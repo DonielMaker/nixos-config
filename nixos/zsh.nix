@@ -10,7 +10,6 @@
         gcc
         cargo
         rustc
-        alacritty
         jq
         kitty
         zsh
