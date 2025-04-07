@@ -1,4 +1,4 @@
-{system, inputs, pkgs, ...}:
+{inputs, pkgs, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -27,19 +27,16 @@
     ];
 
     environment.systemPackages = with pkgs; [
-        libsForQt5.qt5ct
-        alsa-scarlett-gui
 
-        # Programs
+        # Gaming
         mangohud
         protonup-qt
         lutris
         prismlauncher
         steam
         everest-mons
-    
-        rofi-wayland
 
+        # Programs
         vesktop
         brave
         nemo
@@ -47,17 +44,15 @@
         geeqie
         (flameshot.override { enableWlrSupport = true; })
         # Other
+        alsa-scarlett-gui
         home-manager
     ];
 
+    # Steam drive
     fileSystems."/home/donielmaker/Games" = {
         device = "/dev/nvme1n1p1";
         fsType = "ext4";
-        options = [
-            "users"
-            "nofail"
-            "exec"
-        ];
+        options = [ "users" "nofail" "exec" ];
     };
 
     system.stateVersion = "24.11"; # Just don't
