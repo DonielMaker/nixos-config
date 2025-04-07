@@ -21,7 +21,6 @@
     hardware.graphics.enable32Bit = true;
 
     environment.systemPackages = with pkgs; [
-        wofi
         eww
         swww
         xwayland
