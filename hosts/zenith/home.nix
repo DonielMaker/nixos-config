@@ -2,6 +2,7 @@
 
 {
     imports = with inputs.self.homeManagerModules; [
+        mangohud
         rofi
         oh-my-posh
         zsh

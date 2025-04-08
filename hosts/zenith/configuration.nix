@@ -28,7 +28,6 @@
 
     environment.systemPackages = with pkgs; [
         # Gaming
-        mangohud
         protonup-qt
         lutris
         prismlauncher
