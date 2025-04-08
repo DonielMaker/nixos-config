@@ -156,16 +156,21 @@ in
                 "$mainMod, E, exec, ${pkgs.nemo}/bin/nemo"
                 "$mainMod, B, exec, ${pkgs.brave}/bin/brave"
                 # Application Launcher
-                # "$mainMod, Space, exec, wofi --show drun -i --normal-window  --allow-images --width 500 --height 500" #App Launcher
-                "$mainMod, space, exec, ${rofi} -show drun -show-icons"
+                "$mainMod, space, exec, rofi -show drun -show-icons"
                 # Clipboard History
-                # "$mainMod, V, exec, cliphist list | wofi --dmenu --allow-images -i --normal-window --width 500 --height 500 | cliphist decode | wl-copy" # Clipboard
-                "$mainMod, V, exec, cliphist list | ${rofi} -dmenu | cliphist decode | wl-copy" # Clipboard
+                "$mainMod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy" # Clipboard
+                # Inline Calc
+                "$mainMod, C, exec, rofi -show calc -no-history"
                 # Color Picker
                 "$mainMod, P, exec, hyprpicker -a -f hex"
 
-                "$mainMod, S, exec, ${pkgs.flameshot}/bin/flameshot gui"
-                # ''$mainMod SHIFT, S, exec, grim -g "$(slurp -w 0)" $XDG_SCREENSHOTS_DIR/$(date +'%s.png)''
+                # Broken
+                # "$mainMod, S, exec, ${pkgs.flameshot}/bin/flameshot gui"
+                # Figure out why ${pkgs.rofi}/bin/rofi does not receive the config of rofi.nix
+                # "$mainMod, C, exec, ${rofi} -show calc"
+                # "$mainMod, V, exec, cliphist list | ${rofi} -dmenu | cliphist decode | wl-copy" # Clipboard
+                # "$mainMod, space, exec, ${rofi} -show drun -show-icons"
+                # "$mainMod, C, exec, rofi -show calc -no-history -calc-command 'echo -n '{result}' | tr -cd '0-9,.' | wl-copy'"
 
                 "$mainMod, Q, killactive,"
                 "$mainMod, M, exit,"
