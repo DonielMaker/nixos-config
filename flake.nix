@@ -32,8 +32,8 @@
 
         nixosConfigurations.galaxia = mkNixos ./hosts/galaxia;
         nixosConfigurations.zenith = mkNixos ./hosts/zenith;
-        nixosConfigurations.server = mkNixos ./hosts/server;
-        nixosConfigurations.wsl = mkNixos ./hosts/wsl;
+        # DEPRECATED for now
+        # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
 
         packages.${system}.rofi-spotlight = pkgs.callPackage ./nixos/rofi-spotlight.nix {};
 
