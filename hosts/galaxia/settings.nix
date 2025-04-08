@@ -8,4 +8,5 @@ rec {
     monitor = ", 1920x1080@60hz, auto, 1";
     timezone = "Europe/Berlin";
     drive = "/dev/nvme0n1";
+    shell = "zsh";
 }

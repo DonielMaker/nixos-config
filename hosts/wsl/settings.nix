@@ -5,4 +5,5 @@ rec {
     mail = "daniel.schmidt0204@gmail.com";
     dotfiles = "/home/${username}/.config";
     timezone = "Europe/Berlin";
+    shell = "zsh";
 }
