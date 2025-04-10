@@ -2,6 +2,7 @@
 
 {
     programs.zsh.enable = true;
+    programs.zsh.shellInit = "fastfetch";
     environment.pathsToLink = [ "/share/zsh" ];
     
     environment.systemPackages = with pkgs; [
