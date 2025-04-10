@@ -27,6 +27,7 @@
     ];
 
     environment.systemPackages = with pkgs; [
+        qt6ct
         freecad
         # Gaming
         protonup-qt
