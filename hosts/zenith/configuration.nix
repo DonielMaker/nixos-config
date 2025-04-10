@@ -27,6 +27,7 @@
     ];
 
     environment.systemPackages = with pkgs; [
+        freecad
         # Gaming
         protonup-qt
         lutris
