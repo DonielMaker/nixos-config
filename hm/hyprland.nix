@@ -164,8 +164,8 @@ in
                 # Color Picker
                 "$mainMod, P, exec, hyprpicker -a -f hex"
 
+                "$mainMod, S, exec, flameshot gui"
                 # Broken
-                # "$mainMod, S, exec, ${pkgs.flameshot}/bin/flameshot gui"
                 # Figure out why ${pkgs.rofi}/bin/rofi does not receive the config of rofi.nix
                 # "$mainMod, C, exec, ${rofi} -show calc"
                 # "$mainMod, V, exec, cliphist list | ${rofi} -dmenu | cliphist decode | wl-copy" # Clipboard
