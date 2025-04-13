@@ -27,6 +27,7 @@
     ];
 
     environment.systemPackages = with pkgs; [
+        firefox
         qt6ct
         freecad
         # Gaming
@@ -38,7 +39,6 @@
 
         # Programs
         vesktop
-        brave
         nemo
         hyprpicker
         geeqie
