@@ -1,9 +1,5 @@
 { pkgs, monitor, dotfiles, kb_layout, ... }:
 
-let
-    rofi = "${pkgs.rofi}/bin/rofi";
-in
-
 {
    wayland.windowManager.hyprland.enable = true;
    wayland.windowManager.hyprland = {
@@ -29,22 +25,18 @@ in
             windowrule = [
                 # "float, ^(imv)$"
                 # "float, ^(mpv)$"
-                #
-                # "float, ^(wofi)$"
-                # "stayfocused, ^(wofi)$"
-                # "noborder, ^(wofi)$"
-                #
-                # "float, title:^(Bitwarden)$"
+
+                "float, class:^(Rofi)$"
+                "stayfocused, class:^(Rofi)$"
+                "noborder, class:^(Rofi)$"
+
+                # "float, title:^.*(Bitwarden).*$"
 
                 "float, title:^(Picture in picture)$"
                 "pin, title:^(Picture in picture)$"
                 "size 678 384, title:^(Picture in picture)$"
                 "move 1214 671, title:^(Picture in picture)$"
                 "noinitialfocus, title:^(Picture in picture)$"
-
-                #"float, ^(org.pulseaudio.pavucontrol)$"
-
-                #"float, ^(.blueman-manager-wrapped)"
             ];
 
             exec-once = [
@@ -154,7 +146,7 @@ in
             bind = [
                 "$mainMod, Return, exec, ${pkgs.kitty}/bin/kitty"
                 "$mainMod, E, exec, ${pkgs.nemo}/bin/nemo"
-                "$mainMod, B, exec, ${pkgs.brave}/bin/brave"
+                "$mainMod, B, exec, ${pkgs.firefox}/bin/firefox"
                 # Application Launcher
                 "$mainMod, space, exec, rofi -show drun -show-icons"
                 # Clipboard History
