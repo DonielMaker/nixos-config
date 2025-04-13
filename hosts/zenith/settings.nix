@@ -7,6 +7,6 @@ rec {
     kb_layout = "us";
     monitor = ", 2560x1440@144hz, auto, 1";
     timezone = "Europe/Berlin";
-    drive = "/dev/nvme0n1";
+    drive = "/dev/nvme1n1";
     shell = "zsh";
 }
