@@ -22,15 +22,12 @@
         bluethooth
         sddm
         intel
-        ntfs
     ];
 
     environment.systemPackages = with pkgs; [
         # Programs
-        brave
         nemo
         hyprpicker
-        # steam
         geeqie
         (flameshot.override { enableWlrSupport = true; })
         # Other
