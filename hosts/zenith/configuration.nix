@@ -27,6 +27,8 @@
     ];
 
     environment.systemPackages = with pkgs; [
+        kdePackages.kdenlive
+        orca-slicer
         firefox
         qt6ct
         freecad
