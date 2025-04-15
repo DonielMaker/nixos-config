@@ -50,7 +50,7 @@
 
     # Steam drive
     fileSystems."/home/donielmaker/Games" = {
-        device = "/dev/nvme0n1p1";
+        device = "/dev/disk/by-uuid/97b08468-250f-483a-96db-bf1be07dca05";
         fsType = "ext4";
         options = [ "users" "nofail" "exec" ];
     };
