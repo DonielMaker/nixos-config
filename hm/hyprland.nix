@@ -30,13 +30,12 @@
                 "stayfocused, class:^(Rofi)$"
                 "noborder, class:^(Rofi)$"
 
-                # "float, title:^.*(Bitwarden).*$"
+                # "float, title:^(Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox)$"
 
-                "float, title:^(Picture in picture)$"
-                "pin, title:^(Picture in picture)$"
-                "size 678 384, title:^(Picture in picture)$"
-                "move 1214 671, title:^(Picture in picture)$"
-                "noinitialfocus, title:^(Picture in picture)$"
+                "float, title:^(Picture-in-Picture)$"
+                "pin, title:^(Picture-in-Picture)$"
+                "size 678 384, title:^(Picture-in-Picture)$"
+                "noinitialfocus, title:^(Picture-in-Picture)$"
             ];
 
             exec-once = [
@@ -64,8 +63,6 @@
 
             input = {
                 inherit kb_layout;
-                # kb_variant = "lang";
-                # kb_options = "grp:caps_toggle";
 
                 follow_mouse = 1;
 
