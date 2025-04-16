@@ -27,6 +27,7 @@
     ];
 
     environment.systemPackages = with pkgs; [
+        vlc
         kdePackages.kdenlive
         orca-slicer
         firefox
