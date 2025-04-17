@@ -1,4 +1,4 @@
-{drive ? "/dev/nvme0n1", ...}:
+{drive ? throw "please select a device", ...}:
 
 {
     disko.devices.disk.main = {
