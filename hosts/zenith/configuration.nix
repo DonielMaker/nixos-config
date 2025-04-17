@@ -1,4 +1,4 @@
-{inputs, pkgs, ...}:
+{inputs, pkgs, pkgs-stable, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -6,33 +6,44 @@
         inputs.disko.nixosModules.disko
 
         # System
-        settings
-        networking
         bootloader
-        disko
+        networking
+        settings
         user
+        disko
 
-        # Programs
+        # Hyprland (and other graphics related stuff)
+        graphics
+
+        # Graphics driver
+            # intel
+            # nvidia
+        amd
+
+        # Display manager
+        gdm
+            # sddm
+
+        # Hardware related
+            # bluethooth
+            # fingerprint
+        sound
+
+        # Programs 
         neovim
+        openrgb
         steam
         zsh
-
-        # Modules
-        sound
-        graphics
-        openrgb
-        # sddm
-        gdm
-        amd
     ];
 
+    # services.printing.enable = true;
+    # services.avahi = {
+    #     enable = true;
+    #     nssmdns4 = true;
+    #     openFirewall = true;
+    # };
+
     environment.systemPackages = with pkgs; [
-        vlc
-        kdePackages.kdenlive
-        orca-slicer
-        firefox
-        qt6ct
-        freecad
         # Gaming
         protonup-qt
         lutris
@@ -41,6 +52,11 @@
         everest-mons
 
         # Programs
+        gimp
+        vlc
+        kdePackages.kdenlive
+        orca-slicer
+        qt6ct
         vesktop
         nemo
         hyprpicker
@@ -57,6 +73,9 @@
         fsType = "ext4";
         options = [ "users" "nofail" "exec" ];
     };
+
+    # programs.corectrl.enable = true;
+    # programs.corectrl.package = pkgs-stable.corectrl;
 
     system.stateVersion = "24.11"; # Just don't
 }

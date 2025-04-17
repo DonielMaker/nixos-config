@@ -6,23 +6,35 @@
         inputs.disko.nixosModules.disko
 
         # System
-        settings
-        networking
         bootloader
-	    disko
+        networking
+        settings
         user
+        disko
 
-        # Programs
-        neovim
-        zsh
-
-        # Modules
-        sound
+        # Hyprland (and other graphics related stuff)
         graphics
-        bluethooth
-        sddm
+
+        # Graphics driver
         intel
-        ntfs
+            # nvidia
+            # amd
+
+        # Display manager
+            # gdm
+        sddm
+
+        # Hardware related
+        bluethooth
+            # fingerprint
+        sound
+
+        # Programs 
+        neovim
+            # openrgb
+            # rofi-spotlight
+            # steam
+        zsh
     ];
 
     environment.systemPackages = with pkgs; [
