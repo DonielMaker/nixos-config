@@ -11,7 +11,7 @@
         disko.url = "github:nix-community/disko/latest";
         disko.inputs.nixpkgs.follows = "nixpkgs";
 
-	    wsl.url = "github:nix-community/NixOS-WSL/main";
+	    # wsl.url = "github:nix-community/NixOS-WSL/main";
     };
 
     outputs = {self, ...}@inputs :
