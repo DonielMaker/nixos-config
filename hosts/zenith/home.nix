@@ -2,6 +2,7 @@
 
 {
     imports = with inputs.self.homeManagerModules; [
+        firefox
         mangohud
         rofi
         oh-my-posh
