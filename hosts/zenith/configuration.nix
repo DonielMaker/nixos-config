@@ -45,6 +45,7 @@
 
     environment.systemPackages = with pkgs; [
         # Gaming
+        xclicker
         protonup-qt
         lutris
         prismlauncher
