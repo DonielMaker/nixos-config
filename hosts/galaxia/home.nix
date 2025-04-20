@@ -2,6 +2,8 @@
 
 {
     imports = with inputs.self.homeManagerModules; [
+        rofi
+        firefox
         oh-my-posh
         zsh
         neovim

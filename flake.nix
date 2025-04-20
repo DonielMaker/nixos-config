@@ -32,6 +32,7 @@
 
         nixosConfigurations.galaxia = mkNixos ./hosts/galaxia;
         nixosConfigurations.zenith = mkNixos ./hosts/zenith;
+        nixosConfigurations.vm= mkNixos ./hosts/vm;
         # DEPRECATED for now
         # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
 

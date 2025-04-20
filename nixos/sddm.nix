@@ -1,4 +1,4 @@
-{pkgs-stable, ...}:
+{pkgs, ...}:
 
 {
     services.displayManager.enable = true;
@@ -6,10 +6,10 @@
         enable = true;
         wayland.enable = true;
         theme = "catppuccin-macchiato";
-        package = pkgs-stable.libsForQt5.sddm;
+        package = pkgs.kdePackages.sddm;
     };
 
-    environment.systemPackages = with pkgs-stable; [ 
+    environment.systemPackages = with pkgs; [ 
         (catppuccin-sddm.override {flavor = "macchiato"; loginBackground = true;}) 
         libsForQt5.qt5.qtquickcontrols2
         libsForQt5.qt5.qtgraphicaleffects
