@@ -25,5 +25,7 @@
 
         table_columns = 4;
         round_corners = 15;
+
+        toggle_hud = "Shift_R+F12";
     };
 }
