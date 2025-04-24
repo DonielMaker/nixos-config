@@ -6,7 +6,7 @@
         profiles.${username} = {
             search = {
                 force = true;
-                default = "DuckDuckGo";
+                default = "ddg";
                 privateDefault = "DuckDuckGo";
                 engines = {
                     "Nix Packages" = {
