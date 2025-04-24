@@ -12,7 +12,11 @@ in
 
 inputs.nixpkgs.lib.nixosSystem {
     inherit specialArgs;
-    modules = [conf] ++
+    modules = [
+        # Since sspecialArgs.pkgs is set
+        inputs.nixpkgs.nixosModules.readOnlyPkgs
+        conf
+    ] ++
     [
         inputs.home-manager.nixosModules.home-manager {
             home-manager = {
