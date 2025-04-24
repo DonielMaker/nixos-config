@@ -12,7 +12,7 @@
         themes
         hypridle
         kitty
-        flameshot
+        # flameshot
     ];
 
     home = {
