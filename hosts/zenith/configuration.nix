@@ -1,4 +1,4 @@
-{inputs, pkgs, pkgs-stable, ...}:
+{config, inputs, pkgs, pkgs-stable, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -28,22 +28,18 @@
             # bluethooth
             # fingerprint
         sound
+        gigabyte
+        coolercontrol
 
         # Programs 
         neovim
-        openrgb
+        # openrgb
         steam
         zsh
     ];
 
-    # services.printing.enable = true;
-    # services.avahi = {
-    #     enable = true;
-    #     nssmdns4 = true;
-    #     openFirewall = true;
-    # };
-
     environment.systemPackages = with pkgs; [
+        lm_sensors
         # Gaming
         xclicker
         protonup-qt
@@ -75,8 +71,7 @@
         options = [ "users" "nofail" "exec" ];
     };
 
-    # programs.corectrl.enable = true;
-    # programs.corectrl.package = pkgs-stable.corectrl;
+    programs.corectrl.enable = true;
 
     system.stateVersion = "24.11"; # Just don't
 }
