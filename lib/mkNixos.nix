@@ -3,7 +3,7 @@
 settingsPath: 
 
 let
-    conf = import "${settingsPath}/configuration.nix" specialArgs;
+    conf = import "${settingsPath}/configuration.nix";
     home = import "${settingsPath}/home.nix";
     settings = import "${settingsPath}/settings.nix"; 
 
