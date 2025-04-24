@@ -7,7 +7,7 @@
             search = {
                 force = true;
                 default = "ddg";
-                privateDefault = "DuckDuckGo";
+                privateDefault = "ddg";
                 engines = {
                     "Nix Packages" = {
                         urls = [{
