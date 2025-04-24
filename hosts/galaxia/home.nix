@@ -12,7 +12,6 @@
         themes
         hypridle
         kitty
-        # flameshot
     ];
 
     home = {

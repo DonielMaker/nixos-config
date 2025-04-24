@@ -32,17 +32,17 @@
         # Programs 
         neovim
             # openrgb
-            # rofi-spotlight
             # steam
         zsh
     ];
 
     environment.systemPackages = with pkgs; [
+        ferrishot
+        zenity
         # Programs
         nemo
         hyprpicker
         geeqie
-        (flameshot.override { enableWlrSupport = true; })
         # Other
         home-manager
     ];

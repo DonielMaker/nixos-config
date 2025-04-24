@@ -16,7 +16,6 @@
         git
         hypridle
         kitty
-        flameshot
     ];
 
     home = {

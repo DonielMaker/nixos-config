@@ -152,7 +152,7 @@
                 # Color Picker
                 "$mainMod, P, exec, hyprpicker -a -f hex"
 
-                "$mainMod, S, exec, flameshot gui"
+                "$mainMod, S, exec, ferrishot"
                 # Broken
                 # Figure out why ${pkgs.rofi}/bin/rofi does not receive the config of rofi.nix
                 # "$mainMod, C, exec, ${rofi} -show calc"

@@ -58,7 +58,6 @@
         nemo
         hyprpicker
         geeqie
-        (flameshot.override { enableWlrSupport = true; })
         # Other
         alsa-scarlett-gui
         home-manager
