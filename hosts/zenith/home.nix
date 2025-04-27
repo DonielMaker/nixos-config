@@ -9,7 +9,6 @@
         zsh
         neovim
         git
-        oh-my-posh
         hyprland
         themes
         zsh

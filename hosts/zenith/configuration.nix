@@ -32,6 +32,7 @@
         coolercontrol
 
         # Programs 
+        starship
         neovim
         # openrgb
         steam
