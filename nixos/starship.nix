@@ -4,7 +4,7 @@
     programs.starship.enable = true;
     programs.starship.settings = {
         format = ''
-            $hostname$directory$rust$git_branch$git_commit
+            $hostname$directory$git_branch$git_status$character
             ❯
         '';
 
@@ -15,6 +15,19 @@
         hostname = {
             style = "bold green";
             ssh_only = false;
+        };
+
+        git_status = {
+            format = "[$all_status$ahead_behind ]($style)";
+        };
+
+        character = {
+            success_symbol = "[](bold green)";
+            error_symbol = "[](bold red)";
+            vimcmd_symbol = "[](bold green)";
+            # vimcmd_replace_one_symbol = "[](bold yellow)";
+            # vimcmd_replace_symbol = "[](bold red)";
+            # vimcmd_visual_symbol = "[](bold purple)";
         };
     };
 }
