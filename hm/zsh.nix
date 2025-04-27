@@ -1,4 +1,4 @@
-{ dotfiles, ... }:
+{pkgs, dotfiles, ... }:
 
 {
     programs.zsh = {
@@ -11,9 +11,7 @@
             lg = "lazygit";
             v = "nvim";
             ls = "eza -a --icons=auto";
-            # zz = "eza -aTL 3 --icons";
             ff = "fastfetch";
-            #rust = "nix develop ${dotfiles}/nix#rust -c zsh";
         };
     };
 }

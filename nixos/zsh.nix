@@ -4,6 +4,9 @@
     programs.zsh.enable = true;
     programs.zsh.promptInit = "fastfetch";
     environment.pathsToLink = [ "/share/zsh" ];
+    programs.zsh.interactiveShellInit = ''
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    '';
     
     environment.systemPackages = with pkgs; [
         # CLI Tools
