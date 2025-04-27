@@ -42,7 +42,6 @@
                 "hyprctl setcursor Bibata-Modern-Ice 24"
                 "eww open -c ${dotfiles}/eww/ bar"
                 "swww init"
-                "openrgb -p ${dotfiles}/OpenRGB/Main.orp"
                 "wl-paste --type text --watch cliphist store"
                 "wl-paste --type image --watch cliphist store"
             ];
