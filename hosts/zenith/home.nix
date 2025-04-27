@@ -5,7 +5,7 @@
         firefox
         mangohud
         rofi
-        oh-my-posh
+        # oh-my-posh
         zsh
         neovim
         git

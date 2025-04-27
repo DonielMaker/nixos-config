@@ -70,7 +70,5 @@
         options = [ "users" "nofail" "exec" ];
     };
 
-    programs.corectrl.enable = true;
-
     system.stateVersion = "24.11"; # Just don't
 }
