@@ -23,11 +23,11 @@
         # texlab
         lua-language-server
         rust-analyzer
-        tinymist
+        # tinymist
         yaml-language-server
-        nil
-        # nixd
-        slint-lsp
+        # nil
+        nixd
+        # slint-lsp
         pkgs.typescript-language-server
         pkgs.bash-language-server
         pkgs.vscode-langservers-extracted
