@@ -19,9 +19,10 @@
     let 
         system = "x86_64-linux";
 
-        pkgs = import inputs.nixpkgs {inherit system; config.allowUnfree = true;};
-        pkgs-stable = import inputs.nixpkgs-stable {inherit system; config.allowUnfree = true;};
+        pkgs = import inputs.nixpkgs {inherit system overlays; config.allowUnfree = true;};
+        pkgs-stable = import inputs.nixpkgs-stable {inherit system overlays; config.allowUnfree = true;};
 
+        overlays = import ./nixos/overlays.nix {inherit pkgs;}; 
         mkNixos = import ./lib/mkNixos.nix {inherit inputs system pkgs pkgs-stable;};
         buildModules = import ./lib/getModules.nix {lib = inputs.nixpkgs.lib;};
     in
@@ -36,7 +37,7 @@
         # DEPRECATED for now
         # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
 
-        packages.${system}.rofi-spotlight = pkgs.callPackage ./nixos/rofi-spotlight.nix {};
+        # packages.${system}.rofi-spotlight = pkgs.callPackage ./nixos/rofi-spotlight.nix {};
 
         devShells.${system}.rust = (import ./testing/rust.nix {inherit pkgs;});
     };
