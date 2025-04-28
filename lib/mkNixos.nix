@@ -13,7 +13,7 @@ in
 inputs.nixpkgs.lib.nixosSystem {
     inherit specialArgs;
     modules = [
-        # Since sspecialArgs.pkgs is set
+        # Since specialArgs.pkgs is set
         inputs.nixpkgs.nixosModules.readOnlyPkgs
         conf
     ] ++
