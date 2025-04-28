@@ -4,6 +4,7 @@
     imports = with inputs.self.homeManagerModules; [
         firefox
         mangohud
+        starship
         rofi
         # oh-my-posh
         zsh

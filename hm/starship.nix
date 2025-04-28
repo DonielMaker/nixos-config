@@ -18,7 +18,12 @@
         };
 
         git_status = {
-            format = "[$all_status$ahead_behind ]($style)";
+            format = "([\\[$all_status$ahead_behind\\]]($style) )";
+            modified = "[!$count](bold orange)";
+            staged = "[+$count](bold green)";
+            renamed = "[»$count](bold purple)";
+            deleted = "[✘$count](bold red)";
+            untracked = "[?$count](bold white)";
         };
 
         character = {
