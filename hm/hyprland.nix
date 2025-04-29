@@ -1,8 +1,19 @@
 { pkgs, monitor, dotfiles, kb_layout, ... }:
 
 {
-   wayland.windowManager.hyprland.enable = true;
-   wayland.windowManager.hyprland = {
+
+    # Allows interoperabilty between Applications
+    xdg.portal.enable = true;
+    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    xdg.portal.config = {
+        common = {
+            default = [ "hyprland" ];
+            "org.freedesktop.impl.FileChooser" = "gtk";
+        };
+    };
+
+    wayland.windowManager.hyprland.enable = true;
+    wayland.windowManager.hyprland = {
         xwayland.enable = true;
 
         settings = {
@@ -25,10 +36,6 @@
             windowrule = [
                 # "float, ^(imv)$"
                 # "float, ^(mpv)$"
-
-                "float, class:^(Rofi)$"
-                "stayfocused, class:^(Rofi)$"
-                "noborder, class:^(Rofi)$"
 
                 # "float, title:^(Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox)$"
 
@@ -139,9 +146,9 @@
             };
 
             bind = [
-                "$mainMod, Return, exec, ${pkgs.kitty}/bin/kitty"
-                "$mainMod, E, exec, ${pkgs.nemo}/bin/nemo"
-                "$mainMod, B, exec, ${pkgs.firefox}/bin/firefox"
+                "$mainMod, Return, exec, kitty"
+                "$mainMod, E, exec, nautilus"
+                "$mainMod, B, exec, firefox"
                 # Application Launcher
                 "$mainMod, space, exec, fuzzel"
                 # Clipboard History

@@ -40,7 +40,7 @@
         ferrishot
         zenity
         # Programs
-        nemo
+        nautilus
         hyprpicker
         geeqie
         # Other

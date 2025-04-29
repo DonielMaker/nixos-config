@@ -13,10 +13,6 @@
         NIXOS_OZONE_WL = "1";
     };
 
-    # Allows interoperabilty between Applications
-    xdg.portal.enable = true;
-    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
 

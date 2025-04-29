@@ -39,6 +39,8 @@
     ];
 
     environment.systemPackages = with pkgs; [
+        xdg-desktop-portal
+        ferrishot
         papirus-icon-theme
         lm_sensors
         # Gaming
@@ -56,7 +58,7 @@
         orca-slicer
         qt6ct
         vesktop
-        nemo
+        nautilus
         hyprpicker
         geeqie
         # Other
