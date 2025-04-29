@@ -9,6 +9,7 @@
             input = "a5adcbff";
             border = "5b6078dd";
             selection = "8aadf4ff";
+            selection-text = "4c4f69ff";
             match = "ed8796ff";
             prompt = "cad3f5ff";
         };

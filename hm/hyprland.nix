@@ -143,21 +143,13 @@
                 "$mainMod, E, exec, ${pkgs.nemo}/bin/nemo"
                 "$mainMod, B, exec, ${pkgs.firefox}/bin/firefox"
                 # Application Launcher
-                "$mainMod, space, exec, rofi -show drun -show-icons"
+                "$mainMod, space, exec, fuzzel"
                 # Clipboard History
-                "$mainMod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy" # Clipboard
-                # Inline Calc
-                "$mainMod, C, exec, rofi -show calc -no-history"
+                "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
                 # Color Picker
                 "$mainMod, P, exec, hyprpicker -a -f hex"
 
                 "$mainMod, S, exec, ferrishot"
-                # Broken
-                # Figure out why ${pkgs.rofi}/bin/rofi does not receive the config of rofi.nix
-                # "$mainMod, C, exec, ${rofi} -show calc"
-                # "$mainMod, V, exec, cliphist list | ${rofi} -dmenu | cliphist decode | wl-copy" # Clipboard
-                # "$mainMod, space, exec, ${rofi} -show drun -show-icons"
-                # "$mainMod, C, exec, rofi -show calc -no-history -calc-command 'echo -n '{result}' | tr -cd '0-9,.' | wl-copy'"
 
                 "$mainMod, Q, killactive,"
                 "$mainMod, M, exit,"
