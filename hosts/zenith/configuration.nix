@@ -39,6 +39,7 @@
     ];
 
     environment.systemPackages = with pkgs; [
+        papirus-icon-theme
         lm_sensors
         # Gaming
         xclicker

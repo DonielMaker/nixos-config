@@ -1,4 +1,4 @@
-{ pkgs-stable, ... }: 
+{ pkgs, ... }: 
 
 let
     variant = "macchiato";
@@ -9,19 +9,19 @@ in
         enable = true;
         platformTheme.name = "qt6ct";
         style.name = "catppuccin-${variant}-mauve";
-        style.package = pkgs-stable.catppuccin-qt5ct;
+        style.package = pkgs.catppuccin-qt5ct;
     };
 
     gtk = {
         enable = true;
 
         cursorTheme.name = "Bibata-Modern-Ice";
-        cursorTheme.package = pkgs-stable.bibata-cursors;
+        cursorTheme.package = pkgs.bibata-cursors;
 
         iconTheme.name = "Papirus-Dark";
-        iconTheme.package = pkgs-stable.catppuccin-papirus-folders.override {flavor = variant;};
+        iconTheme.package = pkgs.catppuccin-papirus-folders.override {flavor = variant;};
 
         theme.name = "catppuccin-macchiato-blue-standard";
-        theme.package = pkgs-stable.catppuccin-gtk.override {inherit variant;};
+        theme.package = pkgs.catppuccin-gtk.override {inherit variant;};
     };
 } 
