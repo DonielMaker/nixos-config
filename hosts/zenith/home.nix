@@ -2,6 +2,7 @@
 
 {
     imports = with inputs.self.homeManagerModules; [
+        fuzzel
         firefox
         mangohud
         starship
