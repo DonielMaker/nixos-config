@@ -8,8 +8,7 @@ in
     qt = {
         enable = true;
         platformTheme.name = "qt6ct";
-        style.name = "catppuccin-${variant}-mauve";
-        style.package = pkgs.catppuccin-qt5ct;
+        # style.name = "qt6ct-style";
     };
 
     gtk = {
