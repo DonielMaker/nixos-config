@@ -4,8 +4,8 @@
     programs.neovim.enable = true;
     programs.neovim.defaultEditor = true;
 
-    environment.systemPackages = with pkgs-stable; [
-        pkgs.neovim
+    environment.systemPackages = with pkgs; [
+        neovim
 
         # Programming Stuff
         tree-sitter
@@ -28,8 +28,8 @@
         # nil
         nixd
         # slint-lsp
-        pkgs.typescript-language-server
-        pkgs.bash-language-server
-        pkgs.vscode-langservers-extracted
+        typescript-language-server
+        bash-language-server
+        vscode-langservers-extracted
     ];
 }
