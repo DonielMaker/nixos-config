@@ -5,8 +5,8 @@
     services.displayManager.sddm = {
         enable = true;
         wayland.enable = true;
-        theme = "catppuccin-macchiato";
-        package = pkgs.kdePackages.sddm;
+        # theme = "catppuccin-macchiato";
+        # package = pkgs.kdePackages.sddm;
     };
 
     environment.systemPackages = with pkgs; [ 
