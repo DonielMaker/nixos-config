@@ -1,4 +1,4 @@
-{config, inputs, pkgs, pkgs-stable, ...}:
+{ system, inputs, pkgs, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -21,7 +21,8 @@
         amd
 
         # Display manager
-        gdm
+        cosmic-greeter
+            # gdm
             # sddm
 
         # Hardware related
@@ -38,11 +39,23 @@
         zsh
     ];
 
+    # networking.wg-quick.interfaces.wg0 = {
+    #     address = [ "10.8.0.3/24" ];
+    #     dns = [ "192.168.178.3" ];
+    #     peers = [
+    #     {
+    #         allowedIPs = [
+    #             "192.168.178.0/24"
+    #         ];
+    #         endpoint = "famuv.duckdns.org:51820";
+    #         publicKey = "kkfeCXjQLQqNRw7QOeLwzDDySTwrPyDOXWiHZaiFcD4=";
+    #         presharedKey = "QsWoEB4sRIRfuoM706OFHE9UHV8+LKzSYmF5WboIkhQ=";
+    #     }
+    #     ];
+    #     privateKey = "0J2cBDUGEVGEM73uFArgfK4LhkuSTrmxCJwaaEzgskM=";
+    # };
+
     environment.systemPackages = with pkgs; [
-        xdg-desktop-portal
-        ferrishot
-        papirus-icon-theme
-        lm_sensors
         # Gaming
         xclicker
         protonup-qt
@@ -52,6 +65,8 @@
         everest-mons
 
         # Programs
+        ferrishot
+        lm_sensors
         gimp
         vlc
         kdePackages.kdenlive
@@ -61,8 +76,10 @@
         nautilus
         hyprpicker
         geeqie
-        # Other
         alsa-scarlett-gui
+        # Other
+        xdg-desktop-portal
+        papirus-icon-theme
         home-manager
     ];
 
