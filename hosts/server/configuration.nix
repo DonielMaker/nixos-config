@@ -1,4 +1,4 @@
-{inputs, pkgs, ...}:
+{lib, inputs, pkgs, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -37,9 +37,23 @@
     ];
 
     services.openssh.enable = true;
+    security.pam.sshAgentAuth.enable = true;
+
+    users.users.root = {
+        openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwosE68FthKwXs1WhPnY3YqbkVPT52V30X489epRsJQ donielmaker@zenith"
+        ];
+    };
+
+    services.stirling-pdf.enable = true;
+    networking.firewall.allowedTCPPorts = [ 22 8080 ];
+
+    nix.settings.trusted-users = [ "donielmaker" ];
 
     # Any extra Packages
-    environment.systemPackages = with pkgs; [];
+    environment.systemPackages = with pkgs; [
+        vim
+    ];
 
     system.stateVersion = "24.11"; # Just don't
 }
