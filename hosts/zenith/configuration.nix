@@ -39,6 +39,13 @@
         zsh
     ];
 
+    services.flatpak.enable = true;
+
+    programs.corectrl.enable = true;
+    programs.corectrl.gpuOverclock.enable = true;
+    programs.corectrl.gpuOverclock.ppfeaturemask = "0xffffffff";
+    security.polkit.enable = true;
+
     # networking.wg-quick.interfaces.wg0 = {
     #     address = [ "10.8.0.3/24" ];
     #     dns = [ "192.168.178.3" ];
@@ -56,6 +63,7 @@
     # };
 
     environment.systemPackages = with pkgs; [
+        hyprpolkitagent
         # Gaming
         xclicker
         protonup-qt
