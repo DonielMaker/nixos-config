@@ -7,8 +7,7 @@ in
 {
     qt = {
         enable = true;
-        platformTheme.name = "qt6ct";
-        # style.name = "qt6ct-style";
+        platformTheme.name = "qt5ct";
     };
 
     gtk = {

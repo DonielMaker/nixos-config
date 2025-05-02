@@ -30,6 +30,7 @@
                 # "HYPRCURSOR_THEME,Bibata-Modern-Ice"
                 # "HYPRCURSOR_SIZE,24"
                 "QT_QPA_PLATFORM,wayland"
+                "QT_QPA_PLATFORMTHEME,qt5ct"
                 "XDG_SCREENSHOTS_DIR,~/screenshots"
             ];
 
