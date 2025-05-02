@@ -2,7 +2,7 @@
 
 {
     imports = with inputs.self.homeManagerModules; [
-        zsh
+        # zsh
         git
     ];
 

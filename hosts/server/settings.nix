@@ -1,5 +1,5 @@
 rec {
-    hostname = "vm";
+    hostname = "server";
     system = "x86_64-linux";
     username = "donielmaker";
     mail = "";
@@ -7,5 +7,6 @@ rec {
     kb_layout = "";
     monitor = "";
     timezone = "";
-    shell = "zsh";
+    shell = "bash";
+    drive = "/dev/sda";
 }

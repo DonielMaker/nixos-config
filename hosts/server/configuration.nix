@@ -3,14 +3,14 @@
 {
     imports = with inputs.self.nixosModules; [
         ./hardware-configuration.nix
-        # inputs.disko.nixosModules.disko
+        inputs.disko.nixosModules.disko
 
         # System
         bootloader
         networking
         settings
         user
-        # disko
+        disko
 
         # Hyprland (and other graphics related stuff)
             # graphics
@@ -22,7 +22,7 @@
 
         # Display manager
             # gdm
-        sddm
+            # sddm
 
         # Hardware related
             # bluethooth
@@ -33,8 +33,10 @@
             # neovim
             # openrgb
             # steam
-        zsh
+            # zsh
     ];
+
+    services.openssh.enable = true;
 
     # Any extra Packages
     environment.systemPackages = with pkgs; [];
