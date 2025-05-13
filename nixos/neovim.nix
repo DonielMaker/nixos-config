@@ -28,7 +28,8 @@
         # nil
         nixd
         # slint-lsp
-        typescript-language-server
+        vtsls
+        # typescript-language-server
         bash-language-server
         vscode-langservers-extracted
     ];
