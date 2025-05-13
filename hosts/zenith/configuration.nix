@@ -39,6 +39,8 @@
         zsh
     ];
 
+    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_14;
+
     services.flatpak.enable = true;
 
     programs.corectrl.enable = true;
