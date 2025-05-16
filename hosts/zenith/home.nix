@@ -2,11 +2,13 @@
 
 {
     imports = with inputs.self.homeManagerModules; [
+        inputs.walker.homeManagerModules.walker
         fuzzel
         firefox
         mangohud
         starship
-        rofi
+        # rofi
+        walker
         # oh-my-posh
         zsh
         neovim

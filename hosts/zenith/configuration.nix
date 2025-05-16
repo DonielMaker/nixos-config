@@ -48,6 +48,8 @@
     programs.corectrl.gpuOverclock.ppfeaturemask = "0xffffffff";
     security.polkit.enable = true;
 
+    programs.localsend.enable = true;
+
     # networking.wg-quick.interfaces.wg0 = {
     #     address = [ "10.8.0.3/24" ];
     #     dns = [ "192.168.178.3" ];
