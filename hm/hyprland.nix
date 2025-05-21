@@ -25,10 +25,6 @@
                 "XDG_CURRENT_DESKTOP,Hyprland"
                 "XDG_SESSION_TYPE,wayland"
                 "XDG_SESSION_DESKTOP,Hyprland"
-                # "XCURSOR_THEME,Bibata-Modern-Ice"
-                # "XCURSOR_SIZE, 24"
-                # "HYPRCURSOR_THEME,Bibata-Modern-Ice"
-                # "HYPRCURSOR_SIZE,24"
                 "QT_QPA_PLATFORM,wayland"
                 "QT_QPA_PLATFORMTHEME,qt5ct"
                 "XDG_SCREENSHOTS_DIR,~/screenshots"
@@ -49,15 +45,11 @@
             exec-once = [
                 "systemctl --user start hyprpolkitagent.service"
                 "hyprctl setcursor Bibata-Modern-Ice 24"
-                "eww open -c ${dotfiles}/eww/ bar"
+                "eww open -c ${dotfiles}/eww/bar"
                 "swww init"
                 "wl-paste --type text --watch cliphist store"
                 "wl-paste --type image --watch cliphist store"
             ];
-
-            # exec = [
-            #     "swww img ${pkgs.nixos-artwork.wallpapers.catppuccin-macchiato.gnomeFilePath}"
-            # ];
 
             cursor = {
                 no_hardware_cursors = true;
@@ -82,7 +74,6 @@
             };
 
             dwindle = {
-                pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
                 preserve_split = true; # you probably want this
             };
 
@@ -114,7 +105,6 @@
                 };
 
                 shadow = {
-
                     enabled = true;
                     range = 4;
                     render_power = 3;
@@ -152,18 +142,19 @@
                 "$mainMod, E, exec, nautilus"
                 "$mainMod, B, exec, firefox"
                 # Application Launcher
-                "$mainMod, space, exec, fuzzel"
+                "$mainMod, space, exec, walker -m applications"
                 # Clipboard History
-                "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
+                "$mainMod, V, exec, walker -m clipboard"
+                # "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
                 # Color Picker
                 "$mainMod, P, exec, hyprpicker -a -f hex"
-
+                # Screenshots
                 "$mainMod, S, exec, ferrishot"
 
                 "$mainMod, Q, killactive,"
                 "$mainMod, M, exit,"
                 "$mainMod, F, togglefloating,"
-                "$mainMod, J, togglesplit, # dwindle"
+                "$mainMod, J, togglesplit," # dwindle
                 "$mainMod, G, fullscreen"
 
                 # Move focus with mainMod + arrow keys
@@ -220,13 +211,6 @@
                 # Brightness control
                 ", XF86MonBrightnessDown, exec, brightnessctl set 5%- "
                 ", XF86MonBrightnessUp, exec, brightnessctl set +5% "
-
-                # Configuration files
-                # ''$mainMod SHIFT, N, exec, alacritty -e sh -c "rb"''
-                # ''$mainMod SHIFT, C, exec, alacritty -e sh -c "conf"''
-                # ''$mainMod SHIFT, H, exec, alacritty -e sh -c "nvim ~/nix/home-manager/modules/wms/hyprland.nix"''
-                # ''$mainMod SHIFT, W, exec, alacritty -e sh -c "nvim ~/nix/home-manager/modules/wms/waybar.nix''
-                # '', Print, exec, grim -g "$(slurp)" - | swappy -f -''
 
                 # Laptop related
                 ", XF86AudioMute, exec, pamixer -t"
