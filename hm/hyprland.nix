@@ -55,9 +55,9 @@
                 "wl-paste --type image --watch cliphist store"
             ];
 
-            exec = [
-                "swww img ${pkgs.nixos-artwork.wallpapers.catppuccin-macchiato.gnomeFilePath}"
-            ];
+            # exec = [
+            #     "swww img ${pkgs.nixos-artwork.wallpapers.catppuccin-macchiato.gnomeFilePath}"
+            # ];
 
             cursor = {
                 no_hardware_cursors = true;
