@@ -43,6 +43,9 @@
 
     services.flatpak.enable = true;
 
+    programs.nautilus-open-any-terminal.enable = true;
+    programs.nautilus-open-any-terminal.terminal = "kitty";
+
     programs.corectrl.enable = true;
     programs.corectrl.gpuOverclock.enable = true;
     programs.corectrl.gpuOverclock.ppfeaturemask = "0xffffffff";
@@ -50,23 +53,24 @@
 
     programs.localsend.enable = true;
 
-    # networking.wg-quick.interfaces.wg0 = {
-    #     address = [ "10.8.0.3/24" ];
-    #     dns = [ "192.168.178.3" ];
-    #     peers = [
-    #     {
-    #         allowedIPs = [
-    #             "192.168.178.0/24"
-    #         ];
-    #         endpoint = "famuv.duckdns.org:51820";
-    #         publicKey = "kkfeCXjQLQqNRw7QOeLwzDDySTwrPyDOXWiHZaiFcD4=";
-    #         presharedKey = "QsWoEB4sRIRfuoM706OFHE9UHV8+LKzSYmF5WboIkhQ=";
-    #     }
-    #     ];
-    #     privateKey = "0J2cBDUGEVGEM73uFArgfK4LhkuSTrmxCJwaaEzgskM=";
-    # };
+    networking.wg-quick.interfaces.wg0 = {
+        address = [ "10.10.14.7/24" ];
+        dns = [ "1.1.1.1" ];
+        peers = [
+        {
+            allowedIPs = [
+                "10.10.14.0/24"
+            ];
+            endpoint = "public.ipv64.de:51820";
+            publicKey = "Ltmlc2mcJuKprhi5l6rU2hwMqejwQIQ/GFZB+sEckCQ=";
+            presharedKey = "MIWvpJMPF0Q4m6OkqImXVgqDZOXKbOvoreUrIVl83Mw=";
+        }
+        ];
+        privateKey = "8Jqb5G7dp9U/ObycGM3/voh0y4FSSgadBs6pOfeoN2Q=";
+    };
 
     environment.systemPackages = with pkgs; [
+        obs-studio
         hyprpolkitagent
         # Gaming
         xclicker
