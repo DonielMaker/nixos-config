@@ -45,7 +45,7 @@
             exec-once = [
                 "systemctl --user start hyprpolkitagent.service"
                 "hyprctl setcursor Bibata-Modern-Ice 24"
-                "eww open -c ${dotfiles}/eww/bar"
+                "eww open -c ${dotfiles}/eww/ bar"
                 "swww init"
                 "wl-paste --type text --watch cliphist store"
                 "wl-paste --type image --watch cliphist store"
