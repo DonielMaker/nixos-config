@@ -142,10 +142,9 @@
                 "$mainMod, E, exec, nautilus"
                 "$mainMod, B, exec, firefox"
                 # Application Launcher
-                "$mainMod, space, exec, walker -m applications"
+                "$mainMod, space, exec, fuzzel"
                 # Clipboard History
-                "$mainMod, V, exec, walker -m clipboard"
-                # "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
+                "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
                 # Color Picker
                 "$mainMod, P, exec, hyprpicker -a -f hex"
                 # Screenshots

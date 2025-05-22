@@ -1,9 +1,9 @@
-{pkgs, inputs, system, ...}: 
+{pkgs-stable, inputs, system, ...}: 
 
 {
     programs.walker.enable = true;
     programs.walker = {
-        package = pkgs.walker;
+        package = pkgs-stable.walker;
         runAsService = true;
         config = {
             dmenu.LabelColumn = 3;

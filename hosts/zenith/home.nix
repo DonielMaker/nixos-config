@@ -8,8 +8,8 @@
         starship
         # oh-my-posh
         # rofi
-        # fuzzel
-        walker
+        fuzzel
+        # walker
         neovim
         git
         hyprland
