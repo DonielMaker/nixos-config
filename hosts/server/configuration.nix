@@ -37,16 +37,19 @@
     ];
 
     services.openssh.enable = true;
-    security.pam.sshAgentAuth.enable = true;
+    security.sudo.execWheelOnly  =  true;
 
     users.users.root = {
         openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwosE68FthKwXs1WhPnY3YqbkVPT52V30X489epRsJQ donielmaker@zenith"
         ];
+    services.openssh.settings = {
+        PasswordAuthentication = false;
+        PermitRootLogin = "no";
     };
 
-    services.stirling-pdf.enable = true;
-    networking.firewall.allowedTCPPorts = [ 22 8080 ];
+    # services.stirling-pdf.enable = true;
+    # networking.firewall.allowedTCPPorts = [ 22 8080 ];
 
     nix.settings.trusted-users = [ "donielmaker" ];
 
