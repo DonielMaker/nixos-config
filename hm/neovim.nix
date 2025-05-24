@@ -29,4 +29,28 @@
         ];
     };
 
+    home.packages = with pkgs; [
+        tree-sitter
+        zig
+        rustc
+        cargo
+        nodejs
+        gnumake
+        openssl
+        pkg-config
+
+        # LSP
+        marksman
+        yaml-language-server
+        lua-language-server
+        rust-analyzer
+        yaml-language-server
+        nixd
+        bash-language-server
+        vscode-langservers-extracted
+        vtsls
+        # typescript-language-server
+        # tinymist
+        # slint-lsp
+    ];
 }
