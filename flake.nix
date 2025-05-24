@@ -18,7 +18,7 @@
 	    # wsl.url = "github:nix-community/NixOS-WSL/main";
     };
 
-    outputs = {self, ...}@inputs :
+    outputs = {...}@inputs :
 
     let 
         system = "x86_64-linux";
@@ -35,13 +35,16 @@
         nixosModules = buildModules ./nixos;
         homeManagerModules = buildModules ./hm;
 
-        nixosConfigurations.galaxia = mkNixos ./hosts/galaxia;
-        nixosConfigurations.zenith = mkNixos ./hosts/zenith;
-        nixosConfigurations."server" = mkNixos ./hosts/server;
+        nixosConfigurations.galaxia = mkNixos ./hosts/galaxia {useHm = true;};
+        nixosConfigurations.zenith = mkNixos ./hosts/zenith {useHM = true;};
+        nixosConfigurations."server" = mkNixos ./hosts/server {useHM = true;};
 
         # DEPRECATED for now
         # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
 
-        devShells.${system}.rust = (import ./testing/rust.nix {inherit pkgs;});
+        devShells.${system} = {
+            rust = (import ./testing/rust.nix {inherit pkgs;});
+            test = (import ./testing/fhs.nix {inherit pkgs;});
+        };
     };
 }

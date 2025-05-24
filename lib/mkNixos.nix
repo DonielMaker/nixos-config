@@ -1,6 +1,7 @@
 {inputs, system, pkgs, pkgs-stable}:
 
-settingsPath: 
+settingsPath:
+{useHM ? false}:
 
 let
     conf = import "${settingsPath}/configuration.nix";
@@ -16,15 +17,17 @@ inputs.nixpkgs.lib.nixosSystem {
         # Since specialArgs.pkgs is set
         inputs.nixpkgs.nixosModules.readOnlyPkgs
         conf
-    ] ++
-    [
-        inputs.home-manager.nixosModules.home-manager {
-            home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = specialArgs;
-                users.${settings.username}.imports = [home];
-            };
-        }
-    ];  
+    ] ++ 
+    (if useHM then
+        [
+            inputs.home-manager.nixosModules.home-manager {
+                home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    extraSpecialArgs = specialArgs;
+                    users.${settings.username}.imports = [home];
+                };
+            }
+        ] else []
+    );
 }
