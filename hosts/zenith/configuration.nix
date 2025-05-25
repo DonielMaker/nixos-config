@@ -49,28 +49,28 @@
     programs.nautilus-open-any-terminal.enable = true;
     programs.nautilus-open-any-terminal.terminal = "kitty";
 
-    programs.corectrl.enable = true;
-    programs.corectrl.gpuOverclock.enable = true;
-    programs.corectrl.gpuOverclock.ppfeaturemask = "0xffffffff";
-    security.polkit.enable = true;
+    # programs.corectrl.enable = true;
+    # programs.corectrl.gpuOverclock.enable = true;
+    # programs.corectrl.gpuOverclock.ppfeaturemask = "0xffffffff";
+    # security.polkit.enable = true;
 
-    programs.localsend.enable = true;
+    # programs.localsend.enable = true;
 
-    networking.wg-quick.interfaces.wg0 = {
-        address = [ "10.10.14.7/24" ];
-        dns = [ "1.1.1.1" ];
-        peers = [
-        {
-            allowedIPs = [
-                "10.10.14.0/24"
-            ];
-            endpoint = "public.ipv64.de:51820";
-            publicKey = "Ltmlc2mcJuKprhi5l6rU2hwMqejwQIQ/GFZB+sEckCQ=";
-            presharedKey = "MIWvpJMPF0Q4m6OkqImXVgqDZOXKbOvoreUrIVl83Mw=";
-        }
-        ];
-        privateKey = "8Jqb5G7dp9U/ObycGM3/voh0y4FSSgadBs6pOfeoN2Q=";
-    };
+    # networking.wg-quick.interfaces.wg0 = {
+    #     address = [ "10.10.14.7/24" ];
+    #     dns = [ "1.1.1.1" ];
+    #     peers = [
+    #     {
+    #         allowedIPs = [
+    #             "10.10.14.0/24"
+    #         ];
+    #         endpoint = "public.ipv64.de:51820";
+    #         publicKey = "Ltmlc2mcJuKprhi5l6rU2hwMqejwQIQ/GFZB+sEckCQ=";
+    #         presharedKey = "MIWvpJMPF0Q4m6OkqImXVgqDZOXKbOvoreUrIVl83Mw=";
+    #     }
+    #     ];
+    #     privateKey = "8Jqb5G7dp9U/ObycGM3/voh0y4FSSgadBs6pOfeoN2Q=";
+    # };
 
     environment.systemPackages = with pkgs; [
         obs-studio
