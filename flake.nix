@@ -37,15 +37,14 @@
 
         nixosConfigurations.galaxia = mkNixos ./hosts/galaxia {useHM = true;};
         nixosConfigurations.zenith = mkNixos ./hosts/zenith {useHM = true;};
-        nixosConfigurations."server" = mkNixos ./hosts/server {useHM = false;};
-        nixosConfigurations.lastprism = mkNixos ./hosts/lastprism {useHM = false;};
+
+        nixosConfigurations.nfs-server = mkNixos ./hosts/nfs-server {useHM = false;};
 
         # DEPRECATED for now
         # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
 
         devShells.${system} = {
             rust = (import ./testing/rust.nix {inherit pkgs;});
-            test = (import ./testing/fhs.nix {inherit pkgs;});
         };
     };
 }
