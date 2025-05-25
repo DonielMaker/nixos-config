@@ -35,9 +35,10 @@
         nixosModules = buildModules ./nixos;
         homeManagerModules = buildModules ./hm;
 
-        nixosConfigurations.galaxia = mkNixos ./hosts/galaxia {useHm = true;};
+        nixosConfigurations.galaxia = mkNixos ./hosts/galaxia {useHM = true;};
         nixosConfigurations.zenith = mkNixos ./hosts/zenith {useHM = true;};
-        nixosConfigurations."server" = mkNixos ./hosts/server {useHM = true;};
+        nixosConfigurations."server" = mkNixos ./hosts/server {useHM = false;};
+        nixosConfigurations.lastprism = mkNixos ./hosts/lastprism {useHM = false;};
 
         # DEPRECATED for now
         # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
