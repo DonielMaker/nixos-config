@@ -2,7 +2,6 @@
 
 {
     imports = with inputs.self.homeManagerModules; [
-        inputs.walker.homeManagerModules.walker
         firefox
         mangohud
         starship

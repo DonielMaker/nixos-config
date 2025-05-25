@@ -11,10 +11,10 @@
         disko.url = "github:nix-community/disko/latest";
         disko.inputs.nixpkgs.follows = "nixpkgs";
 
-        walker.url = "github:abenz1267/walker/v0.12.21";
 
         stylix.url = "github:nix-community/stylix";
 
+        # walker.url = "github:abenz1267/walker/v0.12.21";
 	    # wsl.url = "github:nix-community/NixOS-WSL/main";
     };
 
