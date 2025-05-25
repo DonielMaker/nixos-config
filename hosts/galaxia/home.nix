@@ -2,10 +2,11 @@
 
 {
     imports = with inputs.self.homeManagerModules; [
-        rofi
         firefox
-        oh-my-posh
+        # oh-my-posh
+        starship
         zsh
+        fuzzel
         neovim
         git
         hyprland
