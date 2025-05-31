@@ -5,5 +5,5 @@ rec {
     dotfiles = "/home/${username}/.config";
     timezone = "Europe/Berlin";
     shell = "bash";
-    drive = "/dev/sda";
+    drive = "/dev/sdb";
 }
