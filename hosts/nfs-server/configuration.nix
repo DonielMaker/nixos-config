@@ -11,7 +11,11 @@
         networking
         settings
         user
+
+        seafile
     ];
+
+    networking.firewall.allowedTCPPorts = [ 22 ];
 
     services.openssh.enable = true;
     security.sudo.execWheelOnly  =  true;
@@ -21,27 +25,6 @@
         PermitRootLogin = "no";
     };
 
-    services.seafile = {
-        enable = true;
-        seahubAddress = "0.0.0.0:8000";
-
-        adminEmail = "daniel.schmidt0204@gmail.com";
-        initialAdminPassword = "Changeme";
-
-        ccnetSettings.General.SERVICE_URL = "https://seafile.lastprism.thematt.net";
-
-        seafileSettings = {
-            fileserver = {
-                host = "0.0.0.0";
-                port = 8082;
-            };
-        };
-
-        dataDir = "/var/lib/seafile";
-    };
-
-    networking.firewall.allowedTCPPorts = [ 22 8082 8000 ];
-
     virtualisation.containers.enable = true;
     virtualisation.docker.enable = true;
 
@@ -50,10 +33,6 @@
         fsType = "ext4";
         options = [ "nofail" ];
     };
-
-    systemd.tmpfiles.rules = [
-        "Z /var/lib/seafile 0770 seafile seafile -"
-    ];
 
     nix.settings.trusted-users = [ "donielmaker" ];
 
