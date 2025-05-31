@@ -49,6 +49,8 @@
     programs.nautilus-open-any-terminal.enable = true;
     programs.nautilus-open-any-terminal.terminal = "kitty";
 
+    networking.search = [ "thematt.net" ];
+
     # programs.corectrl.enable = true;
     # programs.corectrl.gpuOverclock.enable = true;
     # programs.corectrl.gpuOverclock.ppfeaturemask = "0xffffffff";
@@ -73,6 +75,7 @@
     # };
 
     environment.systemPackages = with pkgs; [
+        seafile-client
         obs-studio
         hyprpolkitagent
         # Gaming
