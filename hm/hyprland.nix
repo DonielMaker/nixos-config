@@ -1,4 +1,14 @@
-{ pkgs, monitor, dotfiles, kb_layout, ... }:
+{ pkgs, monitor, lib, kb_layout, ... }:
+
+let
+    kitty = lib.getExe pkgs.kitty;
+    firefox = lib.getExe pkgs.firefox;
+    nautilus = lib.getExe pkgs.nautilus;
+    fuzzel = lib.getExe pkgs.fuzzel;
+    cliphist = lib.getExe pkgs.cliphist;
+    hyprpicker = lib.getExe pkgs.hyprpicker;
+    ferrishot = lib.getExe pkgs.ferrishot;
+in
 
 {
 
@@ -138,17 +148,17 @@
             };
 
             bind = [
-                "$mainMod, Return, exec, kitty"
-                "$mainMod, E, exec, nautilus"
-                "$mainMod, B, exec, firefox"
+                "$mainMod, Return, exec, ${kitty}"
+                "$mainMod, E, exec, ${nautilus}"
+                "$mainMod, B, exec, ${firefox}"
                 # Application Launcher
-                "$mainMod, space, exec, fuzzel"
+                "$mainMod, space, exec, ${fuzzel}"
                 # Clipboard History
-                "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
+                "$mainMod, V, exec, ${cliphist} list | ${fuzzel} --dmenu | ${cliphist} decode | wl-copy"
                 # Color Picker
-                "$mainMod, P, exec, hyprpicker -a -f hex"
+                "$mainMod, P, exec, ${hyprpicker} -a -f hex"
                 # Screenshots
-                "$mainMod, S, exec, ferrishot"
+                "$mainMod, S, exec, ${ferrishot}"
 
                 "$mainMod, Q, killactive,"
                 "$mainMod, M, exit,"
