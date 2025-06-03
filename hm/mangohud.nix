@@ -1,6 +1,6 @@
 {
     programs.mangohud.enable = true;
-    # programs.mangohud.enableSessionWide = true;
+    programs.mangohud.enableSessionWide = true;
     programs.mangohud.settings = {
         gpu_text = "GPU";
         gpu_list = [0];
