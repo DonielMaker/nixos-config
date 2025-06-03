@@ -53,7 +53,7 @@ in
             ];
 
             exec-once = [
-                "swww init"
+                "swww-daemon"
                 "hyprctl setcursor Bibata-Modern-Ice 24"
                 "eww open bar"
                 "wl-paste --type text --watch cliphist store"
