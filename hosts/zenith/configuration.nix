@@ -24,7 +24,8 @@
         amd
 
         # Display manager
-        cosmic-greeter
+        # cosmic-greeter
+        regreet
             # gdm
             # sddm
 

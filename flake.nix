@@ -14,7 +14,6 @@
 
         stylix.url = "github:nix-community/stylix";
 
-        # walker.url = "github:abenz1267/walker/v0.12.21";
 	    # wsl.url = "github:nix-community/NixOS-WSL/main";
     };
 
@@ -35,10 +34,9 @@
         nixosModules = buildModules ./nixos;
         homeManagerModules = buildModules ./hm;
 
-        nixosConfigurations.galaxia = mkNixos ./hosts/galaxia {useHM = true;};
+        nixosConfigurations.galaxia = mkNixos ./hosts/galaxia {useHm = true;};
         nixosConfigurations.zenith = mkNixos ./hosts/zenith {useHM = true;};
-
-        nixosConfigurations.nfs-server = mkNixos ./hosts/nfs-server {useHM = false;};
+        nixosConfigurations.server = mkNixos ./hosts/server {useHM = true;};
 
         # DEPRECATED for now
         # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
