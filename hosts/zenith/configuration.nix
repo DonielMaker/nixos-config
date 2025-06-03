@@ -1,4 +1,4 @@
-{ system, inputs, pkgs, ...}:
+{ inputs, pkgs, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -42,6 +42,16 @@
         zsh
     ];
 
+    systemd.services.lact = {
+        description = "AMDGPU Control Daemon";
+        after = ["multi-user.target"];
+        wantedBy = ["multi-user.target"];
+        serviceConfig = {
+            ExecStart = "${pkgs.lact}/bin/lact daemon";
+        };
+        enable = true;
+    };
+
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_14;
 
     services.flatpak.enable = true;
@@ -50,11 +60,6 @@
     programs.nautilus-open-any-terminal.terminal = "kitty";
 
     networking.search = [ "thematt.net" ];
-
-    # programs.corectrl.enable = true;
-    # programs.corectrl.gpuOverclock.enable = true;
-    # programs.corectrl.gpuOverclock.ppfeaturemask = "0xffffffff";
-    # security.polkit.enable = true;
 
     # programs.localsend.enable = true;
 
@@ -74,7 +79,11 @@
     #     privateKey = "8Jqb5G7dp9U/ObycGM3/voh0y4FSSgadBs6pOfeoN2Q=";
     # };
 
+    services.lact.enable = true;
+
     environment.systemPackages = with pkgs; [
+        geekbench_6
+        upscaler
         seafile-client
         obs-studio
         hyprpolkitagent
