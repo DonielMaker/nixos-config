@@ -42,16 +42,6 @@
         zsh
     ];
 
-    systemd.services.lact = {
-        description = "AMDGPU Control Daemon";
-        after = ["multi-user.target"];
-        wantedBy = ["multi-user.target"];
-        serviceConfig = {
-            ExecStart = "${pkgs.lact}/bin/lact daemon";
-        };
-        enable = true;
-    };
-
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_14;
 
     services.flatpak.enable = true;
