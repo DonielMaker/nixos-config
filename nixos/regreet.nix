@@ -13,8 +13,8 @@ let
     variant = "macchiato";
 
     image = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/DonielMaker/wallpapers/main/Main.jpg";
-        sha256 = "sha256-3z6+ia3NNPCB0RZcUCzHXRp+OProMFepi5k8/46oDIE=";
+        url = "https://raw.githubusercontent.com/DonielMaker/wallpapers/main/Greetd.jpg";
+        sha256 = "sha256-OZTUlNTFrVD7R+R9n3sTGXZ2sGorqumiGm6po8xRdGc=";
     };
 in
 
