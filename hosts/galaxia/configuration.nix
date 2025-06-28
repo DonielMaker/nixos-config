@@ -21,8 +21,9 @@
             # amd
 
         # Display manager
+        regreet
             # gdm
-        sddm
+            # sddm
 
         # Hardware related
         bluethooth
@@ -35,6 +36,11 @@
             # steam
         zsh
     ];
+
+    programs.nautilus-open-any-terminal.enable = true;
+    programs.nautilus-open-any-terminal.terminal = "kitty";
+
+    networking.search = [ "thematt.net" ];
 
     environment.systemPackages = with pkgs; [
         ferrishot

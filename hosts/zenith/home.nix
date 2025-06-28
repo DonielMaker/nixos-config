@@ -5,15 +5,12 @@
         firefox
         mangohud
         starship
-        # oh-my-posh
-        # rofi
+        zsh
         fuzzel
-        # walker
         neovim
         git
         hyprland
         themes
-        zsh
         git
         hypridle
         kitty
