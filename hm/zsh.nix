@@ -7,6 +7,7 @@
         autosuggestion.enable = true;
         dotDir = ".config/zsh";
         shellAliases = {
+            sd = "cd $(find . -type d | fzf)";
             rb = "sudo nixos-rebuild switch --flake ${dotfiles}/nix";
             lg = "lazygit";
             v = "nvim";
