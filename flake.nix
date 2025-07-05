@@ -15,11 +15,12 @@
         stylix.url = "github:nix-community/stylix";
 
 	    # wsl.url = "github:nix-community/NixOS-WSL/main";
+
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = {...}@inputs :
+    outputs = {...}@inputs:
 
     let 
         system = "x86_64-linux";
