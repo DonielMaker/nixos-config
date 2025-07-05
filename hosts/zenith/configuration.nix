@@ -1,4 +1,4 @@
-{ inputs, pkgs, ...}:
+{ inputs, pkgs, system, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -73,6 +73,8 @@
     services.lact.enable = true;
 
     environment.systemPackages = with pkgs; [
+        inputs.quickshell.packages.${system}.quickshell
+
         geekbench_6
         upscaler
         seafile-client
@@ -101,7 +103,6 @@
         alsa-scarlett-gui
         # Other
         xdg-desktop-portal
-        papirus-icon-theme
         home-manager
     ];
 
