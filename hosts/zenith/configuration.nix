@@ -77,9 +77,9 @@
 
         geekbench_6
         upscaler
-        seafile-client
         obs-studio
         hyprpolkitagent
+
         # Gaming
         xclicker
         protonup-qt

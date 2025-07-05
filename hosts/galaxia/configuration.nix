@@ -1,4 +1,4 @@
-{inputs, pkgs, ...}:
+{inputs, pkgs, system, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -21,8 +21,9 @@
             # amd
 
         # Display manager
+        regreet
             # gdm
-        sddm
+            # sddm
 
         # Hardware related
         bluethooth
@@ -36,7 +37,15 @@
         zsh
     ];
 
+    services.upower.enable = true;
+
+    programs.nautilus-open-any-terminal.enable = true;
+    programs.nautilus-open-any-terminal.terminal = "kitty";
+
+    networking.search = [ "thematt.net" ];
+
     environment.systemPackages = with pkgs; [
+        inputs.quickshell.packages.${system}.quickshell
         ferrishot
         zenity
         # Programs

@@ -37,7 +37,7 @@
         nixosModules = buildModules ./nixos;
         homeManagerModules = buildModules ./hm;
 
-        nixosConfigurations.galaxia = mkNixos ./hosts/galaxia {useHm = true;};
+        nixosConfigurations.galaxia = mkNixos ./hosts/galaxia {useHM = true;};
         nixosConfigurations.zenith = mkNixos ./hosts/zenith {useHM = true;};
         nixosConfigurations.server = mkNixos ./hosts/server {useHM = true;};
 
