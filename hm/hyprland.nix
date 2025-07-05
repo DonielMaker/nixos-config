@@ -162,6 +162,7 @@ in
                 "$mainMod, Q, killactive,"
                 "$mainMod, M, exit,"
                 "$mainMod, F, togglefloating,"
+                "$mainMod, H, pin,"
                 "$mainMod, J, togglesplit," # dwindle
                 "$mainMod, G, fullscreen"
 
