@@ -40,6 +40,7 @@
         nixosConfigurations.galaxia = mkNixos ./hosts/galaxia {useHM = true;};
         nixosConfigurations.zenith = mkNixos ./hosts/zenith {useHM = true;};
         nixosConfigurations.server = mkNixos ./hosts/server {useHM = true;};
+        nixosConfigurations.vilethorn = mkNixos ./hosts/vilethorn {useHM = false;};
 
         # DEPRECATED for now
         # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
