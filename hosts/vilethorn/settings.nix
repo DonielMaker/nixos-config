@@ -5,6 +5,6 @@ rec {
     dotfiles = "/home/${username}/.config";
     kb_layout = "us";
     timezone = "Europe/Berlin";
-    drive = "/dev/nvme1n1";
+    drive = "/dev/sda";
     shell = "bash";
 }
