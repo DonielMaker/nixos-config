@@ -11,9 +11,6 @@
         disko.url = "github:nix-community/disko/latest";
         disko.inputs.nixpkgs.follows = "nixpkgs";
 
-
-        stylix.url = "github:nix-community/stylix";
-
 	    # wsl.url = "github:nix-community/NixOS-WSL/main";
 
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
@@ -45,8 +42,8 @@
         # DEPRECATED for now
         # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
 
-        devShells.${system} = {
-            rust = (import ./testing/rust.nix {inherit pkgs;});
-        };
+        # devShells.${system} = {
+        #     rust = (import ./testing/rust.nix {inherit pkgs;});
+        # };
     };
 }
