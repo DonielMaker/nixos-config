@@ -27,6 +27,7 @@
 
         overlays = import ./nixos/overlays.nix {inherit pkgs;}; 
         mkNixos = import ./lib/mkNixos.nix {inherit inputs system pkgs pkgs-stable;};
+        mkHome = import ./lib/mkHome.nix {inherit inputs system pkgs pkgs-stable;};
         buildModules = import ./lib/getModules.nix {lib = inputs.nixpkgs.lib;};
     in
 
@@ -34,10 +35,21 @@
         nixosModules = buildModules ./nixos;
         homeManagerModules = buildModules ./hm;
 
-        nixosConfigurations.galaxia = mkNixos ./hosts/galaxia {useHM = true;};
-        nixosConfigurations.zenith = mkNixos ./hosts/zenith {useHM = true;};
-        nixosConfigurations.server = mkNixos ./hosts/server {useHM = true;};
-        nixosConfigurations.vilethorn = mkNixos ./hosts/vilethorn {useHM = false;};
+        # Main PC
+        nixosConfigurations.zenith = mkNixos ./hosts/zenith;
+        # Laptop
+        nixosConfigurations.galaxia = mkNixos ./hosts/galaxia;
+        # "Test" server
+        nixosConfigurations.server = mkNixos ./hosts/server;
+        # TBC router
+        # nixosConfigurations.vilethorn = mkNixos ./hosts/vilethorn;
+
+        # TODO: Do we want a single user for all systems or one for each?
+        # INFO: Considering how we fetch the home.nix and settings.nix with the settingsPath 
+        # it might be better to have one homeConfigurations per device.
+        # This could be achieved by using "donielmaker@${system}" for each
+        # individual homeConfigurations.
+        homeConfigurations."donielmaker@zenith" = mkHome ./hosts/zenith;
 
         # DEPRECATED for now
         # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
