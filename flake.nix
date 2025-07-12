@@ -22,10 +22,9 @@
     let 
         system = "x86_64-linux";
 
-        pkgs = import inputs.nixpkgs {inherit system overlays; config.allowUnfree = true;};
-        pkgs-stable = import inputs.nixpkgs-stable {inherit system overlays; config.allowUnfree = true;};
+        pkgs = import inputs.nixpkgs {inherit system; config.allowUnfree = true;};
+        pkgs-stable = import inputs.nixpkgs-stable {inherit system; config.allowUnfree = true;};
 
-        overlays = import ./nixos/overlays.nix {inherit pkgs;}; 
         mkNixos = import ./lib/mkNixos.nix {inherit inputs system pkgs pkgs-stable;};
         mkHome = import ./lib/mkHome.nix {inherit inputs system pkgs pkgs-stable;};
         buildModules = import ./lib/getModules.nix {lib = inputs.nixpkgs.lib;};
@@ -50,6 +49,7 @@
         # This could be achieved by using "donielmaker@${system}" for each
         # individual homeConfigurations.
         homeConfigurations."donielmaker@zenith" = mkHome ./hosts/zenith;
+        homeConfigurations."donielmaker@galaxia" = mkHome ./hosts/galaxia;
 
         # DEPRECATED for now
         # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
