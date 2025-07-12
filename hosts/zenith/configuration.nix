@@ -4,9 +4,6 @@
     imports = with inputs.self.nixosModules; [
         ./hardware-configuration.nix
         inputs.disko.nixosModules.disko
-        inputs.stylix.nixosModules.stylix
-
-        # stylix
 
         # System
         bootloader
