@@ -15,6 +15,8 @@
 
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
+
+        ragenix.url = "github:yaxitech/ragenix";
     };
 
     outputs = {...}@inputs:
@@ -25,9 +27,15 @@
         pkgs = import inputs.nixpkgs {inherit system; config.allowUnfree = true;};
         pkgs-stable = import inputs.nixpkgs-stable {inherit system; config.allowUnfree = true;};
 
-        mkNixos = import ./lib/mkNixos.nix {inherit inputs system pkgs pkgs-stable;};
-        mkHome = import ./lib/mkHome.nix {inherit inputs system pkgs pkgs-stable;};
+        # TODO: Perhaps move these all into one main import file?
+        # TODO: mkHome and mkNixos seem very similar is there a way to maybe combine these into one make function?
+        mkNixos = import ./lib/mkNixos.nix {inherit inputs system pkgs pkgs-stable myLib;};
+        mkHome = import ./lib/mkHome.nix {inherit inputs system pkgs pkgs-stable myLib;};
         buildModules = import ./lib/getModules.nix {lib = inputs.nixpkgs.lib;};
+        getSecrets = import ./lib/getSecrets.nix {lib = inputs.nixpkgs.lib;};
+
+        # TODO: like this but maybe a bit better?
+        myLib = {inherit mkNixos mkHome buildModules getSecrets;};
     in
 
     {
@@ -48,6 +56,7 @@
         # it might be better to have one homeConfigurations per device.
         # This could be achieved by using "donielmaker@${system}" for each
         # individual homeConfigurations.
+        # PASSED: This has been resolved like this:
         homeConfigurations."donielmaker@zenith" = mkHome ./hosts/zenith;
         homeConfigurations."donielmaker@galaxia" = mkHome ./hosts/galaxia;
 
