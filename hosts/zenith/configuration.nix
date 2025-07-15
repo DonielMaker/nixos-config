@@ -1,9 +1,10 @@
-{ inputs, pkgs, system, ...}:
+{ inputs, pkgs, pkgs-stable, system, config, myLib, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
         ./hardware-configuration.nix
         inputs.disko.nixosModules.disko
+        inputs.ragenix.nixosModules.default
 
         # System
         bootloader
@@ -40,7 +41,7 @@
         zsh
     ];
 
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_14;
+    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
 
     services.flatpak.enable = true;
 
@@ -51,28 +52,33 @@
 
     # programs.localsend.enable = true;
 
-    # networking.wg-quick.interfaces.wg0 = {
-    #     address = [ "10.10.14.7/24" ];
-    #     dns = [ "1.1.1.1" ];
-    #     peers = [
-    #     {
-    #         allowedIPs = [
-    #             "10.10.14.0/24"
-    #         ];
-    #         endpoint = "public.ipv64.de:51820";
-    #         publicKey = "Ltmlc2mcJuKprhi5l6rU2hwMqejwQIQ/GFZB+sEckCQ=";
-    #         presharedKey = "MIWvpJMPF0Q4m6OkqImXVgqDZOXKbOvoreUrIVl83Mw=";
-    #     }
-    #     ];
-    #     privateKey = "8Jqb5G7dp9U/ObycGM3/voh0y4FSSgadBs6pOfeoN2Q=";
-    # };
+    networking.wg-quick.interfaces.wg0 = {
+        address = [ "10.10.14.7/24" ];
+        dns = [ "1.1.1.1" ];
+        peers = [
+        {
+            allowedIPs = [
+                "10.10.14.0/24"
+            ];
+            endpoint = "87.186.6.152:51820";
+            publicKey = "Ltmlc2mcJuKprhi5l6rU2hwMqejwQIQ/GFZB+sEckCQ=";
+            presharedKeyFile = config.age.secrets.wireguard-shrKey.path;
+        }
+        ];
+        privateKeyFile = config.age.secrets.wireguard-priKey.path;
+    };
 
     services.lact.enable = true;
 
+    services.openssh.enable = true;
+
+    age.secrets = myLib.getSecrets ./secrets;
+
     environment.systemPackages = with pkgs; [
+        inputs.ragenix.packages.${system}.default
         inputs.quickshell.packages.${system}.quickshell
 
-        geekbench_6
+        # geekbench_6
         upscaler
         obs-studio
         hyprpolkitagent
@@ -81,14 +87,14 @@
         xclicker
         protonup-qt
         lutris
-        prismlauncher
+        pkgs-stable.prismlauncher
         steam
         everest-mons
 
         # Programs
         ferrishot
         lm_sensors
-        gimp
+        # gimp
         vlc
         kdePackages.kdenlive
         orca-slicer
