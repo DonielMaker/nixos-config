@@ -6,7 +6,7 @@
         inputs.disko.nixosModules.disko
 
         # System
-        bootloader
+        # bootloader
         networking
         settings
         user
@@ -43,6 +43,12 @@
     programs.nautilus-open-any-terminal.terminal = "kitty";
 
     networking.search = [ "thematt.net" ];
+
+    boot.loader.grub.enable = true;
+    boot.loader.grub.efiSupport = true;
+    boot.loader.grub.device = "nodev";
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
     environment.systemPackages = with pkgs; [
         inputs.quickshell.packages.${system}.quickshell
