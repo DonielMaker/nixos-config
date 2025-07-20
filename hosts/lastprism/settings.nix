@@ -6,5 +6,5 @@ rec {
     dotfiles = "/home/${username}/.config";
     timezone = "Europe/Berlin";
     drive = "/dev/nvme1n1";
-    shell = "bash";
+    shell = "zsh";
 }
