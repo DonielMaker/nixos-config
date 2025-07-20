@@ -98,6 +98,7 @@
         vlc
         kdePackages.kdenlive
         orca-slicer
+        bambu-studio
         qt6ct
         vesktop
         nautilus
