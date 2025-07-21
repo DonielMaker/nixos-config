@@ -34,7 +34,7 @@
                     }
                     {
                         domain = ["*.thematt.net"];
-                        policy = "one_factor";
+                        policy = "two_factor";
                     }
                 ];
             };
@@ -80,9 +80,8 @@
             };
             totp = {
                 disable = false;
-                issuer = "authelia.com";
                 algorithm = "sha1";
-                digits = 8;
+                digits = 6;
                 period = 30;
             };
         };
