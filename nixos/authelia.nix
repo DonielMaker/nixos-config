@@ -24,14 +24,14 @@
             access_control = {
                 default_policy = "deny";
                 rules = [
-                {
-                    domain = ["authelia.thematt.net"];
-                    policy = "bypass";
-                }
-                {
-                    domain = ["*.thematt.net"];
-                    policy = "one_factor";
-                }
+                    {
+                        domain = ["authelia.thematt.net"];
+                        policy = "bypass";
+                    }
+                    {
+                        domain = ["*.thematt.net"];
+                        policy = "one_factor";
+                    }
                 ];
             };
             notifier = {
@@ -42,7 +42,6 @@
             };
             session = {
                 name = "authelia_session";
-                secret = "justignorethissecret";
                 expiration = "12h";
                 inactivity = "45m";
                 remember_me = "1M";
@@ -56,11 +55,7 @@
                     }
                 ];
             };
-            storage = {
-                local = {
-                    path = "/var/lib/authelia-main/db.sqlite3";
-                };
-            };
+            storage.local.path = "/var/lib/authelia-main/db.sqlite3";
             regulation = {
                 max_retries = 3;
                 find_time = "5m";
@@ -76,8 +71,7 @@
                     timeout = "5s";
                     base_dn = "dc=thematt,dc=net";
                     additional_users_dn = "ou=people";
-                    user = "uid=donielmaker,ou=people,dc=thematt,dc=net";
-                    password = "Changeme";
+                    user = "uid=authelia,ou=people,dc=thematt,dc=net";
                 };
             };
             totp = {
