@@ -13,13 +13,39 @@
         settings
         user
 
-        # TODO: add the lastprism system to the secrets.nix
         caddy
         authelia
         lldap
     ];
 
-    age.secrets = myLib.getSecrets ./secrets;
+    age.secrets = {
+    
+        jwtSecret = {
+            file = ./secrets/jwtSecret.age;
+            mode = "440";
+            owner = "authelia-main";
+            group = "authelia-main";
+        };
+        storageEncryptionKey = {
+            file = ./secrets/storageEncryptionKey.age;
+            mode = "440";
+            owner = "authelia-main";
+            group = "authelia-main";
+        };
+        sessionSecret = {
+            file = ./secrets/sessionSecret.age;
+            mode = "440";
+            owner = "authelia-main";
+            group = "authelia-main";
+        };
+        autheliaLldapPassword = {
+            file = ./secrets/autheliaLldapPassword.age;
+            mode = "440";
+            owner = "authelia-main";
+            group = "authelia-main";
+        };
+        cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
+    };
 
     security.sudo.execWheelOnly  =  true;
 
