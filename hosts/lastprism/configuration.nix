@@ -1,4 +1,4 @@
-{ inputs, pkgs, system, ...}:
+{ inputs, pkgs, system, myLib, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -14,12 +14,13 @@
         user
 
         # TODO: add the lastprism system to the secrets.nix
-        # caddy
-        # authelia
-        # lldap
+        caddy
+        authelia
+        lldap
     ];
 
-    # age.secrets = myLib.getSecrets ./secrets;
+    age.secrets = myLib.getSecrets ./secrets;
+
     services.openssh.enable = true;
 
     environment.systemPackages = with pkgs; [
