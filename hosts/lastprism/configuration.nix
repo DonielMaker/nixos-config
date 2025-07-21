@@ -14,9 +14,9 @@
         user
 
         # TODO: add the lastprism system to the secrets.nix
-        # caddy
-        # authelia
-        # lldap
+        caddy
+        authelia
+        lldap
     ];
 
     age.secrets = myLib.getSecrets ./secrets;
