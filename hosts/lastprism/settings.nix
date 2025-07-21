@@ -5,6 +5,6 @@ rec {
     mail = "daniel.schmidt0204@gmail.com";
     dotfiles = "/home/${username}/.config";
     timezone = "Europe/Berlin";
-    drive = "/dev/nvme1n1";
+    drive = "/dev/sda";
     shell = "bash";
 }

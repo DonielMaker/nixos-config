@@ -1,8 +1,9 @@
-{ inputs, pkgs, system, config, myLib, ...}:
+{ inputs, pkgs, system, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
         ./hardware-configuration.nix
+        ./disko.nix
         inputs.disko.nixosModules.disko
         inputs.ragenix.nixosModules.default
 
@@ -12,18 +13,20 @@
         settings
         user
 
-        zsh
-
-        caddy
-        authelia
-        lldap
+        # TODO: add the lastprism system to the secrets.nix
+        # caddy
+        # authelia
+        # lldap
     ];
 
-    age.secrets = myLib.getSecrets ./secrets;
+    # age.secrets = myLib.getSecrets ./secrets;
+    services.openssh.enable = true;
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${system}.default
+
+        vim
     ];
 
-    system.stateVersion = ""; # Just don't
+    system.stateVersion = "25.11"; # Just don't
 }
