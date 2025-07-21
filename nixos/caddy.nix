@@ -1,7 +1,7 @@
 {config, ...}:
 
 {
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
+    networking.firewall.allowedTCPPorts = [ 80 443 8000];
     services.caddy.enable = true;
     services.caddy.extraConfig = ''
         *.thematt.net {
@@ -22,6 +22,15 @@
             @lldap host lldap.thematt.net
             handle @lldap {
                 reverse_proxy 10.10.12.3:17170
+            }
+
+            @whoami host whoami.thematt.net
+            handle @whoami {
+                forward_auth 10.10.12.3:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                }
+                reverse_proxy 10.10.12.3:8000
             }
         }
     '';
