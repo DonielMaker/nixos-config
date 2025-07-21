@@ -1,12 +1,12 @@
 let
-    user1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwosE68FthKwXs1WhPnY3YqbkVPT52V30X489epRsJQ donielmaker@zenith";
+    donielmaker-zenith = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwosE68FthKwXs1WhPnY3YqbkVPT52V30X489epRsJQ donielmaker@zenith";
 
-    system1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE9OsEE+anE42quYmi3ewEsxA/jiopIzdjdAaXa05t/m";
+    zenith = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE9OsEE+anE42quYmi3ewEsxA/jiopIzdjdAaXa05t/m";
 in
 {
-    "secret1.age".publicKeys = [ user1 system1 ];
-    "secret2.age".publicKeys = [ user1 system1 ];
-
-    "wireguard-shrKey.age".publicKeys = [ user1 system1 ];
-    "wireguard-priKey.age".publicKeys = [ user1 system1 ];
+    "jwtSecret.age".publicKeys = [donielmaker-zenith zenith];
+    "storageEncryptionKeyFile.age".publicKeys = [donielmaker-zenith zenith];
+    "sessionSecret.age".publicKeys = [donielmaker-zenith zenith];
+    "autheliaLldapPassword.age".publicKeys = [donielmaker-zenith zenith];
+    "cloudflare.age".publicKeys = [donielmaker-zenith zenith];
 }
