@@ -46,9 +46,9 @@
         nixosConfigurations.zenith = mkNixos ./hosts/zenith;
         # Laptop
         nixosConfigurations.galaxia = mkNixos ./hosts/galaxia;
-        # "Test" server
-        nixosConfigurations.server = mkNixos ./hosts/server;
-        # TBC router
+        # Auth Server
+        nixosConfigurations.lastprism = mkNixos ./hosts/lastprism;
+        # TBC Router
         # nixosConfigurations.vilethorn = mkNixos ./hosts/vilethorn;
 
         # TODO: Do we want a single user for all systems or one for each?
