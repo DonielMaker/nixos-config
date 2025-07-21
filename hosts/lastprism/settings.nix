@@ -1,5 +1,5 @@
 rec {
-    hostname = "zenith";
+    hostname = "lastprism";
     system = "x86_64-linux";
     username = "donielmaker";
     mail = "daniel.schmidt0204@gmail.com";
