@@ -44,11 +44,22 @@
 
     networking.search = [ "thematt.net" ];
 
-    boot.loader.grub.enable = true;
-    boot.loader.grub.efiSupport = true;
-    boot.loader.grub.device = "nodev";
+    boot.loader.limine.enable = true;
+    boot.loader.limine = {
+        efiSupport = true;
+        style = {
+            wallpapers = [
+                ./vladislav-klapin-o-SMjjGuP6c-unsplash.jpg            
+            ];
+            interface.resolution = "1920x1080";
+            interface.branding = "I use NixOS btw";
+            graphicalTerminal.background = "ff000000";
+            graphicalTerminal.foreground = "c0caf5";
+            graphicalTerminal.margin = 50;
+        };
+        maxGenerations = 50;
+    };
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
     environment.systemPackages = with pkgs; [
         inputs.quickshell.packages.${system}.quickshell
