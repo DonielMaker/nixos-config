@@ -1,39 +1,27 @@
-{inputs, pkgs, system, ...}:
+{inputs, config, pkgs, system, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
         ./hardware-configuration.nix
+        ./disko.nix
         inputs.disko.nixosModules.disko
+        inputs.ragenix.nixosModules.default
 
-        # System
-        # bootloader
+        limine
         networking
         settings
         user
-        disko
 
-        # Hyprland (and other graphics related stuff)
         graphics
 
-        # Graphics driver
         intel
-            # nvidia
-            # amd
 
-        # Display manager
         regreet
-            # gdm
-            # sddm
 
-        # Hardware related
         bluethooth
-            # fingerprint
         sound
 
-        # Programs 
         neovim
-            # openrgb
-            # steam
         zsh
     ];
 
@@ -44,25 +32,35 @@
 
     networking.search = [ "thematt.net" ];
 
-    boot.loader.limine.enable = true;
-    boot.loader.limine = {
-        efiSupport = true;
-        style = {
-            wallpapers = [
-                ./vladislav-klapin-o-SMjjGuP6c-unsplash.jpg            
-            ];
-            interface.resolution = "1920x1080";
-            interface.branding = "I use NixOS btw";
-            graphicalTerminal.background = "ff000000";
-            graphicalTerminal.foreground = "c0caf5";
-            graphicalTerminal.margin = 50;
-        };
-        maxGenerations = 50;
+    networking.wg-quick.interfaces.wg0 = {
+        address = [ "10.10.14.6/24" ];
+        dns = [ "1.1.1.1" ];
+        peers = [
+            {
+                allowedIPs = [
+                    "10.10.14.0/24"
+                    "10.10.12.0/24"
+                ];
+                endpoint = "87.186.6.152:51820";
+                publicKey = "Ltmlc2mcJuKprhi5l6rU2hwMqejwQIQ/GFZB+sEckCQ=";
+                presharedKeyFile = config.age.secrets.wireguard-shrKey.path;
+            }
+        ];
+        privateKeyFile = config.age.secrets.wireguard-priKey.path;
     };
-    boot.loader.efi.canTouchEfiVariables = true;
+
+    age.secrets = {
+        wireguard-priKey.file = ./secrets/wireguard-priKey.age;
+        wireguard-shrKey.file = ./secrets/wireguard-shrKey.age;
+    };
+
+    programs.localsend.enable = true;
+
+    services.openssh.enable = true;
 
     environment.systemPackages = with pkgs; [
         inputs.quickshell.packages.${system}.quickshell
+        inputs.ragenix.packages.${system}.default
         ferrishot
         zenity
         # Programs
