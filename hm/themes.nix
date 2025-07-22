@@ -17,6 +17,7 @@ in
         cursorTheme.package = pkgs.bibata-cursors;
 
         # iconTheme.package = pkgs.catppuccin-papirus-folders.override {flavor = variant;};
+        iconTheme.name = "Papirus";
         iconTheme.package = pkgs.papirus-icon-theme;
 
         theme.name = "catppuccin-macchiato-blue-standard";
