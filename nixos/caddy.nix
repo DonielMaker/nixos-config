@@ -32,6 +32,21 @@
                 }
                 reverse_proxy 10.10.12.3:8000
             }
+
+            @clst-1 host proxmox.clst-1.thematt.net 
+            handle @clst-1 {
+                reverse_proxy 10.10.12.60:8006
+            }
+
+            @clst-2 host proxmox.clst-2.thematt.net 
+            handle @clst-2 {
+                reverse_proxy 10.10.12.61:8006
+            }
+
+            @clst-3 host proxmox.clst-3.thematt.net 
+            handle @clst-3 {
+                reverse_proxy 10.10.12.62:8006
+            }
         }
     '';
 
