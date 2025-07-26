@@ -7,7 +7,8 @@
         inputs.ragenix.nixosModules.default
 
         # System
-        bootloader
+        # bootloader
+        limine
         networking
         settings
         user
