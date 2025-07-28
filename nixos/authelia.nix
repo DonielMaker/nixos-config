@@ -34,7 +34,7 @@
                     }
                     {
                         domain = ["*.thematt.net"];
-                        policy = "two_factor";
+                        policy = "one_factor";
                     }
                 ];
             };
