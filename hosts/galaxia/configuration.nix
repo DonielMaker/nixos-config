@@ -7,6 +7,8 @@
         inputs.disko.nixosModules.disko
         inputs.ragenix.nixosModules.default
 
+        # System
+        # bootloader
         limine
         networking
         settings

@@ -1,5 +1,6 @@
-{...}: {
+{...}: 
 
+{
     boot.loader.limine.enable = true;
     boot.loader.limine = {
         efiSupport = true;
@@ -17,6 +18,5 @@
         maxGenerations = 50;
     };
     boot.loader.efi.canTouchEfiVariables = true;
-
 }
 

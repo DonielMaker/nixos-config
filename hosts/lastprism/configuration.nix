@@ -1,4 +1,4 @@
-{ inputs, pkgs, system, myLib, ...}:
+{ inputs, pkgs, system, myLib, config, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -18,31 +18,36 @@
         lldap
     ];
 
-    age.secrets = {
+    age.secrets = let
+        authelia-owner = config.services.authelia.instances.main.user;
+        authelia-group = config.services.authelia.instances.main.group;
+    in
+
+    {
     
         jwtSecret = {
             file = ./secrets/jwtSecret.age;
             mode = "440";
-            owner = "authelia-main";
-            group = "authelia-main";
+            owner = authelia-owner;
+            group = authelia-group;
         };
         storageEncryptionKey = {
             file = ./secrets/storageEncryptionKey.age;
             mode = "440";
-            owner = "authelia-main";
-            group = "authelia-main";
+            owner = authelia-owner;
+            group = authelia-group;
         };
         sessionSecret = {
             file = ./secrets/sessionSecret.age;
             mode = "440";
-            owner = "authelia-main";
-            group = "authelia-main";
+            owner = authelia-owner;
+            group = authelia-group;
         };
         autheliaLldapPassword = {
             file = ./secrets/autheliaLldapPassword.age;
             mode = "440";
-            owner = "authelia-main";
-            group = "authelia-main";
+            owner = authelia-owner;
+            group = authelia-group;
         };
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
     };
