@@ -4,6 +4,7 @@
     imports = with inputs.self.homeManagerModules; [
         firefox
         # oh-my-posh
+        zellij
         starship
         zsh
         fuzzel
