@@ -3,6 +3,7 @@
 {
     imports = with inputs.self.homeManagerModules; [
         firefox
+        zellij
         mangohud
         starship
         zsh
