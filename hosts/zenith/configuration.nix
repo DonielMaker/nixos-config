@@ -80,6 +80,7 @@
         inputs.quickshell.packages.${system}.quickshell
 
         # geekbench_6
+        signal-desktop
         upscaler
         obs-studio
         hyprpolkitagent
