@@ -7,6 +7,7 @@
         autosuggestion.enable = true;
         dotDir = ".config/zsh";
         shellAliases = {
+            z = "zellij";
             sd = "cd $(find . -type d | fzf)";
             s = "ragenix -e";
             rb = "sudo nixos-rebuild switch --flake ${dotfiles}/nix";
