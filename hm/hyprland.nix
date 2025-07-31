@@ -1,7 +1,7 @@
 { pkgs, monitor, lib, kb_layout, ... }:
 
 let
-    kitty = lib.getExe pkgs.kitty;
+    kitty = lib.getExe pkgs.alacritty;
     firefox = lib.getExe pkgs.firefox;
     nautilus = lib.getExe pkgs.nautilus;
     fuzzel = lib.getExe pkgs.fuzzel;

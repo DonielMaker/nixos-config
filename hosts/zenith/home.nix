@@ -14,7 +14,8 @@
         themes
         git
         hypridle
-        kitty
+        # kitty
+        alacritty
     ];
 
     home = {
