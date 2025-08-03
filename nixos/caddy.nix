@@ -60,7 +60,8 @@
     security.acme = {
         acceptTerms = true;
         defaults.email = "daniel.schmidt0204@gmail.com";
-        defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+        # defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+        defaults.server = "https://acme-v02.api.letsencrypt.org/directory";
 
         certs."thematt.net" = {
             group = config.services.caddy.group;
