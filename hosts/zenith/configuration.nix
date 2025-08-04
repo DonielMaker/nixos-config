@@ -3,6 +3,7 @@
 {
     imports = with inputs.self.nixosModules; [
         ./hardware-configuration.nix
+        ./disko.nix
         inputs.disko.nixosModules.disko
         inputs.ragenix.nixosModules.default
 
@@ -12,7 +13,6 @@
         networking
         settings
         user
-        disko
 
         # Hyprland (and other graphics related stuff)
         graphics
@@ -60,8 +60,9 @@
         {
             allowedIPs = [
                 "10.10.14.0/24"
+                "10.10.12.0/24"
             ];
-            endpoint = "87.186.6.152:51820";
+            endpoint = "public.ipv64.de:51820";
             publicKey = "Ltmlc2mcJuKprhi5l6rU2hwMqejwQIQ/GFZB+sEckCQ=";
             presharedKeyFile = config.age.secrets.wireguard-shrKey.path;
         }
@@ -86,7 +87,7 @@
         hyprpolkitagent
 
         # Gaming
-        xclicker
+        # xclicker
         protonup-qt
         lutris
         pkgs-stable.prismlauncher
@@ -111,13 +112,6 @@
         xdg-desktop-portal
         home-manager
     ];
-
-    # Steam drive
-    fileSystems."/home/donielmaker/Games" = {
-        device = "/dev/disk/by-uuid/97b08468-250f-483a-96db-bf1be07dca05";
-        fsType = "ext4";
-        options = [ "users" "nofail" "exec" ];
-    };
 
     system.stateVersion = "24.11"; # Just don't
 }
