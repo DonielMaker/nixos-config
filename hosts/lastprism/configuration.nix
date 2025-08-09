@@ -24,7 +24,6 @@
     in
 
     {
-    
         jwtSecret = {
             file = ./secrets/jwtSecret.age;
             mode = "440";
@@ -51,6 +50,8 @@
         };
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
     };
+
+    services.opencloud.enable = true;
 
     security.sudo.execWheelOnly  =  true;
 
