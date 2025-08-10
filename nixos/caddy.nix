@@ -11,17 +11,17 @@
 
             @authelia host authelia.thematt.net
             handle @authelia {
-                reverse_proxy 10.10.12.3:9091
+                reverse_proxy 10.10.12.14:9091
             }
 
             @lldap host lldap.thematt.net
             handle @lldap {
-                reverse_proxy 10.10.12.3:17170
+                reverse_proxy 10.10.12.14:17170
             }
 
             @wireguard host wireguard.thematt.net 
             handle @wireguard {
-                forward_auth 10.10.12.3:9091 {
+                forward_auth 10.10.12.14:9091 {
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
@@ -30,7 +30,7 @@
 
             @technitium host technitium.thematt.net 
             handle @technitium {
-                forward_auth 10.10.12.3:9091 {
+                forward_auth 10.10.12.14:9091 {
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
