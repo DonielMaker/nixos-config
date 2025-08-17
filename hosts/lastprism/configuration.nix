@@ -51,8 +51,6 @@
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
     };
 
-    services.opencloud.enable = true;
-
     security.sudo.execWheelOnly  =  true;
 
     services.openssh.enable = true;
