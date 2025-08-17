@@ -48,6 +48,8 @@
         nixosConfigurations.galaxia = mkNixos ./hosts/galaxia;
         # Auth Server
         nixosConfigurations.lastprism = mkNixos ./hosts/lastprism;
+
+        nixosConfigurations.lastprism-max = mkNixos ./hosts/lastprism-max;
         # TBC Router
         # nixosConfigurations.vilethorn = mkNixos ./hosts/vilethorn;
 
