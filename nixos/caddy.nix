@@ -11,26 +11,22 @@
 
             @authelia host authelia.thematt.net
             handle @authelia {
-                reverse_proxy 10.10.12.14:9091
+                reverse_proxy nixos.lastprism.thematt.net:9091
             }
 
             @lldap host lldap.thematt.net
             handle @lldap {
-                reverse_proxy 10.10.12.14:17170
+                reverse_proxy nixos.lastprism.thematt.net:17170
             }
 
             @wireguard host wireguard.thematt.net 
             handle @wireguard {
-                forward_auth 10.10.12.14:9091 {
-                    uri /api/authz/forward-auth
-                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-                }
-                reverse_proxy 10.10.12.2:51821
+                reverse_proxy 10.10.12.2:8888
             }
 
             @technitium host technitium.thematt.net 
             handle @technitium {
-                forward_auth 10.10.12.14:9091 {
+                forward_auth nixos.lastprism.thematt.net:9091 {
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
@@ -53,6 +49,11 @@
                         tls_insecure_skip_verify
                     }
                 }
+            }
+
+            @paperless host paperless.thematt.net 
+            handle @paperless {
+                reverse_proxy 10.10.12.3:28981
             }
         }
     '';
