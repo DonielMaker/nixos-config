@@ -34,12 +34,12 @@
             content = {
                 type = "gpt";
                 partitions = {
-                    opencloud = {
+                    data = {
                         size = "100%";
                         content = {
                             type = "filesystem";
                             format = "ext4";
-                            mountpoint = "/var/lib/opencloud";
+                            mountpoint = "/var/lib";
                         };
                     };
                 };
