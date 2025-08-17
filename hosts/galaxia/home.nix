@@ -13,7 +13,7 @@
         hyprland
         themes
         hypridle
-        kitty
+        alacritty
     ];
 
     home = {
