@@ -7,37 +7,21 @@
         inputs.disko.nixosModules.disko
         inputs.ragenix.nixosModules.default
 
-        # System
-        # bootloader
         limine
         networking
         settings
         user
 
-        # Hyprland (and other graphics related stuff)
         graphics
-
-        # Graphics driver
-            # intel
-            # nvidia
         amd
 
-        # Display manager
-        # cosmic-greeter
         regreet
-            # gdm
-            # sddm
 
-        # Hardware related
-            # bluethooth
-            # fingerprint
         sound
         gigabyte
         coolercontrol
 
-        # Programs 
         neovim
-        # openrgb
         steam
         zsh
     ];
