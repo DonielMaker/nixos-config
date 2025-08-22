@@ -12,11 +12,9 @@
         zsh
         fuzzel
         neovim
-        git
         hyprland
         git
         hypridle
-        # kitty
         alacritty
     ];
 
@@ -25,6 +23,8 @@
         homeDirectory = lib.mkForce "/home/${username}";
         stateVersion = "24.11";
     };
+
+    programs.fuzzel.enable = true;
 
     wayland.windowManager.hyprland.settings = {
         workspace = [
