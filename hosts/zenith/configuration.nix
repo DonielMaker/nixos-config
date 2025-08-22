@@ -56,33 +56,25 @@
         amberol
         rustdesk
         signal-desktop
-        upscaler
         obs-studio
         hyprpolkitagent
 
-        # Gaming
-        # xclicker
         protonup-qt
-        lutris
-        pkgs-stable.prismlauncher
+        prismlauncher
         steam
         everest-mons
 
-        # Programs
         ferrishot
-        lm_sensors
-        # gimp
         vlc
         kdePackages.kdenlive
-        orca-slicer
-        bambu-studio
+        # orca-slicer
+        # bambu-studio
         qt6ct
         vesktop
         nautilus
-        hyprpicker
         geeqie
         alsa-scarlett-gui
-        # Other
+
         xdg-desktop-portal
         home-manager
     ];
