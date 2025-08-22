@@ -33,6 +33,9 @@
     services.flatpak.enable = true;
 
     boot.plymouth.enable = true;
+
+    networking.networkmanager.insertNameservers = [ "10.10.12.2" ];
+
     programs.nautilus-open-any-terminal.enable = true;
     programs.nautilus-open-any-terminal.terminal = "kitty";
 
