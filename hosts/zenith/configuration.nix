@@ -32,6 +32,7 @@
 
     services.flatpak.enable = true;
 
+    boot.plymouth.enable = true;
     programs.nautilus-open-any-terminal.enable = true;
     programs.nautilus-open-any-terminal.terminal = "kitty";
 
