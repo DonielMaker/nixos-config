@@ -7,8 +7,8 @@
         autosuggestion.enable = true;
         dotDir = ".config/zsh";
         shellAliases = {
+            nr = "nixos-rebuild switch --sudo --ask-sudo-password";
             z = "zellij";
-            sd = "cd $(find . -type d | fzf)";
             s = "ragenix -e";
             rb = "sudo nixos-rebuild switch --flake ${dotfiles}/nix";
             hm = "home-manager switch --flake ${dotfiles}/nix";
