@@ -51,7 +51,10 @@
         inputs.ragenix.packages.${system}.default
         inputs.quickshell.packages.${system}.quickshell
 
+        wireguard-tools
         # geekbench_6
+        amberol
+        rustdesk
         signal-desktop
         upscaler
         obs-studio
