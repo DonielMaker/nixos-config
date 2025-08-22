@@ -54,7 +54,7 @@ in
 
             exec-once = [
                 "swww-daemon"
-                "hyprctl setcursor Bibata-Modern-Ice 24"
+                # "hyprctl setcursor Bibata-Modern-Ice 24"
                 "qs"
                 "wl-paste --type text --watch cliphist store"
                 "wl-paste --type image --watch cliphist store"

@@ -6,6 +6,7 @@
         ./disko.nix
         inputs.disko.nixosModules.disko
         inputs.ragenix.nixosModules.default
+        inputs.stylix.nixosModules.stylix
 
         limine
         networking
@@ -16,6 +17,7 @@
         amd
 
         regreet
+        stylix
 
         sound
         gigabyte

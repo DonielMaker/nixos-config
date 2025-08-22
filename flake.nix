@@ -17,6 +17,9 @@
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
         ragenix.url = "github:yaxitech/ragenix";
+
+        stylix.url = "github:nix-community/stylix";
+        stylix.inputs.nixpkgs.follows = "nixpkgs";
     };
 
     outputs = {...}@inputs:

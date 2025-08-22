@@ -1,7 +1,10 @@
-{ inputs, username, lib, ... }:
+{inputs, username, lib, ... }:
 
 {
     imports = with inputs.self.homeManagerModules; [
+        inputs.stylix.homeModules.stylix
+
+        stylix
         firefox
         zellij
         mangohud
@@ -11,7 +14,6 @@
         neovim
         git
         hyprland
-        themes
         git
         hypridle
         # kitty
