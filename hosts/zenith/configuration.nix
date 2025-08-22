@@ -37,7 +37,7 @@
     networking.networkmanager.insertNameservers = [ "10.10.12.2" ];
 
     programs.nautilus-open-any-terminal.enable = true;
-    programs.nautilus-open-any-terminal.terminal = "kitty";
+    programs.nautilus-open-any-terminal.terminal = "alacritty";
 
     networking.search = [ "thematt.net" ];
 
