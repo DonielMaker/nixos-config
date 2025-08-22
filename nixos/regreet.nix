@@ -13,8 +13,8 @@ let
     variant = "macchiato";
 
     image = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/DonielMaker/wallpapers/main/Greetd.jpg";
-        sha256 = "sha256-OZTUlNTFrVD7R+R9n3sTGXZ2sGorqumiGm6po8xRdGc=";
+        url = "https://raw.githubusercontent.com/DonielMaker/wallpapers/main/rohit-tandon-9wg5jCEPBsw-unsplash.jpg";
+        sha256 = "sha256-qSUv2rCHWB2fYwL2Gd8d8LeQKKtM4aEljshaFbirB0g=";
     };
 in
 
@@ -27,7 +27,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-        greetd.regreet
+        greetd.regreet 
     ];
 
     programs.regreet.enable = true;
@@ -35,8 +35,8 @@ in
         cursorTheme.name = "Bibata-Modern-Ice";
         cursorTheme.package = pkgs.bibata-cursors;
 
-        # iconTheme.name = "Papirus";
-        # iconTheme.package = pkgs.catppuccin-papirus-folders.override {flavor = variant;};
+        iconTheme.name = "Papirus";
+        iconTheme.package = pkgs.catppuccin-papirus-folders.override {flavor = variant;};
 
         theme.name = "catppuccin-macchiato-blue-standard";
         theme.package = pkgs.catppuccin-gtk.override {inherit variant;};
