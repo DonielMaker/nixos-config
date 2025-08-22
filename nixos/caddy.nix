@@ -21,7 +21,7 @@
 
             @wireguard host wireguard.thematt.net 
             handle @wireguard {
-                reverse_proxy 10.10.12.2:8888
+                reverse_proxy 10.10.12.2:51821
             }
 
             @technitium host technitium.thematt.net 
