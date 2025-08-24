@@ -1,7 +1,7 @@
 {config, ...}:
 
 {
-    networking.firewall.allowedTCPPorts = [ 80 443 8000];
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
     services.caddy.enable = true;
     services.caddy.extraConfig = ''
         *.thematt.net, *.vilethorn.thematt.net, *.lastprism.thematt.net {
@@ -55,6 +55,11 @@
             handle @paperless {
                 reverse_proxy 10.10.12.3:28981
             }
+
+            @opencloud host opencloud.thematt.net
+            handle @opencloud {
+                reverse_proxy nixos.lastprism.thematt.net:9200
+            }
         }
     '';
 
@@ -79,6 +84,4 @@
             environmentFile = config.age.secrets.cloudflareDnsApiToken.path;
         };
     };
-
-    services.whoami.enable = true;
 }
