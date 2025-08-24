@@ -1,4 +1,4 @@
-{ inputs, pkgs, system, myLib, config, ...}:
+{ inputs, pkgs, system, username, config, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -17,6 +17,19 @@
         authelia
         lldap
     ];
+
+    # Enable common container config files in /etc/containers
+    virtualisation.containers.enable = true;
+    virtualisation.docker.enable = true;
+    users.users.${username}.extraGroups = ["docker"];
+
+    # 8080 = erp-next
+    networking.firewall.allowedTCPPorts = [ 28981 8080 9200 9300 9980 8000];
+    # services.paperless.enable = true;
+    # services.paperless.address = "0.0.0.0";
+    # services.paperless.settings = {
+    #     PAPERLESS_CSRF_TRUSTED_ORIGINS = "https://paperless.thematt.net";
+    # };
 
     age.secrets = let
         authelia-owner = config.services.authelia.instances.main.user;
@@ -66,6 +79,7 @@
 
         vim
         git
+        docker-compose
     ];
 
     system.stateVersion = "25.11"; # Just don't
