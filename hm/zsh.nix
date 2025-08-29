@@ -1,11 +1,11 @@
-{dotfiles, ... }:
+{config, dotfiles, ... }:
 
 {
     programs.zsh = {
         enable = true;
         enableCompletion = true;
         autosuggestion.enable = true;
-        dotDir = ".config/zsh";
+        dotDir = "${config.xdg.configHome}/zsh";
         shellAliases = {
             nr = "nixos-rebuild switch --sudo --ask-sudo-password";
             z = "zellij";
