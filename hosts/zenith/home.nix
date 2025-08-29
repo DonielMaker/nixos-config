@@ -32,6 +32,7 @@
             "2, monitor:DP-1"
             "3, monitor:DP-1"
             "4, monitor:DP-2, default:true"
+            "5, monitor:DP-2, default:true"
         ];
     };
 }
