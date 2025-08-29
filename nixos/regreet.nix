@@ -27,7 +27,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-        greetd.regreet 
+        regreet
     ];
 
     programs.regreet.enable = true;
