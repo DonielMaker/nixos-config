@@ -11,6 +11,8 @@
     environment.systemPackages = with pkgs; [
         # CLI Tools
         vim
+        yt-dlp
+        imagemagick
         gcc
         cargo
         rustc
