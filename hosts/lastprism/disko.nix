@@ -39,7 +39,7 @@
                         content = {
                             type = "filesystem";
                             format = "ext4";
-                            mountpoint = "/var/lib";
+                            mountpoint = "/storage";
                         };
                     };
                 };
