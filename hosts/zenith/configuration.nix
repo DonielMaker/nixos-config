@@ -69,7 +69,7 @@
         ferrishot
         vlc
         kdePackages.kdenlive
-        # orca-slicer
+        orca-slicer
         # bambu-studio
         qt6ct
         vesktop
