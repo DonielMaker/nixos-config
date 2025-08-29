@@ -15,6 +15,7 @@ in
     # Allows interoperabilty between Applications
     xdg.portal.enable = true;
     xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
     xdg.portal.config = {
         common = {
             default = [ "hyprland" ];
@@ -142,7 +143,7 @@ in
                 animate_manual_resizes = true;
                 animate_mouse_windowdragging = true;
                 enable_swallow = true;
-                render_ahead_of_time = false;
+                # render_ahead_of_time = false;
                 disable_hyprland_logo = true;
             };
 
