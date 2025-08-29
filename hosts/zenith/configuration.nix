@@ -1,4 +1,4 @@
-{ inputs, pkgs, pkgs-stable, system, config, myLib, ...}:
+{ inputs, pkgs, pkgs-stable, system, myLib, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -48,9 +48,11 @@
     age.secrets = myLib.getSecrets ./secrets;
 
     environment.systemPackages = with pkgs; [
+        pkgs-stable.opencloud-desktop
         inputs.ragenix.packages.${system}.default
         inputs.quickshell.packages.${system}.quickshell
 
+        heroic
         wireguard-tools
         # geekbench_6
         amberol
@@ -60,7 +62,7 @@
         hyprpolkitagent
 
         protonup-qt
-        prismlauncher
+        pkgs-stable.prismlauncher
         steam
         everest-mons
 
