@@ -8,9 +8,11 @@ let
     systems = [zenith lastprism];
 in
 {
-    "jwtSecret.age".publicKeys = [donielmaker-zenith donielmaker-lastprism zenith lastprism];
-    "storageEncryptionKey.age".publicKeys = [donielmaker-zenith donielmaker-lastprism zenith lastprism];
-    "sessionSecret.age".publicKeys = [donielmaker-zenith donielmaker-lastprism zenith lastprism];
-    "autheliaLldapPassword.age".publicKeys = [donielmaker-zenith donielmaker-lastprism zenith lastprism];
-    "cloudflareDnsApiToken.age".publicKeys = [donielmaker-zenith donielmaker-lastprism zenith lastprism];
+    "jwtSecret.age".publicKeys = users ++ systems;
+    "storageEncryptionKey.age".publicKeys = users ++ systems;
+    "sessionSecret.age".publicKeys = users ++ systems;
+    "autheliaLldapPassword.age".publicKeys = users ++ systems;
+    "cloudflareDnsApiToken.age".publicKeys = users ++ systems;
+    "private.pem.age".publicKeys = users ++ systems;
+    "public.crt.age".publicKeys = users ++ systems;
 }
