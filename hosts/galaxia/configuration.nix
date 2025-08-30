@@ -6,23 +6,20 @@
         ./disko.nix
         inputs.disko.nixosModules.disko
         inputs.ragenix.nixosModules.default
+        inputs.stylix.nixosModules.stylix
 
         # System
-        # bootloader
-        limine
+        bootloader
+        #limine
         networking
         settings
         user
-
         graphics
-
         intel
-
         regreet
-
         bluethooth
         sound
-
+        stylix
         neovim
         zsh
     ];
@@ -50,10 +47,10 @@
     #     privateKeyFile = config.age.secrets.wireguard-priKey.path;
     # };
 
-    age.secrets = {
-        wireguard-priKey.file = ./secrets/wireguard-priKey.age;
-        wireguard-shrKey.file = ./secrets/wireguard-shrKey.age;
-    };
+    #age.secrets = {
+    #    wireguard-priKey.file = ./secrets/wireguard-priKey.age;
+    #    wireguard-shrKey.file = ./secrets/wireguard-shrKey.age;
+    #};
 
     programs.localsend.enable = true;
 
@@ -72,5 +69,5 @@
         home-manager
     ];
 
-    system.stateVersion = "24.11"; # Just don't
+    system.stateVersion = "25.05"; # Just don't
 }

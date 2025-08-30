@@ -2,6 +2,8 @@
 
 {
     imports = with inputs.self.homeManagerModules; [
+        inputs.stylix.homeModules.stylix
+
         firefox
         # oh-my-posh
         zellij
@@ -11,7 +13,7 @@
         neovim
         git
         hyprland
-        themes
+        stylix
         hypridle
         alacritty
     ];
