@@ -54,15 +54,14 @@
     };
 
     environment.systemPackages = with pkgs; [
-        feishin
-        pkgs-stable.opencloud-desktop
+        supersonic-wayland
+        opencloud-desktop
         inputs.ragenix.packages.${system}.default
         inputs.quickshell.packages.${system}.quickshell
 
         heroic
         wireguard-tools
         # geekbench_6
-        amberol
         rustdesk
         signal-desktop
         obs-studio
