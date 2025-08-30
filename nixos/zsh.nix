@@ -17,7 +17,6 @@
         cargo
         rustc
         jq
-        kitty
         zsh
         git
         lazygit

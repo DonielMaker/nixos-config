@@ -1,7 +1,7 @@
 { pkgs, monitor, lib, kb_layout, ... }:
 
 let
-    kitty = lib.getExe pkgs.alacritty;
+    alacritty = lib.getExe pkgs.alacritty;
     firefox = lib.getExe pkgs.firefox;
     nautilus = lib.getExe pkgs.nautilus;
     fuzzel = lib.getExe pkgs.fuzzel;
@@ -148,7 +148,7 @@ in
             };
 
             bind = [
-                "$mainMod, Return, exec, ${kitty}"
+                "$mainMod, Return, exec, ${alacritty}"
                 "$mainMod, E, exec, ${nautilus}"
                 "$mainMod, B, exec, ${firefox}"
                 # Application Launcher
