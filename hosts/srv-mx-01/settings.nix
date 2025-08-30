@@ -1,7 +1,7 @@
 rec {
-    hostname = "lastprism-max";
+    hostname = "srv-mx-01";
     system = "x86_64-linux";
-    username = "donielmaker";
+    username = "solut";
     dotfiles = "/home/${username}/.config";
     timezone = "Europe/Berlin";
     shell = "bash";

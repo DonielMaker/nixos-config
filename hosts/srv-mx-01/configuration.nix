@@ -15,6 +15,7 @@
         user
     ];
 
+    # erpnext
     networking.firewall.allowedTCPPorts = [ 8080 ];
 
     boot.supportedFilesystems = [ "zfs" ]; 

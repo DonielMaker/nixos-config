@@ -52,7 +52,7 @@
         # Auth Server
         nixosConfigurations.lastprism = mkNixos ./hosts/lastprism;
 
-        nixosConfigurations.lastprism-max = mkNixos ./hosts/lastprism-max;
+        nixosConfigurations.srv-mx-01 = mkNixos ./hosts/srv-mx-01;
         # TBC Router
         # nixosConfigurations.vilethorn = mkNixos ./hosts/vilethorn;
 
