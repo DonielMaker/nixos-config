@@ -23,8 +23,13 @@
     virtualisation.docker.enable = true;
     users.users.${username}.extraGroups = ["docker"];
 
-    # 8080 = erp-next
     networking.firewall.allowedTCPPorts = [ 28981 8080 9200 9300 9980 8000];
+    services.navidrome.enable = true;
+    services.navidrome.openFirewall = true;
+    services.navidrome.settings = { 
+        Address = "0.0.0.0";
+        MusicFolder = "/mnt/music"; 
+    };
     # services.paperless.enable = true;
     # services.paperless.address = "0.0.0.0";
     # services.paperless.settings = {
