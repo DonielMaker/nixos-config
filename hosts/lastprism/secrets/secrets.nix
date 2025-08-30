@@ -14,5 +14,4 @@ in
     "autheliaLldapPassword.age".publicKeys = users ++ systems;
     "cloudflareDnsApiToken.age".publicKeys = users ++ systems;
     "private.pem.age".publicKeys = users ++ systems;
-    "public.crt.age".publicKeys = users ++ systems;
 }

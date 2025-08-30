@@ -78,12 +78,6 @@
             owner = authelia-owner;
             group = authelia-group;
         };
-        "public.crt" = {
-            file = ./secrets/public.crt.age;
-            mode = "440";
-            owner = authelia-owner;
-            group = authelia-group;
-        };
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
     };
 
