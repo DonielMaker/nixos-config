@@ -1,8 +1,6 @@
-{drive ? throw "please select a device", ...}:
-
 {
     disko.devices.disk.main = {
-        device = drive;
+        device = "/dev/disk/by-id/";
         type = "disk";
         content = {
             type = "gpt";

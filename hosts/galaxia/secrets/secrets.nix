@@ -8,6 +8,6 @@ let
     systems = [zenith galaxia];
 in
 {
-    "wireguard-priKey.age".publicKeys = [donielmaker-zenith donielmaker-galaxia zenith galaxia];
-    "wireguard-shrKey.age".publicKeys = [donielmaker-zenith donielmaker-galaxia zenith galaxia];
+    "wireguard-priKey.age".publicKeys = users ++ systems;
+    "wireguard-shrKey.age".publicKeys = users ++ systems;
 }
