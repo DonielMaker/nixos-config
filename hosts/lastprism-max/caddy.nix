@@ -24,10 +24,10 @@
                 reverse_proxy 192.168.178.20:51821
             }
 
-            # @erp-next host erp-next.srv-plp.ipv64.de 
-            # handle @erp-next {
-            #     reverse_proxy 10.10.12.3:8080
-            # }
+            @erpnext host erpnext.srv-plp.ipv64.de 
+            handle @erpnext {
+                reverse_proxy 192.168.178.218:8080
+            }
 
             # @paperless host paperless.srv-plp.ipv64.de 
             # handle @paperless {
