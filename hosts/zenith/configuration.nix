@@ -48,6 +48,7 @@
     age.secrets = myLib.getSecrets ./secrets;
 
     environment.systemPackages = with pkgs; [
+        feishin
         pkgs-stable.opencloud-desktop
         inputs.ragenix.packages.${system}.default
         inputs.quickshell.packages.${system}.quickshell
