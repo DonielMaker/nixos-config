@@ -46,6 +46,12 @@
     services.openssh.enable = true;
 
     age.secrets = myLib.getSecrets ./secrets;
+    services.printing.enable = true;
+    services.avahi = {
+        enable = true;
+        nssmdns4 = true;
+        openFirewall = true;
+    };
 
     environment.systemPackages = with pkgs; [
         feishin
