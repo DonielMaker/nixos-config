@@ -9,7 +9,7 @@
         initialPassword = "Changeme";
         openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwosE68FthKwXs1WhPnY3YqbkVPT52V30X489epRsJQ donielmaker@zenith"
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMGCA4si0+PqWQn/PRtfOeuCIK3ISIvMKfvQhciwPQvh donielmaker@galaxia"
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHTBWBfCU8uM+G5p6vl0dwc0Q7XA6TypesGZWzbbpiwx donielmaker@galaxia"
         ];
     };
 }

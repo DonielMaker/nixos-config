@@ -1,6 +1,6 @@
 {
     disko.devices.disk.main = {
-        device = "/dev/disk/by-id/";
+        device = "/dev/disk/by-id/nvme-Lexar_SSD_NM790_1TB_PKG257R003231P220J";
         type = "disk";
         content = {
             type = "gpt";
