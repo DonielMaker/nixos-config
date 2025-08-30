@@ -80,34 +80,34 @@
                 digits = 6;
                 period = 30;
             };
-            identity_providers = {
-                oidc = {
-                    hmac_secret = "this_is_a_secret_abc123abc123abc";
-                    jwks = [
-                        {
-                            # key = config.age.secrets.
-                            #   certificate_chain: |
-                            #     -----BEGIN CERTIFICATE-----
-                            #     ...
-                            #     -----END CERTIFICATE-----
-                            #     -----BEGIN CERTIFICATE-----
-                            #     ...
-                            #     -----END CERTIFICATE-----
-                        }
-                    ];
-                    enable_client_debug_messages = false;
-                    require_pushed_authorization_requests = false;
-                    cors = {
-                        endpoints= [
-                            "authorization"
-                            "token"
-                            "revocation"
-                            "introspection"
-                        ];
-                        allowed_origins= [ "https://*.thematt.net" ];
-                    };
-                };
-            };
+            # identity_providers = {
+            #     oidc = {
+            #         hmac_secret = "this_is_a_secret_abc123abc123abc";
+            #         jwks = [
+            #             {
+            #                 # key = config.age.secrets.
+            #                 #   certificate_chain: |
+            #                 #     -----BEGIN CERTIFICATE-----
+            #                 #     ...
+            #                 #     -----END CERTIFICATE-----
+            #                 #     -----BEGIN CERTIFICATE-----
+            #                 #     ...
+            #                 #     -----END CERTIFICATE-----
+            #             }
+            #         ];
+            #         enable_client_debug_messages = false;
+            #         require_pushed_authorization_requests = false;
+            #         cors = {
+            #             endpoints= [
+            #                 "authorization"
+            #                 "token"
+            #                 "revocation"
+            #                 "introspection"
+            #             ];
+            #             allowed_origins= [ "https://*.thematt.net" ];
+            #         };
+            #     };
+            # };
         };
     };
 }

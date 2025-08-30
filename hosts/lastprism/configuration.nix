@@ -28,8 +28,14 @@
     services.navidrome.openFirewall = true;
     services.navidrome.settings = { 
         Address = "0.0.0.0";
-        MusicFolder = "/mnt/music"; 
+        MusicFolder = "/storage/music"; 
     };
+
+    # services.zitadel.enable = true;
+    # services.zitadel = {
+    #     masterKeyFile = config.age.secrets.zitadelMasterKey.path;
+    #     openFirewall = true;
+    # };
     # services.paperless.enable = true;
     # services.paperless.address = "0.0.0.0";
     # services.paperless.settings = {
