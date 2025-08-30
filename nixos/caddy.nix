@@ -21,7 +21,12 @@
 
             @wireguard host wireguard.thematt.net 
             handle @wireguard {
-                reverse_proxy 10.10.12.2:51821
+                reverse_proxy docker.vilethorn.thematt.net:51821
+            }
+
+            @navidrome host navidrome.thematt.net 
+            handle @navidrome {
+                reverse_proxy nixos.lastprism.thematt.net:4533
             }
 
             @technitium host technitium.thematt.net 
@@ -30,7 +35,7 @@
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
-                reverse_proxy 10.10.12.2:5380
+                reverse_proxy docker.vilethorn.thematt.net:5380
             }
 
             @proxmox-vilethorn host proxmox.vilethorn.thematt.net 
@@ -53,7 +58,7 @@
 
             @paperless host paperless.thematt.net 
             handle @paperless {
-                reverse_proxy 10.10.12.3:28981
+                reverse_proxy nixos.lastprism.thematt.net:28981
             }
 
             @opencloud host opencloud.thematt.net
