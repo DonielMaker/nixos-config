@@ -1,4 +1,4 @@
-{pkgs, ...}: 
+{config, ...}: 
 
 {
     services.redis.servers.authelia-main = {
@@ -12,8 +12,12 @@
     services.authelia.instances.main = {
         enable = true;
         secrets = {
-            jwtSecretFile = "${pkgs.writeText "jwtSecretFile" "ThisISVeryImportant"}";
-            storageEncryptionKeyFile = "${pkgs.writeText "storageEncryptionKeyFile" "CiMS4659IskGSaL6m2GSVmNsjMi2cOgj"}";
+            jwtSecretFile = config.age.secrets.jwtSecret.path;
+            storageEncryptionKeyFile = config.age.secrets.storageEncryptionKey.path;
+            sessionSecretFile = config.age.secrets.sessionSecret.path;
+        };
+        environmentVariables = {
+            "AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE" = config.age.secrets.autheliaLldapPassword.path;
         };
         settings = {
             theme = "dark";
