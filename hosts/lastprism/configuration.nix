@@ -31,16 +31,11 @@
         MusicFolder = "/storage/music"; 
     };
 
-    # services.zitadel.enable = true;
-    # services.zitadel = {
-    #     masterKeyFile = config.age.secrets.zitadelMasterKey.path;
-    #     openFirewall = true;
-    # };
-    # services.paperless.enable = true;
-    # services.paperless.address = "0.0.0.0";
-    # services.paperless.settings = {
-    #     PAPERLESS_CSRF_TRUSTED_ORIGINS = "https://paperless.thematt.net";
-    # };
+    services.paperless.enable = true;
+    services.paperless.address = "0.0.0.0";
+    services.paperless.settings = {
+        PAPERLESS_CSRF_TRUSTED_ORIGINS = "https://paperless.thematt.net";
+    };
 
     age.secrets = let
         authelia-owner = config.services.authelia.instances.main.user;
