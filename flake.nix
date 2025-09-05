@@ -11,8 +11,6 @@
         disko.url = "github:nix-community/disko/latest";
         disko.inputs.nixpkgs.follows = "nixpkgs";
 
-	    # wsl.url = "github:nix-community/NixOS-WSL/main";
-
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -20,6 +18,8 @@
 
         stylix.url = "github:nix-community/stylix";
         stylix.inputs.nixpkgs.follows = "nixpkgs";
+
+	    # wsl.url = "github:nix-community/NixOS-WSL/main";
     };
 
     outputs = {...}@inputs:
@@ -49,27 +49,17 @@
         nixosConfigurations.zenith = mkNixos ./hosts/zenith;
         # Laptop
         nixosConfigurations.galaxia = mkNixos ./hosts/galaxia;
-        # Auth Server
+        # Server
         nixosConfigurations.lastprism = mkNixos ./hosts/lastprism;
-
+        # Company Server
         nixosConfigurations.srv-mx-01 = mkNixos ./hosts/srv-mx-01;
         # TBC Router
         # nixosConfigurations.vilethorn = mkNixos ./hosts/vilethorn;
 
-        # TODO: Do we want a single user for all systems or one for each?
-        # INFO: Considering how we fetch the home.nix and settings.nix with the settingsPath 
-        # it might be better to have one homeConfigurations per device.
-        # This could be achieved by using "donielmaker@${system}" for each
-        # individual homeConfigurations.
-        # PASSED: This has been resolved like this:
         homeConfigurations."donielmaker@zenith" = mkHome ./hosts/zenith;
         homeConfigurations."donielmaker@galaxia" = mkHome ./hosts/galaxia;
 
         # DEPRECATED for now
         # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
-
-        # devShells.${system} = {
-        #     rust = (import ./testing/rust.nix {inherit pkgs;});
-        # };
     };
 }
