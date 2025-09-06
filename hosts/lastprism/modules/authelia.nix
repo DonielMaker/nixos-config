@@ -87,11 +87,6 @@
             };
             identity_providers = {
                 oidc = {
-                    # jwks = [
-                    #     {
-                    #         key = ''{{ secret "${config.age.secrets.autheliaJwksKey.path}" | mindent 10 "|" | msquote }}'';
-                    #     }
-                    # ];
                     lifespans = {
                         access_token = "1h";
                         authorize_code = "1m";
