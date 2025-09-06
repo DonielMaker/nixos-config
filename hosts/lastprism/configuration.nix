@@ -1,4 +1,4 @@
-{ inputs, pkgs, system, username, config, ...}:
+{ inputs, pkgs, system, config, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -7,35 +7,21 @@
         inputs.disko.nixosModules.disko
         inputs.ragenix.nixosModules.default
 
-        # System
         bootloader
         networking
         settings
         user
+        docker
+        openssh
 
-        caddy
-        authelia
         lldap
+
+        ./modules/caddy.nix
+        ./modules/authelia.nix
     ];
 
-    # Enable common container config files in /etc/containers
-    virtualisation.containers.enable = true;
-    virtualisation.docker.enable = true;
-    users.users.${username}.extraGroups = ["docker"];
-
-    networking.firewall.allowedTCPPorts = [ 28981 8080 9200 9300 9980 8000];
-    services.navidrome.enable = true;
-    services.navidrome.openFirewall = true;
-    services.navidrome.settings = { 
-        Address = "0.0.0.0";
-        MusicFolder = "/storage/music"; 
-    };
-
-    services.paperless.enable = true;
-    services.paperless.address = "0.0.0.0";
-    services.paperless.settings = {
-        PAPERLESS_CSRF_TRUSTED_ORIGINS = "https://paperless.thematt.net";
-    };
+    # paperless, opencloud
+    networking.firewall.allowedTCPPorts = [ 28981 9200 ];
 
     age.secrets = let
 
@@ -72,12 +58,19 @@
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
     };
 
-    security.sudo.execWheelOnly  =  true;
+    # Navidrome: A Music server which uses the subsonic protocol to send content to clients
+    services.navidrome.enable = true;
+    services.navidrome.openFirewall = true;
+    services.navidrome.settings = { 
+        Address = "0.0.0.0";
+        MusicFolder = "/storage/music"; 
+    };
 
-    services.openssh.enable = true;
-    services.openssh.settings = {
-        PasswordAuthentication = false;
-        PermitRootLogin = "no";
+    # Paperless: A Document server with plenty of features (ocr, file conversion, editing, etc.)
+    services.paperless.enable = true;
+    services.paperless.address = "0.0.0.0";
+    services.paperless.settings = {
+        PAPERLESS_CSRF_TRUSTED_ORIGINS = "https://paperless.thematt.net";
     };
 
     nix.settings.trusted-users = [ "donielmaker" ];
@@ -87,7 +80,6 @@
 
         vim
         git
-        docker-compose
     ];
 
     system.stateVersion = "25.11"; # Just don't
