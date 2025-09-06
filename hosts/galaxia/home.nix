@@ -5,7 +5,6 @@
         inputs.stylix.homeModules.stylix
 
         firefox
-        # oh-my-posh
         zellij
         starship
         zsh
@@ -21,7 +20,7 @@
 
     home = {
         inherit username;
-        homeDirectory = lib.mkForce "/home/${username}";
+        homeDirectory = /home/${username};
         stateVersion = "24.11";
     };
 }

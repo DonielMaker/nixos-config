@@ -1,4 +1,4 @@
-{inputs, username, lib, ... }:
+{inputs, username, ... }:
 
 {
     imports = with inputs.self.homeManagerModules; [
@@ -19,14 +19,6 @@
         flameshot
     ];
 
-    home = {
-        inherit username;
-        homeDirectory = lib.mkForce "/home/${username}";
-        stateVersion = "24.11";
-    };
-
-    programs.fuzzel.enable = true;
-
     wayland.windowManager.hyprland.settings = {
         workspace = [
             "1, monitor:DP-1, default:true"
@@ -35,5 +27,11 @@
             "4, monitor:DP-2, default:true"
             "5, monitor:DP-2, default:true"
         ];
+    };
+
+    home = {
+        inherit username;
+        homeDirectory = /home/${username};
+        stateVersion = "24.11";
     };
 }
