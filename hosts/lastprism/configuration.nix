@@ -1,4 +1,4 @@
-{ inputs, pkgs, system, username, config, ...}:
+{ inputs, pkgs, system, config, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -7,23 +7,58 @@
         inputs.disko.nixosModules.disko
         inputs.ragenix.nixosModules.default
 
-        # System
         bootloader
         networking
         settings
         user
+        docker
+        openssh
 
-        caddy
-        authelia
         lldap
+
+        ./modules/caddy.nix
+        ./modules/authelia.nix
     ];
 
-    # Enable common container config files in /etc/containers
-    virtualisation.containers.enable = true;
-    virtualisation.docker.enable = true;
-    users.users.${username}.extraGroups = ["docker"];
+    # paperless, opencloud
+    networking.firewall.allowedTCPPorts = [ 28981 9200 ];
 
-    networking.firewall.allowedTCPPorts = [ 28981 8080 9200 9300 9980 8000];
+    age.secrets = let
+
+        authelia = {
+            mode = "440";
+            owner = config.services.authelia.instances.main.user;
+            group = config.services.authelia.instances.main.group;
+        };
+    in
+
+    {
+        jwtSecret = {
+            inherit (authelia) mode owner group;
+            file = ./secrets/jwtSecret.age;
+        };
+
+        storageEncryptionKey = {
+            inherit (authelia) mode owner group;
+            file = ./secrets/storageEncryptionKey.age;
+        };
+        sessionSecret = {
+            inherit (authelia) mode owner group;
+            file = ./secrets/sessionSecret.age;
+        };
+        autheliaLldapPassword = {
+            inherit (authelia) mode owner group;
+            file = ./secrets/autheliaLldapPassword.age;
+        };
+        autheliaJwksKey = {
+            inherit (authelia) mode owner group;
+            file = ./secrets/autheliaJwksKey.age;
+        };
+
+        cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
+    };
+
+    # Navidrome: A Music server which uses the subsonic protocol to send content to clients
     services.navidrome.enable = true;
     services.navidrome.openFirewall = true;
     services.navidrome.settings = { 
@@ -31,57 +66,11 @@
         MusicFolder = "/storage/music"; 
     };
 
+    # Paperless: A Document server with plenty of features (ocr, file conversion, editing, etc.)
     services.paperless.enable = true;
     services.paperless.address = "0.0.0.0";
     services.paperless.settings = {
         PAPERLESS_CSRF_TRUSTED_ORIGINS = "https://paperless.thematt.net";
-    };
-
-    age.secrets = let
-        authelia-owner = config.services.authelia.instances.main.user;
-        authelia-group = config.services.authelia.instances.main.group;
-    in
-
-    {
-        jwtSecret = {
-            file = ./secrets/jwtSecret.age;
-            mode = "440";
-            owner = authelia-owner;
-            group = authelia-group;
-        };
-        storageEncryptionKey = {
-            file = ./secrets/storageEncryptionKey.age;
-            mode = "440";
-            owner = authelia-owner;
-            group = authelia-group;
-        };
-        sessionSecret = {
-            file = ./secrets/sessionSecret.age;
-            mode = "440";
-            owner = authelia-owner;
-            group = authelia-group;
-        };
-        autheliaLldapPassword = {
-            file = ./secrets/autheliaLldapPassword.age;
-            mode = "440";
-            owner = authelia-owner;
-            group = authelia-group;
-        };
-        "private.pem" = {
-            file = ./secrets/private.pem.age;
-            mode = "440";
-            owner = authelia-owner;
-            group = authelia-group;
-        };
-        cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
-    };
-
-    security.sudo.execWheelOnly  =  true;
-
-    services.openssh.enable = true;
-    services.openssh.settings = {
-        PasswordAuthentication = false;
-        PermitRootLogin = "no";
     };
 
     nix.settings.trusted-users = [ "donielmaker" ];
@@ -91,7 +80,6 @@
 
         vim
         git
-        docker-compose
     ];
 
     system.stateVersion = "25.11"; # Just don't

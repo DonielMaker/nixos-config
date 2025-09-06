@@ -33,11 +33,6 @@
             # handle @paperless {
             #     reverse_proxy 10.10.12.3:28981
             # }
-
-            # @opencloud host opencloud.srv-plp.ipv64.de
-            # handle @opencloud {
-            #     reverse_proxy nixos.lastprism.srv-plp.ipv64.de:9200
-            # }
         }
     '';
 
