@@ -15,10 +15,10 @@
             jwtSecretFile = config.age.secrets.jwtSecret.path;
             storageEncryptionKeyFile = config.age.secrets.storageEncryptionKey.path;
             sessionSecretFile = config.age.secrets.sessionSecret.path;
+            oidcIssuerPrivateKeyFile = config.age.secrets.autheliaJwksKey.path;
         };
         environmentVariables = {
             "AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE" = config.age.secrets.autheliaLldapPassword.path;
-            "AUTHELIA_OIDC_JWKS_MAIN_KEY" = config.age.secrets.autheliaJwksKey.path;
         };
         settings = {
             theme = "dark";
@@ -87,11 +87,11 @@
             };
             identity_providers = {
                 oidc = {
-                    jwks = [
-                        {
-                            key = "\${AUTHELIA_OIDC_JWKS_MAIN_KEY}";
-                        }
-                    ];
+                    # jwks = [
+                    #     {
+                    #         key = ''{{ secret "${config.age.secrets.autheliaJwksKey.path}" | mindent 10 "|" | msquote }}'';
+                    #     }
+                    # ];
                     lifespans = {
                         access_token = "1h";
                         authorize_code = "1m";

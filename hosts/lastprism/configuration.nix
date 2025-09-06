@@ -38,41 +38,37 @@
     };
 
     age.secrets = let
-        authelia-owner = config.services.authelia.instances.main.user;
-        authelia-group = config.services.authelia.instances.main.group;
+
+        authelia = {
+            mode = "440";
+            owner = config.services.authelia.instances.main.user;
+            group = config.services.authelia.instances.main.group;
+        };
     in
 
     {
         jwtSecret = {
+            inherit (authelia) mode owner group;
             file = ./secrets/jwtSecret.age;
-            mode = "440";
-            owner = authelia-owner;
-            group = authelia-group;
         };
+
         storageEncryptionKey = {
+            inherit (authelia) mode owner group;
             file = ./secrets/storageEncryptionKey.age;
-            mode = "440";
-            owner = authelia-owner;
-            group = authelia-group;
         };
         sessionSecret = {
+            inherit (authelia) mode owner group;
             file = ./secrets/sessionSecret.age;
-            mode = "440";
-            owner = authelia-owner;
-            group = authelia-group;
         };
         autheliaLldapPassword = {
+            inherit (authelia) mode owner group;
             file = ./secrets/autheliaLldapPassword.age;
-            mode = "440";
-            owner = authelia-owner;
-            group = authelia-group;
         };
-        "private.pem" = {
-            file = ./secrets/private.pem.age;
-            mode = "440";
-            owner = authelia-owner;
-            group = authelia-group;
+        autheliaJwksKey = {
+            inherit (authelia) mode owner group;
+            file = ./secrets/autheliaJwksKey.age;
         };
+
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
     };
 
