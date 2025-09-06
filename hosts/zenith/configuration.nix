@@ -30,8 +30,6 @@
 
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
 
-    services.gvfs.enable = true;
-
     services.flatpak.enable = true;
 
     boot.plymouth.enable = true;
@@ -40,6 +38,8 @@
 
     programs.nautilus-open-any-terminal.enable = true;
     programs.nautilus-open-any-terminal.terminal = "alacritty";
+
+    services.gvfs.enable = true;
 
     programs.localsend.enable = true;
 
@@ -63,7 +63,6 @@
         inputs.quickshell.packages.${system}.quickshell
 
         heroic
-        wireguard-tools
         # geekbench_6
         rustdesk
         signal-desktop
