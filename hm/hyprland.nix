@@ -1,4 +1,4 @@
-{ pkgs, monitor, lib, kb_layout, ... }:
+{ pkgs, monitor, lib, config, ... }:
 
 let
     alacritty = lib.getExe pkgs.alacritty;
@@ -72,7 +72,7 @@ in
             };
 
             input = {
-                inherit kb_layout;
+                kb_layout = config.home.keyboard.layout;
 
                 follow_mouse = 1;
 

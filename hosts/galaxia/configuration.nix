@@ -24,6 +24,8 @@
         zsh
     ];
 
+    services.xserver.xkb.layout = "de";
+
     services.upower.enable = true;
     services.tlp.enable = true;
 

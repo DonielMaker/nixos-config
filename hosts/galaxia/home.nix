@@ -22,5 +22,6 @@
         inherit username;
         homeDirectory = /home/${username};
         stateVersion = "24.11";
+        keyboard.layout = "de";
     };
 }

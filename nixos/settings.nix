@@ -1,8 +1,6 @@
-{kb_layout, timezone, ...}:
+{timezone, ...}:
 
 {
-    services.xserver.xkb.layout = kb_layout;
-
     time.timeZone = timezone;
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
