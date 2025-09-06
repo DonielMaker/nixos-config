@@ -30,6 +30,8 @@
 
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
 
+    services.gvfs.enable = true;
+
     services.flatpak.enable = true;
 
     boot.plymouth.enable = true;
