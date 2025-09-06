@@ -28,6 +28,7 @@
             };
         };
 
+        # TODO: this should be a zfs pool at some point (when all 3 ssds are ready)
         disk1 = {
             device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1";
             type = "disk";
