@@ -19,6 +19,7 @@
         stylix.url = "github:nix-community/stylix";
         stylix.inputs.nixpkgs.follows = "nixpkgs";
 
+        copyparty.url = "github:9001/copyparty";
 	    # wsl.url = "github:nix-community/NixOS-WSL/main";
     };
 

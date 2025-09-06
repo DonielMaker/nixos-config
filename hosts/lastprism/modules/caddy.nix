@@ -29,6 +29,11 @@
                 reverse_proxy nixos.lastprism.thematt.net:4533
             }
 
+            @copyparty host copyparty.thematt.net 
+            handle @copyparty {
+                reverse_proxy nixos.lastprism.thematt.net:3923
+            }
+
             @technitium host technitium.thematt.net 
             handle @technitium {
                 forward_auth nixos.lastprism.thematt.net:9091 {

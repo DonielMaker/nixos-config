@@ -6,6 +6,7 @@
         ./disko.nix
         inputs.disko.nixosModules.disko
         inputs.ragenix.nixosModules.default
+        inputs.copyparty.nixosModules.default
 
         bootloader
         networking
@@ -20,8 +21,8 @@
         ./modules/authelia.nix
     ];
 
-    # paperless, opencloud
-    networking.firewall.allowedTCPPorts = [ 28981 9200 ];
+    # paperless, opencloud, copyparty
+    networking.firewall.allowedTCPPorts = [ 28981 9200 3923 ];
 
     age.secrets = let
 
@@ -56,6 +57,29 @@
         };
 
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
+    };
+
+    nixpkgs.overlays = [
+        inputs.copyparty.overlays.default
+    ];
+
+    services.copyparty.enable = true;
+    services.copyparty = {
+        settings = {
+            i = "0.0.0.0";
+            z = true;
+        };
+
+        accounts = {
+            donielmaker.passwordFile = "/run/keys/copyparty/don_password";
+        };
+
+        volumes = {
+            "/" = {
+                path = "/storage/copyparty";
+                access.rwda = "donielmaker";
+            };
+        };
     };
 
     # Navidrome: A Music server which uses the subsonic protocol to send content to clients
