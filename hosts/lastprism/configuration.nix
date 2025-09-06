@@ -68,6 +68,8 @@
         settings = {
             i = "0.0.0.0";
             z = true;
+            e2dsa = true;
+            e2ts = true;
         };
 
         accounts = {
@@ -77,7 +79,7 @@
         volumes = {
             "/" = {
                 path = "/storage/copyparty";
-                access.rwda = "donielmaker";
+                access.rwmda = "donielmaker";
             };
         };
     };
