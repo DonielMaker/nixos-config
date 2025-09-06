@@ -16,6 +16,7 @@
         stylix
         hypridle
         alacritty
+        flameshot
     ];
 
     home = {

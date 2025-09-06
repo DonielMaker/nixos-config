@@ -16,6 +16,7 @@
         git
         hypridle
         alacritty
+        flameshot
     ];
 
     home = {

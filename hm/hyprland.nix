@@ -7,7 +7,7 @@ let
     fuzzel = lib.getExe pkgs.fuzzel;
     cliphist = lib.getExe pkgs.cliphist;
     hyprpicker = lib.getExe pkgs.hyprpicker;
-    ferrishot = lib.getExe pkgs.ferrishot;
+    flameshot = lib.getExe pkgs.flameshot;
 in
 
 {
@@ -158,7 +158,7 @@ in
                 # Color Picker
                 "$mainMod, P, exec, ${hyprpicker} -a -f hex"
                 # Screenshots
-                "$mainMod, S, exec, ${ferrishot}"
+                "$mainMod, S, exec, ${flameshot} gui"
 
                 "$mainMod, Q, killactive,"
                 "$mainMod, M, exit,"
