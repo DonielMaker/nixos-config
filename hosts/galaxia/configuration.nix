@@ -30,6 +30,8 @@
     programs.nautilus-open-any-terminal.enable = true;
     programs.nautilus-open-any-terminal.terminal = "alacritty";
 
+    services.gvfs.enable = true;
+
     networking.wg-quick.interfaces.wg0 = {
         address = [ "10.8.0.3/24" ];
         dns = [ "1.1.1.1" ];
@@ -57,8 +59,8 @@
     services.openssh.enable = true;
 
     environment.systemPackages = with pkgs; [
+        vlc
         supersonic-wayland
-        opencloud-desktop
         inputs.quickshell.packages.${system}.quickshell
         inputs.ragenix.packages.${system}.default
         ferrishot
