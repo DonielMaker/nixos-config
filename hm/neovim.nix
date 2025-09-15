@@ -52,7 +52,7 @@
 
         kdePackages.qtdeclarative
         # typescript-language-server
-        # tinymist
+        tinymist
         # slint-lsp
     ];
 }
