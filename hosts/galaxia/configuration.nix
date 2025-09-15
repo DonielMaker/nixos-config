@@ -17,7 +17,7 @@
         graphics
         intel
         regreet
-        bluethooth
+        bluetooth
         sound
         stylix
         neovim
