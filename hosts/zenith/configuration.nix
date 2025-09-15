@@ -22,6 +22,7 @@
         sound
         gigabyte
         coolercontrol
+        bluetooth
 
         neovim
         steam
@@ -59,6 +60,8 @@
     };
 
     environment.systemPackages = with pkgs; [
+        thunderbird
+        gimp
         supersonic-wayland
         opencloud-desktop
         inputs.ragenix.packages.${system}.default
