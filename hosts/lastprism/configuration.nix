@@ -63,6 +63,7 @@
         inputs.copyparty.overlays.default
     ];
 
+    # Copyparty: WebDav Fileserver with great performance
     services.copyparty.enable = true;
     services.copyparty = {
         settings = {
