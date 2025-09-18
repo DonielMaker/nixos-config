@@ -155,15 +155,14 @@ in
                 "$mainMod, space, exec, ${fuzzel}"
                 # Clipboard History
                 "$mainMod, V, exec, ${cliphist} list | ${fuzzel} --dmenu | ${cliphist} decode | wl-copy"
-                # Color Picker
-                "$mainMod, P, exec, ${hyprpicker} -a -f hex"
+                "$mainMod CTRL, V, exec, ${cliphist} wipe"
                 # Screenshots
                 "$mainMod, S, exec, ${flameshot} gui"
 
                 "$mainMod, Q, killactive,"
                 "$mainMod, M, exit,"
                 "$mainMod, F, togglefloating,"
-                "$mainMod, H, pin,"
+                "$mainMod, P, pin,"
                 "$mainMod, J, togglesplit," # dwindle
                 "$mainMod, G, fullscreen"
 
@@ -210,7 +209,7 @@ in
                 "$mainMod SHIFT, 0, movetoworkspacesilent, 10"
 
                 # Mute source
-                ", Control_R, exec, pamixer --default-source -t"
+                "$mainMod, Control_R, exec, pamixer --default-source -t"
 
                 #  INFO: Currently unused
 
