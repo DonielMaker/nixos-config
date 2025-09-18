@@ -34,6 +34,11 @@
                 reverse_proxy nixos.lastprism.thematt.net:3923
             }
 
+            @radicale host radicale.thematt.net 
+            handle @radicale {
+                reverse_proxy nixos.lastprism.thematt.net:5232
+            }
+
             @technitium host technitium.thematt.net 
             handle @technitium {
                 forward_auth nixos.lastprism.thematt.net:9091 {
@@ -64,11 +69,6 @@
             @paperless host paperless.thematt.net 
             handle @paperless {
                 reverse_proxy nixos.lastprism.thematt.net:28981
-            }
-
-            @opencloud host opencloud.thematt.net
-            handle @opencloud {
-                reverse_proxy nixos.lastprism.thematt.net:9200
             }
         }
     '';

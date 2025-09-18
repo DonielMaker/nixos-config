@@ -21,8 +21,8 @@
         ./modules/authelia.nix
     ];
 
-    # paperless, opencloud, copyparty
-    networking.firewall.allowedTCPPorts = [ 28981 9200 3923 ];
+    # paperless, opencloud, copyparty, radicale
+    networking.firewall.allowedTCPPorts = [ 28981 9200 3923 5232 ];
 
     age.secrets = let
 
@@ -90,6 +90,23 @@
     services.navidrome.settings = { 
         Address = "0.0.0.0";
         MusicFolder = "/storage/music"; 
+    };
+
+    # Radicale: CalDav/CardDav server for syncing calenders and contacts
+    services.radicale.enable = true;
+    services.radicale.settings = {
+        server.hosts = [ "0.0.0.0:5232" ];
+        storage.filesystem_folder = "/storage/radicale";
+        auth.type = "ldap";
+        auth = {
+            ldap_uri = "ldap://nixos.lastprism.thematt.net:3890";
+            ldap_base = "dc=thematt,dc=net";
+            ldap_reader_dn = "uid=radicale,ou=people,dc=thematt,dc=net";
+            ldap_secret = "Changeme";
+            ldap_user_attribute = "uid";
+            # ldap_secret_file = config.age.secrets.radicale_lldap_pass.path;
+            ldap_filter = "(&(objectClass=Person)(uid={0})(memberOf=cn=radicale,ou=groups,dc=thematt,dc=net))";
+        };
     };
 
     # Paperless: A Document server with plenty of features (ocr, file conversion, editing, etc.)
