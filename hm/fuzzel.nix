@@ -23,7 +23,7 @@
             fields = "name";
             font = "Dejavu Sans:size=12";
         };
-        dmenu.mode = "text";
+        # dmenu.mode = "text";
         border.width = 2;
     };
 }
