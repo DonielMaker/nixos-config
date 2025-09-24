@@ -112,9 +112,100 @@
 
     # Paperless: A Document server with plenty of features (ocr, file conversion, editing, etc.)
     services.paperless.enable = true;
-    services.paperless.address = "0.0.0.0";
-    services.paperless.settings = {
-        PAPERLESS_CSRF_TRUSTED_ORIGINS = "https://paperless.thematt.net";
+    services.paperless = {
+        address = "0.0.0.0";
+        dataDir = "/storage/paperless";
+
+        settings = {
+            PAPERLESS_URL = "https://paperless.thematt.net";
+            PAPERLESS_OCR_LANGUAGE = "eng+deu";
+            PAPERLESS_TIME_ZONE = "Europe/Berlin";
+        };
+    };
+
+    # Tika: Ocr?
+    services.tika.enable = true;
+    services.tika = {
+        listenAddress = "0.0.0.0";
+        openFirewall = true;
+        enableOcr = true;
+    };
+
+    # Homepage: a Dashboard for all your needs
+    services.homepage-dashboard.enable = true;
+    services.homepage-dashboard = {
+        openFirewall = true;
+        allowedHosts = "homepage.thematt.net";
+        widgets = [
+            {
+                resources = {
+                    cpu = true;
+                    uptime = true;
+                    units = "metric";
+                    memory = true;
+                    disk = "/storage";
+                };
+            }
+            {
+                search = {
+                    provider = "duckduckgo";
+                    target = "_blank";
+                    focus = "true";
+                };
+            }
+            {
+                greeting = {
+                    text_size = "x1";
+                    text = "Hello you motherfucker";
+                };
+            }
+        ];
+        services = [
+            {
+                "Management/Authentication" = [
+                    {
+                        "Lldap" = {
+                            description = "Ldap server written in rust";
+                            href = "https://lldap.thematt.net";
+                        };
+                    }
+                    {
+                        "Authelia" = {
+                            description = "Idp manager";
+                            href = "https://authelia.thematt.net";
+                        };
+                    }
+                    {
+                        "Lastprism" = {
+                            description = "The Proxmox Lastprism Server";
+                            href = "https://proxmox.lastprism.thematt.net";
+                        };
+                    }
+                ];
+            }
+            {
+                "Services" = [
+                    {
+                        "Navidrome" = {
+                            description = "Music server";
+                            href = "https://navidrome.thematt.net";
+                        };
+                    }
+                    {
+                        "Paperless" = {
+                            description = "Document server";
+                            href = "https://paperless.thematt.net";
+                        };
+                    }
+                    {
+                        "Copyparty" = {
+                            description = "Fileserver";
+                            href = "https://copyparty.thematt.net";
+                        };
+                    }
+                ];
+            }
+        ];
     };
 
     nix.settings.trusted-users = [ "donielmaker" ];
