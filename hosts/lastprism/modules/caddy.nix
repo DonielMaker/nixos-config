@@ -19,11 +19,6 @@
                 reverse_proxy nixos.lastprism.thematt.net:17170
             }
 
-            @wireguard host wireguard.thematt.net 
-            handle @wireguard {
-                reverse_proxy docker.vilethorn.thematt.net:51821
-            }
-
             @navidrome host navidrome.thematt.net 
             handle @navidrome {
                 reverse_proxy nixos.lastprism.thematt.net:4533
@@ -34,27 +29,14 @@
                 reverse_proxy nixos.lastprism.thematt.net:3923
             }
 
+            @homepage host homepage.thematt.net
+            handle @homepage {
+                reverse_proxy nixos.lastprism.thematt.net:8082
+            }
+
             @radicale host radicale.thematt.net 
             handle @radicale {
                 reverse_proxy nixos.lastprism.thematt.net:5232
-            }
-
-            @technitium host technitium.thematt.net 
-            handle @technitium {
-                forward_auth nixos.lastprism.thematt.net:9091 {
-                    uri /api/authz/forward-auth
-                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-                }
-                reverse_proxy docker.vilethorn.thematt.net:5380
-            }
-
-            @proxmox-vilethorn host proxmox.vilethorn.thematt.net 
-            handle @proxmox-vilethorn {
-                reverse_proxy 10.10.12.11:8006 {
-                    transport http {
-                        tls_insecure_skip_verify
-                    }
-                }
             }
 
             @proxmox-lastprism host proxmox.lastprism.thematt.net 
