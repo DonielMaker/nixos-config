@@ -49,7 +49,6 @@
 
     services.openssh.enable = true;
 
-    age.secrets = myLib.getSecrets ./secrets;
     services.resolved.enable = true;
     services.resolved.domains = [ "thematt.net" ];
     networking.networkmanager.dns = "systemd-resolved";
@@ -59,6 +58,12 @@
         enable = true;
         nssmdns4 = true;
         openFirewall = true;
+    };
+
+
+    age.secrets = {
+       wireguard-priKey.file = ./secrets/wireguard-priKey.age;
+       wireguard-shrKey.file = ./secrets/wireguard-shrKey.age;
     };
 
     environment.systemPackages = with pkgs; [
