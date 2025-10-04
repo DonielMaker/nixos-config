@@ -50,6 +50,9 @@
     services.openssh.enable = true;
 
     age.secrets = myLib.getSecrets ./secrets;
+    services.resolved.enable = true;
+    services.resolved.domains = [ "thematt.net" ];
+    networking.networkmanager.dns = "systemd-resolved";
 
     services.printing.enable = true;
     services.avahi = {
