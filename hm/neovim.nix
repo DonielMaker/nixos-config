@@ -49,7 +49,6 @@
         bash-language-server
         vscode-langservers-extracted
         vtsls
-
         kdePackages.qtdeclarative
         # typescript-language-server
         tinymist

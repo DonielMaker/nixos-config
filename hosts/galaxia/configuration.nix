@@ -1,4 +1,4 @@
-{inputs, config, pkgs, system, ...}:
+{config, inputs, pkgs, system, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -32,24 +32,9 @@
     programs.nautilus-open-any-terminal.enable = true;
     programs.nautilus-open-any-terminal.terminal = "alacritty";
 
-    services.gvfs.enable = true;
+    services.resolved.enable = true;
 
-    networking.wg-quick.interfaces.wg0 = {
-        address = [ "10.8.0.3/24" ];
-        dns = [ "1.1.1.1" ];
-        peers = [
-            {
-                allowedIPs = [
-                    "10.8.0.0/24"
-                    "10.10.12.0/24"
-                ];
-                endpoint = "public.ipv64.de:51820";
-                publicKey = "hy12YOG6MaWwA3JeqGpDzt0XXSg/qsErxIRntlVrzHU=";
-                presharedKeyFile = config.age.secrets.wireguard-shrKey.path;
-            }
-        ];
-        privateKeyFile = config.age.secrets.wireguard-priKey.path;
-    };
+    services.gvfs.enable = true;
 
     age.secrets = {
        wireguard-priKey.file = ./secrets/wireguard-priKey.age;
@@ -61,18 +46,19 @@
     services.openssh.enable = true;
 
     environment.systemPackages = with pkgs; [
-        vlc
-        supersonic-wayland
         inputs.quickshell.packages.${system}.quickshell
         inputs.ragenix.packages.${system}.default
-        ferrishot
+
+        wireguard-tools
+    
+        zathura
+        typst
+        vlc
         signal-desktop
         orca-slicer
-        # Programs
         nautilus
-        hyprpicker
         geeqie
-        # Other
+
         home-manager
     ];
 
