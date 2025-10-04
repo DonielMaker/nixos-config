@@ -1,4 +1,4 @@
-{ inputs, pkgs, pkgs-stable, system, myLib, ...}:
+{ inputs, pkgs, pkgs-stable, system, config, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -37,6 +37,7 @@
 
     boot.plymouth.enable = true;
 
+    services.gnome.gnome-keyring.enable = true;
 
     programs.nautilus-open-any-terminal.enable = true;
     programs.nautilus-open-any-terminal.terminal = "alacritty";
@@ -66,35 +67,38 @@
        wireguard-shrKey.file = ./secrets/wireguard-shrKey.age;
     };
 
+    virtualisation.waydroid.enable = true;
+
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${system}.default
         inputs.quickshell.packages.${system}.quickshell
 
+        protonplus
+        gnome-calendar
+        gnome-contacts
         gimp
-        heroic
-        # geekbench_6
-        rustdesk
+        # rustdesk
         signal-desktop
-        obs-studio
-        hyprpolkitagent
-
-        protonup-qt
-        pkgs-stable.prismlauncher
-        steam
-        everest-mons
-
-        ferrishot
         vlc
         kdePackages.kdenlive
-        orca-slicer
-        # bambu-studio
-        qt6ct
         vesktop
-        nautilus
+        obs-studio
         geeqie
-        alsa-scarlett-gui
 
-        xdg-desktop-portal
+        pkgs-stable.prismlauncher
+        heroic
+        steam
+        everest-mons
+        xclicker
+
+        orca-slicer
+        nautilus
+        qt6ct
+
+
+        evolution-data-server
+        hyprpolkitagent
+        qt6ct
         home-manager
     ];
 
