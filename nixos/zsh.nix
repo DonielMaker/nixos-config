@@ -11,6 +11,7 @@
     environment.systemPackages = with pkgs; [
         # CLI Tools
         vim
+        htop
         yt-dlp
         imagemagick
         gcc
@@ -26,7 +27,6 @@
         fzf
         unzip
         fastfetch
-        htop
         eza
         ffmpeg
         tmux
@@ -34,6 +34,7 @@
         imagemagick
         pkg-config
     ];
+
 
     fonts.packages = with pkgs; [
         nerd-fonts.fira-code
