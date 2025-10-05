@@ -45,6 +45,21 @@
 
     services.openssh.enable = true;
 
+
+    networking.wg-quick.interfaces.wg0 = {
+        address = [ "10.10.20.3/32" ];
+        dns = [ "1.1.1.1, thematt.net" ];
+        peers = [
+            {
+                allowedIPs = [ "10.10.0.0/16" ];
+                endpoint = "public.ipv64.de:51820";
+                publicKey = "DQ2yw5O4IPieIi048Qzr+8YyiLtnyZWMD6wTNSETxSE=";
+                presharedKeyFile = config.age.secrets.wireguard-shrKey.path;
+            }
+        ];
+        privateKeyFile = config.age.secrets.wireguard-priKey.path;
+    };
+
     environment.systemPackages = with pkgs; [
         inputs.quickshell.packages.${system}.quickshell
         inputs.ragenix.packages.${system}.default
