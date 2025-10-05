@@ -1,4 +1,4 @@
-{ inputs, pkgs, pkgs-stable, system, myLib, ...}:
+{ inputs, pkgs, pkgs-stable, system, config, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -8,7 +8,7 @@
         inputs.ragenix.nixosModules.default
         inputs.stylix.nixosModules.stylix
 
-        limine
+        bootloader
         networking
         settings
         user
@@ -31,13 +31,13 @@
 
     services.xserver.xkb.layout = "us";
 
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
+    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_16;
 
     services.flatpak.enable = true;
 
     boot.plymouth.enable = true;
 
-    networking.networkmanager.insertNameservers = [ "10.10.12.2" ];
+    services.gnome.gnome-keyring.enable = true;
 
     programs.nautilus-open-any-terminal.enable = true;
     programs.nautilus-open-any-terminal.terminal = "alacritty";
@@ -50,7 +50,9 @@
 
     services.openssh.enable = true;
 
-    age.secrets = myLib.getSecrets ./secrets;
+    services.resolved.enable = true;
+    services.resolved.domains = [ "thematt.net" ];
+    networking.networkmanager.dns = "systemd-resolved";
 
     services.printing.enable = true;
     services.avahi = {
@@ -59,35 +61,44 @@
         openFirewall = true;
     };
 
+
+    age.secrets = {
+       wireguard-priKey.file = ./secrets/wireguard-priKey.age;
+       wireguard-shrKey.file = ./secrets/wireguard-shrKey.age;
+    };
+
+    virtualisation.waydroid.enable = true;
+
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${system}.default
         inputs.quickshell.packages.${system}.quickshell
 
+        protonplus
+        gnome-calendar
+        gnome-contacts
         gimp
-        heroic
-        # geekbench_6
-        rustdesk
+        # rustdesk
         signal-desktop
-        obs-studio
-        hyprpolkitagent
-
-        protonup-qt
-        pkgs-stable.prismlauncher
-        steam
-        everest-mons
-
-        ferrishot
         vlc
         kdePackages.kdenlive
-        orca-slicer
-        # bambu-studio
-        qt6ct
         vesktop
-        nautilus
+        obs-studio
         geeqie
-        alsa-scarlett-gui
 
-        xdg-desktop-portal
+        pkgs-stable.prismlauncher
+        heroic
+        steam
+        everest-mons
+        xclicker
+
+        orca-slicer
+        nautilus
+        qt6ct
+
+
+        evolution-data-server
+        hyprpolkitagent
+        qt6ct
         home-manager
     ];
 
