@@ -32,14 +32,18 @@
     programs.nautilus-open-any-terminal.enable = true;
     programs.nautilus-open-any-terminal.terminal = "alacritty";
 
-    services.resolved.enable = true;
-
     services.gvfs.enable = true;
 
     age.secrets = {
        wireguard-priKey.file = ./secrets/wireguard-priKey.age;
        wireguard-shrKey.file = ./secrets/wireguard-shrKey.age;
     };
+
+    environment.etc."resolv.conf".text = ''
+       search fritz.box thematt.net 
+       nameserver 1.1.1.1
+       options edns0
+    '';
 
     programs.localsend.enable = true;
 
@@ -48,7 +52,7 @@
 
     networking.wg-quick.interfaces.wg0 = {
         address = [ "10.10.20.3/32" ];
-        dns = [ "1.1.1.1, thematt.net" ];
+        # dns = [ "1.1.1.1, thematt.net" ];
         peers = [
             {
                 allowedIPs = [ "10.10.0.0/16" ];

@@ -2,11 +2,7 @@
 
 {
     networking.networkmanager.enable = true;
+    networking.hostName = hostname;
     # networking.networkmanager.dns = "systemd-resolved";
     # services.resolved.enable = true;
-
-    networking.search = [
-        "thematt.net"
-    ];
-    networking.hostName = hostname;
 }
