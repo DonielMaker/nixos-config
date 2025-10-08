@@ -31,7 +31,7 @@
 
     services.xserver.xkb.layout = "us";
 
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_16;
+    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
 
     services.flatpak.enable = true;
 
@@ -85,7 +85,7 @@
         obs-studio
         geeqie
 
-        pkgs-stable.prismlauncher
+        prismlauncher
         heroic
         steam
         everest-mons
