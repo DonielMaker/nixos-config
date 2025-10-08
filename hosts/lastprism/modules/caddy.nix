@@ -39,6 +39,16 @@
                 reverse_proxy nixos.lastprism.thematt.net:5232
             }
 
+            @grafana host grafana.thematt.net 
+            handle @grafana {
+                reverse_proxy nixos.lastprism.thematt.net:6778
+            }
+
+            @prometheus host prometheus.thematt.net 
+            handle @prometheus {
+                reverse_proxy nixos.lastprism.thematt.net:9090
+            }
+
             @proxmox-lastprism host proxmox.lastprism.thematt.net 
             handle @proxmox-lastprism {
                 reverse_proxy 10.10.12.12:8006 {
