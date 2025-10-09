@@ -20,7 +20,7 @@
         stylix.inputs.nixpkgs.follows = "nixpkgs";
 
         copyparty.url = "github:9001/copyparty";
-	    # wsl.url = "github:nix-community/NixOS-WSL/main";
+	    wsl.url = "github:nix-community/NixOS-WSL/main";
     };
 
     outputs = {...}@inputs:
@@ -60,7 +60,6 @@
         homeConfigurations."donielmaker@zenith" = mkHome ./hosts/zenith;
         homeConfigurations."donielmaker@galaxia" = mkHome ./hosts/galaxia;
 
-        # DEPRECATED for now
-        # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
+        nixosConfigurations.wsl = mkNixos ./hosts/wsl;
     };
 }
