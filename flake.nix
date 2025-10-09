@@ -21,8 +21,8 @@
 
         copyparty.url = "github:9001/copyparty";
 	    # wsl.url = "github:nix-community/NixOS-WSL/main";
-
-        neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+	neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+	    wsl.url = "github:nix-community/NixOS-WSL/main";
     };
 
     outputs = {...}@inputs:
@@ -62,7 +62,6 @@
         homeConfigurations."donielmaker@zenith" = mkHome ./hosts/zenith;
         homeConfigurations."donielmaker@galaxia" = mkHome ./hosts/galaxia;
 
-        # DEPRECATED for now
-        # nixosConfigurations.wsl = mkNixos ./hosts/wsl;
+        nixosConfigurations.wsl = mkNixos ./hosts/wsl;
     };
 }

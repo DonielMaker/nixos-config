@@ -20,7 +20,6 @@
         bluetooth
         sound
         stylix
-        neovim
         zsh
     ];
 

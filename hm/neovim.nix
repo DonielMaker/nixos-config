@@ -1,11 +1,10 @@
-{pkgs, ...}:
+{pkgs, inputs, system, ...}:
 
 {
     programs.neovim = {
         enable = true;
         defaultEditor = true;
-        extraLuaPackages = ps: [ ps.magick ];
-        extraPackages = [ pkgs.imagemagick ];
+        package = inputs.neovim-nightly-overlay.packages.${system}.default;
         plugins = with pkgs.vimPlugins.nvim-treesitter-parsers; [
             # latex
             json
