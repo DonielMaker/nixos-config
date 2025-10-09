@@ -24,7 +24,7 @@
         coolercontrol
         bluetooth
 
-        neovim
+        # neovim
         steam
         zsh
     ];
