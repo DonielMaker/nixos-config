@@ -143,7 +143,6 @@
                     uptime = true;
                     units = "metric";
                     memory = true;
-                    disk = "/storage";
                 };
             }
             {
@@ -167,18 +166,28 @@
                         "Lldap" = {
                             description = "Ldap server written in rust";
                             href = "https://lldap.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/lldap-light.svg";
                         };
                     }
                     {
                         "Authelia" = {
                             description = "Idp manager";
                             href = "https://authelia.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/authelia.svg";
                         };
                     }
                     {
                         "Lastprism" = {
                             description = "The Proxmox Lastprism Server";
                             href = "https://proxmox.lastprism.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/proxmox.svg";
+                        };
+                    }
+                    {
+                        "Grafana" = {
+                            description = "Metrics and Logs visualization";
+                            href = "https://grafana.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grafana.svg";
                         };
                     }
                 ];
@@ -189,18 +198,28 @@
                         "Navidrome" = {
                             description = "Music server";
                             href = "https://navidrome.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/navidrome.svg";
                         };
                     }
                     {
                         "Paperless" = {
                             description = "Document server";
                             href = "https://paperless.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
                         };
                     }
                     {
                         "Copyparty" = {
                             description = "Fileserver";
                             href = "https://copyparty.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/copyparty.svg";
+                        };
+                    }
+                    {
+                        "Radicale" = {
+                            description = "CalDav/CardDav Server";
+                            href = "https://radicale.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/radicale.svg";
                         };
                     }
                 ];
