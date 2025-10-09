@@ -21,6 +21,7 @@
 
         copyparty.url = "github:9001/copyparty";
 	    # wsl.url = "github:nix-community/NixOS-WSL/main";
+	neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     };
 
     outputs = {...}@inputs:
