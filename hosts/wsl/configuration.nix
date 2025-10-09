@@ -9,12 +9,9 @@
         }
         ./hardware-configuration.nix
 
-        # System
         settings
         networking
         user
-
-        # Programs
         neovim
         zsh
     ];

@@ -1,4 +1,4 @@
-{ inputs, username, lib, ... }:
+{ inputs, username, ... }:
 
 {
     imports = with inputs.self.homeManagerModules; [
