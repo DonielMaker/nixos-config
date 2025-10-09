@@ -61,6 +61,7 @@
 
         homeConfigurations."donielmaker@zenith" = mkHome ./hosts/zenith;
         homeConfigurations."donielmaker@galaxia" = mkHome ./hosts/galaxia;
+        homeConfigurations."donielmaker@wsl" = mkHome ./hosts/wsl;
 
         nixosConfigurations.wsl = mkNixos ./hosts/wsl;
     };

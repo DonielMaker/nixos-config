@@ -1,8 +1,9 @@
-{ inputs, username, lib, ... }:
+{ inputs, username, ... }:
 
 {
     imports = with inputs.self.homeManagerModules; [
-        oh-my-posh
+        zellij
+        starship
         zsh
         neovim
         git
@@ -10,7 +11,7 @@
 
     home = {
         inherit username;
-        homeDirectory = lib.mkForce "/home/${username}";
+        homeDirectory = "/home/${username}";
         stateVersion = "24.05";
     };
 }
