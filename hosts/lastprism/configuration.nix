@@ -13,7 +13,7 @@
         networking
         settings
         user
-        docker
+        # docker
         openssh
 
         lldap
@@ -248,9 +248,7 @@
     };
 
     services.alloy.enable = true;
-    services.alloy.extraFlags = [
-        "--server.http.listen-addr=0.0.0.0:12345" 
-    ];
+    services.alloy.extraFlags = [ "--server.http.listen-addr=0.0.0.0:12345" ];
     environment.etc."alloy/config.alloy".text = ''
         prometheus.exporter.unix "metrics" {
             disable_collectors = ["ipvs", "btrfs", "infiniband", "xfs", "zfs"]
