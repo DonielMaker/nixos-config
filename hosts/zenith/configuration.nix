@@ -73,11 +73,12 @@
         inputs.ragenix.packages.${system}.default
         inputs.quickshell.packages.${system}.quickshell
 
+        wireguard-tools
         protonplus
         gnome-calendar
         gnome-contacts
         gimp
-        # rustdesk
+        rustdesk
         signal-desktop
         vlc
         kdePackages.kdenlive
@@ -91,6 +92,7 @@
         everest-mons
         xclicker
 
+        ventoy
         orca-slicer
         nautilus
         qt6ct
