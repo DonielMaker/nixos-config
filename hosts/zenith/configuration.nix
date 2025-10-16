@@ -92,7 +92,6 @@
         everest-mons
         xclicker
 
-        ventoy
         orca-slicer
         nautilus
         qt6ct
