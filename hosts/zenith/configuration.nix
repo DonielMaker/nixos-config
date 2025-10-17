@@ -73,6 +73,7 @@
         inputs.ragenix.packages.${system}.default
         inputs.quickshell.packages.${system}.quickshell
 
+        alsa-scarlett-gui
         wireguard-tools
         protonplus
         gnome-calendar
