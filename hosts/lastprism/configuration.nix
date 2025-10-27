@@ -111,17 +111,17 @@
     };
 
     # Paperless: A Document server with plenty of features (ocr, file conversion, editing, etc.)
-    services.paperless.enable = true;
-    services.paperless = {
-        address = "0.0.0.0";
-        dataDir = "/storage/paperless";
-
-        settings = {
-            PAPERLESS_URL = "https://paperless.thematt.net";
-            PAPERLESS_OCR_LANGUAGE = "eng+deu";
-            PAPERLESS_TIME_ZONE = "Europe/Berlin";
-        };
-    };
+    # services.paperless.enable = true;
+    # services.paperless = {
+    #     address = "0.0.0.0";
+    #     dataDir = "/storage/paperless";
+    #
+    #     settings = {
+    #         PAPERLESS_URL = "https://paperless.thematt.net";
+    #         PAPERLESS_OCR_LANGUAGE = "eng+deu";
+    #         PAPERLESS_TIME_ZONE = "Europe/Berlin";
+    #     };
+    # };
 
     # Tika: Ocr?
     # services.tika.enable = true;
