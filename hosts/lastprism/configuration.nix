@@ -74,7 +74,7 @@
         };
 
         accounts = {
-            donielmaker.passwordFile = "/run/keys/copyparty/don_password";
+            donielmaker.passwordFile = "${pkgs.writeText "donielmaker" "Changeme"}";
         };
 
         volumes = {
