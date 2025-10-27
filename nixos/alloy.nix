@@ -1,6 +1,7 @@
 {...}: 
 
 {
+    networking.firewall.allowedTCPPorts = [ 12345];
 
     services.alloy.enable = true;
     services.alloy.extraFlags = [ "--server.http.listen-addr=0.0.0.0:12345" ];

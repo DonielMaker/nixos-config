@@ -21,8 +21,8 @@
         ./modules/authelia.nix
     ];
 
-    # paperless, opencloud, copyparty, radicale, alloy, prometheus, homeassistant, zigbee2mqtt, mosquitto
-    networking.firewall.allowedTCPPorts = [ 28981 9200 3923 5232 12345 9090 8123 8080 1883];
+    # paperless, opencloud, copyparty, radicale, prometheus, homeassistant, zigbee2mqtt, mosquitto
+    networking.firewall.allowedTCPPorts = [ 28981 9200 3923 5232 9090 8123 8080 1883];
 
     age.secrets = let
 
