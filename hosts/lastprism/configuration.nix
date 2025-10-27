@@ -13,12 +13,10 @@
         networking
         settings
         user
-        # docker
         openssh
-        alloy
 
         lldap
-
+        alloy
         ./modules/caddy.nix
         ./modules/authelia.nix
     ];
