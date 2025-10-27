@@ -23,8 +23,8 @@
         ./modules/authelia.nix
     ];
 
-    # paperless, opencloud, copyparty, radicale, alloy, prometheus,
-    networking.firewall.allowedTCPPorts = [ 28981 9200 3923 5232 12345 9090];
+    # paperless, opencloud, copyparty, radicale, alloy, prometheus, homeassistant, zigbee2mqtt, mosquitto
+    networking.firewall.allowedTCPPorts = [ 28981 9200 3923 5232 12345 9090 8123 8080 1883];
 
     age.secrets = let
 
@@ -224,9 +224,76 @@
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/radicale.svg";
                         };
                     }
+                    {
+                        "Homeassistant" = {
+                            description = "Home Automation Server";
+                            href = "https://home-assistant.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/home-assistant-light.svg";
+                        };
+                    }
+                    {
+                        "Zigbee2mqtt" = {
+                            description = "Connection Between Zigbee and Mqtt";
+                            href = "https://zigbee2mqtt.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/zigbee2mqtt.svg";
+                        };
+                    }
                 ];
             }
         ];
+    };
+
+    services.home-assistant.enable = true;
+    services.home-assistant = {
+        extraComponents = [
+            # Components required to complete the onboarding
+            "analytics"
+            "google_translate"
+            "met"
+            "radio_browser"
+            "shopping_list"
+            # Recommended for fast zlib compression
+            # https://www.home-assistant.io/integrations/isal
+            "isal"
+            "mqtt"
+        ];
+        config = {
+            # Includes dependencies for a basic setup
+            # https://www.home-assistant.io/integrations/default_config/
+            default_config = {};
+            http = rec {
+                base_url = "https://home-assistant.thematt.net";
+                cors_allowed_origins = base_url;
+                use_x_forwarded_for = true;
+                trusted_proxies = [
+                    "10.10.12.3"
+                ];
+            };
+        };
+    };
+
+    services.mosquitto.enable = true;
+    services.mosquitto = {
+        listeners = [
+            {
+                acl = [ "pattern readwrite #" ];
+                omitPasswordAuth = true;
+                settings.allow_anonymous = true;
+            }
+        ];
+    };
+
+    services.zigbee2mqtt.enable = true;
+    services.zigbee2mqtt = {
+        settings = {
+            homeassistant.enabled = config.services.home-assistant.enable;
+            frontend.enabled = true;
+            permit_join = true;
+            serial = {
+                port = "/dev/ttyUSB0";
+            };
+        }
+        ;
     };
 
     services.grafana.enable = true;

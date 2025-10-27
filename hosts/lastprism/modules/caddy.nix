@@ -44,6 +44,16 @@
                 reverse_proxy nixos.lastprism.thematt.net:6778
             }
 
+            @home-assistant host home-assistant.thematt.net 
+            handle @home-assistant {
+                reverse_proxy nixos.lastprism.thematt.net:8123
+            }
+
+            @zigbee2mqtt host zigbee2mqtt.thematt.net 
+            handle @zigbee2mqtt {
+                reverse_proxy nixos.lastprism.thematt.net:8080
+            }
+
             @prometheus host prometheus.thematt.net 
             handle @prometheus {
                 reverse_proxy nixos.lastprism.thematt.net:9090
