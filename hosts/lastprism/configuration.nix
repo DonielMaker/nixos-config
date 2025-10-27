@@ -241,6 +241,7 @@
         ];
     };
 
+    # Home-Assistant: Home Automation
     services.home-assistant.enable = true;
     services.home-assistant = {
         extraComponents = [
@@ -259,17 +260,15 @@
             # Includes dependencies for a basic setup
             # https://www.home-assistant.io/integrations/default_config/
             default_config = {};
-            http = rec {
-                base_url = "https://home-assistant.thematt.net";
-                cors_allowed_origins = base_url;
+            http = {
                 use_x_forwarded_for = true;
-                trusted_proxies = [
-                    "10.10.12.3"
-                ];
+                trusted_proxies = [ "10.10.12.3" ];
             };
         };
     };
 
+    # Mosquitto: Mqtt Server
+    # Needs authentication currently not usable for prod. Used anyways
     services.mosquitto.enable = true;
     services.mosquitto = {
         listeners = [
@@ -281,6 +280,7 @@
         ];
     };
 
+    # Zigbee2mqtt: Connection between Zigbee and Mqtt devices
     services.zigbee2mqtt.enable = true;
     services.zigbee2mqtt = {
         settings = {
