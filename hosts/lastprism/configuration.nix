@@ -201,13 +201,13 @@
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/navidrome.svg";
                         };
                     }
-                    {
-                        "Paperless" = {
-                            description = "Document server";
-                            href = "https://paperless.thematt.net";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
-                        };
-                    }
+                    # {
+                    #     "Paperless" = {
+                    #         description = "Document server";
+                    #         href = "https://paperless.thematt.net";
+                    #         icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
+                    #     };
+                    # }
                     {
                         "Copyparty" = {
                             description = "Fileserver";
