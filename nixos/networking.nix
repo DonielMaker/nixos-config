@@ -2,7 +2,10 @@
 
 {
     networking.networkmanager.enable = true;
+    networking.networkmanager.dns = "none";
+    networking.search = [ "thematt.net" ];
+    networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
     networking.hostName = hostname;
-    # networking.networkmanager.dns = "systemd-resolved";
-    # services.resolved.enable = true;
+    networking.useDHCP = false;
+    networking.dhcpcd.enable = false;
 }
