@@ -13,17 +13,16 @@
         networking
         settings
         user
-        docker
         openssh
 
         lldap
-
+        alloy
         ./modules/caddy.nix
         ./modules/authelia.nix
     ];
 
-    # paperless, opencloud, copyparty, radicale, alloy, prometheus,
-    networking.firewall.allowedTCPPorts = [ 28981 9200 3923 5232 12345 9090];
+    # paperless, opencloud, copyparty, radicale, prometheus, homeassistant, zigbee2mqtt, mosquitto
+    networking.firewall.allowedTCPPorts = [ 28981 9200 3923 5232 9090 8123 8080 1883];
 
     age.secrets = let
 
@@ -75,7 +74,7 @@
         };
 
         accounts = {
-            donielmaker.passwordFile = "/run/keys/copyparty/don_password";
+            donielmaker.passwordFile = "${pkgs.writeText "donielmaker" "Changeme"}";
         };
 
         volumes = {
@@ -112,25 +111,25 @@
     };
 
     # Paperless: A Document server with plenty of features (ocr, file conversion, editing, etc.)
-    services.paperless.enable = true;
-    services.paperless = {
-        address = "0.0.0.0";
-        dataDir = "/storage/paperless";
-
-        settings = {
-            PAPERLESS_URL = "https://paperless.thematt.net";
-            PAPERLESS_OCR_LANGUAGE = "eng+deu";
-            PAPERLESS_TIME_ZONE = "Europe/Berlin";
-        };
-    };
+    # services.paperless.enable = true;
+    # services.paperless = {
+    #     address = "0.0.0.0";
+    #     dataDir = "/storage/paperless";
+    #
+    #     settings = {
+    #         PAPERLESS_URL = "https://paperless.thematt.net";
+    #         PAPERLESS_OCR_LANGUAGE = "eng+deu";
+    #         PAPERLESS_TIME_ZONE = "Europe/Berlin";
+    #     };
+    # };
 
     # Tika: Ocr?
-    services.tika.enable = true;
-    services.tika = {
-        listenAddress = "0.0.0.0";
-        openFirewall = true;
-        enableOcr = true;
-    };
+    # services.tika.enable = true;
+    # services.tika = {
+    #     listenAddress = "0.0.0.0";
+    #     openFirewall = true;
+    #     enableOcr = true;
+    # };
 
     # Homepage: a Dashboard for all your needs
     services.homepage-dashboard.enable = true;
@@ -202,13 +201,13 @@
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/navidrome.svg";
                         };
                     }
-                    {
-                        "Paperless" = {
-                            description = "Document server";
-                            href = "https://paperless.thematt.net";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
-                        };
-                    }
+                    # {
+                    #     "Paperless" = {
+                    #         description = "Document server";
+                    #         href = "https://paperless.thematt.net";
+                    #         icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
+                    #     };
+                    # }
                     {
                         "Copyparty" = {
                             description = "Fileserver";
@@ -223,9 +222,76 @@
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/radicale.svg";
                         };
                     }
+                    {
+                        "Homeassistant" = {
+                            description = "Home Automation Server";
+                            href = "https://home-assistant.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/home-assistant-light.svg";
+                        };
+                    }
+                    {
+                        "Zigbee2mqtt" = {
+                            description = "Connection Between Zigbee and Mqtt";
+                            href = "https://zigbee2mqtt.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/zigbee2mqtt.svg";
+                        };
+                    }
                 ];
             }
         ];
+    };
+
+    # Home-Assistant: Home Automation
+    services.home-assistant.enable = true;
+    services.home-assistant = {
+        extraComponents = [
+            # Components required to complete the onboarding
+            "analytics"
+            "google_translate"
+            "met"
+            "radio_browser"
+            "shopping_list"
+            # Recommended for fast zlib compression
+            # https://www.home-assistant.io/integrations/isal
+            "isal"
+            "mqtt"
+        ];
+        config = {
+            # Includes dependencies for a basic setup
+            # https://www.home-assistant.io/integrations/default_config/
+            default_config = {};
+            http = {
+                use_x_forwarded_for = true;
+                trusted_proxies = [ "10.10.12.3" ];
+            };
+        };
+    };
+
+    # Mosquitto: Mqtt Server
+    # Needs authentication currently not usable for prod. Used anyways
+    services.mosquitto.enable = true;
+    services.mosquitto = {
+        listeners = [
+            {
+                acl = [ "pattern readwrite #" ];
+                omitPasswordAuth = true;
+                settings.allow_anonymous = true;
+            }
+        ];
+    };
+
+    # Zigbee2mqtt: Connection between Zigbee and Mqtt devices
+    services.zigbee2mqtt.enable = true;
+    services.zigbee2mqtt = {
+        settings = {
+            homeassistant.enabled = config.services.home-assistant.enable;
+            frontend.enabled = true;
+            permit_join = true;
+            serial = {
+                port = "/dev/ttyUSB0";
+            };
+        }
+        ;
     };
 
     services.grafana.enable = true;
@@ -246,57 +312,6 @@
         webExternalUrl = "https://prometheus.thematt.net";
         port = 9090;
     };
-
-    services.alloy.enable = true;
-    services.alloy.extraFlags = [
-        "--server.http.listen-addr=0.0.0.0:12345" 
-    ];
-    environment.etc."alloy/config.alloy".text = ''
-        prometheus.exporter.unix "metrics" {
-            disable_collectors = ["ipvs", "btrfs", "infiniband", "xfs", "zfs"]
-            enable_collectors = ["meminfo"]
-
-            filesystem {
-                fs_types_exclude     = "^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|tmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$"
-                    mount_points_exclude = "^/(dev|proc|run/credentials/.+|sys|var/lib/docker/.+)($|/)"
-                    mount_timeout        = "5s"
-            }
-
-            netclass {
-                ignored_devices = "^(veth.*|cali.*|[a-f0-9]{15})$"
-            }
-
-            netdev {
-                device_exclude = "^(veth.*|cali.*|[a-f0-9]{15})$"
-            }
-        }
-
-        discovery.relabel "metrics" {
-            targets = prometheus.exporter.unix.metrics.targets
-
-            rule {
-                target_label = "instance"
-                    replacement  = constants.hostname
-            }
-
-            rule {
-                target_label = "job"
-                    replacement = string.format("%s-metrics", constants.hostname)
-            }
-        }
-
-        prometheus.scrape "metrics" {
-            scrape_interval = "15s"
-            targets = discovery.relabel.metrics.output
-            forward_to = [prometheus.remote_write.metrics.receiver]
-        }
-
-        prometheus.remote_write "metrics" {
-            endpoint {
-                url = "http://localhost:9090/api/v1/write"
-            }
-        }
-    '';
 
     # services.loki.enable = true;
     # services.loki = {

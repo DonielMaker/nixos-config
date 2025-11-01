@@ -17,7 +17,7 @@
             width = 45;
             lines = 20;
             tabs = 4;
-            icon-theme = "Papirus";
+            icon-theme = "Tela-Circle-Dark";
             image-size-ratio = 1;
             horizontal-pad = 16;
             fields = "name";

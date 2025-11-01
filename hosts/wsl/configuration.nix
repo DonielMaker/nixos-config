@@ -1,4 +1,4 @@
-{inputs, username, ...}:
+{pkgs, inputs, username, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -12,8 +12,16 @@
         settings
         networking
         user
-        neovim
         zsh
+    ];
+
+    environment.systemPackages = with pkgs; [
+        inputs.ragenix.packages.${system}.default
+
+        wireguard-tools
+    
+        typst
+        home-manager
     ];
 
     system.stateVersion = "25.05"; # Just don't
