@@ -8,8 +8,8 @@
         inputs.ragenix.nixosModules.default
         inputs.stylix.nixosModules.stylix
 
-        bootloader
-        #limine
+        # bootloader
+        limine
         networking
         settings
         user
