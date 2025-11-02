@@ -59,6 +59,11 @@
                 reverse_proxy nixos.lastprism.thematt.net:9090
             }
 
+            @zitadel host zitadel.thematt.net 
+            handle @zitadel {
+                reverse_proxy nixos.lastprism.thematt.net:4443
+            }
+
             @proxmox-lastprism host proxmox.lastprism.thematt.net 
             handle @proxmox-lastprism {
                 reverse_proxy 10.10.12.12:8006 {
@@ -66,11 +71,6 @@
                         tls_insecure_skip_verify
                     }
                 }
-            }
-
-            @paperless host paperless.thematt.net 
-            handle @paperless {
-                reverse_proxy nixos.lastprism.thematt.net:28981
             }
         }
     '';
