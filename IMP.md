@@ -5,3 +5,5 @@ things to do:
 - setup freshrss and rsshub
 - setup uptime kuma
 - setup matrix (tuwunel)
+
+- setup oauth for copyparty, radicale, homeassistant, grafana and the above mentioned 
