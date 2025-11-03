@@ -109,7 +109,7 @@
                         {
                             client_id = "proxmox";
                             client_name = "Proxmox";
-                            client_secret = "OT3TzdNZsvJi&OYnbUJGP3hMYV2mS*Fj8gUCu5s%F30q^4ukw3iOoHLkjRd%q$d@";
+                            client_secret = "$pbkdf2-sha512$310000$lU3QoJ.QBpvCzNybOZj4zg$0K54H/evu7KByWQVfWs7KzidwHyF.16y7AxqynXQVng9tV1XIt2v/HrNvPmGcDpV1EjsfpX3zyYDejQeVatg/g";
                             public = false;
                             authorization_policy = "two_factor";
                             require_pkce = true;
