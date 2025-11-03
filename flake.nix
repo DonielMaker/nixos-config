@@ -45,8 +45,8 @@
     in
 
     {
-        nixosModules = buildModules ./nixos;
-        homeManagerModules = buildModules ./hm;
+        nixosModules = buildModules ./nixos ".nix";
+        homeManagerModules = buildModules ./hm ".nix";
 
         # Main PC
         nixosConfigurations.zenith = mkNixos ./hosts/zenith;
