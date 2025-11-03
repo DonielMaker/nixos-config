@@ -5,17 +5,22 @@
     boot.loader.limine = {
         efiSupport = true;
         style = {
-            wallpapers = [
-                # TODO: MOVE THIS PHOTO TO A DERIVATION!!
-                ./vladislav-klapin-o-SMjjGuP6c-unsplash.jpg            
-            ];
-            interface.resolution = "1920x1080";
+            wallpapers = [];
             interface.branding = "I use NixOS btw";
-            graphicalTerminal.background = "ff000000";
+            graphicalTerminal.background = "24283b";
             graphicalTerminal.foreground = "c0caf5";
-            graphicalTerminal.margin = 50;
+            graphicalTerminal.palette = "
+                :24283b
+                :f7768e
+                :9ece6a
+                :ff9e64
+                :7aa2f7
+                :bb9af7
+                :7dcfff
+                :2F334C
+            ";
         };
-        maxGenerations = 50;
+        maxGenerations = 10;
     };
     boot.loader.efi.canTouchEfiVariables = true;
 }

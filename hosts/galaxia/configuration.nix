@@ -8,8 +8,8 @@
         inputs.ragenix.nixosModules.default
         inputs.stylix.nixosModules.stylix
 
-        bootloader
-        #limine
+        # bootloader
+        limine
         networking
         settings
         user
@@ -37,12 +37,6 @@
        wireguard-shrKey.file = ./secrets/wireguard-shrKey.age;
     };
 
-    environment.etc."resolv.conf".text = ''
-       search fritz.box thematt.net 
-       nameserver 1.1.1.1
-       options edns0
-    '';
-
     programs.localsend.enable = true;
 
     services.openssh.enable = true;
@@ -50,7 +44,6 @@
 
     networking.wg-quick.interfaces.wg0 = {
         address = [ "10.10.20.3/32" ];
-        # dns = [ "1.1.1.1, thematt.net" ];
         peers = [
             {
                 allowedIPs = [ "10.10.0.0/16" ];
