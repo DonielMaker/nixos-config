@@ -50,10 +50,6 @@
 
     services.openssh.enable = true;
 
-    services.resolved.enable = true;
-    services.resolved.domains = [ "thematt.net" ];
-    networking.networkmanager.dns = "systemd-resolved";
-
     services.printing.enable = true;
     services.avahi = {
         enable = true;
