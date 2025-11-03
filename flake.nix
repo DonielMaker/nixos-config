@@ -54,6 +54,8 @@
         nixosConfigurations.galaxia = mkNixos ./hosts/galaxia;
         # Server
         nixosConfigurations.lastprism = mkNixos ./hosts/lastprism;
+        # Auth Server
+        nixosConfigurations.miasma = mkNixos ./hosts/miasma;
         # Company Server
         nixosConfigurations.srv-mx-01 = mkNixos ./hosts/srv-mx-01;
         # TBC Router
