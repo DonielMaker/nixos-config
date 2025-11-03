@@ -21,8 +21,8 @@
         ./modules/authelia.nix
     ];
 
-    # paperless, copyparty, radicale, prometheus, homeassistant, zigbee2mqtt, mosquitto
-    networking.firewall.allowedTCPPorts = [ 28981 3923 5232 9090 8123 8080 1883];
+    # paperless, copyparty, radicale, prometheus, homeassistant, zigbee2mqtt, mosquitto, uptime-kuma
+    networking.firewall.allowedTCPPorts = [ 28981 3923 5232 9090 8123 8080 1883 3001];
 
     age.secrets = let
 
@@ -76,6 +76,12 @@
     nixpkgs.overlays = [
         inputs.copyparty.overlays.default
     ];
+
+    # Uptime Kuma: Healthcheck on your services
+    services.uptime-kuma.enable = true;
+    services.uptime-kuma.settings = {
+        HOST = "0.0.0.0";
+    };
 
     # Copyparty: WebDav Fileserver with great performance
     services.copyparty.enable = true;
@@ -210,6 +216,25 @@
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grafana.svg";
                         };
                     }
+                    {
+                        "Uptime Kuma" = {
+                            description = "Check uptime of services";
+                            href = "https://uptime.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/uptime-kuma.svg";
+                            widget = {
+                                type = "uptimekuma";
+                                url = "http://nixos.lastprism.thematt.net:3001";
+                                slug = "homepage";
+                            };
+                        };
+                    }
+                    {
+                        "Fritz!Box" = {
+                            description = "Fritz Box Router";
+                            href = "http://192.168.0.1";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/fritz.svg";
+                        };
+                    }
                 ];
             }
             {
@@ -267,10 +292,7 @@
         extraComponents = [
             # Components required to complete the onboarding
             "analytics"
-            "google_translate"
             "met"
-            "radio_browser"
-            "shopping_list"
             # Recommended for fast zlib compression
             # https://www.home-assistant.io/integrations/isal
             "isal"

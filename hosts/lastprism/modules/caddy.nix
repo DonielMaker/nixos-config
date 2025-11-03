@@ -24,19 +24,6 @@
                 reverse_proxy nixos.lastprism.thematt.net:4533
             }
 
-            # While this does work, it doesn't fit the suitcase of copyparty as copyparty is also reachable outside a browser (where headers don't matter)
-            # @copyparty host copyparty.thematt.net 
-            # handle @copyparty {
-            #     forward_auth nixos.lastprism.thematt.net:9091 {
-            #         uri /api/authz/forward-auth
-            #         copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-            #     }
-            #     reverse_proxy nixos.lastprism.thematt.net:3923 {
-            #         header_up X-Idp-User {http.request.header.Remote-User}
-            #         header_up X-Idp-Group {http.request.header.Remote-Groups}
-            #     }
-            # }
-
             @copyparty host copyparty.thematt.net 
             handle @copyparty {
                 reverse_proxy nixos.lastprism.thematt.net:3923
@@ -44,7 +31,20 @@
 
             @homepage host homepage.thematt.net
             handle @homepage {
+                forward_auth nixos.lastprism.thematt.net:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                }
                 reverse_proxy nixos.lastprism.thematt.net:8082
+            }
+
+            @uptime host uptime.thematt.net
+            handle @uptime {
+                forward_auth nixos.lastprism.thematt.net:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                }
+                reverse_proxy nixos.lastprism.thematt.net:3001
             }
 
             @radicale host radicale.thematt.net 
@@ -64,17 +64,20 @@
 
             @zigbee2mqtt host zigbee2mqtt.thematt.net 
             handle @zigbee2mqtt {
+                forward_auth nixos.lastprism.thematt.net:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                }
                 reverse_proxy nixos.lastprism.thematt.net:8080
             }
 
             @prometheus host prometheus.thematt.net 
             handle @prometheus {
+                forward_auth nixos.lastprism.thematt.net:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                }
                 reverse_proxy nixos.lastprism.thematt.net:9090
-            }
-
-            @zitadel host zitadel.thematt.net 
-            handle @zitadel {
-                reverse_proxy nixos.lastprism.thematt.net:4443
             }
 
             @proxmox-lastprism host proxmox.lastprism.thematt.net 
@@ -85,6 +88,19 @@
                     }
                 }
             }
+
+            # While this does work, it doesn't fit the suitcase of copyparty as copyparty is also reachable outside a browser (where headers don't matter)
+            # @copyparty host copyparty.thematt.net 
+            # handle @copyparty {
+            #     forward_auth nixos.lastprism.thematt.net:9091 {
+            #         uri /api/authz/forward-auth
+            #         copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+            #     }
+            #     reverse_proxy nixos.lastprism.thematt.net:3923 {
+            #         header_up X-Idp-User {http.request.header.Remote-User}
+            #         header_up X-Idp-Group {http.request.header.Remote-Groups}
+            #     }
+            # }
         }
     '';
 
