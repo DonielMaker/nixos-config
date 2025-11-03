@@ -36,27 +36,32 @@
     {
         jwtSecret = {
             inherit (authelia) mode owner group;
-            file = ./secrets/jwtSecret.age;
+            file = ./secrets/authelia/jwtSecret.age;
         };
 
         storageEncryptionKey = {
             inherit (authelia) mode owner group;
-            file = ./secrets/storageEncryptionKey.age;
+            file = ./secrets/authelia/storageEncryptionKey.age;
         };
 
         sessionSecret = {
             inherit (authelia) mode owner group;
-            file = ./secrets/sessionSecret.age;
+            file = ./secrets/authelia/sessionSecret.age;
         };
 
         autheliaLldapPassword = {
             inherit (authelia) mode owner group;
-            file = ./secrets/autheliaLldapPassword.age;
+            file = ./secrets/authelia/autheliaLldapPassword.age;
         };
 
         autheliaJwksKey = {
             inherit (authelia) mode owner group;
-            file = ./secrets/autheliaJwksKey.age;
+            file = ./secrets/authelia/autheliaJwksKey.age;
+        };
+
+        proxmox-lastprism-oidc-secret = {
+            inherit (authelia) mode owner group;
+            file = ./secrets/oidc/proxmox-lastprism-oidc-secret.age;
         };
 
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;

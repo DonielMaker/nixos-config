@@ -8,10 +8,11 @@ let
     systems = [zenith lastprism];
 in
 {
-    "jwtSecret.age".publicKeys = users ++ systems;
-    "storageEncryptionKey.age".publicKeys = users ++ systems;
-    "sessionSecret.age".publicKeys = users ++ systems;
-    "autheliaLldapPassword.age".publicKeys = users ++ systems;
+    # Secrets dedicated to authelia
+    "authelia/jwtSecret.age".publicKeys = users ++ systems;
+    "authelia/storageEncryptionKey.age".publicKeys = users ++ systems;
+    "authelia/sessionSecret.age".publicKeys = users ++ systems;
+    "authelia/autheliaLldapPassword.age".publicKeys = users ++ systems;
+    "authelia/autheliaJwksKey.age".publicKeys = users ++ systems;
     "cloudflareDnsApiToken.age".publicKeys = users ++ systems;
-    "autheliaJwksKey.age".publicKeys = users ++ systems;
 }
