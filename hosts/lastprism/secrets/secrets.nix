@@ -14,5 +14,9 @@ in
     "authelia/sessionSecret.age".publicKeys = users ++ systems;
     "authelia/autheliaLldapPassword.age".publicKeys = users ++ systems;
     "authelia/autheliaJwksKey.age".publicKeys = users ++ systems;
+
+    # Copyparty Passwords
+    "copyparty/copyparty-donielmaker-password.age".publicKeys = users ++ systems;
+
     "cloudflareDnsApiToken.age".publicKeys = users ++ systems;
 }

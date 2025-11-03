@@ -24,6 +24,19 @@
                 reverse_proxy nixos.lastprism.thematt.net:4533
             }
 
+            # While this does work, it doesn't fit the suitcase of copyparty as copyparty is also reachable outside a browser (where headers don't matter)
+            # @copyparty host copyparty.thematt.net 
+            # handle @copyparty {
+            #     forward_auth nixos.lastprism.thematt.net:9091 {
+            #         uri /api/authz/forward-auth
+            #         copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+            #     }
+            #     reverse_proxy nixos.lastprism.thematt.net:3923 {
+            #         header_up X-Idp-User {http.request.header.Remote-User}
+            #         header_up X-Idp-Group {http.request.header.Remote-Groups}
+            #     }
+            # }
+
             @copyparty host copyparty.thematt.net 
             handle @copyparty {
                 reverse_proxy nixos.lastprism.thematt.net:3923

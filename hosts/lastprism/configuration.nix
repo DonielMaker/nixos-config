@@ -21,8 +21,8 @@
         ./modules/authelia.nix
     ];
 
-    # paperless, opencloud, copyparty, radicale, prometheus, homeassistant, zigbee2mqtt, mosquitto
-    networking.firewall.allowedTCPPorts = [ 28981 9200 3923 5232 9090 8123 8080 1883];
+    # paperless, copyparty, radicale, prometheus, homeassistant, zigbee2mqtt, mosquitto
+    networking.firewall.allowedTCPPorts = [ 28981 3923 5232 9090 8123 8080 1883];
 
     age.secrets = let
 
@@ -30,6 +30,12 @@
             mode = "440";
             owner = config.services.authelia.instances.main.user;
             group = config.services.authelia.instances.main.group;
+        };
+
+        copyparty = {
+            mode = "440";
+            owner = config.services.copyparty.user;
+            group = config.services.copyparty.group;
         };
     in
 
@@ -59,9 +65,9 @@
             file = ./secrets/authelia/autheliaJwksKey.age;
         };
 
-        proxmox-lastprism-oidc-secret = {
-            inherit (authelia) mode owner group;
-            file = ./secrets/oidc/proxmox-lastprism-oidc-secret.age;
+        copyparty-donielmaker-password = {
+            inherit (copyparty) mode owner group;
+            file = ./secrets/copyparty/copyparty-donielmaker-password.age;
         };
 
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
@@ -79,10 +85,16 @@
             z = true;
             e2dsa = true;
             e2ts = true;
+
+            # As of now this does not work since trying to use copyparty outside the browser (file explorer on PC/Smartphone) leads to a https unauthorized? error.
+            # idp-h-usr = "x-idp-user";
+            # idp-h-grp = "x-idp-group";
+            # idp-store = 3;
+            # xff-src = "10.10.12.3";
         };
 
         accounts = {
-            donielmaker.passwordFile = "${pkgs.writeText "donielmaker" "Changeme"}";
+            donielmaker.passwordFile = config.age.secrets.copyparty-donielmaker-password.path;
         };
 
         volumes = {
