@@ -43,14 +43,17 @@
             inherit (authelia) mode owner group;
             file = ./secrets/storageEncryptionKey.age;
         };
+
         sessionSecret = {
             inherit (authelia) mode owner group;
             file = ./secrets/sessionSecret.age;
         };
+
         autheliaLldapPassword = {
             inherit (authelia) mode owner group;
             file = ./secrets/autheliaLldapPassword.age;
         };
+
         autheliaJwksKey = {
             inherit (authelia) mode owner group;
             file = ./secrets/autheliaJwksKey.age;
