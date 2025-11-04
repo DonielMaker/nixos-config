@@ -29,10 +29,9 @@ let
     getFlatDir = dir: lib.filesystem.listFilesRecursive dir;
     # Gets all the File with a certain suffix
     getFileWithSuffix = dir: suffix: lib.filter (file: lib.hasSuffix suffix file) (getFlatDir dir);
-    # Return the file name (In this case the module name) of a path
+    # Return the file name (aka module name) of a path
     getModuleName = dir: suffix: lib.map (file: lib.removeSuffix suffix (baseNameOf file)) (getFileWithSuffix dir suffix);
     # Zips two lists into a list of attrSet like so: [{name = name; value = value;} ...]
-    # At this stage we would like to recurse back into this function if value is of type dir. Essentially giving the name of the function it's own attrSet
     zipPairs = dir: suffix: lib.zipListsWith (moduleName: modulePath: lib.nameValuePair moduleName (if (lib.pathIsDirectory modulePath) then (toAttrSet modulePath suffix) else modulePath)) (getModuleName dir suffix) (getFileWithSuffix dir suffix);
     # With zipPairs it turns the list into one attrSet like so: {name1 = value1; name2 = value2; ...}
     toAttrSet = dir: suffix: builtins.listToAttrs (zipPairs dir suffix);
