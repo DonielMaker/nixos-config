@@ -21,8 +21,8 @@
         ./modules/authelia.nix
     ];
 
-    # paperless, copyparty, radicale, prometheus, homeassistant, zigbee2mqtt, mosquitto, uptime-kuma
-    networking.firewall.allowedTCPPorts = [ 28981 3923 5232 9090 8123 8080 1883 3001];
+    # copyparty, radicale, prometheus, homeassistant, zigbee2mqtt, mosquitto, uptime-kuma
+    networking.firewall.allowedTCPPorts = [ 3923 5232 9090 8123 8080 1883 3001];
 
     age.secrets = let
 
