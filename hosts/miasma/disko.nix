@@ -1,7 +1,7 @@
 {
     disko.devices.disk = {
         main = {
-            device = "/dev/disk/by-id/ata-SAMSUNG_MZNLF128HCHP-00000_S28TNXAGB04908";
+            device = "/dev/disk/by-id/nvme-KINGSTON_SA1000M8480G_50026B7282087FAB";
             type = "disk";
             content = {
                 type = "gpt";
