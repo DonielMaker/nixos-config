@@ -11,12 +11,12 @@
 
             @authelia host authelia.thematt.net
             handle @authelia {
-                reverse_proxy localhost:9091
+                reverse_proxy miasma.thematt.net:9091
             }
 
             @lldap host lldap.thematt.net
             handle @lldap {
-                reverse_proxy nixos.lastprism.thematt.net:17170
+                reverse_proxy miasma.thematt.net:17170
             }
 
             @navidrome host navidrome.thematt.net 
@@ -35,7 +35,7 @@
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
-                reverse_proxy nixos.lastprism.thematt.net:8082
+                reverse_proxy miasma.thematt.net:8082
             }
 
             @uptime host uptime.thematt.net
@@ -44,7 +44,7 @@
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
-                reverse_proxy nixos.lastprism.thematt.net:3001
+                reverse_proxy miasma.thematt.net:3001
             }
 
             @radicale host radicale.thematt.net 
@@ -54,7 +54,7 @@
 
             @grafana host grafana.thematt.net 
             handle @grafana {
-                reverse_proxy nixos.lastprism.thematt.net:6778
+                reverse_proxy miasma.thematt.net:6778
             }
 
             @home-assistant host home-assistant.thematt.net 
@@ -77,7 +77,7 @@
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
-                reverse_proxy nixos.lastprism.thematt.net:9090
+                reverse_proxy miasma.thematt.net:9090
             }
 
             @proxmox-lastprism host proxmox.lastprism.thematt.net 
