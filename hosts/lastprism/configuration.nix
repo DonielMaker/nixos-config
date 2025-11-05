@@ -73,9 +73,7 @@
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
     };
 
-    nixpkgs.overlays = [
-        inputs.copyparty.overlays.default
-    ];
+    nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
 
     # Uptime Kuma: Healthcheck on your services
     services.uptime-kuma.enable = true;
