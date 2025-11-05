@@ -11,7 +11,7 @@
 
             @authelia host authelia.thematt.net
             handle @authelia {
-                reverse_proxy nixos.lastprism.thematt.net:9091
+                reverse_proxy localhost:9091
             }
 
             @lldap host lldap.thematt.net
@@ -31,7 +31,20 @@
 
             @homepage host homepage.thematt.net
             handle @homepage {
+                forward_auth nixos.lastprism.thematt.net:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                }
                 reverse_proxy nixos.lastprism.thematt.net:8082
+            }
+
+            @uptime host uptime.thematt.net
+            handle @uptime {
+                forward_auth nixos.lastprism.thematt.net:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                }
+                reverse_proxy nixos.lastprism.thematt.net:3001
             }
 
             @radicale host radicale.thematt.net 
@@ -44,8 +57,26 @@
                 reverse_proxy nixos.lastprism.thematt.net:6778
             }
 
+            @home-assistant host home-assistant.thematt.net 
+            handle @home-assistant {
+                reverse_proxy nixos.lastprism.thematt.net:8123
+            }
+
+            @zigbee2mqtt host zigbee2mqtt.thematt.net 
+            handle @zigbee2mqtt {
+                forward_auth nixos.lastprism.thematt.net:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                }
+                reverse_proxy nixos.lastprism.thematt.net:8080
+            }
+
             @prometheus host prometheus.thematt.net 
             handle @prometheus {
+                forward_auth nixos.lastprism.thematt.net:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                }
                 reverse_proxy nixos.lastprism.thematt.net:9090
             }
 
@@ -58,10 +89,19 @@
                 }
             }
 
-            @paperless host paperless.thematt.net 
-            handle @paperless {
-                reverse_proxy nixos.lastprism.thematt.net:28981
-            }
+            # While this does work, it doesn't fit the suitcase of copyparty as it is also reachable outside a 
+            # browser (where headers don't matter/work)
+            # @copyparty host copyparty.thematt.net 
+            # handle @copyparty {
+            #     forward_auth nixos.lastprism.thematt.net:9091 {
+            #         uri /api/authz/forward-auth
+            #         copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+            #     }
+            #     reverse_proxy nixos.lastprism.thematt.net:3923 {
+            #         header_up X-Idp-User {http.request.header.Remote-User}
+            #         header_up X-Idp-Group {http.request.header.Remote-Groups}
+            #     }
+            # }
         }
     '';
 

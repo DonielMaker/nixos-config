@@ -15,47 +15,47 @@
         openssh
 
         alloy
-        # lldap
+        lldap
         # ./modules/caddy.nix
         # ./modules/authelia.nix
     ];
 
-    # prometheus,
-    networking.firewall.allowedTCPPorts = [ 9090];
+    # prometheus, uptime-kuma
+    networking.firewall.allowedTCPPorts = [ 9090 3001];
 
-    # age.secrets = let
-    #     authelia = {
-    #         mode = "440";
-    #         owner = config.services.authelia.instances.main.user;
-    #         group = config.services.authelia.instances.main.group;
-    #     };
-    # in
-    #
-    # {
-    #     jwtSecret = {
-    #         inherit (authelia) mode owner group;
-    #         file = ./secrets/jwtSecret.age;
-    #     };
-    #
-    #     storageEncryptionKey = {
-    #         inherit (authelia) mode owner group;
-    #         file = ./secrets/storageEncryptionKey.age;
-    #     };
-    #     sessionSecret = {
-    #         inherit (authelia) mode owner group;
-    #         file = ./secrets/sessionSecret.age;
-    #     };
-    #     autheliaLldapPassword = {
-    #         inherit (authelia) mode owner group;
-    #         file = ./secrets/autheliaLldapPassword.age;
-    #     };
-    #     autheliaJwksKey = {
-    #         inherit (authelia) mode owner group;
-    #         file = ./secrets/autheliaJwksKey.age;
-    #     };
-    #
-    #     cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
-    # };
+    age.secrets = let
+        authelia = {
+            mode = "440";
+            owner = config.services.authelia.instances.main.user;
+            group = config.services.authelia.instances.main.group;
+        };
+    in
+
+    {
+        jwtSecret = {
+            inherit (authelia) mode owner group;
+            file = ./secrets/jwtSecret.age;
+        };
+
+        storageEncryptionKey = {
+            inherit (authelia) mode owner group;
+            file = ./secrets/storageEncryptionKey.age;
+        };
+        sessionSecret = {
+            inherit (authelia) mode owner group;
+            file = ./secrets/sessionSecret.age;
+        };
+        autheliaLldapPassword = {
+            inherit (authelia) mode owner group;
+            file = ./secrets/autheliaLldapPassword.age;
+        };
+        autheliaJwksKey = {
+            inherit (authelia) mode owner group;
+            file = ./secrets/autheliaJwksKey.age;
+        };
+
+        cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
+    };
 
     # Homepage: a Dashboard for all your needs
     services.homepage-dashboard.enable = true;
@@ -116,6 +116,25 @@
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grafana.svg";
                         };
                     }
+                    {
+                        "Uptime Kuma" = {
+                            description = "Check uptime of services";
+                            href = "https://uptime.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/uptime-kuma.svg";
+                            widget = {
+                                type = "uptimekuma";
+                                url = "http://nixos.lastprism.thematt.net:3001";
+                                slug = "homepage";
+                            };
+                        };
+                    }
+                    {
+                        "Fritz!Box" = {
+                            description = "Fritz Box Router";
+                            href = "http://192.168.0.1";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/fritz.svg";
+                        };
+                    }
                 ];
             }
             {
@@ -127,13 +146,13 @@
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/navidrome.svg";
                         };
                     }
-                    {
-                        "Paperless" = {
-                            description = "Document server";
-                            href = "https://paperless.thematt.net";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
-                        };
-                    }
+                    # {
+                    #     "Paperless" = {
+                    #         description = "Document server";
+                    #         href = "https://paperless.thematt.net";
+                    #         icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
+                    #     };
+                    # }
                     {
                         "Copyparty" = {
                             description = "Fileserver";
@@ -146,6 +165,20 @@
                             description = "CalDav/CardDav Server";
                             href = "https://radicale.thematt.net";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/radicale.svg";
+                        };
+                    }
+                    {
+                        "Homeassistant" = {
+                            description = "Home Automation Server";
+                            href = "https://home-assistant.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/home-assistant-light.svg";
+                        };
+                    }
+                    {
+                        "Zigbee2mqtt" = {
+                            description = "Connection Between Zigbee and Mqtt";
+                            href = "https://zigbee2mqtt.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/zigbee2mqtt.svg";
                         };
                     }
                 ];
