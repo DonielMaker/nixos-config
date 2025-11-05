@@ -23,39 +23,44 @@
     # prometheus, uptime-kuma
     networking.firewall.allowedTCPPorts = [ 9090 3001];
 
-    age.secrets = let
-        authelia = {
-            mode = "440";
-            owner = config.services.authelia.instances.main.user;
-            group = config.services.authelia.instances.main.group;
-        };
-    in
-
-    {
-        jwtSecret = {
-            inherit (authelia) mode owner group;
-            file = ./secrets/jwtSecret.age;
-        };
-
-        storageEncryptionKey = {
-            inherit (authelia) mode owner group;
-            file = ./secrets/storageEncryptionKey.age;
-        };
-        sessionSecret = {
-            inherit (authelia) mode owner group;
-            file = ./secrets/sessionSecret.age;
-        };
-        autheliaLldapPassword = {
-            inherit (authelia) mode owner group;
-            file = ./secrets/autheliaLldapPassword.age;
-        };
-        autheliaJwksKey = {
-            inherit (authelia) mode owner group;
-            file = ./secrets/autheliaJwksKey.age;
-        };
-
-        cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
-    };
+    # age.secrets = let
+    #
+    #     authelia = {
+    #         mode = "440";
+    #         owner = config.services.authelia.instances.main.user;
+    #         group = config.services.authelia.instances.main.group;
+    #     };
+    #
+    # in
+    #
+    # {
+    #     jwtSecret = {
+    #         inherit (authelia) mode owner group;
+    #         file = ./secrets/authelia/jwtSecret.age;
+    #     };
+    #
+    #     storageEncryptionKey = {
+    #         inherit (authelia) mode owner group;
+    #         file = ./secrets/authelia/storageEncryptionKey.age;
+    #     };
+    #
+    #     sessionSecret = {
+    #         inherit (authelia) mode owner group;
+    #         file = ./secrets/authelia/sessionSecret.age;
+    #     };
+    #
+    #     autheliaLldapPassword = {
+    #         inherit (authelia) mode owner group;
+    #         file = ./secrets/authelia/autheliaLldapPassword.age;
+    #     };
+    #
+    #     autheliaJwksKey = {
+    #         inherit (authelia) mode owner group;
+    #         file = ./secrets/authelia/autheliaJwksKey.age;
+    #     };
+    #
+    #     cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
+    # };
 
     # Homepage: a Dashboard for all your needs
     services.homepage-dashboard.enable = true;
