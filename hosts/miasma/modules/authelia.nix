@@ -109,27 +109,16 @@
                         {
                             client_id = "proxmox";
                             client_name = "Proxmox";
-                            client_secret = "OT3TzdNZsvJi&OYnbUJGP3hMYV2mS*Fj8gUCu5s%F30q^4ukw3iOoHLkjRd%q$d@";
+                            client_secret = "$pbkdf2-sha512$310000$lU3QoJ.QBpvCzNybOZj4zg$0K54H/evu7KByWQVfWs7KzidwHyF.16y7AxqynXQVng9tV1XIt2v/HrNvPmGcDpV1EjsfpX3zyYDejQeVatg/g";
                             public = false;
                             authorization_policy = "two_factor";
                             require_pkce = true;
                             pkce_challenge_method = "S256";
-                            redirect_uris = [
-                                "https://proxmox.lastprism.thematt.net"
-                                # "https://proxmox.lastprism.thematt.net/api2/json/access/ticket?realm=Authelia"
-                            ];
-                            scopes = [
-                                "openid"
-                                "profile"
-                                "email"
-                                "groups"
-                            ];
-                            response_types = [
-                                "code"
-                            ];
-                            grant_types = [
-                                "authorization_code"
-                            ];
+                            redirect_uris = [ "https://proxmox.lastprism.thematt.net" ];
+                            audience = [ "https://proxmox.lastprism.thematt.net" ];
+                            scopes = [ "openid" "profile" "email" "groups" ];
+                            response_types = [ "code" ];
+                            grant_types = [ "authorization_code" ];
                             access_token_signed_response_alg = "none";
                             userinfo_signed_response_alg = "none";
                             token_endpoint_auth_method = "client_secret_basic";
