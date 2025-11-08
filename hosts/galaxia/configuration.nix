@@ -34,7 +34,6 @@
 
     age.secrets = {
        wireguard-priKey.file = ./secrets/wireguard-priKey.age;
-       wireguard-shrKey.file = ./secrets/wireguard-shrKey.age;
     };
 
     programs.localsend.enable = true;
@@ -43,13 +42,12 @@
 
 
     networking.wg-quick.interfaces.wg0 = {
-        address = [ "10.10.20.3/32" ];
+        address = [ "10.20.10.3/32" ];
         peers = [
             {
-                allowedIPs = [ "10.10.0.0/16" ];
+                allowedIPs = [ "10.20.10.0/24" "10.10.0.0/16" ];
                 endpoint = "public.ipv64.de:51820";
-                publicKey = "DQ2yw5O4IPieIi048Qzr+8YyiLtnyZWMD6wTNSETxSE=";
-                presharedKeyFile = config.age.secrets.wireguard-shrKey.path;
+                publicKey = "HS4sfxavdcVujCE9r0nJBdcaJgl7xg9Z3bGqFcfjq0w=";
             }
         ];
         privateKeyFile = config.age.secrets.wireguard-priKey.path;
