@@ -1,4 +1,4 @@
-{ inputs, pkgs, pkgs-stable, system, config, ...}:
+{ inputs, pkgs, system, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
