@@ -16,9 +16,6 @@
         openssh
 
         alloy
-        # lldap
-        # ./modules/caddy.nix
-        # ./modules/authelia.nix
     ];
 
     # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto
