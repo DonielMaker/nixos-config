@@ -20,8 +20,8 @@
         ./modules/authelia.nix
     ];
 
-    # prometheus, uptime-kuma
-    networking.firewall.allowedTCPPorts = [ 9090 3001];
+    # prometheus, uptime-kuma, authelia
+    networking.firewall.allowedTCPPorts = [ 9090 3001 9091];
 
     age.secrets = let
 

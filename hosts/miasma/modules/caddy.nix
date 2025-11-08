@@ -31,7 +31,7 @@
 
             @homepage host homepage.thematt.net
             handle @homepage {
-                forward_auth nixos.lastprism.thematt.net:9091 {
+                forward_auth miasma.thematt.net:9091 {
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
@@ -40,7 +40,7 @@
 
             @uptime host uptime.thematt.net
             handle @uptime {
-                forward_auth nixos.lastprism.thematt.net:9091 {
+                forward_auth miasma.thematt.net:9091 {
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
@@ -64,7 +64,7 @@
 
             @zigbee2mqtt host zigbee2mqtt.thematt.net 
             handle @zigbee2mqtt {
-                forward_auth nixos.lastprism.thematt.net:9091 {
+                forward_auth miasma.thematt.net:9091 {
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
