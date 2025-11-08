@@ -62,6 +62,12 @@
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
     };
 
+    # Uptime Kuma: Healthcheck on your services
+    services.uptime-kuma.enable = true;
+    services.uptime-kuma.settings = {
+        HOST = "0.0.0.0";
+    };
+
     # Homepage: a Dashboard for all your needs
     services.homepage-dashboard.enable = true;
     services.homepage-dashboard = {
@@ -219,5 +225,5 @@
         git
     ];
 
-    system.stateVersion = "25.11"; # Just don't
+    system.stateVersion = "25.05"; # Just don't
 }
