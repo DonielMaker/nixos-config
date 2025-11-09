@@ -20,8 +20,8 @@
         ./modules/authelia.nix
     ];
 
-    # prometheus, uptime-kuma, authelia
-    networking.firewall.allowedTCPPorts = [ 9090 3001 9091];
+    # prometheus, uptime-kuma, authelia, bind
+    networking.firewall.allowedTCPPorts = [ 9090 3001 9091 53];
 
     age.secrets = let
 
@@ -66,6 +66,44 @@
     services.uptime-kuma.enable = true;
     services.uptime-kuma.settings = {
         HOST = "0.0.0.0";
+    };
+    
+    services.bind.enable = true;
+    services.bind = {
+        forwarders = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" "8.8.8.8" ]; 
+        zones = {
+            "thematt.net" = {
+                master = true;
+                file = pkgs.writeText "thematt-net.zone" ''
+$TTL 2d    ; default TTL for zone
+
+$ORIGIN thematt.net.
+
+; Start of Authority RR defining the key characteristics of the zone (domain)
+
+@                   IN      SOA   ns.thematt.net. daniel.schmidt0204.gmail.com (
+
+            2025111000; serial number
+            12h        ; refresh
+            15m        ; update retry
+            3w         ; expiry
+            2h         ; minimum
+)
+
+                    IN      NS      ns.thematt.net.
+
+ns                  IN      A       10.10.12.100
+
+nixos.lastprism     IN      A       10.10.12.101
+
+lastprism           IN      A       10.10.12.12
+
+miasma              IN      A       10.10.12.100
+
+*                   IN      CNAME   miasma.thematt.net.
+                '';
+            };
+        };
     };
 
     # Homepage: a Dashboard for all your needs
