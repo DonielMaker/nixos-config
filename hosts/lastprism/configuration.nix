@@ -21,6 +21,8 @@
     # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto
     networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 ];
 
+    powerManagement.powertop.enable = true;
+
     age.secrets = let
 
         copyparty = {
