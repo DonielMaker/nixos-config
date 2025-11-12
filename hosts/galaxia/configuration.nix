@@ -41,7 +41,6 @@
 
     services.openssh.enable = true;
 
-
     networking.wg-quick.interfaces.wg0 = {
         address = [ "10.10.20.3/32" ];
         peers = [
