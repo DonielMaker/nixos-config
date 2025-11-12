@@ -9,5 +9,4 @@ let
 in
 {
     "wireguard-priKey.age".publicKeys = users ++ systems;
-    "wireguard-shrKey.age".publicKeys = users ++ systems;
 }
