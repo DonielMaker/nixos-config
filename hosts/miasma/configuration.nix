@@ -134,7 +134,7 @@
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/uptime-kuma.svg";
                             widget = {
                                 type = "uptimekuma";
-                                url = "http://nixos.lastprism.thematt.net:3001";
+                                url = "http://miasma.thematt.net:3001";
                                 slug = "homepage";
                             };
                         };
