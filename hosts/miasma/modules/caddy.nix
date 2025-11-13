@@ -73,10 +73,6 @@
 
             @prometheus host prometheus.thematt.net 
             handle @prometheus {
-                forward_auth nixos.lastprism.thematt.net:9091 {
-                    uri /api/authz/forward-auth
-                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-                }
                 reverse_proxy miasma.thematt.net:9090
             }
 
