@@ -69,6 +69,7 @@
         inputs.ragenix.packages.${system}.default
         inputs.quickshell.packages.${system}.quickshell
 
+        brave
         alsa-scarlett-gui
         wireguard-tools
         protonplus

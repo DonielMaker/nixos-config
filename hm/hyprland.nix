@@ -2,7 +2,7 @@
 
 let
     alacritty = lib.getExe pkgs.alacritty;
-    firefox = lib.getExe pkgs.firefox;
+    brave = "${lib.getExe pkgs.brave} --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1";
     nautilus = lib.getExe pkgs.nautilus;
     fuzzel = lib.getExe pkgs.fuzzel;
     cliphist = lib.getExe pkgs.cliphist;
@@ -150,7 +150,7 @@ in
             bind = [
                 "$mainMod, Return, exec, ${alacritty}"
                 "$mainMod, E, exec, ${nautilus}"
-                "$mainMod, B, exec, ${firefox}"
+                "$mainMod, B, exec, ${brave}"
                 # Application Launcher
                 "$mainMod, space, exec, ${fuzzel}"
                 # Clipboard History

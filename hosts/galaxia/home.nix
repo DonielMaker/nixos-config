@@ -4,7 +4,6 @@
     imports = with inputs.self.homeManagerModules; [
         inputs.stylix.homeModules.stylix
 
-        firefox
         zellij
         starship
         zsh
