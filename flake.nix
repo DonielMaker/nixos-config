@@ -57,7 +57,7 @@
         # Auth Server
         nixosConfigurations.miasma = mkNixos ./hosts/miasma;
         # Company Server
-        nixosConfigurations.srv-mx-01 = mkNixos ./hosts/srv-mx-01;
+        nixosConfigurations.srv-mx-02 = mkNixos ./hosts/srv-mx-02;
         # TBC Router
         # nixosConfigurations.vilethorn = mkNixos ./hosts/vilethorn;
 

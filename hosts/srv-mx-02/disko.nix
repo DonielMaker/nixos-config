@@ -1,7 +1,7 @@
 {
     disko.devices.disk = {
         main = {
-            device = "/dev/disk/by-id/ata-SanDisk_X400_M.2_2280_512GB_171101420006";
+            device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
             type = "disk";
             content = {
                 type = "gpt";

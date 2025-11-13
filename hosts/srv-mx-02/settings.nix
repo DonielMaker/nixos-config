@@ -1,5 +1,5 @@
 rec {
-    hostname = "srv-mx-01";
+    hostname = "srv-mx-02";
     system = "x86_64-linux";
     username = "solut";
     timezone = "Europe/Berlin";
