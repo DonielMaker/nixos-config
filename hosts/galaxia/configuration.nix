@@ -40,7 +40,6 @@
 
     services.openssh.enable = true;
 
-
     networking.wg-quick.interfaces.wg0 = {
         address = [ "10.20.10.3/32" ];
         # dns = [ "10.10.12.100, thematt.net" ];
