@@ -134,7 +134,7 @@
             default_config = {};
             http = {
                 use_x_forwarded_for = true;
-                trusted_proxies = [ "10.10.12.100" ];
+                trusted_proxies = [ "miasma.thematt.net" ];
             };
         };
     };

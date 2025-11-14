@@ -71,7 +71,7 @@
                 password_change.disable = true;
                 refresh_interval = "1m";
                 ldap = {
-                    address = "ldap://10.10.12.100:3890";
+                    address = "ldap://miasma.thematt.net:3890";
                     implementation = "lldap";
                     timeout = "5s";
                     base_dn = "dc=thematt,dc=net";
