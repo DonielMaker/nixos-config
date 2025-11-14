@@ -33,6 +33,8 @@
 
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
 
+    networking.nameservers = [ "10.10.12.10" "1.1.1.1" ];
+
     services.flatpak.enable = true;
 
     boot.plymouth.enable = true;

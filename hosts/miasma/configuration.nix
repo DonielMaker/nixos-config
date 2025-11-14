@@ -21,7 +21,8 @@
     ];
 
     # prometheus, uptime-kuma, authelia, bind
-    networking.firewall.allowedTCPPorts = [ 9090 3001 9091 53];
+    networking.firewall.allowedTCPPorts = [ 9090 3001 9091];
+    networking.firewall.allowedUDPPorts = [ 53 ];
 
     age.secrets = let
 
@@ -71,6 +72,7 @@
     services.bind.enable = true;
     services.bind = {
         forwarders = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" "8.8.8.8" ]; 
+        cacheNetworks = [ "10.20.0.0/16" "10.10.0.0/16" ];
         zones = {
             "thematt.net" = {
                 master = true;
@@ -92,13 +94,13 @@ $ORIGIN thematt.net.
 
                     IN      NS      ns.thematt.net.
 
-ns                  IN      A       10.10.12.100
+ns                  IN      A       10.10.12.10
 
-nixos.lastprism     IN      A       10.10.12.101
+nixos.lastprism     IN      A       10.10.12.11
 
 lastprism           IN      A       10.10.12.12
 
-miasma              IN      A       10.10.12.100
+miasma              IN      A       10.10.12.10
 
 *                   IN      CNAME   miasma.thematt.net.
                 '';
