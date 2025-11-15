@@ -18,7 +18,6 @@
     hardware.graphics.enable32Bit = true;
 
     environment.systemPackages = with pkgs; [
-        eww
         swww
         xwayland
         wl-clipboard
