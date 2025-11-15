@@ -41,6 +41,7 @@
 
     nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
 
+    networking.nameservers = [ "10.10.12.10" ];
 
     # Copyparty: WebDav Fileserver with great performance
     services.copyparty.enable = true;
@@ -134,7 +135,8 @@
             default_config = {};
             http = {
                 use_x_forwarded_for = true;
-                trusted_proxies = [ "miasma.thematt.net" ];
+                # Why Can't this be dns?
+                trusted_proxies = [ "10.10.12.10" ];
             };
         };
     };
