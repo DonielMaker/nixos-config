@@ -8,7 +8,8 @@
         inputs.ragenix.nixosModules.default
         inputs.stylix.nixosModules.stylix
 
-        bootloader
+        # bootloader
+        limine
         networking
         settings
         user
@@ -31,9 +32,9 @@
 
     services.xserver.xkb.layout = "us";
 
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
+    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_17;
 
-    networking.nameservers = [ "10.10.12.10" "1.1.1.1" ];
+    networking.nameservers = [ "10.10.12.10" "10.10.110.10" "1.1.1.1" ];
 
     services.flatpak.enable = true;
 
