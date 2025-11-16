@@ -24,23 +24,23 @@
             #     reverse_proxy nixos.lastprism.soluttech.uk:3923
             # }
 
-            # @homepage host homepage.soluttech.uk
-            # handle @homepage {
-            #     forward_auth srv-mx-01.soluttech.uk:9091 {
-            #         uri /api/authz/forward-auth
-            #         copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-            #     }
-            #     reverse_proxy srv-mx-01.soluttech.uk:8082
-            # }
+            @homepage host homepage.soluttech.uk
+            handle @homepage {
+                # forward_auth srv-mx-01.soluttech.uk:9091 {
+                #     uri /api/authz/forward-auth
+                #     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                # }
+                reverse_proxy srv-mx-02.soluttech.uk:8082
+            }
 
-            # @uptime host uptime.soluttech.uk
-            # handle @uptime {
-            #     forward_auth srv-mx-01.soluttech.uk:9091 {
-            #         uri /api/authz/forward-auth
-            #         copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-            #     }
-            #     reverse_proxy miasma.soluttech.uk:3001
-            # }
+            @uptime host uptime.soluttech.uk
+            handle @uptime {
+                # forward_auth srv-mx-01.soluttech.uk:9091 {
+                #     uri /api/authz/forward-auth
+                #     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                # }
+                reverse_proxy srv-mx-02.soluttech.uk:3001
+            }
 
             # @radicale host radicale.soluttech.uk 
             # handle @radicale {
@@ -57,8 +57,8 @@
             #     reverse_proxy miasma.soluttech.uk:9090
             # }
 
-            @proxmox-lastprism host proxmox.soluttech.uk 
-            handle @proxmox-lastprism {
+            @proxmox host proxmox.soluttech.uk 
+            handle @proxmox {
                 reverse_proxy 10.10.110.100:8006 {
                     transport http {
                         tls_insecure_skip_verify
