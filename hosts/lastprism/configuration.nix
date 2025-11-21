@@ -23,6 +23,18 @@
 
     powerManagement.powertop.enable = true;
 
+    users.users.donielmaker.extraGroups = [ "media" ];
+
+    users.groups.media = {};
+
+    systemd.tmpfiles.rules = [
+        "d /storage/media 0770 copyparty media -"
+        "d /storage/media/pictures 0770 copyparty media -"
+        "d /storage/media/videos 0770 copyparty media -"
+        "d /storage/media/music 0770 navidrome media -"
+        "d /storage/media/documents 0770 copyparty media -"
+    ];
+
     age.secrets = let
 
         copyparty = {
@@ -71,6 +83,8 @@
         };
     };
 
+    users.users.copyparty.extraGroups = [ "media" ];
+
     # Navidrome: A Music server which uses the subsonic protocol to send content to clients
     services.navidrome.enable = true;
     services.navidrome.openFirewall = true;
@@ -78,6 +92,8 @@
         Address = "0.0.0.0";
         MusicFolder = "/storage/music"; 
     };
+
+    users.users.navidrome.extraGroups = [ "media" ];
 
     # Radicale: CalDav/CardDav server for syncing calenders and contacts
     services.radicale.enable = true;
