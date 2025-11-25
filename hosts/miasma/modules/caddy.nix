@@ -29,6 +29,15 @@
                 reverse_proxy nixos.lastprism.thematt.net:3923
             }
 
+            @shiori host shiori.thematt.net 
+            handle @shiori {
+                forward_auth miasma.thematt.net:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                }
+                reverse_proxy nixos.lastprism.thematt.net:7571
+            }
+
             @homepage host homepage.thematt.net
             handle @homepage {
                 forward_auth miasma.thematt.net:9091 {

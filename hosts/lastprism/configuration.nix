@@ -18,8 +18,8 @@
         alloy
     ];
 
-    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto
-    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 ];
+    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, shiori
+    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 7571 ];
 
     powerManagement.powertop.enable = true;
 
@@ -155,6 +155,19 @@
                 trusted_proxies = [ "10.10.12.10" ];
             };
         };
+    };
+
+    # Shiori: Bookmark Manager
+    services.shiori.enable = true;
+    services.shiori = {
+        port = 7571;
+        environmentFile = pkgs.writeText "shiori.conf" 
+''
+    SHIORI_HTTP_SECRET_KEY=B7U3uTOK0SK68xExkchGlBMORetnPORvCz1xFpfr6IfcE3jm
+    SHIORI_SSO_PROXY_AUTH_ENABLED=true
+    SHIORI_SSO_PROXY_AUTH_HEADER_NAME=Remote-User
+    SHIORI_SSO_PROXY_AUTH_TRUSTED=10.10.0.0/16
+'';
     };
 
     # Mosquitto: Mqtt Server
