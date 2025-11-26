@@ -11,4 +11,6 @@
     stylix.cursor.size = 24;
 
     stylix.targets.plymouth.logoAnimated = false;
+
+    stylix.targets.limine.enable = false;
 }
