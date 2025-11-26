@@ -96,12 +96,11 @@
 
         orca-slicer
         nautilus
-        qt6ct
 
 
         evolution-data-server
         hyprpolkitagent
-        qt6ct
+        kdePackages.qt6ct
         home-manager
     ];
 
