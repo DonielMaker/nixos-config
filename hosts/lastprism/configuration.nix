@@ -18,8 +18,8 @@
         alloy
     ];
 
-    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, shiori
-    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 7571 ];
+    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, shiori, trilium
+    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 7571 8965 ];
 
     powerManagement.powertop.enable = true;
 
@@ -58,6 +58,7 @@
     # Copyparty: WebDav Fileserver with great performance
     services.copyparty.enable = true;
     services.copyparty = {
+        group = "media";
         settings = {
             i = "0.0.0.0";
             z = true;
@@ -83,7 +84,17 @@
         };
     };
 
-    users.users.copyparty.extraGroups = [ "media" ];
+    services.trilium-server.enable = true;
+    services.trilium-server = {
+        dataDir = "/storage/trilium";
+        port = 8965;
+        host = "0.0.0.0";
+    };
+
+    systemd.services.trilium-server.environment = {
+        TRILIUM_NETWORK_TRUSTEDREVERSEPROXY = "10.10.12.10";
+        TRILIUM_NETWORK_CORS_ALLOW_ORIGIN = "https://trilium.thematt.net";
+    };
 
     # Navidrome: A Music server which uses the subsonic protocol to send content to clients
     services.navidrome.enable = true;

@@ -14,6 +14,11 @@
                 reverse_proxy miasma.thematt.net:9091
             }
 
+            @trilium host trilium.thematt.net
+            handle @trilium {
+                reverse_proxy nixos.lastprism.thematt.net:8965
+            }
+
             @lldap host lldap.thematt.net
             handle @lldap {
                 reverse_proxy miasma.thematt.net:17170
