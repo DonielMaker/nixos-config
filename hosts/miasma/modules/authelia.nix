@@ -93,8 +93,7 @@
                         id_token = "1h";
                         refresh_token = "90m";
                     };
-                    enable_client_debug_messages = false;
-                    enforce_pkce = "public_clients_only";
+                    enable_client_debug_messages = true;
                     require_pushed_authorization_requests = false;
                     cors = {
                         endpoints= [
@@ -112,10 +111,7 @@
                             client_secret = "$pbkdf2-sha512$310000$lU3QoJ.QBpvCzNybOZj4zg$0K54H/evu7KByWQVfWs7KzidwHyF.16y7AxqynXQVng9tV1XIt2v/HrNvPmGcDpV1EjsfpX3zyYDejQeVatg/g";
                             public = false;
                             authorization_policy = "two_factor";
-                            require_pkce = true;
-                            pkce_challenge_method = "S256";
                             redirect_uris = [ "https://proxmox.lastprism.thematt.net" ];
-                            audience = [ "https://proxmox.lastprism.thematt.net" ];
                             scopes = [ "openid" "profile" "email" "groups" ];
                             response_types = [ "code" ];
                             grant_types = [ "authorization_code" ];

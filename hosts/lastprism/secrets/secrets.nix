@@ -8,6 +8,6 @@ let
     systems = [zenith lastprism];
 in
 {
-    # Copyparty Passwords
+    # Copyparty
     "copyparty/copyparty-donielmaker-password.age".publicKeys = users ++ systems;
 }

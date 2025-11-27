@@ -11,17 +11,17 @@
         disko.url = "github:nix-community/disko/latest";
         disko.inputs.nixpkgs.follows = "nixpkgs";
 
-        quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-        quickshell.inputs.nixpkgs.follows = "nixpkgs";
-
         ragenix.url = "github:yaxitech/ragenix";
 
         stylix.url = "github:nix-community/stylix";
         stylix.inputs.nixpkgs.follows = "nixpkgs";
 
         copyparty.url = "github:9001/copyparty";
-	    # wsl.url = "github:nix-community/NixOS-WSL/main";
-	neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
+        quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+        quickshell.inputs.nixpkgs.follows = "nixpkgs";
+
+        neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 	    wsl.url = "github:nix-community/NixOS-WSL/main";
     };
 

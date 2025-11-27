@@ -14,6 +14,11 @@
                 reverse_proxy miasma.thematt.net:9091
             }
 
+            @trilium host trilium.thematt.net
+            handle @trilium {
+                reverse_proxy nixos.lastprism.thematt.net:8965
+            }
+
             @lldap host lldap.thematt.net
             handle @lldap {
                 reverse_proxy miasma.thematt.net:17170
@@ -27,6 +32,15 @@
             @copyparty host copyparty.thematt.net 
             handle @copyparty {
                 reverse_proxy nixos.lastprism.thematt.net:3923
+            }
+
+            @shiori host shiori.thematt.net 
+            handle @shiori {
+                forward_auth miasma.thematt.net:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                }
+                reverse_proxy nixos.lastprism.thematt.net:7571
             }
 
             @homepage host homepage.thematt.net

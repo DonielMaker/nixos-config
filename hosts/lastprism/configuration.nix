@@ -18,10 +18,22 @@
         alloy
     ];
 
-    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto
-    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 ];
+    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, shiori, trilium
+    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 7571 8965 ];
 
     powerManagement.powertop.enable = true;
+
+    users.users.donielmaker.extraGroups = [ "media" ];
+
+    users.groups.media = {};
+
+    systemd.tmpfiles.rules = [
+        "d /storage/media 0770 copyparty media -"
+        "d /storage/media/pictures 0770 copyparty media -"
+        "d /storage/media/videos 0770 copyparty media -"
+        "d /storage/media/music 0770 navidrome media -"
+        "d /storage/media/documents 0770 copyparty media -"
+    ];
 
     age.secrets = let
 
@@ -46,6 +58,7 @@
     # Copyparty: WebDav Fileserver with great performance
     services.copyparty.enable = true;
     services.copyparty = {
+        group = "media";
         settings = {
             i = "0.0.0.0";
             z = true;
@@ -71,6 +84,18 @@
         };
     };
 
+    services.trilium-server.enable = true;
+    services.trilium-server = {
+        dataDir = "/storage/trilium";
+        port = 8965;
+        host = "0.0.0.0";
+    };
+
+    systemd.services.trilium-server.environment = {
+        TRILIUM_NETWORK_TRUSTEDREVERSEPROXY = "10.10.12.10";
+        TRILIUM_NETWORK_CORS_ALLOW_ORIGIN = "https://trilium.thematt.net";
+    };
+
     # Navidrome: A Music server which uses the subsonic protocol to send content to clients
     services.navidrome.enable = true;
     services.navidrome.openFirewall = true;
@@ -78,6 +103,8 @@
         Address = "0.0.0.0";
         MusicFolder = "/storage/music"; 
     };
+
+    users.users.navidrome.extraGroups = [ "media" ];
 
     # Radicale: CalDav/CardDav server for syncing calenders and contacts
     services.radicale.enable = true;
@@ -139,6 +166,19 @@
                 trusted_proxies = [ "10.10.12.10" ];
             };
         };
+    };
+
+    # Shiori: Bookmark Manager
+    services.shiori.enable = true;
+    services.shiori = {
+        port = 7571;
+        environmentFile = pkgs.writeText "shiori.conf" 
+''
+    SHIORI_HTTP_SECRET_KEY=B7U3uTOK0SK68xExkchGlBMORetnPORvCz1xFpfr6IfcE3jm
+    SHIORI_SSO_PROXY_AUTH_ENABLED=true
+    SHIORI_SSO_PROXY_AUTH_HEADER_NAME=Remote-User
+    SHIORI_SSO_PROXY_AUTH_TRUSTED=10.10.0.0/16
+'';
     };
 
     # Mosquitto: Mqtt Server

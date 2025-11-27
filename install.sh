@@ -9,6 +9,12 @@
 # Also: if everything seems to be supplied (disk exists, settings are configured) 
 # then install the system instantly without prompting the user
 
+
+
+
+
+
+# OLD:
 # set -e
 #
 # printf "Make sure you have the right disk selected!\nFlake:\t%s\nDisk:\t%s\n\n" "$1" "$2"

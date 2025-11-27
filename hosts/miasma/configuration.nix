@@ -103,6 +103,8 @@ lastprism           IN      A       10.10.12.12
 miasma              IN      A       10.10.12.10
 
 *                   IN      CNAME   miasma.thematt.net.
+
+*.lastprism         IN      CNAME   miasma.thematt.net.
                 '';
             };
         };

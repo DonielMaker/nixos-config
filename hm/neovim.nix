@@ -49,8 +49,7 @@
         vscode-langservers-extracted
         vtsls
         kdePackages.qtdeclarative
-        # typescript-language-server
+        just-lsp
         tinymist
-        # slint-lsp
     ];
 }
