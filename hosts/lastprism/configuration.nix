@@ -168,19 +168,6 @@
         };
     };
 
-    # Shiori: Bookmark Manager
-    services.shiori.enable = true;
-    services.shiori = {
-        port = 7571;
-        environmentFile = pkgs.writeText "shiori.conf" 
-''
-    SHIORI_HTTP_SECRET_KEY=B7U3uTOK0SK68xExkchGlBMORetnPORvCz1xFpfr6IfcE3jm
-    SHIORI_SSO_PROXY_AUTH_ENABLED=true
-    SHIORI_SSO_PROXY_AUTH_HEADER_NAME=Remote-User
-    SHIORI_SSO_PROXY_AUTH_TRUSTED=10.10.0.0/16
-'';
-    };
-
     # Mosquitto: Mqtt Server
     # Needs authentication currently not usable for prod. Used anyways
     services.mosquitto.enable = true;
