@@ -277,42 +277,6 @@
         "type": "github"
       }
     },
-    "flake-utils_3": {
-      "inputs": {
-        "systems": "systems_4"
-      },
-      "locked": {
-        "lastModified": 1731533236,
-        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_4": {
-      "inputs": {
-        "systems": "systems_5"
-      },
-      "locked": {
-        "lastModified": 1701680307,
-        "narHash": "sha256-kAuep2h5ajznlPMD9rnQyffWG8EM/C73lejGofXvdM8=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "4022d587cbbfd70fe950c1e2083a02621806a725",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "fromYaml": {
       "flake": false,
       "locked": {
@@ -355,15 +319,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1764182832,
-        "narHash": "sha256-ahMNAEknEnSW+WLZsgTnw2e12YcltJDi6J2MsWtPvs0=",
+        "lastModified": 1764177491,
+        "narHash": "sha256-dhX2abFWxeXab3Aad4Pg1xGtn9W84/qetNXfmYUwktw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "8220473f952571691b05037dbd18659d1f5f83a1",
+        "rev": "2217780c39169a9c77915200137550c2ef0fa974",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
+        "ref": "release-25.11",
         "repo": "home-manager",
         "type": "github"
       }
@@ -546,28 +511,6 @@
         "type": "github"
       }
     },
-    "pnpm2nix": {
-      "inputs": {
-        "flake-utils": "flake-utils_4",
-        "nixpkgs": [
-          "trilium-notes",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1748901165,
-        "narHash": "sha256-SctrxW5rVrROBLfh8p4kXfbF7NbJQDkse/Penu4PlEs=",
-        "owner": "FliegendeWurst",
-        "repo": "pnpm2nix-nzbr",
-        "rev": "cda68d63418896a58542f3310c1c757ae92b1f22",
-        "type": "github"
-      },
-      "original": {
-        "owner": "FliegendeWurst",
-        "repo": "pnpm2nix-nzbr",
-        "type": "github"
-      }
-    },
     "quickshell": {
       "inputs": {
         "nixpkgs": [
@@ -621,7 +564,6 @@
         "quickshell": "quickshell",
         "ragenix": "ragenix",
         "stylix": "stylix",
-        "trilium-notes": "trilium-notes",
         "wsl": "wsl"
       }
     },
@@ -725,36 +667,6 @@
         "type": "github"
       }
     },
-    "systems_4": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
-    "systems_5": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
     "tinted-foot": {
       "flake": false,
       "locked": {
@@ -833,29 +745,6 @@
       "original": {
         "owner": "tinted-theming",
         "repo": "base16-zed",
-        "type": "github"
-      }
-    },
-    "trilium-notes": {
-      "inputs": {
-        "flake-utils": "flake-utils_3",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "pnpm2nix": "pnpm2nix"
-      },
-      "locked": {
-        "lastModified": 1750019546,
-        "narHash": "sha256-XON0rRFKJQ92R3oYESwAMCShw1ld4IG9KLaejOS7ajo=",
-        "owner": "TriliumNext",
-        "repo": "Trilium",
-        "rev": "b9ae226569379574723b9367d33d45bc868e110e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "TriliumNext",
-        "ref": "v0.95.0",
-        "repo": "Trilium",
         "type": "github"
       }
     },
