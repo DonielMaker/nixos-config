@@ -60,15 +60,9 @@
         inputs.quickshell.packages.${system}.quickshell
         inputs.ragenix.packages.${system}.default
 
-        cairo
-        atk
-        glib
-        gtk3
-        pango
-        dioxus-cli
-
         wireguard-tools
     
+        just
         zathura
         typst
         vlc
