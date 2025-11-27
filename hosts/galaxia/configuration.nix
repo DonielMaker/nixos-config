@@ -13,12 +13,17 @@
         networking
         settings
         user
+        openssh
+
         graphics
         intel
+
         regreet
+        stylix
+
         bluetooth
         sound
-        stylix
+
         zsh
     ];
 
@@ -38,8 +43,6 @@
 
     programs.localsend.enable = true;
 
-    services.openssh.enable = true;
-
     networking.wg-quick.interfaces.wg0 = {
         address = [ "10.20.10.3/32" ];
         dns = [ "10.10.12.10, thematt.net" ];
@@ -56,6 +59,13 @@
     environment.systemPackages = with pkgs; [
         inputs.quickshell.packages.${system}.quickshell
         inputs.ragenix.packages.${system}.default
+
+        cairo
+        atk
+        glib
+        gtk3
+        pango
+        dioxus-cli
 
         wireguard-tools
     
