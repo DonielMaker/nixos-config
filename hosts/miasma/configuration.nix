@@ -199,13 +199,13 @@ miasma              IN      A       10.10.12.10
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/navidrome.svg";
                         };
                     }
-                    # {
-                    #     "Paperless" = {
-                    #         description = "Document server";
-                    #         href = "https://paperless.thematt.net";
-                    #         icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
-                    #     };
-                    # }
+                    {
+                        "Paperless" = {
+                            description = "Document server";
+                            href = "https://paperless.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
+                        };
+                    }
                     {
                         "Copyparty" = {
                             description = "Fileserver";
@@ -232,6 +232,13 @@ miasma              IN      A       10.10.12.10
                             description = "Connection Between Zigbee and Mqtt";
                             href = "https://zigbee2mqtt.thematt.net";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/zigbee2mqtt.svg";
+                        };
+                    }
+                    {
+                        "Trilium" = {
+                            description = "Note-taking Server";
+                            href = "https://trilium.thematt.net";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/trilium-notes.svg";
                         };
                     }
                 ];
