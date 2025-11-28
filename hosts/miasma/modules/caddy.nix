@@ -25,7 +25,12 @@
 
             @trilium host trilium.thematt.net
             handle @trilium {
-                reverse_proxy nixos.lastprism.thematt.net:8965
+                reverse_proxy nixos.lastprism.thematt.net:8965 {
+                    header_up Host {host}
+                    header_up X-Real-IP {remote_host}
+                    header_up X-Forwarded-For {remote_host}
+                    header_up X-Forwarded-Proto {scheme}
+                }
             }
 
             @lldap host lldap.thematt.net

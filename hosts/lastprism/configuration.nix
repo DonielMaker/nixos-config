@@ -93,6 +93,13 @@
     systemd.services.trilium-server.environment = {
         TRILIUM_NETWORK_TRUSTEDREVERSEPROXY = "10.10.12.10";
         TRILIUM_NETWORK_CORS_ALLOW_ORIGIN = "https://trilium.thematt.net";
+
+        # TRILIUM_OAUTH_BASE_URL = "https://trilium.thematt.net";
+        # TRILIUM_OAUTH_CLIENT_ID = "trilium";
+        # TRILIUM_OAUTH_CLIENT_SECRET = "cYaZ2Ihre3cwQWnRuhsNARpheef31a2n5Vw12vfq5QoEtKc8do9uK5klNpRs8MQM";
+        # TRILIUM_OAUTH_ISSUER_BASE_URL = "https://authelia.thematt.net";
+        # TRILIUM_OAUTH_ISSUER_NAME = "Authelia";
+        # TRILIUM_OAUTH_ISSUER_ICON = "https://www.authelia.com/images/branding/logo-cropped.png";
     };
 
     # Navidrome: A Music server which uses the subsonic protocol to send content to clients
