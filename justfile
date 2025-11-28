@@ -13,3 +13,7 @@ rb CONFIG=(FLAKE):
 hm CONFIG=(FLAKE):
     git add .
     home-manager switch --flake {{ CONFIG }}
+
+# Generates the plaintext and hashed secret for Oidc Clients
+gen-auth:
+    sudo nix run nixpkgs\#authelia -- crypto hash generate argon2 --random --random.length 64 --random.charset alphanumeric
