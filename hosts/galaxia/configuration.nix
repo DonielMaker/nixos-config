@@ -13,12 +13,17 @@
         networking
         settings
         user
+        openssh
+
         graphics
         intel
+
         regreet
+        stylix
+
         bluetooth
         sound
-        stylix
+
         zsh
     ];
 
@@ -37,8 +42,6 @@
     };
 
     programs.localsend.enable = true;
-
-    services.openssh.enable = true;
 
     networking.wg-quick.interfaces.wg0 = {
         address = [ "10.20.10.3/32" ];
@@ -59,6 +62,7 @@
 
         wireguard-tools
     
+        just
         zathura
         typst
         vlc
