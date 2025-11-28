@@ -69,7 +69,7 @@
             # idp-h-usr = "x-idp-user";
             # idp-h-grp = "x-idp-group";
             # idp-store = 3;
-            # xff-src = "10.10.12.3";
+            xff-src = "10.10.12.0/24";
         };
 
         accounts = {
