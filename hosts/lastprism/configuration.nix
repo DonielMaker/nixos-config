@@ -98,11 +98,13 @@
 
     # Navidrome: A Music server which uses the subsonic protocol to send content to clients
     services.navidrome.enable = true;
-    services.navidrome.openFirewall = true;
-    users.users.navidrome.extraGroups = [ "media" ];
-    services.navidrome.settings = { 
-        Address = "0.0.0.0";
-        MusicFolder = "/storage/media/music"; 
+    services.navidrome = {
+        openFirewall = true;
+        group = "media";
+        settings = {
+            Address = "0.0.0.0";
+            MusicFolder = "/storage/media/music"; 
+        };
     };
 
     # Radicale: CalDav/CardDav server for syncing calenders and contacts
