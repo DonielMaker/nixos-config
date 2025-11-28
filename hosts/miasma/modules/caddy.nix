@@ -14,6 +14,15 @@
                 reverse_proxy miasma.thematt.net:9091
             }
 
+            @paperless host paperless.thematt.net
+            handle @paperless {
+                forward_auth miasma.thematt.net:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                }
+                reverse_proxy nixos.lastprism.thematt.net:28981
+            }
+
             @trilium host trilium.thematt.net
             handle @trilium {
                 reverse_proxy nixos.lastprism.thematt.net:8965
@@ -32,15 +41,6 @@
             @copyparty host copyparty.thematt.net 
             handle @copyparty {
                 reverse_proxy nixos.lastprism.thematt.net:3923
-            }
-
-            @shiori host shiori.thematt.net 
-            handle @shiori {
-                forward_auth miasma.thematt.net:9091 {
-                    uri /api/authz/forward-auth
-                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-                }
-                reverse_proxy nixos.lastprism.thematt.net:7571
             }
 
             @homepage host homepage.thematt.net

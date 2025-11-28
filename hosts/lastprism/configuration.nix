@@ -18,13 +18,12 @@
         alloy
     ];
 
-    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, shiori, trilium
-    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 7571 8965 ];
+    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, shiori, trilium, paperless
+    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 7571 8965 28981 ];
 
     powerManagement.powertop.enable = true;
 
     users.users.donielmaker.extraGroups = [ "media" ];
-
     users.groups.media = {};
 
     systemd.tmpfiles.rules = [
@@ -32,7 +31,7 @@
         "d /storage/media/pictures 0770 copyparty media -"
         "d /storage/media/videos 0770 copyparty media -"
         "d /storage/media/music 0770 navidrome media -"
-        "d /storage/media/documents 0770 copyparty media -"
+        "d /storage/media/documents 0770 paperless media -"
     ];
 
     age.secrets = let
@@ -125,17 +124,24 @@
     };
 
     # Paperless: A Document server with plenty of features (ocr, file conversion, editing, etc.)
-    # services.paperless.enable = true;
-    # services.paperless = {
-    #     address = "0.0.0.0";
-    #     dataDir = "/storage/paperless";
-    #
-    #     settings = {
-    #         PAPERLESS_URL = "https://paperless.thematt.net";
-    #         PAPERLESS_OCR_LANGUAGE = "eng+deu";
-    #         PAPERLESS_TIME_ZONE = "Europe/Berlin";
-    #     };
-    # };
+    services.paperless.enable = true;
+    users.users.paperless.extraGroups = [ "media" ];
+    services.paperless = {
+        address = "0.0.0.0";
+        port = 28981;
+        dataDir = "/storage/media/documents";
+
+        settings = {
+            PAPERLESS_URL = "https://paperless.thematt.net";
+            PAPERLESS_OCR_LANGUAGE = "eng+deu";
+            PAPERLESS_TIME_ZONE = "Europe/Berlin";
+            PAPERLESS_TRUSTED_PROXIES = "10.10.12.0/24";
+            PAPERLESS_USE_X_FORWARDED_HOST = true;
+            PAPERLESS_ENABLE_HTTP_REMOTE_USER = true;
+            PAPERLSS_HTTP_REMOTE_USER_HEADER_NAME = "Remote-User";
+            PAPERLESS_LOGOUT_REDIRECT_URL = "https://authelia.thematt.net";
+        };
+    };
 
     # Tika: Ocr?
     # services.tika.enable = true;
