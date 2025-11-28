@@ -31,7 +31,6 @@
         "d /storage/media/pictures 0770 copyparty media -"
         "d /storage/media/videos 0770 copyparty media -"
         "d /storage/media/music 0770 navidrome media -"
-        "d /storage/media/documents 0770 paperless media -"
     ];
 
     age.secrets = let
@@ -136,7 +135,7 @@
     services.paperless = {
         address = "0.0.0.0";
         port = 28981;
-        dataDir = "/storage/media/documents";
+        dataDir = "/storage/paperless";
 
         settings = {
             PAPERLESS_URL = "https://paperless.thematt.net";
