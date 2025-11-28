@@ -108,8 +108,10 @@
                         {
                             client_id = "proxmox";
                             client_name = "Proxmox";
-                            client_secret = "$pbkdf2-sha512$310000$lU3QoJ.QBpvCzNybOZj4zg$0K54H/evu7KByWQVfWs7KzidwHyF.16y7AxqynXQVng9tV1XIt2v/HrNvPmGcDpV1EjsfpX3zyYDejQeVatg/g";
+                            client_secret = "$argon2id$v=19$m=65536,t=3,p=4$FGfPJgtAdjDEe0wf8cFgLA$3wanv1DOfrRt5a1476gYmQkQtKorJLX5qRStYrXjEUQ";
                             public = false;
+                            require_pkce= true;
+                            pkce_challenge_method = "S256";
                             authorization_policy = "two_factor";
                             redirect_uris = [ "https://proxmox.lastprism.thematt.net" ];
                             scopes = [ "openid" "profile" "email" "groups" ];
