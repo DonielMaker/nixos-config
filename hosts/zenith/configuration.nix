@@ -14,6 +14,7 @@
         user
 
         graphics
+        hyprland
         amd
 
         regreet

@@ -14,6 +14,7 @@
         settings
         user
         openssh
+        hyprland
 
         alloy
     ];
