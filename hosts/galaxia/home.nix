@@ -4,17 +4,20 @@
     imports = with inputs.self.homeManagerModules; [
         inputs.stylix.homeModules.stylix
 
+        alacritty
         zellij
         starship
         zsh
-        fuzzel
         neovim
         git
-        hyprland
-        stylix
-        hypridle
-        alacritty
+
+        fuzzel
         flameshot
+
+        hyprland
+        hyprlock
+        hypridle
+        stylix
     ];
 
     home = {

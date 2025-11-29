@@ -4,19 +4,21 @@
     imports = with inputs.self.homeManagerModules; [
         inputs.stylix.homeModules.stylix
 
-        stylix
-        firefox
+        alacritty
         zellij
-        mangohud
         starship
         zsh
-        fuzzel
         neovim
-        hyprland
         git
-        hypridle
-        alacritty
+
+        fuzzel
+        mangohud
         flameshot
+
+        hyprland
+        hyprlock
+        hypridle
+        stylix
     ];
 
     wayland.windowManager.hyprland.settings = {
