@@ -249,12 +249,28 @@ miasma              IN      A       10.10.12.10
     services.grafana.enable = true;
     services.grafana.settings = {
         server = {
-            # Listening Address
             http_addr = "0.0.0.0";
-            # and Port
             http_port = 6778;
-            # Grafana needs to know on which domain and URL it's running
             root_url = "https://grafana.thematt.net";
+        };
+
+        "auth.generic_oauth" = {
+            enabled = true;
+            name = "Authelia";
+            icon = "signin";
+            client_id = "grafana";
+            client_secret = "28FH7GuRhs1K3U2NYOnt3qr11AcEthbljKNP9GEOfcMtaeK0bEW7ZGCWSmku6bUL";
+            scopes = "openid profile email groups";
+            empty_scopes = false;
+            auth_url = "https://authelia.thematt.net/api/oidc/authorization";
+            token_url = "https://authelia.thematt.net/api/oidc/token";
+            api_url = "https://authelia.thematt.net/api/oidc/userinfo";
+            login_attribute_path = "preferred_username";
+            groups_attribute_path = "groups";
+            name_attribute_path = "name";
+            use_pkce = true;
+            signout_redirect_url = "https://authelia.thematt.net";
+            role_attribute_path = "contains(groups[*], 'Grafana_Admin') && 'Admin' || contains(groups[*], 'Grafana_Editor') && 'Editor' || 'Viewer'";
         };
     };
 
