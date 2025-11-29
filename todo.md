@@ -1,6 +1,18 @@
 things to do:
-- setup freshrss and rsshub
-- setup matrix (tuwunel)
-- setup authentication for radicale, homeassistant, grafana and the above mentioned 
-- create main groups and change all the dataDir's to their specific main group (for photos, videos, audio this would be media group)
-- setup zfs with your 2tb ssd
+
+- Many Client Services are Duplicates. This includes:
+    - Printing
+    - Keyboard Layout
+    - plymouth
+    - nautilus-open-any-terminal
+    - gvfs
+    - localsend
+
+- Many "Modules" don't work as modules but just for saving space in the configuration.nix. This includes:
+    - Graphics.nix
+
+- Many Values are hard-set instead of usable variables. Possible Refactors are:
+    - Domainname (thematt.net)
+    - Keyboard Layout
+    - Nameservers
+    - Possibly some hard-coded ip (Trustedproxies, etc.)
