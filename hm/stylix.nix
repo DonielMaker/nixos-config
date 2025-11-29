@@ -17,9 +17,9 @@
     stylix.icons.package = pkgs.tela-circle-icon-theme;
 
     stylix.targets.hyprland.enable = false;
-    stylix.targets.alacritty.enable = false;
+    # stylix.targets.alacritty.enable = false;
     stylix.targets.neovim.enable = false;
-    stylix.targets.fuzzel.enable = false;
+    # stylix.targets.fuzzel.enable = false;
 
     stylix.targets.firefox.profileNames = [ username ];
 }
