@@ -1,13 +1,21 @@
-{...}: 
+{pkgs, ...}: 
+
+let
+    image = pkgs.fetchurl {
+        url = "https://raw.githubusercontent.com/DonielMaker/wallpapers/main/vladislav-klapin-o-SMjjGuP6c-unsplash.jpg";
+        sha256 = "sha256-+ObY8Jft/Ergnufgcp/cXKV/webd+74yl1XdsCYdMp0=";
+    };
+in
 
 {
     boot.loader.limine.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.limine = {
         efiSupport = true;
+        maxGenerations = 10;
         style = {
-            wallpapers = [];
+            wallpapers = [ "${image}" ];
             interface.branding = "I use NixOS btw";
-            graphicalTerminal.background = "24283b";
             graphicalTerminal.foreground = "c0caf5";
             graphicalTerminal.palette = "
                 :24283b
@@ -20,8 +28,6 @@
                 :2F334C
             ";
         };
-        maxGenerations = 10;
     };
-    boot.loader.efi.canTouchEfiVariables = true;
 }
 
