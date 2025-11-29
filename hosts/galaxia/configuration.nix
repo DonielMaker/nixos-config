@@ -15,6 +15,7 @@
         openssh
 
         graphics
+        hyprland
         intel
 
         regreet
