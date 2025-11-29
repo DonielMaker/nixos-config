@@ -7,13 +7,16 @@
         autosuggestion.enable = true;
         dotDir = "${config.xdg.configHome}/zsh";
         shellAliases = {
-            nr = "nixos-rebuild switch --sudo --ask-sudo-password";
+            ".." = "cd ..";
+            "..." = "cd ../..";
+            "...." = "cd ../../..";
+            "....." = "cd ../../../..";
             z = "zellij";
+            rg = "rg --color=auto";
             s = "ragenix -e";
-            rb = "sudo nixos-rebuild switch --flake ${config.xdg.configHome}/nix";
-            hm = "home-manager switch --flake ${config.xdg.configHome}/nix";
             lg = "lazygit";
             v = "nvim";
+            vim = "nvim";
             ls = "eza -a --icons=auto";
             ff = "fastfetch";
         };
