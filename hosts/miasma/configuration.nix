@@ -8,20 +8,19 @@
         inputs.disko.nixosModules.disko
         inputs.ragenix.nixosModules.default
 
-        bootloader
+        systemd-boot
         networking
         settings
         user
         openssh
 
         alloy
-        lldap
         ./modules/caddy.nix
         ./modules/authelia.nix
     ];
 
-    # prometheus, uptime-kuma, authelia, bind
-    networking.firewall.allowedTCPPorts = [ 9090 3001 9091];
+    # prometheus, uptime-kuma, authelia, bind, lldap-web, lldap-ldap
+    networking.firewall.allowedTCPPorts = [ 9090 3001 9091  17170 3890 ];
     networking.firewall.allowedUDPPorts = [ 53 ];
 
     age.secrets = let
@@ -62,6 +61,12 @@
 
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
     };
+
+    services.lldap.enable = true;
+    services.lldap.settings.ldap_base_dn = "dc=thematt,dc=net";
+    # User does no longer exist
+    services.lldap.settings.ldap_user_pass = "blablabla";
+    services.lldap.silenceForceUserPassResetWarning = true;
 
     # Uptime Kuma: Healthcheck on your services
     services.uptime-kuma.enable = true;

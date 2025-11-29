@@ -9,7 +9,7 @@
         inputs.ragenix.nixosModules.default
         inputs.copyparty.nixosModules.default
 
-        bootloader
+        systemd-boot
         networking
         settings
         user
@@ -80,6 +80,23 @@
                 access.rwmda = "donielmaker";
             };
         };
+    };
+
+    # Currently problems regarding inter-subnet access
+    # services.printing.enable = true;
+    # services.printing = {
+    #     listenAddresses = [ "*:631" ];
+    #     # allowFrom = [ "10.10.0.0/16" ];
+    #     allowFrom = [ "all" ];
+    #     browsing = true;
+    #     defaultShared = true;
+    #     openFirewall = true;
+    # };
+
+    services.avahi.enable = true;
+    services.avahi = {
+        nssmdns4 = true;
+        openFirewall = true;
     };
 
     services.trilium-server.enable = true;

@@ -8,7 +8,6 @@
         inputs.ragenix.nixosModules.default
         inputs.stylix.nixosModules.stylix
 
-        # bootloader
         limine
         networking
         settings
@@ -25,7 +24,7 @@
         coolercontrol
         bluetooth
 
-        # neovim
+        openssh
         steam
         zsh
     ];
@@ -51,15 +50,12 @@
 
     services.lact.enable = true;
 
-    services.openssh.enable = true;
-
-    services.printing.enable = true;
-    services.avahi = {
-        enable = true;
-        nssmdns4 = true;
-        openFirewall = true;
-    };
-
+    # services.printing.enable = true;
+    # services.avahi = {
+    #     enable = true;
+    #     nssmdns4 = true;
+    #     openFirewall = true;
+    # };
 
     age.secrets = {
        wireguard-priKey.file = ./secrets/wireguard-priKey.age;
