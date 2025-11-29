@@ -6,8 +6,8 @@ let
     nautilus = lib.getExe pkgs.nautilus;
     fuzzel = lib.getExe pkgs.fuzzel;
     cliphist = lib.getExe pkgs.cliphist;
-    hyprpicker = lib.getExe pkgs.hyprpicker;
     flameshot = lib.getExe pkgs.flameshot;
+    # hyprpicker = lib.getExe pkgs.hyprpicker;
 in
 
 {
@@ -55,6 +55,7 @@ in
 
             exec-once = [
                 "swww-daemon"
+                "hypridle"
                 # "hyprctl setcursor Bibata-Modern-Ice 24"
                 "qs"
                 "wl-paste --type text --watch cliphist store"
@@ -148,8 +149,11 @@ in
             };
 
             bind = [
+                # Terminal
                 "$mainMod, Return, exec, ${alacritty}"
+                # File Explorer
                 "$mainMod, E, exec, ${nautilus}"
+                # Browser
                 "$mainMod, B, exec, ${brave}"
                 # Application Launcher
                 "$mainMod, space, exec, ${fuzzel}"
@@ -163,26 +167,26 @@ in
                 "$mainMod, M, exit,"
                 "$mainMod, F, togglefloating,"
                 "$mainMod, P, pin,"
-                "$mainMod, J, togglesplit," # dwindle
                 "$mainMod, G, fullscreen"
+                "$mainMod, N, exec, hyprlock"
 
                 # Move focus with mainMod + arrow keys
-                "$mainMod, left,  movefocus, l"
-                "$mainMod, right, movefocus, r"
-                "$mainMod, up,    movefocus, u"
-                "$mainMod, down,  movefocus, d"
+                "$mainMod, h,  movefocus, l"
+                "$mainMod, j,  movefocus, d"
+                "$mainMod, k,    movefocus, u"
+                "$mainMod, l, movefocus, r"
 
                 # Moving windows
-                "$mainMod SHIFT, left,  swapwindow, l"
-                "$mainMod SHIFT, right, swapwindow, r"
-                "$mainMod SHIFT, up,    swapwindow, u"
-                "$mainMod SHIFT, down,  swapwindow, d"
+                "$mainMod SHIFT, h,  swapwindow, l"
+                "$mainMod SHIFT, j,  swapwindow, d"
+                "$mainMod SHIFT, k,    swapwindow, u"
+                "$mainMod SHIFT, l, swapwindow, r"
 
                 # Window resizing                     X  Y
-                "$mainMod CTRL, left,  resizeactive, -60 0"
-                "$mainMod CTRL, right, resizeactive,  60 0"
-                "$mainMod CTRL, up,    resizeactive,  0 -60"
-                "$mainMod CTRL, down,  resizeactive,  0  60"
+                "$mainMod CTRL, h,  resizeactive, -60 0"
+                "$mainMod CTRL, j,  resizeactive,  0  60"
+                "$mainMod CTRL, k,    resizeactive,  0 -60"
+                "$mainMod CTRL, l, resizeactive,  60 0"
 
                 # Switch workspaces with mainMod + [0-9]
                 "$mainMod, 1, workspace, 1"
