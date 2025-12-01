@@ -94,11 +94,11 @@
     #     openFirewall = true;
     # };
 
-    services.avahi.enable = true;
-    services.avahi = {
-        nssmdns4 = true;
-        openFirewall = true;
-    };
+    # services.avahi.enable = true;
+    # services.avahi = {
+    #     nssmdns4 = true;
+    #     openFirewall = true;
+    # };
 
     services.trilium-server.enable = true;
     services.trilium-server = {

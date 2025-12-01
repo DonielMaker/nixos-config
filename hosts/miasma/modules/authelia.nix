@@ -126,8 +126,8 @@
                             client_name = "Trilium";
                             client_secret = "$argon2id$v=19$m=65536,t=3,p=4$iAW7Z2DFdH+YFa80y6SeQw$a2UwF29+g33+vWQIlwLP4h2PyMQhKodYP6EPwDsz6fM";
                             public = false;
-                            require_pkce= true;
-                            pkce_challenge_method = "S256";
+                            # require_pkce= true;
+                            # pkce_challenge_method = "S256";
                             authorization_policy = "two_factor";
                             redirect_uris = [ "https://trilium.${domain}/callback" ];
                             scopes = [ "openid" "profile" "email" ];
