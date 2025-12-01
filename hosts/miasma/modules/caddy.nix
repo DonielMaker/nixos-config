@@ -132,7 +132,6 @@
             domain = "thematt.net";
             extraDomainNames = [ 
                 "*.thematt.net"
-                "*.vilethorn.thematt.net"
                 "*.lastprism.thematt.net"
             ];
             dnsProvider = "cloudflare";

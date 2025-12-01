@@ -149,7 +149,6 @@
 
     # Paperless: A Document server with plenty of features (ocr, file conversion, editing, etc.)
     services.paperless.enable = true;
-    users.users.paperless.extraGroups = [ "media" ];
     services.paperless = {
         address = "0.0.0.0";
         port = 28981;

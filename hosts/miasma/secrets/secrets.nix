@@ -9,6 +9,7 @@ let
     miasma = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBdQs+WYWfCL3rjl4Kh4zu/fhI2Tvofx9418qzlTjLOe";
     systems = [ zenith miasma galaxia ];
 in
+
 {
     # Secrets dedicated to authelia
     "authelia/jwtSecret.age".publicKeys = users ++ systems;
