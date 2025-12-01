@@ -71,6 +71,7 @@
 
         just
         brave
+        scarlett2
         alsa-scarlett-gui
         wireguard-tools
         protonplus
