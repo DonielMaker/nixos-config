@@ -12,6 +12,7 @@
         networking
         settings
         user
+        openssh
 
         graphics
         hyprland
@@ -24,9 +25,8 @@
         gigabyte
         coolercontrol
         bluetooth
-
-        openssh
         steam
+
         zsh
     ];
 
