@@ -1,4 +1,4 @@
-{...}: 
+{domain, ...}: 
 
 {
     networking.firewall.allowedTCPPorts = [ 12345 ];
@@ -47,7 +47,7 @@
 
         prometheus.remote_write "metrics" {
             endpoint {
-                url = "http://prometheus.thematt.net:9090/api/v1/write"
+                url = "http://prometheus.${domain}:9090/api/v1/write"
             }
         }
     '';

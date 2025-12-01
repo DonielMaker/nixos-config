@@ -1,31 +1,31 @@
-{config, ...}:
+{config, domain, ...}:
 
 {
     networking.firewall.allowedTCPPorts = [ 80 443 ];
     services.caddy.enable = true;
     services.caddy.extraConfig = ''
-        *.thematt.net, *.vilethorn.thematt.net, *.lastprism.thematt.net {
-            tls /var/lib/acme/thematt.net/cert.pem /var/lib/acme/thematt.net/key.pem {
+        *.${domain}, *.vilethorn.${domain}, *.lastprism.${domain} {
+            tls /var/lib/acme/${domain}/cert.pem /var/lib/acme/${domain}/key.pem {
                 protocols tls1.3
             }
 
-            @authelia host authelia.thematt.net
+            @authelia host authelia.${domain}
             handle @authelia {
-                reverse_proxy miasma.thematt.net:9091
+                reverse_proxy miasma.${domain}:9091
             }
 
-            @paperless host paperless.thematt.net
+            @paperless host paperless.${domain}
             handle @paperless {
-                forward_auth miasma.thematt.net:9091 {
+                forward_auth miasma.${domain}:9091 {
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
-                reverse_proxy nixos.lastprism.thematt.net:28981
+                reverse_proxy nixos.lastprism.${domain}:28981
             }
 
-            @trilium host trilium.thematt.net
+            @trilium host trilium.${domain}
             handle @trilium {
-                reverse_proxy nixos.lastprism.thematt.net:8965 {
+                reverse_proxy nixos.lastprism.${domain}:8965 {
                     header_up Host {host}
                     header_up X-Real-IP {remote_host}
                     header_up X-Forwarded-For {remote_host}
@@ -33,69 +33,69 @@
                 }
             }
 
-            @lldap host lldap.thematt.net
+            @lldap host lldap.${domain}
             handle @lldap {
-                reverse_proxy miasma.thematt.net:17170
+                reverse_proxy miasma.${domain}:17170
             }
 
-            @navidrome host navidrome.thematt.net 
+            @navidrome host navidrome.${domain} 
             handle @navidrome {
-                reverse_proxy nixos.lastprism.thematt.net:4533
+                reverse_proxy nixos.lastprism.${domain}:4533
             }
 
-            @copyparty host copyparty.thematt.net 
+            @copyparty host copyparty.${domain} 
             handle @copyparty {
-                reverse_proxy nixos.lastprism.thematt.net:3923
+                reverse_proxy nixos.lastprism.${domain}:3923
             }
 
-            @homepage host homepage.thematt.net
+            @homepage host homepage.${domain}
             handle @homepage {
-                forward_auth miasma.thematt.net:9091 {
+                forward_auth miasma.${domain}:9091 {
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
-                reverse_proxy miasma.thematt.net:8082
+                reverse_proxy miasma.${domain}:8082
             }
 
-            @uptime host uptime.thematt.net
+            @uptime host uptime.${domain}
             handle @uptime {
-                forward_auth miasma.thematt.net:9091 {
+                forward_auth miasma.${domain}:9091 {
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
-                reverse_proxy miasma.thematt.net:3001
+                reverse_proxy miasma.${domain}:3001
             }
 
-            @radicale host radicale.thematt.net 
+            @radicale host radicale.${domain} 
             handle @radicale {
-                reverse_proxy nixos.lastprism.thematt.net:5232
+                reverse_proxy nixos.lastprism.${domain}:5232
             }
 
-            @grafana host grafana.thematt.net 
+            @grafana host grafana.${domain} 
             handle @grafana {
-                reverse_proxy miasma.thematt.net:6778
+                reverse_proxy miasma.${domain}:6778
             }
 
-            @home-assistant host home-assistant.thematt.net 
+            @home-assistant host home-assistant.${domain} 
             handle @home-assistant {
-                reverse_proxy nixos.lastprism.thematt.net:8123
+                reverse_proxy nixos.lastprism.${domain}:8123
             }
 
-            @zigbee2mqtt host zigbee2mqtt.thematt.net 
+            @zigbee2mqtt host zigbee2mqtt.${domain} 
             handle @zigbee2mqtt {
-                forward_auth miasma.thematt.net:9091 {
+                forward_auth miasma.${domain}:9091 {
                     uri /api/authz/forward-auth
                     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
                 }
-                reverse_proxy nixos.lastprism.thematt.net:8080
+                reverse_proxy nixos.lastprism.${domain}:8080
             }
 
-            @prometheus host prometheus.thematt.net 
+            @prometheus host prometheus.${domain} 
             handle @prometheus {
-                reverse_proxy miasma.thematt.net:9090
+                reverse_proxy miasma.${domain}:9090
             }
 
-            @proxmox-lastprism host proxmox.lastprism.thematt.net 
+            @proxmox-lastprism host proxmox.lastprism.${domain} 
             handle @proxmox-lastprism {
                 reverse_proxy 10.10.12.12:8006 {
                     transport http {
@@ -106,13 +106,13 @@
 
             # While this does work, it doesn't fit the suitcase of copyparty as it is also reachable outside a 
             # browser (where headers don't matter/work)
-            # @copyparty host copyparty.thematt.net 
+            # @copyparty host copyparty.${domain} 
             # handle @copyparty {
-            #     forward_auth nixos.lastprism.thematt.net:9091 {
+            #     forward_auth nixos.lastprism.${domain}:9091 {
             #         uri /api/authz/forward-auth
             #         copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
             #     }
-            #     reverse_proxy nixos.lastprism.thematt.net:3923 {
+            #     reverse_proxy nixos.lastprism.${domain}:3923 {
             #         header_up X-Idp-User {http.request.header.Remote-User}
             #         header_up X-Idp-Group {http.request.header.Remote-Groups}
             #     }
@@ -126,13 +126,13 @@
         # defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
         defaults.server = "https://acme-v02.api.letsencrypt.org/directory";
 
-        certs."thematt.net" = {
+        certs."${domain}" = {
             group = config.services.caddy.group;
 
-            domain = "thematt.net";
+            domain = "${domain}";
             extraDomainNames = [ 
-                "*.thematt.net"
-                "*.lastprism.thematt.net"
+                "*.${domain}"
+                "*.lastprism.${domain}"
             ];
             dnsProvider = "cloudflare";
             dnsResolver = "1.1.1.1:53";

@@ -1,4 +1,4 @@
-{ inputs, pkgs, system, config, ...}:
+{ config, inputs, pkgs, system, domain, ...}:
 
 {
 
@@ -109,12 +109,12 @@
 
     systemd.services.trilium-server.environment = {
         TRILIUM_NETWORK_TRUSTEDREVERSEPROXY = "10.10.12.10";
-        TRILIUM_NETWORK_CORS_ALLOW_ORIGIN = "https://trilium.thematt.net";
+        TRILIUM_NETWORK_CORS_ALLOW_ORIGIN = "https://trilium.${domain}";
 
-        # TRILIUM_OAUTH_BASE_URL = "https://trilium.thematt.net";
+        # TRILIUM_OAUTH_BASE_URL = "https://trilium.${domain}";
         # TRILIUM_OAUTH_CLIENT_ID = "trilium";
         # TRILIUM_OAUTH_CLIENT_SECRET = "cYaZ2Ihre3cwQWnRuhsNARpheef31a2n5Vw12vfq5QoEtKc8do9uK5klNpRs8MQM";
-        # TRILIUM_OAUTH_ISSUER_BASE_URL = "https://authelia.thematt.net";
+        # TRILIUM_OAUTH_ISSUER_BASE_URL = "https://authelia.${domain}";
         # TRILIUM_OAUTH_ISSUER_NAME = "Authelia";
         # TRILIUM_OAUTH_ISSUER_ICON = "https://www.authelia.com/images/branding/logo-cropped.png";
     };
@@ -137,7 +137,7 @@
         storage.filesystem_folder = "/storage/radicale";
         auth.type = "ldap";
         auth = {
-            ldap_uri = "ldap://nixos.lastprism.thematt.net:3890";
+            ldap_uri = "ldap://nixos.lastprism.${domain}:3890";
             ldap_base = "dc=thematt,dc=net";
             ldap_reader_dn = "uid=radicale,ou=people,dc=thematt,dc=net";
             ldap_secret = "Changeme";
@@ -155,14 +155,14 @@
         dataDir = "/storage/paperless";
 
         settings = {
-            PAPERLESS_URL = "https://paperless.thematt.net";
+            PAPERLESS_URL = "https://paperless.${domain}";
             PAPERLESS_OCR_LANGUAGE = "eng+deu";
             PAPERLESS_TIME_ZONE = "Europe/Berlin";
             PAPERLESS_TRUSTED_PROXIES = "10.10.12.0/24";
             PAPERLESS_USE_X_FORWARDED_HOST = true;
             PAPERLESS_ENABLE_HTTP_REMOTE_USER = true;
             PAPERLSS_HTTP_REMOTE_USER_HEADER_NAME = "Remote-User";
-            PAPERLESS_LOGOUT_REDIRECT_URL = "https://authelia.thematt.net";
+            PAPERLESS_LOGOUT_REDIRECT_URL = "https://authelia.${domain}";
         };
     };
 

@@ -1,4 +1,4 @@
-{config, ...}: 
+{config, domain, ...}: 
 
 {
     services.redis.servers.authelia-main = {
@@ -30,11 +30,11 @@
                 default_policy = "deny";
                 rules = [
                     {
-                        domain = ["authelia.thematt.net"];
+                        domain = ["authelia.${domain}"];
                         policy = "bypass";
                     }
                     {
-                        domain = ["*.thematt.net"];
+                        domain = ["*.${domain}"];
                         policy = "one_factor";
                     }
                 ];
@@ -53,8 +53,8 @@
                 redis.host = "/run/redis-authelia-main/redis.sock";
                 cookies = [
                     {
-                        domain = "thematt.net";
-                        authelia_url = "https://authelia.thematt.net";
+                        domain = "${domain}";
+                        authelia_url = "https://authelia.${domain}";
                         # default_redirection_url: 'https://www.example.com'
                         # same_site: 'lax'
                     }
@@ -71,7 +71,7 @@
                 password_change.disable = true;
                 refresh_interval = "1m";
                 ldap = {
-                    address = "ldap://miasma.thematt.net:3890";
+                    address = "ldap://miasma.${domain}:3890";
                     implementation = "lldap";
                     timeout = "5s";
                     base_dn = "dc=thematt,dc=net";
@@ -102,7 +102,7 @@
                             "revocation"
                             "introspection"
                         ];
-                        allowed_origins= [ "https://*.thematt.net" ];
+                        allowed_origins= [ "https://*.${domain}" ];
                     };
                     clients = [
                         {
@@ -113,7 +113,7 @@
                             require_pkce= true;
                             pkce_challenge_method = "S256";
                             authorization_policy = "two_factor";
-                            redirect_uris = [ "https://proxmox.lastprism.thematt.net" ];
+                            redirect_uris = [ "https://proxmox.lastprism.${domain}" ];
                             scopes = [ "openid" "profile" "email" "groups" ];
                             response_types = [ "code" ];
                             grant_types = [ "authorization_code" ];
@@ -129,7 +129,7 @@
                             require_pkce= true;
                             pkce_challenge_method = "S256";
                             authorization_policy = "two_factor";
-                            redirect_uris = [ "https://trilium.thematt.net/callback" ];
+                            redirect_uris = [ "https://trilium.${domain}/callback" ];
                             scopes = [ "openid" "profile" "email" ];
                             response_types = [ "code" ];
                             grant_types = [ "authorization_code" ];
@@ -145,7 +145,7 @@
                             require_pkce= true;
                             pkce_challenge_method = "S256";
                             authorization_policy = "two_factor";
-                            redirect_uris = [ "https://grafana.thematt.net/login/generic_oauth" ];
+                            redirect_uris = [ "https://grafana.${domain}/login/generic_oauth" ];
                             scopes = [ "openid" "profile" "email" "groups" ];
                             response_types = [ "code" ];
                             grant_types = [ "authorization_code" ];

@@ -1,4 +1,4 @@
-{ inputs, pkgs, system, config, ...}:
+{ config, inputs, pkgs, system, domain, ...}:
 
 {
 
@@ -79,16 +79,16 @@
         forwarders = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" "8.8.8.8" ]; 
         cacheNetworks = [ "10.20.0.0/16" "10.10.0.0/16" ];
         zones = {
-            "thematt.net" = {
+            "${domain}" = {
                 master = true;
-                file = pkgs.writeText "thematt-net.zone" ''
+                file = pkgs.writeText "${domain}.zone" ''
 $TTL 2d    ; default TTL for zone
 
-$ORIGIN thematt.net.
+$ORIGIN ${domain}.
 
 ; Start of Authority RR defining the key characteristics of the zone (domain)
 
-@                   IN      SOA   ns.thematt.net. daniel.schmidt0204.gmail.com (
+@                   IN      SOA   ns.${domain}. daniel.schmidt0204.gmail.com (
 
             2025111000; serial number
             12h        ; refresh
@@ -97,7 +97,7 @@ $ORIGIN thematt.net.
             2h         ; minimum
 )
 
-                    IN      NS      ns.thematt.net.
+                    IN      NS      ns.${domain}.
 
 ns                  IN      A       10.10.12.10
 
@@ -107,9 +107,9 @@ lastprism           IN      A       10.10.12.12
 
 miasma              IN      A       10.10.12.10
 
-*                   IN      CNAME   miasma.thematt.net.
+*                   IN      CNAME   miasma.${domain}.
 
-*.lastprism         IN      CNAME   miasma.thematt.net.
+*.lastprism         IN      CNAME   miasma.${domain}.
                 '';
             };
         };
@@ -119,7 +119,7 @@ miasma              IN      A       10.10.12.10
     services.homepage-dashboard.enable = true;
     services.homepage-dashboard = {
         openFirewall = true;
-        allowedHosts = "homepage.thematt.net";
+        allowedHosts = "homepage.${domain}";
         widgets = [
             {
                 resources = {
@@ -149,39 +149,39 @@ miasma              IN      A       10.10.12.10
                     {
                         "Lldap" = {
                             description = "Ldap server written in rust";
-                            href = "https://lldap.thematt.net";
+                            href = "https://lldap.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/lldap-light.svg";
                         };
                     }
                     {
                         "Authelia" = {
                             description = "Idp manager";
-                            href = "https://authelia.thematt.net";
+                            href = "https://authelia.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/authelia.svg";
                         };
                     }
                     {
                         "Lastprism" = {
                             description = "The Proxmox Lastprism Server";
-                            href = "https://proxmox.lastprism.thematt.net";
+                            href = "https://proxmox.lastprism.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/proxmox.svg";
                         };
                     }
                     {
                         "Grafana" = {
                             description = "Metrics and Logs visualization";
-                            href = "https://grafana.thematt.net";
+                            href = "https://grafana.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grafana.svg";
                         };
                     }
                     {
                         "Uptime Kuma" = {
                             description = "Check uptime of services";
-                            href = "https://uptime.thematt.net";
+                            href = "https://uptime.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/uptime-kuma.svg";
                             widget = {
                                 type = "uptimekuma";
-                                url = "http://miasma.thematt.net:3001";
+                                url = "http://miasma.${domain}:3001";
                                 slug = "homepage";
                             };
                         };
@@ -200,49 +200,49 @@ miasma              IN      A       10.10.12.10
                     {
                         "Navidrome" = {
                             description = "Music server";
-                            href = "https://navidrome.thematt.net";
+                            href = "https://navidrome.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/navidrome.svg";
                         };
                     }
                     {
                         "Paperless" = {
                             description = "Document server";
-                            href = "https://paperless.thematt.net";
+                            href = "https://paperless.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
                         };
                     }
                     {
                         "Copyparty" = {
                             description = "Fileserver";
-                            href = "https://copyparty.thematt.net";
+                            href = "https://copyparty.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/copyparty.svg";
                         };
                     }
                     {
                         "Radicale" = {
                             description = "CalDav/CardDav Server";
-                            href = "https://radicale.thematt.net";
+                            href = "https://radicale.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/radicale.svg";
                         };
                     }
                     {
                         "Homeassistant" = {
                             description = "Home Automation Server";
-                            href = "https://home-assistant.thematt.net";
+                            href = "https://home-assistant.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/home-assistant-light.svg";
                         };
                     }
                     {
                         "Zigbee2mqtt" = {
                             description = "Connection Between Zigbee and Mqtt";
-                            href = "https://zigbee2mqtt.thematt.net";
+                            href = "https://zigbee2mqtt.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/zigbee2mqtt.svg";
                         };
                     }
                     {
                         "Trilium" = {
                             description = "Note-taking Server";
-                            href = "https://trilium.thematt.net";
+                            href = "https://trilium.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/trilium-notes.svg";
                         };
                     }
@@ -256,7 +256,7 @@ miasma              IN      A       10.10.12.10
         server = {
             http_addr = "0.0.0.0";
             http_port = 6778;
-            root_url = "https://grafana.thematt.net";
+            root_url = "https://grafana.${domain}";
         };
 
         "auth.generic_oauth" = {
@@ -267,14 +267,14 @@ miasma              IN      A       10.10.12.10
             client_secret = "28FH7GuRhs1K3U2NYOnt3qr11AcEthbljKNP9GEOfcMtaeK0bEW7ZGCWSmku6bUL";
             scopes = "openid profile email groups";
             empty_scopes = false;
-            auth_url = "https://authelia.thematt.net/api/oidc/authorization";
-            token_url = "https://authelia.thematt.net/api/oidc/token";
-            api_url = "https://authelia.thematt.net/api/oidc/userinfo";
+            auth_url = "https://authelia.${domain}/api/oidc/authorization";
+            token_url = "https://authelia.${domain}/api/oidc/token";
+            api_url = "https://authelia.${domain}/api/oidc/userinfo";
             login_attribute_path = "preferred_username";
             groups_attribute_path = "groups";
             name_attribute_path = "name";
             use_pkce = true;
-            signout_redirect_url = "https://authelia.thematt.net";
+            signout_redirect_url = "https://authelia.${domain}";
             role_attribute_path = "contains(groups[*], 'Grafana_Admin') && 'Admin' || contains(groups[*], 'Grafana_Editor') && 'Editor' || 'Viewer'";
         };
     };
@@ -282,7 +282,7 @@ miasma              IN      A       10.10.12.10
     services.prometheus.enable = true;
     services.prometheus.extraFlags = [ "--web.enable-remote-write-receiver" ];
     services.prometheus = {
-        webExternalUrl = "https://prometheus.thematt.net";
+        webExternalUrl = "https://prometheus.${domain}";
         port = 9090;
     };
 
