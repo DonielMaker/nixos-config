@@ -101,15 +101,27 @@ $ORIGIN ${domain}.
 
 ns                  IN      A       10.10.12.10
 
-nixos.lastprism     IN      A       10.10.12.11
+proxmox.lastprism             IN      A       10.10.12.12
 
-lastprism           IN      A       10.10.12.12
+lastprism                   IN      A       10.10.12.11
 
-miasma              IN      A       10.10.12.10
+miasma                   IN      A       10.10.12.10
 
 *                   IN      CNAME   miasma.${domain}.
-
-*.lastprism         IN      CNAME   miasma.${domain}.
+                '';
+            };
+            "soluttech.uk" = {
+                master = true;
+                allowQuery = [];
+                file = pkgs.writeText "soluttech.uk.zone" ''
+$TTL 3600
+@   IN  SOA localhost. root.localhost. (
+        1
+        3600
+        600
+        604800
+        3600 )
+IN  NS  localhost.
                 '';
             };
         };
@@ -149,48 +161,40 @@ miasma              IN      A       10.10.12.10
                     {
                         "Lldap" = {
                             description = "Ldap server written in rust";
-                            href = "https://lldap.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/lldap-light.svg";
+                            href = "https://lldap.${domain}";
+                            siteMonitor = "http://miasma.${domain}:17170";
                         };
                     }
                     {
                         "Authelia" = {
                             description = "Idp manager";
-                            href = "https://authelia.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/authelia.svg";
+                            href = "https://authelia.${domain}";
+                            siteMonitor = "http://miasma.${domain}:9091";
                         };
                     }
                     {
                         "Lastprism" = {
                             description = "The Proxmox Lastprism Server";
-                            href = "https://proxmox.lastprism.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/proxmox.svg";
+                            href = "https://proxmox.${domain}";
+                            siteMonitor = "https://proxmox.lastprism.${domain}:8006";
                         };
                     }
                     {
                         "Grafana" = {
                             description = "Metrics and Logs visualization";
-                            href = "https://grafana.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grafana.svg";
-                        };
-                    }
-                    {
-                        "Uptime Kuma" = {
-                            description = "Check uptime of services";
-                            href = "https://uptime.${domain}";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/uptime-kuma.svg";
-                            widget = {
-                                type = "uptimekuma";
-                                url = "http://miasma.${domain}:3001";
-                                slug = "homepage";
-                            };
+                            href = "https://grafana.${domain}";
+                            siteMonitor = "http://miasma.${domain}:6778";
                         };
                     }
                     {
                         "Fritz!Box" = {
                             description = "Fritz Box Router";
-                            href = "http://192.168.0.1";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/fritz.svg";
+                            href = "http://192.168.0.1";
                         };
                     }
                 ];
@@ -200,50 +204,57 @@ miasma              IN      A       10.10.12.10
                     {
                         "Navidrome" = {
                             description = "Music server";
-                            href = "https://navidrome.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/navidrome.svg";
+                            href = "https://navidrome.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:4533";
                         };
                     }
                     {
                         "Paperless" = {
                             description = "Document server";
-                            href = "https://paperless.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
+                            href = "https://paperless.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:28981";
                         };
                     }
                     {
                         "Copyparty" = {
                             description = "Fileserver";
-                            href = "https://copyparty.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/copyparty.svg";
+                            href = "https://copyparty.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:3923";
                         };
                     }
                     {
                         "Radicale" = {
                             description = "CalDav/CardDav Server";
-                            href = "https://radicale.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/radicale.svg";
+                            href = "https://radicale.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:5232";
                         };
                     }
                     {
                         "Homeassistant" = {
                             description = "Home Automation Server";
-                            href = "https://home-assistant.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/home-assistant-light.svg";
+                            href = "https://home-assistant.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:8123";
                         };
                     }
                     {
                         "Zigbee2mqtt" = {
                             description = "Connection Between Zigbee and Mqtt";
-                            href = "https://zigbee2mqtt.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/zigbee2mqtt.svg";
+                            href = "https://zigbee2mqtt.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:8080";
                         };
                     }
                     {
                         "Trilium" = {
                             description = "Note-taking Server";
-                            href = "https://trilium.${domain}";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/trilium-notes.svg";
+                            href = "https://trilium.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:8965";
                         };
                     }
                 ];
