@@ -113,7 +113,7 @@
                             require_pkce= true;
                             pkce_challenge_method = "S256";
                             authorization_policy = "two_factor";
-                            redirect_uris = [ "https://proxmox.lastprism.${domain}" ];
+                            redirect_uris = [ "https://proxmox.${domain}" ];
                             scopes = [ "openid" "profile" "email" "groups" ];
                             response_types = [ "code" ];
                             grant_types = [ "authorization_code" ];
