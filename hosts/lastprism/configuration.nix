@@ -102,6 +102,7 @@
 
     services.trilium-server.enable = true;
     services.trilium-server = {
+        package = inputs.trilium.packages.${system}.server;
         dataDir = "/storage/trilium";
         port = 8965;
         host = "0.0.0.0";
