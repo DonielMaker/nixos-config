@@ -164,12 +164,10 @@
             PAPERLESS_USE_X_FORWARDED_PORT = true;
             PAPERLESS_LOGOUT_REDIRECT_URL = "https://paperless.${domain}";
 
-            # PAPERLESS_ENABLE_HTTP_REMOTE_USER = true;
-            # PAPERLSS_HTTP_REMOTE_USER_HEADER_NAME = "Remote-User";
             # SSO
             PAPERLESS_SOCIAL_AUTO_SIGNUP = true;
-            # PAPERLESS_DISABLE_REGULAR_LOGIN = true;
-            # PAPERLESS_REDIRECT_LOGIN_TO_SSO = true;
+            PAPERLESS_DISABLE_REGULAR_LOGIN = true;
+            PAPERLESS_REDIRECT_LOGIN_TO_SSO = true;
             PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
             PAPERLESS_SOCIALACCOUNT_PROVIDERS= ''
 {
