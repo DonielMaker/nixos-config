@@ -95,6 +95,7 @@
         vesktop
         obs-studio
         geeqie
+        hyprshot
 
         prismlauncher
         heroic
@@ -105,8 +106,7 @@
         orca-slicer
         nautilus
 
-
-        evolution-data-server
+        wakeonlan
         hyprpolkitagent
         kdePackages.qt6ct
         home-manager
