@@ -12,9 +12,9 @@
     stylix.polarity = "dark";
 
     stylix.icons.enable = true;
-    stylix.icons.light = "Tela-circle-light";
-    stylix.icons.dark = "Tela-circle-dark";
-    stylix.icons.package = pkgs.tela-circle-icon-theme;
+    stylix.icons.light = "Papirus";
+    stylix.icons.dark = "Papirus-Dark";
+    stylix.icons.package = pkgs.papirus-icon-theme;
 
     stylix.targets.hyprland.enable = false;
     stylix.targets.neovim.enable = false;
