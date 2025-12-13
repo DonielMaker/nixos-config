@@ -42,7 +42,7 @@ in
             ];
 
             windowrulev2 = [
-                # Float Pip in the bottom left
+                # Float Pip in the bottom right
                 "float, pin, noinitialfocus, title:^(Picture in picture)"
                 # Width, Height
                 "size 40% 40%, title:^(Picture in picture)"
@@ -51,7 +51,7 @@ in
                 # Float Brave Extensions in the bottom left
                 "float, pin, class:^(brave-[a-z]+-Default)$"
                 "size 30% 50%, class:^(brave-[a-z]+-Default)$"
-                "move 69% 48%, class:^(brave-[a-z]+-Default)$"
+                "move 1% 48%, class:^(brave-[a-z]+-Default)$"
 
                 # Float gtk portal (File Chooser) in the middle
                 "float, center, class:^(xdg-desktop-portal-gtk)$"
