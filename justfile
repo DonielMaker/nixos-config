@@ -16,4 +16,4 @@ hm CONFIG=(FLAKE):
 
 # Generates the plaintext and hashed secret for Oidc Clients
 gen-auth:
-    sudo nix run nixpkgs\#authelia -- crypto hash generate argon2 --random --random.length 64 --random.charset alphanumeric
+    nix run nixpkgs\#authelia -- crypto hash generate argon2 --random --random.length 64 --random.charset alphanumeric
