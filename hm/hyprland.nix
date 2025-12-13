@@ -1,4 +1,4 @@
-{ pkgs, monitor, lib, config, ... }:
+{ pkgs, username, monitor, lib, config, ... }:
 
 let
     alacritty = lib.getExe pkgs.alacritty;
@@ -6,7 +6,7 @@ let
     nautilus = lib.getExe pkgs.nautilus;
     fuzzel = lib.getExe pkgs.fuzzel;
     cliphist = lib.getExe pkgs.cliphist;
-    flameshot = lib.getExe pkgs.flameshot;
+    hyprshot = lib.getExe pkgs.hyprshot;
     # hyprpicker = lib.getExe pkgs.hyprpicker;
 in
 
@@ -41,16 +41,21 @@ in
                 "XDG_SCREENSHOTS_DIR,~/screenshots"
             ];
 
-            windowrule = [
-                # "float, ^(imv)$"
-                # "float, ^(mpv)$"
+            windowrulev2 = [
+                # Float Pip in the bottom left
+                "float, pin, noinitialfocus, title:^(Picture in picture)"
+                # Width, Height
+                "size 40% 40%, title:^(Picture in picture)"
+                "move 59% 58%, title:^(Picture in picture)"
 
-                # "float, title:^(Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox)$"
+                # Float Brave Extensions in the bottom left
+                "float, pin, class:^(brave-[a-z]+-Default)$"
+                "size 30% 50%, class:^(brave-[a-z]+-Default)$"
+                "move 69% 48%, class:^(brave-[a-z]+-Default)$"
 
-                "float, title:^(Picture-in-Picture)$"
-                "pin, title:^(Picture-in-Picture)$"
-                "size 678 384, title:^(Picture-in-Picture)$"
-                "noinitialfocus, title:^(Picture-in-Picture)$"
+                # Float gtk portal (File Chooser) in the middle
+                "float, center, class:^(xdg-desktop-portal-gtk)$"
+                "size 40% 40%, class:^(xdg-desktop-portal-gtk)$"
             ];
 
             exec-once = [
@@ -160,14 +165,16 @@ in
                 # Clipboard History
                 "$mainMod, V, exec, ${cliphist} list | ${fuzzel} --dmenu | ${cliphist} decode | wl-copy"
                 "$mainMod CTRL, V, exec, ${cliphist} wipe"
-                # Screenshots
-                "$mainMod, S, exec, ${flameshot} gui"
+                # Screenshot to Clipboard
+                "$mainMod, S, exec, ${hyprshot} -szm region --clipboard-only"
+                # Screenshot to file
+                "$mainMod SHIFT, S, exec, ${hyprshot} -szm region -o ${config.home.homeDirectory}/Pictures/Screenshots"
 
                 "$mainMod, Q, killactive,"
                 "$mainMod, M, exit,"
                 "$mainMod, F, togglefloating,"
                 "$mainMod, P, pin,"
-                "$mainMod, G, fullscreen"
+                "$mainMod, G, fullscreenstate, 2 0"
                 "$mainMod, N, exec, hyprlock"
 
                 # Move focus with mainMod + arrow keys
