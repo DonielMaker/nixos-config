@@ -1,4 +1,4 @@
-{config, inputs, pkgs, system, ...}:
+{config, inputs, hostname, pkgs, system, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -9,7 +9,6 @@
         inputs.stylix.nixosModules.stylix
 
         limine
-        networking
         settings
         user
         openssh
@@ -35,6 +34,12 @@
     programs.nautilus-open-any-terminal.enable = true;
     programs.nautilus-open-any-terminal.terminal = "alacritty";
 
+    networking.networkmanager.enable = true;
+    networking.networkmanager.dns = "systemd-resolved";
+    networking.hostName = hostname;
+    services.resolved.enable = true;
+    networking.nameservers = [ "10.10.12.10" "10.10.110.10" "1.1.1.1" ];
+
     services.gvfs.enable = true;
 
     age.secrets = {
@@ -45,7 +50,6 @@
 
     networking.wg-quick.interfaces.wg0 = {
         address = [ "10.20.10.3/32" ];
-        dns = [ "10.10.12.10, thematt.net" ];
         peers = [
             {
                 allowedIPs = [ "10.20.10.0/24" "10.10.0.0/16" ];
