@@ -113,7 +113,7 @@
                             require_pkce= true;
                             pkce_challenge_method = "S256";
                             authorization_policy = "two_factor";
-                            redirect_uris = [ "https://proxmox.lastprism.${domain}" ];
+                            redirect_uris = [ "https://proxmox.${domain}" ];
                             scopes = [ "openid" "profile" "email" "groups" ];
                             response_types = [ "code" ];
                             grant_types = [ "authorization_code" ];
@@ -147,6 +147,22 @@
                             authorization_policy = "two_factor";
                             redirect_uris = [ "https://grafana.${domain}/login/generic_oauth" ];
                             scopes = [ "openid" "profile" "email" "groups" ];
+                            response_types = [ "code" ];
+                            grant_types = [ "authorization_code" ];
+                            access_token_signed_response_alg = "none";
+                            userinfo_signed_response_alg = "none";
+                            token_endpoint_auth_method = "client_secret_basic";
+                        }
+                        {
+                            client_id = "paperless";
+                            client_name = "Paperless";
+                            client_secret = "$argon2id$v=19$m=65536,t=3,p=4$MG8UmdGpij+7KWaySlPmVQ$OLfquNi6sDzc8JCVVQSDiVZwnpvz5FTJ4sa0COf9cq4";
+                            public = false;
+                            require_pkce= true;
+                            pkce_challenge_method = "S256";
+                            authorization_policy = "two_factor";
+                            redirect_uris = [ "https://paperless.thematt.net/accounts/oidc/authelia/login/callback/" ];
+                            scopes = [ "openid" "profile" "email" ];
                             response_types = [ "code" ];
                             grant_types = [ "authorization_code" ];
                             access_token_signed_response_alg = "none";

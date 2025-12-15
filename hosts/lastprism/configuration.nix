@@ -102,6 +102,7 @@
 
     services.trilium-server.enable = true;
     services.trilium-server = {
+        package = inputs.trilium.packages.${system}.server;
         dataDir = "/storage/trilium";
         port = 8965;
         host = "0.0.0.0";
@@ -160,9 +161,33 @@
             PAPERLESS_TIME_ZONE = "Europe/Berlin";
             PAPERLESS_TRUSTED_PROXIES = "10.10.12.0/24";
             PAPERLESS_USE_X_FORWARDED_HOST = true;
-            PAPERLESS_ENABLE_HTTP_REMOTE_USER = true;
-            PAPERLSS_HTTP_REMOTE_USER_HEADER_NAME = "Remote-User";
-            PAPERLESS_LOGOUT_REDIRECT_URL = "https://authelia.${domain}";
+            PAPERLESS_USE_X_FORWARDED_PORT = true;
+            PAPERLESS_LOGOUT_REDIRECT_URL = "https://paperless.${domain}";
+
+            # SSO
+            PAPERLESS_SOCIAL_AUTO_SIGNUP = true;
+            PAPERLESS_DISABLE_REGULAR_LOGIN = true;
+            PAPERLESS_REDIRECT_LOGIN_TO_SSO = true;
+            PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
+            PAPERLESS_SOCIALACCOUNT_PROVIDERS= ''
+{
+    "openid_connect": {
+        "SCOPE":["openid", "profile", "email"],
+        "OAUTH_PKCE_ENABLED": true,
+        "APPS": [
+            {
+                "provider_id": "authelia",
+                "name": "Authelia",
+                "client_id": "paperless",
+                "secret": "SE9kT540KNYhaXYxhd7ymQN7OLarVcdWC5BIZKORgbiJSDcj1qDiMnMzFGSPsysh",
+                "settings": {
+                    "server_url":"https://authelia.thematt.net/.well-known/openid-configuration",
+                    "token_auth_method": "client_secret_basic"
+                }
+            }
+        ]
+    }
+}'';
         };
     };
 

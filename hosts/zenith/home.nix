@@ -13,7 +13,6 @@
 
         fuzzel
         mangohud
-        flameshot
 
         hyprland
         hyprlock
