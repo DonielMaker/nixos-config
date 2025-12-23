@@ -63,6 +63,7 @@
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
     };
 
+    # Lldap: Ldap Server
     services.lldap.enable = true;
     services.lldap.settings.ldap_base_dn = "dc=thematt,dc=net";
     # User does no longer exist
