@@ -3,7 +3,7 @@
     networking.firewall.allowedTCPPorts = [ 80 443 ];
     services.caddy.enable = true;
     services.caddy.extraConfig = ''
-        *.${domain}, *.vilethorn.${domain}, *.lastprism.${domain} {
+        *.${domain}, *.lastprism.${domain} {
             tls /var/lib/acme/${domain}/cert.pem /var/lib/acme/${domain}/key.pem {
                 protocols tls1.3
             }
