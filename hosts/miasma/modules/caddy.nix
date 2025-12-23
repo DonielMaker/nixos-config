@@ -18,6 +18,11 @@
                 reverse_proxy miasma.${domain}:17170
             }
 
+            @vaultwarden host vaultwarden.${domain}
+            handle @vaultwarden {
+                reverse_proxy miasma.${domain}:5902
+            }
+
             @homepage host homepage.${domain}
             handle @homepage {
                 forward_auth miasma.${domain}:9091 {
