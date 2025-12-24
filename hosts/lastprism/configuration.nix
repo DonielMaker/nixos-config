@@ -19,8 +19,8 @@
         alloy
     ];
 
-    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, shiori, trilium, paperless
-    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 7571 8965 28981 ];
+    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, trilium, paperless
+    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 8965 28981 ];
 
     powerManagement.powertop.enable = true;
 

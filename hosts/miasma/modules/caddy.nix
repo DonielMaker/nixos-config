@@ -3,7 +3,7 @@
     networking.firewall.allowedTCPPorts = [ 80 443 ];
     services.caddy.enable = true;
     services.caddy.extraConfig = ''
-        *.${domain}, *.vilethorn.${domain}, *.lastprism.${domain} {
+        *.${domain}, *.lastprism.${domain} {
             tls /var/lib/acme/${domain}/cert.pem /var/lib/acme/${domain}/key.pem {
                 protocols tls1.3
             }
@@ -16,6 +16,11 @@
             @lldap host lldap.${domain}
             handle @lldap {
                 reverse_proxy miasma.${domain}:17170
+            }
+
+            @vaultwarden host vaultwarden.${domain}
+            handle @vaultwarden {
+                reverse_proxy miasma.${domain}:5902
             }
 
             @homepage host homepage.${domain}

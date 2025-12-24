@@ -19,8 +19,9 @@
         ./modules/authelia.nix
     ];
 
-    # prometheus, uptime-kuma, authelia, bind, lldap-web, lldap-ldap
-    networking.firewall.allowedTCPPorts = [ 9090 3001 9091  17170 3890 ];
+    # prometheus, authelia, lldap-web, lldap-ldap, vaultwarden
+    networking.firewall.allowedTCPPorts = [ 9090 9091 17170 3890 5902];
+    # bind9
     networking.firewall.allowedUDPPorts = [ 53 ];
 
     age.secrets = let
@@ -62,18 +63,32 @@
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
     };
 
+    # Lldap: Ldap Server
     services.lldap.enable = true;
     services.lldap.settings.ldap_base_dn = "dc=thematt,dc=net";
     # User does no longer exist
     services.lldap.settings.ldap_user_pass = "blablabla";
     services.lldap.silenceForceUserPassResetWarning = true;
 
-    # Uptime Kuma: Healthcheck on your services
-    services.uptime-kuma.enable = true;
-    services.uptime-kuma.settings = {
-        HOST = "0.0.0.0";
+    # Vaultwarden: Passwordmanager
+    services.vaultwarden.enable = true;
+    services.vaultwarden = {
+        backupDir = "/storage/vaultwarden";
+        config = {
+            DOMAIN = "https://vaultwarden.${domain}";
+            ADMIN_TOKEN = "$argon2id$v=19$m=65536,t=3,p=4$PuLNkQoWqh2KK6oTiS13zA$jODU+1C0V9/dEMmMbmtyRtEFXgwAkBfTb36s848IUzA";
+            ROCKET_ADDRESS = "0.0.0.0";
+            ROCKET_PORT = 5902;
+            # HaveIBeenPwned Api Key
+            HIBP_API_KEY = "";
+            TRASH_AUTO_DELETE_DAYS = 30;
+            SIGNUPS_ALLOWED = false;
+            IP_HEADER = "X-Forwarded-For";
+            # Do we need this?
+            PASSWORD_HINTS_ALLOWED = false;
+        };
     };
-    
+
     services.bind.enable = true;
     services.bind = {
         forwarders = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" "8.8.8.8" ]; 
