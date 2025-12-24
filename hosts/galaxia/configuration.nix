@@ -36,9 +36,10 @@
 
     networking.networkmanager.enable = true;
     networking.networkmanager.dns = "systemd-resolved";
+    networking.nameservers = [ "10.10.12.10" "10.10.110.10" ];
     networking.hostName = hostname;
     services.resolved.enable = true;
-    networking.nameservers = [ "10.10.12.10" "10.10.110.10" "1.1.1.1" ];
+    services.resolved.domains = [ "thematt.net" "soluttech.uk" ];
 
     services.gvfs.enable = true;
 
