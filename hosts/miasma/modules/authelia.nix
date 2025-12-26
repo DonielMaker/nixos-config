@@ -169,6 +169,22 @@
                             userinfo_signed_response_alg = "none";
                             token_endpoint_auth_method = "client_secret_basic";
                         }
+                        {
+                            client_id = "outline";
+                            client_name = "Outline";
+                            client_secret = "$argon2id$v=19$m=65536,t=3,p=4$AD3GZA2c/SPjMlgZW2Yj9g$mnfUEFRyeQPK2d3I/DEHyRrjbITQ5sdHyAZqHuZEgEU";
+                            public = false;
+                            # require_pkce = true;
+                            # pkce_challenge_method = "S256";
+                            authorization_policy = "two_factor";
+                            redirect_uris = [ "https://outline.${domain}/auth/oidc.callback" ];
+                            scopes = [ "openid" "offline_access" "profile" "email" ];
+                            response_types = [ "code" ];
+                            grant_types = [ "authorization_code" "refresh_token" ];
+                            access_token_signed_response_alg = "none";
+                            userinfo_signed_response_alg = "none";
+                            token_endpoint_auth_method = "client_secret_post";
+                        }
                     ];
                 };
             };

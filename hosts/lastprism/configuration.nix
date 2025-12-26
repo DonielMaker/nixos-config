@@ -19,8 +19,8 @@
         alloy
     ];
 
-    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, trilium, paperless
-    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 8965 28981 ];
+    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, trilium, paperless, outline
+    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 8965 28981 2920 ];
 
     powerManagement.powertop.enable = true;
 
@@ -41,6 +41,12 @@
             owner = config.services.copyparty.user;
             group = config.services.copyparty.group;
         };
+
+        outline = {
+            mode = "440";
+            owner = config.services.outline.user;
+            group = config.services.outline.group;
+        };
     in
 
     {
@@ -48,11 +54,55 @@
             inherit (copyparty) mode owner group;
             file = ./secrets/copyparty/copyparty-donielmaker-password.age;
         };
+
+        outline-secretKey = {
+            inherit (outline) mode owner group;
+            file = ./secrets/outline/secretKey.age;
+        };
+
+        outline-utilsSecret = {
+            inherit (outline) mode owner group;
+            file = ./secrets/outline/utilsSecret.age;
+        };
+
+        outline-clientSecret = {
+            inherit (outline) mode owner group;
+            file = ./secrets/outline/clientSecret.age;
+        };
     };
 
     nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
 
     networking.nameservers = [ "10.10.12.10" ];
+
+    # Outline: Note-Taking Server
+    services.outline.enable = true;
+    services.outline = {
+        secretKeyFile = config.age.secrets.outline-secretKey.path;
+        utilsSecretFile = config.age.secrets.outline-utilsSecret.path;
+        port = 2920;
+        publicUrl = "https://outline.${domain}";
+        forceHttps = false;
+        concurrency = 4;
+        defaultLanguage = "en_US";
+        storage = {
+            storageType = "local";
+            localRootDir = "/storage/outline";
+        };
+        oidcAuthentication = {
+            clientId = "outline";
+            clientSecretFile = config.age.secrets.outline-clientSecret.path;
+            authUrl = "https://authelia.${domain}/api/oidc/authorization";
+            tokenUrl = "https://authelia.${domain}/api/oidc/token";
+            userinfoUrl = "https://authelia.${domain}/api/oidc/userinfo";
+            usernameClaim = "preferred_username";
+            displayName = "Authelia";
+            scopes = [ "openid" "offline_access" "profile" "email" ];
+        };
+    };
+    systemd.services.outline.environment = {
+        OIDC_LOGOUT_URI = "https://homepage.${domain}";
+    };
 
     # Copyparty: WebDav Fileserver with great performance
     services.copyparty.enable = true;

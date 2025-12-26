@@ -23,6 +23,11 @@
                 reverse_proxy miasma.${domain}:5902
             }
 
+            @outline host outline.${domain}
+            handle @outline {
+                reverse_proxy lastprism.${domain}:2920
+            }
+
             @homepage host homepage.${domain}
             handle @homepage {
                 forward_auth miasma.${domain}:9091 {
