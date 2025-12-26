@@ -298,10 +298,10 @@ IN  NS  localhost.
             api_url = "https://authelia.${domain}/api/oidc/userinfo";
             login_attribute_path = "preferred_username";
             groups_attribute_path = "groups";
-            name_attribute_path = "name";
+            name_attribute_path = "display_name";
             use_pkce = true;
-            signout_redirect_url = "https://authelia.${domain}";
-            role_attribute_path = "contains(groups[*], 'Grafana_Admin') && 'Admin' || contains(groups[*], 'Grafana_Editor') && 'Editor' || 'Viewer'";
+            signout_redirect_url = "https://homepage.${domain}";
+            skip_org_role_sync = true;
         };
     };
 
