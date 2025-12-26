@@ -19,8 +19,8 @@
         alloy
     ];
 
-    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, trilium, paperless, outline
-    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 8965 28981 2920 ];
+    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, paperless, outline
+    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 28981 2920 ];
 
     powerManagement.powertop.enable = true;
 
@@ -149,26 +149,6 @@
     #     nssmdns4 = true;
     #     openFirewall = true;
     # };
-
-    services.trilium-server.enable = true;
-    services.trilium-server = {
-        package = inputs.trilium.packages.${system}.server;
-        dataDir = "/storage/trilium";
-        port = 8965;
-        host = "0.0.0.0";
-    };
-
-    systemd.services.trilium-server.environment = {
-        TRILIUM_NETWORK_TRUSTEDREVERSEPROXY = "10.10.12.10";
-        TRILIUM_NETWORK_CORS_ALLOW_ORIGIN = "https://trilium.${domain}";
-
-        # TRILIUM_OAUTH_BASE_URL = "https://trilium.${domain}";
-        # TRILIUM_OAUTH_CLIENT_ID = "trilium";
-        # TRILIUM_OAUTH_CLIENT_SECRET = "cYaZ2Ihre3cwQWnRuhsNARpheef31a2n5Vw12vfq5QoEtKc8do9uK5klNpRs8MQM";
-        # TRILIUM_OAUTH_ISSUER_BASE_URL = "https://authelia.${domain}";
-        # TRILIUM_OAUTH_ISSUER_NAME = "Authelia";
-        # TRILIUM_OAUTH_ISSUER_ICON = "https://www.authelia.com/images/branding/logo-cropped.png";
-    };
 
     # Navidrome: A Music server which uses the subsonic protocol to send content to clients
     services.navidrome.enable = true;

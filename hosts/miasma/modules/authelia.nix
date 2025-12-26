@@ -122,22 +122,6 @@
                             token_endpoint_auth_method = "client_secret_basic";
                         }
                         {
-                            client_id = "trilium";
-                            client_name = "Trilium";
-                            client_secret = "$argon2id$v=19$m=65536,t=3,p=4$iAW7Z2DFdH+YFa80y6SeQw$a2UwF29+g33+vWQIlwLP4h2PyMQhKodYP6EPwDsz6fM";
-                            public = false;
-                            # require_pkce= true;
-                            # pkce_challenge_method = "S256";
-                            authorization_policy = "two_factor";
-                            redirect_uris = [ "https://trilium.${domain}/callback" ];
-                            scopes = [ "openid" "profile" "email" ];
-                            response_types = [ "code" ];
-                            grant_types = [ "authorization_code" ];
-                            access_token_signed_response_alg = "none";
-                            userinfo_signed_response_alg = "none";
-                            token_endpoint_auth_method = "client_secret_basic";
-                        }
-                        {
                             client_id = "grafana";
                             client_name = "Grafana";
                             client_secret = "$argon2id$v=19$m=65536,t=3,p=4$scu44e90oai9rSdSyOXw9Q$IDHKR+f+Sle9zHpAQxbEYnXSCIQ+GrqQ1qWeCs8Uogg";

@@ -51,11 +51,6 @@
                 reverse_proxy lastprism.${domain}:28981
             }
 
-            @trilium host trilium.${domain}
-            handle @trilium {
-                reverse_proxy lastprism.${domain}:8965
-            }
-
             @navidrome host navidrome.${domain} 
             handle @navidrome {
                 reverse_proxy lastprism.${domain}:4533
