@@ -1,4 +1,4 @@
-{config, inputs, hostname, pkgs, system, ...}:
+{config, inputs, pkgs, system, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -12,6 +12,7 @@
         settings
         user
         openssh
+        networking
 
         graphics
         hyprland
@@ -33,13 +34,6 @@
 
     programs.nautilus-open-any-terminal.enable = true;
     programs.nautilus-open-any-terminal.terminal = "alacritty";
-
-    networking.networkmanager.enable = true;
-    networking.networkmanager.dns = "systemd-resolved";
-    networking.nameservers = [ "10.10.12.10" "10.10.110.10" ];
-    networking.hostName = hostname;
-    services.resolved.enable = true;
-    services.resolved.domains = [ "thematt.net" "soluttech.uk" ];
 
     services.gvfs.enable = true;
 
