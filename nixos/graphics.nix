@@ -10,7 +10,6 @@
     };
 
     environment.systemPackages = with pkgs; [
-        swww
         xwayland
         wl-clipboard
         cliphist
