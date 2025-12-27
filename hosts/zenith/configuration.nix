@@ -30,10 +30,7 @@
         zsh
     ];
 
-    services.xserver.xkb.layout = "us";
-
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
-
 
     services.flatpak.enable = true;
 

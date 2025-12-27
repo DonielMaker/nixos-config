@@ -27,15 +27,8 @@
         zsh
     ];
 
-    services.xserver.xkb.layout = "de";
-
     services.upower.enable = true;
     services.tlp.enable = true;
-
-    programs.nautilus-open-any-terminal.enable = true;
-    programs.nautilus-open-any-terminal.terminal = "alacritty";
-
-    services.gvfs.enable = true;
 
     age.secrets = {
        wireguard-priKey.file = ./secrets/wireguard-priKey.age;
