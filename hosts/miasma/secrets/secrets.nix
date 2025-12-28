@@ -18,5 +18,7 @@ in
     "authelia/autheliaLldapPassword.age".publicKeys = users ++ systems;
     "authelia/autheliaJwksKey.age".publicKeys = users ++ systems;
 
+    "grafana/clientSecret.age".publicKeys = users ++ systems;
+
     "cloudflareDnsApiToken.age".publicKeys = users ++ systems;
 }

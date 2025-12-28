@@ -32,6 +32,11 @@
             group = config.services.authelia.instances.main.group;
         };
 
+        grafana = {
+            mode = "440";
+            owner = "grafana";
+            group = "grafana";
+        };
     in
 
     {
@@ -58,6 +63,11 @@
         autheliaJwksKey = {
             inherit (authelia) mode owner group;
             file = ./secrets/authelia/autheliaJwksKey.age;
+        };
+
+        grafanaClientSecret = {
+            inherit (grafana) mode owner group;
+            file = ./secrets/grafana/clientSecret.age;
         };
 
         cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
@@ -290,7 +300,7 @@ IN  NS  localhost.
             name = "Authelia";
             icon = "signin";
             client_id = "grafana";
-            client_secret = "28FH7GuRhs1K3U2NYOnt3qr11AcEthbljKNP9GEOfcMtaeK0bEW7ZGCWSmku6bUL";
+            client_secret = ''$__file{${config.age.secrets.grafanaClientSecret.path}}'';
             scopes = "openid profile email groups";
             empty_scopes = false;
             auth_url = "https://authelia.${domain}/api/oidc/authorization";
