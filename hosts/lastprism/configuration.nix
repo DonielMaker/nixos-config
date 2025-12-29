@@ -19,6 +19,8 @@
         alloy
     ];
 
+    nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
+
     # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, paperless, outline
     networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 28981 2920 ];
 
@@ -27,6 +29,7 @@
     users.users.donielmaker.extraGroups = [ "media" ];
     users.groups.media = {};
 
+    # Should these be hardcoded or via config.services.copyparty.user, etc.?
     systemd.tmpfiles.rules = [
         "d /storage/media 0770 copyparty media -"
         "d /storage/media/pictures 0770 copyparty media -"
@@ -71,12 +74,9 @@
         };
     };
 
-    nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
-
-    networking.nameservers = [ "10.10.12.10" ];
-
     # Outline: Note-Taking Server
     services.outline.enable = true;
+    systemd.services.outline.environment.OIDC_LOGOUT_URI = "https://homepage.${domain}";
     services.outline = {
         secretKeyFile = config.age.secrets.outline-secretKey.path;
         utilsSecretFile = config.age.secrets.outline-utilsSecret.path;
@@ -99,9 +99,6 @@
             displayName = "Authelia";
             scopes = [ "openid" "offline_access" "profile" "email" ];
         };
-    };
-    systemd.services.outline.environment = {
-        OIDC_LOGOUT_URI = "https://homepage.${domain}";
     };
 
     # Copyparty: WebDav Fileserver with great performance
@@ -192,7 +189,7 @@
             PAPERLESS_TRUSTED_PROXIES = "10.10.12.0/24";
             PAPERLESS_USE_X_FORWARDED_HOST = true;
             PAPERLESS_USE_X_FORWARDED_PORT = true;
-            PAPERLESS_LOGOUT_REDIRECT_URL = "https://paperless.${domain}";
+            PAPERLESS_LOGOUT_REDIRECT_URL = "https://homepage.${domain}";
 
             # SSO
             PAPERLESS_SOCIAL_AUTO_SIGNUP = true;
@@ -279,8 +276,6 @@
         }
         ;
     };
-
-    nix.settings.trusted-users = [ "donielmaker" ];
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${system}.default
