@@ -45,13 +45,6 @@
 
     services.lact.enable = true;
 
-    # services.printing.enable = true;
-    # services.avahi = {
-    #     enable = true;
-    #     nssmdns4 = true;
-    #     openFirewall = true;
-    # };
-
     age.secrets = {
        wireguard-priKey.file = ./secrets/wireguard-priKey.age;
        wireguard-shrKey.file = ./secrets/wireguard-shrKey.age;
