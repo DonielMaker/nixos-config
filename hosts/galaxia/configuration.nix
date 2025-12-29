@@ -30,11 +30,11 @@
     services.upower.enable = true;
     services.tlp.enable = true;
 
+    programs.localsend.enable = true;
+
     age.secrets = {
        wireguard-priKey.file = ./secrets/wireguard-priKey.age;
     };
-
-    programs.localsend.enable = true;
 
     networking.wg-quick.interfaces.wg0 = {
         address = [ "10.20.10.3/32" ];
@@ -52,15 +52,17 @@
         inputs.quickshell.packages.${system}.quickshell
         inputs.ragenix.packages.${system}.default
 
-        wireguard-tools
-    
-        just
         zathura
         typst
+
+        just
+        brave
+        wireguard-tools
         vlc
         signal-desktop
-        orca-slicer
-        nautilus
+        gimp
+        rustdesk
+        obs-studio
         geeqie
 
         home-manager
