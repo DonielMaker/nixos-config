@@ -40,29 +40,29 @@
     in
 
     {
-        jwtSecret = {
+        autheliaJwtSecret = {
             inherit (authelia) mode owner group;
             file = ./secrets/authelia/jwtSecret.age;
         };
 
-        storageEncryptionKey = {
+        autheliaStorageEncryptionKey = {
             inherit (authelia) mode owner group;
             file = ./secrets/authelia/storageEncryptionKey.age;
         };
 
-        sessionSecret = {
+        autheliaSessionSecret = {
             inherit (authelia) mode owner group;
             file = ./secrets/authelia/sessionSecret.age;
         };
 
         autheliaLldapPassword = {
             inherit (authelia) mode owner group;
-            file = ./secrets/authelia/autheliaLldapPassword.age;
+            file = ./secrets/authelia/lldapPassword.age;
         };
 
         autheliaJwksKey = {
             inherit (authelia) mode owner group;
-            file = ./secrets/authelia/autheliaJwksKey.age;
+            file = ./secrets/authelia/jwksKey.age;
         };
 
         grafanaClientSecret = {
@@ -70,7 +70,7 @@
             file = ./secrets/grafana/clientSecret.age;
         };
 
-        cloudflareDnsApiToken.file = ./secrets/cloudflareDnsApiToken.age;
+        cloudflareDnsApiToken.file = ./secrets/cloudflare/dnsApiToken.age;
     };
 
     # Lldap: Ldap Server
@@ -274,14 +274,6 @@ IN  NS  localhost.
                             siteMonitor = "http://lastprism.${domain}:8080";
                         };
                     }
-                    {
-                        "Trilium" = {
-                            description = "Note-taking Server";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@master/svg/trilium-notes.svg";
-                            href = "https://trilium.${domain}";
-                            siteMonitor = "http://lastprism.${domain}:8965";
-                        };
-                    }
                 ];
             }
         ];
@@ -321,8 +313,6 @@ IN  NS  localhost.
         webExternalUrl = "https://prometheus.${domain}";
         port = 9090;
     };
-
-    nix.settings.trusted-users = [ "donielmaker" ];
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${system}.default
