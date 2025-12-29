@@ -52,13 +52,11 @@
         inputs.quickshell.packages.${system}.quickshell
 
         just
-        brave
+        brave 
         scarlett2
         alsa-scarlett-gui
         wireguard-tools
         protonplus
-        gnome-calendar
-        gnome-contacts
         gimp
         rustdesk
         signal-desktop
@@ -67,7 +65,6 @@
         vesktop
         obs-studio
         geeqie
-        hyprshot
 
         prismlauncher
         heroic
@@ -76,11 +73,7 @@
         xclicker
 
         orca-slicer
-        nautilus
 
-        wakeonlan
-        hyprpolkitagent
-        kdePackages.qt6ct
         home-manager
     ];
 
