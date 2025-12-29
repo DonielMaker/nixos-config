@@ -32,6 +32,9 @@
 
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
 
+    networking.nameservers = [ "10.10.12.10" "10.10.110.10" "1.1.1.1" ];
+    services.resolved.domains = [ "thematt.net" "soluttech.uk" ];
+
     services.flatpak.enable = true;
 
     boot.plymouth.enable = true;
