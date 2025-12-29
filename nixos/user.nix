@@ -1,6 +1,9 @@
 {pkgs, username, shell, ...}:
 
 {
+
+    nix.settings.trusted-users = [ "donielmaker" ];
+
     users.users.${username} = {
         isNormalUser = true;
         description = username;
