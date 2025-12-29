@@ -41,11 +41,6 @@
 
     services.gnome.gnome-keyring.enable = true;
 
-    programs.nautilus-open-any-terminal.enable = true;
-    programs.nautilus-open-any-terminal.terminal = "alacritty";
-
-    services.gvfs.enable = true;
-
     programs.localsend.enable = true;
 
     services.lact.enable = true;
