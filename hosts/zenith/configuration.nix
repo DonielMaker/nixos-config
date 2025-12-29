@@ -45,11 +45,6 @@
 
     services.lact.enable = true;
 
-    age.secrets = {
-       wireguard-priKey.file = ./secrets/wireguard-priKey.age;
-       wireguard-shrKey.file = ./secrets/wireguard-shrKey.age;
-    };
-
     virtualisation.waydroid.enable = true;
 
     environment.systemPackages = with pkgs; [
