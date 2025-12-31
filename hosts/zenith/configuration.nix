@@ -88,6 +88,8 @@
         steam
         everest-mons
         xclicker
+        owmods-gui
+        owmods-cli
 
         orca-slicer
         nautilus
