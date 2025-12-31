@@ -11,14 +11,19 @@
         neovim
         git
 
-        fuzzel
         mangohud
+        librewolf
+        mangohud
+
+        fuzzel
 
         hyprland
         hyprlock
         hypridle
         stylix
     ];
+
+    nixpkgs.overlays = [ inputs.nur.overlays.default ];
 
     wayland.windowManager.hyprland.settings = {
         workspace = [

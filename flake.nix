@@ -16,6 +16,9 @@
         stylix.url = "github:nix-community/stylix";
         stylix.inputs.nixpkgs.follows = "nixpkgs";
 
+        nur.url = "github:nix-community/NUR";
+        nur.inputs.nixpkgs.follows = "nixpkgs";
+
         copyparty.url = "github:9001/copyparty";
 
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
@@ -57,13 +60,8 @@
         nixosConfigurations.lastprism = mkNixos ./hosts/lastprism;
         # Auth Server
         nixosConfigurations.miasma = mkNixos ./hosts/miasma;
-        # TBC Router
-        # nixosConfigurations.vilethorn = mkNixos ./hosts/vilethorn;
 
         homeConfigurations."donielmaker@zenith" = mkHome ./hosts/zenith;
         homeConfigurations."donielmaker@galaxia" = mkHome ./hosts/galaxia;
-        homeConfigurations."donielmaker@wsl" = mkHome ./hosts/wsl;
-
-        nixosConfigurations.wsl = mkNixos ./hosts/wsl;
     };
 }
