@@ -27,3 +27,7 @@ update:
     nix flake update
     just rb
     just hm
+
+clean:
+    sudo nix-collect-garbage -d    
+    nix-collect-garbage -d
