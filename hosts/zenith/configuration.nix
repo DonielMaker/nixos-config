@@ -32,32 +32,18 @@
 
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
 
+    networking.nameservers = [ "10.10.12.10" "10.10.110.10" "1.1.1.1" ];
+    services.resolved.domains = [ "thematt.net" "soluttech.uk" ];
+
     services.flatpak.enable = true;
 
     boot.plymouth.enable = true;
 
     services.gnome.gnome-keyring.enable = true;
 
-    programs.nautilus-open-any-terminal.enable = true;
-    programs.nautilus-open-any-terminal.terminal = "alacritty";
-
-    services.gvfs.enable = true;
-
     programs.localsend.enable = true;
 
     services.lact.enable = true;
-
-    # services.printing.enable = true;
-    # services.avahi = {
-    #     enable = true;
-    #     nssmdns4 = true;
-    #     openFirewall = true;
-    # };
-
-    age.secrets = {
-       wireguard-priKey.file = ./secrets/wireguard-priKey.age;
-       wireguard-shrKey.file = ./secrets/wireguard-shrKey.age;
-    };
 
     virtualisation.waydroid.enable = true;
 
@@ -66,13 +52,11 @@
         inputs.quickshell.packages.${system}.quickshell
 
         just
-        brave
+        brave 
         scarlett2
         alsa-scarlett-gui
         wireguard-tools
         protonplus
-        gnome-calendar
-        gnome-contacts
         gimp
         rustdesk
         signal-desktop
@@ -81,7 +65,6 @@
         vesktop
         obs-studio
         geeqie
-        hyprshot
 
         prismlauncher
         heroic
@@ -92,11 +75,7 @@
         owmods-cli
 
         orca-slicer
-        nautilus
 
-        wakeonlan
-        hyprpolkitagent
-        kdePackages.qt6ct
         home-manager
     ];
 

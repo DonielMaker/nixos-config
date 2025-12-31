@@ -11,14 +11,13 @@ let
 in
 
 {
-    # Secrets dedicated to authelia
     "authelia/jwtSecret.age".publicKeys = users ++ systems;
     "authelia/storageEncryptionKey.age".publicKeys = users ++ systems;
     "authelia/sessionSecret.age".publicKeys = users ++ systems;
-    "authelia/autheliaLldapPassword.age".publicKeys = users ++ systems;
-    "authelia/autheliaJwksKey.age".publicKeys = users ++ systems;
+    "authelia/lldapPassword.age".publicKeys = users ++ systems;
+    "authelia/jwksKey.age".publicKeys = users ++ systems;
 
     "grafana/clientSecret.age".publicKeys = users ++ systems;
 
-    "cloudflareDnsApiToken.age".publicKeys = users ++ systems;
+    "cloudflare/dnsApiToken.age".publicKeys = users ++ systems;
 }

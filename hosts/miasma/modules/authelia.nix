@@ -12,9 +12,9 @@
     services.authelia.instances.main = {
         enable = true;
         secrets = {
-            jwtSecretFile = config.age.secrets.jwtSecret.path;
-            storageEncryptionKeyFile = config.age.secrets.storageEncryptionKey.path;
-            sessionSecretFile = config.age.secrets.sessionSecret.path;
+            jwtSecretFile = config.age.secrets.autheliaJwtSecret.path;
+            storageEncryptionKeyFile = config.age.secrets.autheliaStorageEncryptionKey.path;
+            sessionSecretFile = config.age.secrets.autheliaSessionSecret.path;
             oidcIssuerPrivateKeyFile = config.age.secrets.autheliaJwksKey.path;
         };
         environmentVariables = {
