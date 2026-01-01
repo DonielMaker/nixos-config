@@ -14,7 +14,6 @@
         settings
         user
         openssh
-        hyprland
 
         alloy
     ];
@@ -231,18 +230,28 @@
     services.home-assistant.enable = true;
     services.home-assistant = {
         extraComponents = [
-            # Components required to complete the onboarding
             "analytics"
             "met"
-            # Recommended for fast zlib compression
-            # https://www.home-assistant.io/integrations/isal
             "isal"
             "mqtt"
         ];
+
+        customComponents = with pkgs.home-assistant-custom-components; [
+            auth_oidc
+            prometheus_sensor
+        ];
+
         config = {
             # Includes dependencies for a basic setup
             # https://www.home-assistant.io/integrations/default_config/
             default_config = {};
+            homeassistant = {
+                name = "Home";
+                latitude = "53.00906288742223";
+                longitude = "9.060134791016266";
+                unit_system = "metric";
+                time_zone = "Europe/Berlin";
+            };
             http = {
                 use_x_forwarded_for = true;
                 # Why Can't this be dns?
