@@ -12,7 +12,6 @@
         git
 
         fuzzel
-        flameshot
 
         hyprland
         hyprlock
