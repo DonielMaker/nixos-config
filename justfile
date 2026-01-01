@@ -22,16 +22,30 @@ nr HOST CONFIG:
 gen-auth:
     nix run nixpkgs\#authelia -- crypto hash generate argon2 --random --random.length 64 --random.charset alphanumeric
 
-# Update the flake and rb/hm
+# Execute rb and hm afterwards
 update:
-    nix flake update
     just rb
     just hm
+
+# Update nix flake and run just update
+update-full:
+    nix flake update
+    just update
 
 # Clean Nix-Store
 clean:
     sudo nix-collect-garbage -d    
     nix-collect-garbage -d
 
+# Run a nixosConfiguration inside a repl
 repl CONFIG=(FLAKE):
     nixos-rebuild repl --flake {{ CONFIG }}
+
+[doc("""
+Install via nixos-anywhere
+    HARDWARE_PATH: path to your hardware-configuration.nix
+    HOST: host to install the config on (user@ip_address)
+    CONFIG: path to flake
+""")]
+remote-install HARDWARE_PATH HOST CONFIG: 
+    nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-generate-config {{ HARDWARE_PATH }} --flake {{ CONFIG }} --target-host {{ HOST }}
