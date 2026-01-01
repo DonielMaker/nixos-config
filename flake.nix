@@ -39,6 +39,7 @@
     outputs = {...}@inputs:
 
     let 
+        # This only lives in this flake please use arch instead
         system = "x86_64-linux";
 
         pkgs = import inputs.nixpkgs { inherit system overlays; config.allowUnfree = true; };
@@ -50,8 +51,8 @@
 
         # TODO: Perhaps move these all into one main import file?
         # TODO: mkHome and mkNixos seem very similar is there a way to maybe combine these into one make function?
-        mkNixos = import ./lib/mkNixos.nix {inherit inputs system pkgs pkgs-stable myLib;};
-        mkHome = import ./lib/mkHome.nix {inherit inputs system pkgs pkgs-stable myLib;};
+        mkNixos = import ./lib/mkNixos.nix {inherit inputs pkgs pkgs-stable;};
+        mkHome = import ./lib/mkHome.nix {inherit inputs pkgs pkgs-stable;};
         buildModules = import ./lib/getModules.nix {lib = inputs.nixpkgs.lib;};
         getSecrets = import ./lib/getSecrets.nix {lib = inputs.nixpkgs.lib;};
 

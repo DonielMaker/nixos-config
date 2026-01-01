@@ -1,12 +1,13 @@
-{inputs, system, pkgs, pkgs-stable, myLib}:
+{inputs, pkgs, pkgs-stable}:
 
 settingsPath: 
 
 let
     home = import "${settingsPath}/home.nix";
     settings = import "${settingsPath}/settings.nix"; 
+    arch = pkgs.stdenv.hostPlatform.system;
 
-    extraSpecialArgs = {inherit system pkgs-stable inputs myLib;} // settings;
+    extraSpecialArgs = {inherit inputs pkgs-stable arch;} // settings;
 in
 
 inputs.home-manager.lib.homeManagerConfiguration {

@@ -1,4 +1,4 @@
-{config, inputs, pkgs, system, ...}:
+{config, inputs, pkgs, arch, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -49,8 +49,8 @@
     };
 
     environment.systemPackages = with pkgs; [
-        inputs.quickshell.packages.${system}.quickshell
-        inputs.ragenix.packages.${system}.default
+        inputs.quickshell.packages.${arch}.quickshell
+        inputs.ragenix.packages.${arch}.default
 
         zathura
         typst

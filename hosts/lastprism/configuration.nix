@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, system, domain, ...}:
+{ config, inputs, pkgs, domain, ...}:
 
 {
 
@@ -278,7 +278,7 @@
     };
 
     environment.systemPackages = with pkgs; [
-        inputs.ragenix.packages.${system}.default
+        inputs.ragenix.packages.${arch}.default
 
         vim
         git

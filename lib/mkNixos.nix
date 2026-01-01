@@ -1,12 +1,13 @@
-{inputs, system, pkgs, pkgs-stable, myLib}:
+{inputs, pkgs, pkgs-stable}:
 
 settingsPath:
 
 let
     conf = import "${settingsPath}/configuration.nix";
     settings = import "${settingsPath}/settings.nix"; 
+    arch = pkgs.stdenv.hostPlatform.system;
 
-    specialArgs = {inherit system pkgs-stable inputs myLib;} // settings;
+    specialArgs = {inherit inputs pkgs-stable arch;} // settings;
 in
 
 inputs.nixpkgs.lib.nixosSystem {

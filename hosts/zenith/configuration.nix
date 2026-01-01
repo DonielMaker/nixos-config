@@ -1,4 +1,4 @@
-{inputs, pkgs, system, ...}:
+{inputs, pkgs, arch, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -48,8 +48,8 @@
     virtualisation.waydroid.enable = true;
 
     environment.systemPackages = with pkgs; [
-        inputs.ragenix.packages.${system}.default
-        inputs.quickshell.packages.${system}.quickshell
+        inputs.ragenix.packages.${arch}.default
+        inputs.quickshell.packages.${arch}.quickshell
 
         just
         brave 
