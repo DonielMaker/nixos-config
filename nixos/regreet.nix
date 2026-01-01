@@ -1,4 +1,4 @@
-{pkgs, config,  ...}: 
+{config, pkgs, image,  ...}: 
 
 let
     hyprConf = pkgs.writeText "hyprland.conf" ''
@@ -9,13 +9,6 @@ let
             # disable_hyprland_qtutils_check = true
         }
     '';
-    
-    variant = "macchiato";
-
-    image = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/DonielMaker/wallpapers/main/rohit-tandon-9wg5jCEPBsw-unsplash.jpg";
-        sha256 = "sha256-qSUv2rCHWB2fYwL2Gd8d8LeQKKtM4aEljshaFbirB0g=";
-    };
 in
 
 {
@@ -34,7 +27,7 @@ in
     programs.regreet = {
 
         settings = {
-            background.path = "${image}";
+            background.path = "${image.login}";
             background.fit = "Cover";
 
             timezone = "Europe/Berlin";

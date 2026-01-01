@@ -1,12 +1,4 @@
-{pkgs, lib, ...}: 
-
-let
-    pfp = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/DonielMaker/wallpapers/9d3e6bb09f9d2745b6224511c7ef3a025666d04a/Matt.jpg";
-        sha256 = "sha256-qIzNEhdXCAfhSZiGqzOdwgcheESpYggVWTj+NfhRQKU=";
-    };
-
-in
+{lib, image, ...}: 
 
 {
     programs.hyprlock.enable = true;
@@ -39,7 +31,7 @@ in
         };
 
         image = {
-            path = "${pfp}";
+            path = "${image.pfp}";
             border_size = "2";
             border_color = "rgba(255, 255, 255, 0)";
             size = "160";

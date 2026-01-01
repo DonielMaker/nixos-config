@@ -4,7 +4,7 @@ settingsPath:
 
 let
     home = import "${settingsPath}/home.nix";
-    settings = import "${settingsPath}/settings.nix"; 
+    settings = import "${settingsPath}/settings.nix" {inherit pkgs;}; 
     arch = pkgs.stdenv.hostPlatform.system;
 
     extraSpecialArgs = {inherit inputs pkgs-stable arch;} // settings;
