@@ -1,4 +1,4 @@
-{inputs, pkgs, arch, ...}:
+{inputs, pkgs, pkgs-stable, arch, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -49,11 +49,11 @@
         just
         scarlett2
         alsa-scarlett-gui
-        geeqie
+        pkgs-stable.geeqie
 
         brave 
         gimp
-        rustdesk
+        pkgs-stable.rustdesk
         signal-desktop
         vlc
         kdePackages.kdenlive
