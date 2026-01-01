@@ -1,8 +1,6 @@
 things to do:
 
 - Many Client Services are Duplicates. This includes:
-    - Printing
-    - plymouth
     - localsend
 
 - Many Values are hard-set instead of usable variables. Possible Refactors are:

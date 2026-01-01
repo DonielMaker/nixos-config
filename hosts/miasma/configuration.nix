@@ -126,11 +126,13 @@ $ORIGIN ${domain}.
 
 ns                  IN      A       10.10.12.10
 
-proxmox.lastprism             IN      A       10.10.12.12
+proxmox.lastprism   IN      A       10.10.12.12
 
-lastprism                   IN      A       10.10.12.11
+lastprism           IN      A       10.10.12.11
 
-miasma                   IN      A       10.10.12.10
+miasma              IN      A       10.10.12.10
+
+vilethorn           IN      A       10.10.90.1              
 
 *                   IN      CNAME   miasma.${domain}.
                 '';

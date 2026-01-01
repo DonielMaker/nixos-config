@@ -54,21 +54,17 @@
         mkNixos = import ./lib/mkNixos.nix {inherit inputs pkgs pkgs-stable;};
         mkHome = import ./lib/mkHome.nix {inherit inputs pkgs pkgs-stable;};
         buildModules = import ./lib/getModules.nix {lib = inputs.nixpkgs.lib;};
-        getSecrets = import ./lib/getSecrets.nix {lib = inputs.nixpkgs.lib;};
-
-        # TODO: like this but maybe a bit better?
-        myLib = {inherit mkNixos mkHome buildModules getSecrets;};
     in
 
     {
         nixosModules = buildModules ./nixos ".nix";
         homeManagerModules = buildModules ./hm ".nix";
 
-        # Main PC
+        # Desktop
         nixosConfigurations.zenith = mkNixos ./hosts/zenith;
         # Laptop
         nixosConfigurations.galaxia = mkNixos ./hosts/galaxia;
-        # Server
+        # Storage Server
         nixosConfigurations.lastprism = mkNixos ./hosts/lastprism;
         # Auth Server
         nixosConfigurations.miasma = mkNixos ./hosts/miasma;

@@ -32,12 +32,7 @@
 
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
 
-    networking.nameservers = [ "10.10.12.10" "10.10.110.10" "1.1.1.1" ];
-    services.resolved.domains = [ "thematt.net" "soluttech.uk" ];
-
     services.flatpak.enable = true;
-
-    boot.plymouth.enable = true;
 
     services.gnome.gnome-keyring.enable = true;
 
@@ -52,11 +47,11 @@
         inputs.quickshell.packages.${arch}.quickshell
 
         just
-        brave 
         scarlett2
         alsa-scarlett-gui
-        wireguard-tools
-        protonplus
+        geeqie
+
+        brave 
         gimp
         rustdesk
         signal-desktop
@@ -64,7 +59,7 @@
         kdePackages.kdenlive
         vesktop
         obs-studio
-        geeqie
+        orca-slicer
 
         prismlauncher
         heroic
@@ -73,8 +68,8 @@
         xclicker
         owmods-gui
         owmods-cli
+        protonplus
 
-        orca-slicer
 
         home-manager
     ];

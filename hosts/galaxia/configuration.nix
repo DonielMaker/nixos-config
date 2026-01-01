@@ -57,11 +57,9 @@
 
         just
         brave
-        wireguard-tools
         vlc
         signal-desktop
         gimp
-        rustdesk
         obs-studio
         geeqie
 

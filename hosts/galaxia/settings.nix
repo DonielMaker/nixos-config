@@ -1,4 +1,4 @@
-rec {
+{
     hostname = "galaxia";
     username = "donielmaker";
     mail = "daniel.schmidt0204@gmail.com";

@@ -1,4 +1,4 @@
-rec {
+{
     hostname = "lastprism";
     username = "donielmaker";
     shell = "bash";

@@ -12,11 +12,6 @@ in
 
 inputs.nixpkgs.lib.nixosSystem {
     inherit specialArgs;
-    modules = [
-        conf 
-        {
-            nixpkgs.pkgs = pkgs;
-        }
-    ];
+    modules = [ conf { nixpkgs.pkgs = pkgs; } ];
 }
 
