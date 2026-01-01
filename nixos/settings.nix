@@ -1,7 +1,7 @@
-{timezone, ...}:
+{...}:
 
 {
-    time.timeZone = timezone;
+    time.timeZone = "Europe/Berlin";
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

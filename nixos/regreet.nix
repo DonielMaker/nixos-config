@@ -37,7 +37,7 @@ in
             background.path = "${image}";
             background.fit = "Cover";
 
-            timezone = "Germany/Berlin";
+            timezone = "Europe/Berlin";
         };
 
         # Not working :/
