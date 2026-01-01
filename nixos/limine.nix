@@ -1,4 +1,4 @@
-{image, ...}: 
+{lib, image, ...}: 
 
 let
 in
@@ -12,6 +12,7 @@ in
         style = {
             wallpapers = [ "${image.boot}" ];
             interface.branding = "I use NixOS btw";
+            graphicalTerminal.background = lib.mkForce "FFFFFFFF";
         };
     };
 }
