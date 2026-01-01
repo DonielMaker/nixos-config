@@ -15,7 +15,6 @@
         # Secret Management
         ragenix.url = "github:yaxitech/ragenix";
         ragenix.inputs.nixpkgs.follows = "nixpkgs";
-        ragenix.inputs.darwin.follows = ""; # Saves resources
 
         # Styling
         stylix.url = "github:nix-community/stylix";
