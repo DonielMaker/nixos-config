@@ -25,8 +25,6 @@
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
         neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
-	    wsl.url = "github:nix-community/NixOS-WSL/main";
     };
 
     outputs = {...}@inputs:
