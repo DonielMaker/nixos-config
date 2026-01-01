@@ -1,3 +1,5 @@
+{pkgs}:
+
 {
     hostname = "lastprism";
     username = "donielmaker";

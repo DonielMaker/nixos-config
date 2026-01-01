@@ -6,6 +6,7 @@
     mail = "daniel.schmidt0204@gmail.com";
     monitor = ["DP-1, 2560x1440@144hz, auto, 1" "DP-2, 1920x1080@180hz, auto-left, 1, transform, 3"];
     shell = "zsh";
+    domain = "thematt.net";
     image = {
         pfp = pkgs.fetchurl {
             url = "https://raw.githubusercontent.com/DonielMaker/wallpapers/9d3e6bb09f9d2745b6224511c7ef3a025666d04a/Matt.jpg";

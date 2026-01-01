@@ -1,3 +1,5 @@
+{pkgs}:
+
 {
     hostname = "miasma";
     username = "donielmaker";

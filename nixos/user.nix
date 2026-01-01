@@ -2,7 +2,7 @@
 
 {
 
-    nix.settings.trusted-users = [ "donielmaker" ];
+    nix.settings.trusted-users = [ username ];
 
     users.users.${username} = {
         isNormalUser = true;

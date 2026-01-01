@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, domain, ...}:
+{config, inputs, pkgs, username, domain, arch, ...}:
 
 {
 
@@ -26,7 +26,7 @@
 
     powerManagement.powertop.enable = true;
 
-    users.users.donielmaker.extraGroups = [ "media" ];
+    users.users.${username}.extraGroups = [ "media" ];
     users.groups.media = {};
 
     # Should these be hardcoded or via config.services.copyparty.user, etc.?
@@ -196,6 +196,7 @@
             PAPERLESS_DISABLE_REGULAR_LOGIN = true;
             PAPERLESS_REDIRECT_LOGIN_TO_SSO = true;
             PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
+            # TODO: This secrets needs to be secured
             PAPERLESS_SOCIALACCOUNT_PROVIDERS= ''
 {
     "openid_connect": {

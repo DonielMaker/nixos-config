@@ -52,10 +52,10 @@
         inputs.quickshell.packages.${arch}.quickshell
         inputs.ragenix.packages.${arch}.default
 
-        zathura
+        just
         typst
 
-        just
+        zathura
         brave
         vlc
         signal-desktop
