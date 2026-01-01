@@ -1,10 +1,9 @@
-{pkgs, inputs, system, ...}:
+{pkgs, ...}:
 
 {
     programs.neovim = {
         enable = true;
         defaultEditor = true;
-        package = inputs.neovim-nightly-overlay.packages.${system}.default;
         plugins = with pkgs.vimPlugins.nvim-treesitter-parsers; [
             # latex
             json

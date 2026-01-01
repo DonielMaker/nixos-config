@@ -32,8 +32,12 @@
     let 
         system = "x86_64-linux";
 
-        pkgs = import inputs.nixpkgs { inherit system; config.allowUnfree = true; };
-        pkgs-stable = import inputs.nixpkgs-stable {inherit system; config.allowUnfree = true;};
+        pkgs = import inputs.nixpkgs { inherit system overlays; config.allowUnfree = true; };
+        pkgs-stable = import inputs.nixpkgs-stable {inherit system overlays; config.allowUnfree = true;};
+        overlays = with inputs; [
+            neovim-nightly-overlay.overlays.default
+            nur.overlays.default
+        ];
 
         # TODO: Perhaps move these all into one main import file?
         # TODO: mkHome and mkNixos seem very similar is there a way to maybe combine these into one make function?
