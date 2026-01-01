@@ -61,14 +61,13 @@
 
         # Desktop
         nixosConfigurations.zenith = mkNixos ./hosts/zenith;
+        homeConfigurations."donielmaker@zenith" = mkHome ./hosts/zenith;
         # Laptop
         nixosConfigurations.galaxia = mkNixos ./hosts/galaxia;
+        homeConfigurations."donielmaker@galaxia" = mkHome ./hosts/galaxia;
         # Storage Server
         nixosConfigurations.lastprism = mkNixos ./hosts/lastprism;
         # Auth Server
         nixosConfigurations.miasma = mkNixos ./hosts/miasma;
-
-        homeConfigurations."donielmaker@zenith" = mkHome ./hosts/zenith;
-        homeConfigurations."donielmaker@galaxia" = mkHome ./hosts/galaxia;
     };
 }
