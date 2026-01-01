@@ -9,8 +9,6 @@
     programs.nautilus-open-any-terminal.terminal = "alacritty";
 
     services.gvfs.enable = true;
-    
-    services.gnome.sushi.enable = true;
 
     environment.systemPackages = with pkgs; [
         kitty
