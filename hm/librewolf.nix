@@ -1,4 +1,6 @@
-{ pkgs, username, ...}: {
+{ pkgs, username, ...}:
+
+{
     programs.librewolf.enable = true;
 
     programs.librewolf = {
@@ -9,18 +11,7 @@
                 bitwarden
                 darkreader
             ];
-            containers = {
-                dangerous = {
-                    color = "red";
-                    icon = "fruit";
-                    id = 2;
-                };
-                shopping = {
-                    color = "blue";
-                    icon = "cart";
-                    id = 1;
-                };
-            };
+
             search = {
                 force = true;
                 default = "ddg";
