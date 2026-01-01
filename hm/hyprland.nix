@@ -1,12 +1,12 @@
-{ pkgs, username, monitor, lib, config, ... }:
+{ pkgs, monitor, lib, config, ... }:
 
 let
-    alacritty = lib.getExe pkgs.alacritty;
-    brave = "${lib.getExe pkgs.brave} --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1";
-    nautilus = lib.getExe pkgs.nautilus;
-    fuzzel = lib.getExe pkgs.fuzzel;
+    terminal = lib.getExe pkgs.alacritty;
+    browser = "${lib.getExe pkgs.brave} --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1";
+    explorer = lib.getExe pkgs.nautilus;
+    launcher = lib.getExe pkgs.fuzzel;
     cliphist = lib.getExe pkgs.cliphist;
-    hyprshot = lib.getExe pkgs.hyprshot;
+    screenshot = lib.getExe pkgs.hyprshot;
     # hyprpicker = lib.getExe pkgs.hyprpicker;
 in
 
@@ -155,20 +155,20 @@ in
 
             bind = [
                 # Terminal
-                "$mainMod, Return, exec, ${alacritty}"
+                "$mainMod, Return, exec, ${terminal}"
                 # File Explorer
-                "$mainMod, E, exec, ${nautilus}"
+                "$mainMod, E, exec, ${explorer}"
                 # Browser
-                "$mainMod, B, exec, ${brave}"
+                "$mainMod, B, exec, ${browser}"
                 # Application Launcher
-                "$mainMod, space, exec, ${fuzzel}"
+                "$mainMod, space, exec, ${launcher}"
                 # Clipboard History
-                "$mainMod, V, exec, ${cliphist} list | ${fuzzel} --dmenu | ${cliphist} decode | wl-copy"
+                "$mainMod, V, exec, ${cliphist} list | ${launcher} --dmenu | ${cliphist} decode | wl-copy"
                 "$mainMod CTRL, V, exec, ${cliphist} wipe"
                 # Screenshot to Clipboard
-                "$mainMod, S, exec, ${hyprshot} -szm region --clipboard-only"
+                "$mainMod, S, exec, ${screenshot} -szm region --clipboard-only"
                 # Screenshot to file
-                "$mainMod SHIFT, S, exec, ${hyprshot} -szm region -o ${config.home.homeDirectory}/Pictures/Screenshots"
+                "$mainMod SHIFT, S, exec, ${screenshot} -szm region -o ${config.home.homeDirectory}/Pictures/Screenshots"
 
                 "$mainMod, Q, killactive,"
                 "$mainMod, M, exit,"
