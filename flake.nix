@@ -2,6 +2,7 @@
     description = "Please don't use!";
 
     inputs = {
+        # Main Dependencies
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
         nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
@@ -11,20 +12,28 @@
         disko.url = "github:nix-community/disko/latest";
         disko.inputs.nixpkgs.follows = "nixpkgs";
 
+        # Secret Management
         ragenix.url = "github:yaxitech/ragenix";
+        ragenix.inputs.nixpkgs.follows = "nixpkgs";
+        ragenix.inputs.darwin.follows = ""; # Saves resources
 
+        # Styling
         stylix.url = "github:nix-community/stylix";
         stylix.inputs.nixpkgs.follows = "nixpkgs";
 
+        # For now only firefox-addons
         nur.url = "github:nix-community/NUR";
         nur.inputs.nixpkgs.follows = "nixpkgs";
 
+        # These are program flakes
         copyparty.url = "github:9001/copyparty";
+        copyparty.inputs.nixpkgs.follows = "nixpkgs";
 
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
         neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+        neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
     };
 
     outputs = {...}@inputs:
