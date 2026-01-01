@@ -10,7 +10,7 @@
     domain = "thematt.net";
     image = {
         pfp = pkgs.fetchurl {
-            url = "https://raw.githubusercontent.com/DonielMaker/wallpapers/9d3e6bb09f9d2745b6224511c7ef3a025666d04a/Matt.jpg";
+            url = "https://raw.githubusercontent.com/DonielMaker/wallpapers/main/Matt.jpg";
             sha256 = "sha256-qIzNEhdXCAfhSZiGqzOdwgcheESpYggVWTj+NfhRQKU=";
         };
         boot = pkgs.fetchurl {
@@ -18,8 +18,8 @@
             sha256 = "sha256-+ObY8Jft/Ergnufgcp/cXKV/webd+74yl1XdsCYdMp0=";
         };
         login = pkgs.fetchurl {
-            url = "https://raw.githubusercontent.com/DonielMaker/wallpapers/main/rohit-tandon-9wg5jCEPBsw-unsplash.jpg";
-            sha256 = "sha256-qSUv2rCHWB2fYwL2Gd8d8LeQKKtM4aEljshaFbirB0g=";
+            url = "https://raw.githubusercontent.com/DonielMaker/wallpapers/refs/heads/main/konstantin-kleine-V1NVvXmO_dk-unsplash.jpg";
+            sha256 = "sha256-gOdgMuuQM//G7lfpaKooa27ij2Ph5RaXNRH9Gc0QrHc=";
         };
     };
 }
