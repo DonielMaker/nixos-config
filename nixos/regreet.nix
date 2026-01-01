@@ -1,43 +1,19 @@
-{config, pkgs, image,  ...}: 
-
-let
-    hyprConf = pkgs.writeText "hyprland.conf" ''
-        exec-once = ${config.programs.regreet.package}/bin/regreet; hyprctl dispatch exit
-        misc {
-            disable_hyprland_logo = true
-            disable_splash_rendering = true
-            # disable_hyprland_qtutils_check = true
-        }
-    '';
-in
+{image,  ...}: 
 
 {
-    services.greetd.enable = true;
-    services.greetd.settings = {
-        default_session = {
-            command = "Hyprland --config ${hyprConf}";
-        };
-    };
-
-    environment.systemPackages = with pkgs; [
-        regreet
-    ];
-
     programs.regreet.enable = true;
-    programs.regreet = {
+    programs.regreet.cageArgs = [ "-s" "-mlast" ];
+    programs.regreet.settings = {
 
-        settings = {
-            background.path = "${image.login}";
-            background.fit = "Cover";
+        background.path = "${image.login}";
+        background.fit = "Cover";
 
-            timezone = "Europe/Berlin";
-        };
+        GTK.cursor_theme_name = "Bibata-Modern-Ice";
+        GTK.icon_theme_name = "Papirus-Dark";
 
-        # Not working :/
-        extraCss = ''
-            .background {
-                background-color: rgba(36, 39, 58, 0.7);
-            }
-        '';
+        appearance.greeting_msg = "Fuck off";
+
+        widget.clock.format = "%H:%M";
+        widget.clock.timezone = "Europe/Berlin";
     };
 }
