@@ -28,6 +28,10 @@ update:
     just rb
     just hm
 
+# Clean Nix-Store
 clean:
     sudo nix-collect-garbage -d    
     nix-collect-garbage -d
+
+repl CONFIG=(FLAKE):
+    nixos-rebuild repl --flake {{ CONFIG }}
