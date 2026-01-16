@@ -57,17 +57,17 @@
             file = ./secrets/copyparty/copyparty-donielmaker-password.age;
         };
 
-        outline-secretKey = {
+        outlineSecretKey = {
             inherit (outline) mode owner group;
             file = ./secrets/outline/secretKey.age;
         };
 
-        outline-utilsSecret = {
+        outlineUtilsSecret = {
             inherit (outline) mode owner group;
             file = ./secrets/outline/utilsSecret.age;
         };
 
-        outline-clientSecret = {
+        outlineClientSecret = {
             inherit (outline) mode owner group;
             file = ./secrets/outline/clientSecret.age;
         };
@@ -77,8 +77,8 @@
     services.outline.enable = true;
     systemd.services.outline.environment.OIDC_LOGOUT_URI = "https://homepage.${domain}";
     services.outline = {
-        secretKeyFile = config.age.secrets.outline-secretKey.path;
-        utilsSecretFile = config.age.secrets.outline-utilsSecret.path;
+        secretKeyFile = config.age.secrets.outlineSecretKey.path;
+        utilsSecretFile = config.age.secrets.outlineUtilsSecret.path;
         port = 2920;
         publicUrl = "https://outline.${domain}";
         forceHttps = false;
@@ -90,7 +90,7 @@
         };
         oidcAuthentication = {
             clientId = "outline";
-            clientSecretFile = config.age.secrets.outline-clientSecret.path;
+            clientSecretFile = config.age.secrets.outlineClientSecret.path;
             authUrl = "https://authelia.${domain}/api/oidc/authorization";
             tokenUrl = "https://authelia.${domain}/api/oidc/token";
             userinfoUrl = "https://authelia.${domain}/api/oidc/userinfo";
