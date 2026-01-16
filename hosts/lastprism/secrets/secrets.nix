@@ -16,4 +16,7 @@ in
     "outline/utilsSecret.age".publicKeys = users ++ systems;
     "outline/secretKey.age".publicKeys = users ++ systems;
     "outline/clientSecret.age".publicKeys = users ++ systems;
+
+    # Radicale
+    "radicale/password.age".publicKeys = users ++ systems;
 }

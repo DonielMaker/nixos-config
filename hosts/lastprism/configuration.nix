@@ -49,6 +49,12 @@
             owner = config.services.outline.user;
             group = config.services.outline.group;
         };
+
+        radicale = {
+            mode = "440";
+            owner = "radicale";
+            group = "radicale";
+        };
     in
 
     {
@@ -70,6 +76,11 @@
         outlineClientSecret = {
             inherit (outline) mode owner group;
             file = ./secrets/outline/clientSecret.age;
+        };
+
+        radicalePassword = {
+            inherit (radicale) mode owner group;
+            file = ./secrets/radicale/password.age;
         };
     };
 
@@ -164,12 +175,11 @@
         storage.filesystem_folder = "/storage/radicale";
         auth.type = "ldap";
         auth = {
-            ldap_uri = "ldap://nixos.lastprism.${domain}:3890";
+            ldap_uri = "ldap://miasma.${domain}:3890";
             ldap_base = "dc=thematt,dc=net";
             ldap_reader_dn = "uid=radicale,ou=people,dc=thematt,dc=net";
-            ldap_secret = "Changeme";
             ldap_user_attribute = "uid";
-            # ldap_secret_file = config.age.secrets.radicale_lldap_pass.path;
+            ldap_secret_file = config.age.secrets.radicalePassword.path;
             ldap_filter = "(&(objectClass=Person)(uid={0})(memberOf=cn=radicale,ou=groups,dc=thematt,dc=net))";
         };
     };
