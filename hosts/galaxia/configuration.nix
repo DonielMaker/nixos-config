@@ -1,4 +1,4 @@
-{config, inputs, pkgs, arch, ...}:
+{inputs, pkgs, pkgs-stable, arch, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -32,22 +32,6 @@
 
     programs.localsend.enable = true;
 
-    age.secrets = {
-       wireguard-priKey.file = ./secrets/wireguard-priKey.age;
-    };
-
-    networking.wg-quick.interfaces.wg0 = {
-        address = [ "10.20.10.3/32" ];
-        peers = [
-            {
-                allowedIPs = [ "10.20.10.0/24" "10.10.0.0/16" ];
-                endpoint = "public.ipv64.de:51820";
-                publicKey = "HS4sfxavdcVujCE9r0nJBdcaJgl7xg9Z3bGqFcfjq0w=";
-            }
-        ];
-        privateKeyFile = config.age.secrets.wireguard-priKey.path;
-    };
-
     environment.systemPackages = with pkgs; [
         inputs.quickshell.packages.${arch}.quickshell
         inputs.ragenix.packages.${arch}.default
@@ -61,7 +45,7 @@
         signal-desktop
         gimp
         obs-studio
-        geeqie
+        pkgs-stable.geeqie
 
         home-manager
     ];
