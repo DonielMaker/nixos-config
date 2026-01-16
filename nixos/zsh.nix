@@ -11,28 +11,19 @@
     environment.systemPackages = with pkgs; [
         # CLI Tools
         vim
+        just
         htop
         yt-dlp
         imagemagick
-        gcc
-        cargo
-        rustc
-        jq
-        zsh
         git
         lazygit
         ripgrep
-        bat
         fd
         fzf
         unzip
         fastfetch
         eza
         ffmpeg
-        tmux
-        nmap
-        imagemagick
-        pkg-config
     ];
 
 
