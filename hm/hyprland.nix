@@ -171,7 +171,7 @@ in
                 "$mainMod SHIFT, S, exec, ${screenshot} -szm region -o ${config.home.homeDirectory}/Pictures/Screenshots"
 
                 "$mainMod, Q, killactive,"
-                "$mainMod, M, exit,"
+                "$mainMod SHIFT, M, exit,"
                 "$mainMod, F, togglefloating,"
                 "$mainMod, P, pin,"
                 "$mainMod, G, fullscreenstate, 2 0"
