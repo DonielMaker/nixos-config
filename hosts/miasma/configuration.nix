@@ -102,7 +102,7 @@
     services.bind.enable = true;
     services.bind = {
         forwarders = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" "8.8.8.8" ]; 
-        cacheNetworks = [ "10.20.0.0/16" "10.10.0.0/16" ];
+        cacheNetworks = [ "127.0.0.1" "10.0.0.0/8" ];
         zones = {
             "${domain}" = {
                 master = true;
@@ -137,6 +137,7 @@ vilethorn           IN      A       10.10.90.1
 *                   IN      CNAME   miasma.${domain}.
                 '';
             };
+
             "soluttech.uk" = {
                 master = true;
                 allowQuery = [];
