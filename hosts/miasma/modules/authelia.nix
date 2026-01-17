@@ -108,7 +108,7 @@
                         {
                             client_id = "proxmox";
                             client_name = "Proxmox";
-                            client_secret = "$argon2id$v=19$m=65536,t=3,p=4$2sHToeyt+l5bUebj8hVVAg$jeftjG/M85YjixQuR4qe+EjnNNonPJIWhD23gbYS904";
+                            client_secret = "$argon2id$v=19$m=65536,t=3,p=4$khsEGQnE+udPRXAIA/WBNw$1BgVRPKoM1gCXSh8QlLNeex490EJMXhIh4ypST42q38";
                             public = false;
                             require_pkce= true;
                             pkce_challenge_method = "S256";
