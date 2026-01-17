@@ -46,12 +46,13 @@
         inputs.ragenix.packages.${arch}.default
         inputs.quickshell.packages.${arch}.quickshell
 
-        just
         scarlett2
         alsa-scarlett-gui
-        pkgs-stable.geeqie
 
+        evolution
+        evolution-data-server
         brave 
+        pkgs-stable.geeqie
         gimp
         pkgs-stable.rustdesk
         signal-desktop
@@ -60,6 +61,8 @@
         vesktop
         obs-studio
         orca-slicer
+        librewolf
+        drawio
 
         prismlauncher
         heroic
@@ -69,7 +72,6 @@
         owmods-gui
         owmods-cli
         protonplus
-
 
         home-manager
     ];

@@ -111,6 +111,16 @@
         };
     };
 
+    services.apcupsd.enable = true;
+    services.apcupsd.configText = ''
+        UPSCABLE usb
+        UPSTYPE usb
+        DEVICE
+        LOCKFILE /var/lock
+        UPSCLASS standalone
+        UPSMODE disable
+    '';
+
     # Copyparty: WebDav Fileserver with great performance
     services.copyparty.enable = true;
     services.copyparty = {
