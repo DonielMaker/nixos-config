@@ -15,6 +15,7 @@
         htop
         yt-dlp
         imagemagick
+        ghostscript
         git
         lazygit
         ripgrep
