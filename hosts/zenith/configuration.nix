@@ -30,6 +30,8 @@
         zsh
     ];
 
+    networking.firewall.allowedTCPPorts = [ 5900 ];
+
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
 
     services.flatpak.enable = true;
@@ -41,6 +43,8 @@
     services.lact.enable = true;
 
     virtualisation.waydroid.enable = true;
+
+    programs.wayvnc.enable = true;
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${arch}.default
