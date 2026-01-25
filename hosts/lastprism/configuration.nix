@@ -130,10 +130,12 @@
     services.guacamole-client.enable = true;
     services.guacamole-client = {
         enableWebserver = true;
-        userMappingXml = ./user-mapping.xml;
         settings = {
             guacd-port = config.services.guacamole-server.port;
             guacd-hostname = config.services.guacamole-server.host;
+            postgresql-database = "guacamole";
+            postgresql-username = "guacamole";
+            postgresql-password = "Changeme";
         };
     };
 
