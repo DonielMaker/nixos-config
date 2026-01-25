@@ -20,8 +20,8 @@
 
     nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
 
-    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, paperless, outline
-    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 28981 2920 ];
+    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, paperless, outline, guacamole-server, guacamole-client
+    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 28981 2920 4822 8081];
 
     powerManagement.powertop.enable = true;
 
@@ -120,6 +120,22 @@
         UPSCLASS standalone
         UPSMODE disable
     '';
+
+    services.guacamole-server.enable = true;
+    services.guacamole-server = {
+        host = "0.0.0.0";
+    };
+
+    services.tomcat.port = 8081;
+    services.guacamole-client.enable = true;
+    services.guacamole-client = {
+        enableWebserver = true;
+        userMappingXml = ./user-mapping.xml;
+        settings = {
+            guacd-port = config.services.guacamole-server.port;
+            guacd-hostname = config.services.guacamole-server.host;
+        };
+    };
 
     # Copyparty: WebDav Fileserver with great performance
     services.copyparty.enable = true;
