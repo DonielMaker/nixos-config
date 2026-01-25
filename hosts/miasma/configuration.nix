@@ -134,6 +134,8 @@ miasma              IN      A       10.10.12.10
 
 vilethorn           IN      A       10.10.90.1              
 
+ark                 IN      A       10.10.12.13
+
 *                   IN      CNAME   miasma.${domain}.
                 '';
             };
