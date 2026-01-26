@@ -198,7 +198,7 @@ IN  NS  localhost.
                     }
                     {
                         "Authelia" = {
-                            description = "Idp manager";
+                            description = "IdP Manager";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/authelia.svg";
                             href = "https://authelia.${domain}";
                             siteMonitor = "http://miasma.${domain}:9091";
@@ -225,6 +225,16 @@ IN  NS  localhost.
                             description = "Fritz Box Router";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/fritz.svg";
                             href = "http://192.168.0.1";
+                        };
+                    }
+                    {
+                        "APCUPSD" = {
+                            description = "UPS Stats";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/apc.svg";
+                            widget = {
+                                type = "apcups";
+                                url = "tcp://lastprism.${domain}:3551";
+                            };
                         };
                     }
                 ];
