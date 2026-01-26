@@ -20,8 +20,8 @@
 
     nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
 
-    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, paperless, outline, guacamole-server, guacamole-client
-    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 28981 2920 4822 8081];
+    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, paperless, outline, apcupsd
+    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 28981 2920 3551 ];
 
     powerManagement.powertop.enable = true;
 
@@ -121,23 +121,24 @@
         UPSMODE disable
     '';
 
-    services.guacamole-server.enable = true;
-    services.guacamole-server = {
-        host = "0.0.0.0";
-    };
+    # Replaced by Authentik RAC
+    # services.guacamole-server.enable = true;
+    # services.guacamole-server = {
+    #     host = "0.0.0.0";
+    # };
 
-    services.tomcat.port = 8081;
-    services.guacamole-client.enable = true;
-    services.guacamole-client = {
-        enableWebserver = true;
-        settings = {
-            guacd-port = config.services.guacamole-server.port;
-            guacd-hostname = config.services.guacamole-server.host;
-            postgresql-database = "guacamole";
-            postgresql-username = "guacamole";
-            postgresql-password = "Changeme";
-        };
-    };
+    # services.tomcat.port = 8081;
+    # services.guacamole-client.enable = true;
+    # services.guacamole-client = {
+    #     enableWebserver = true;
+    #     settings = {
+    #         guacd-port = config.services.guacamole-server.port;
+    #         guacd-hostname = config.services.guacamole-server.host;
+    #         postgresql-database = "guacamole";
+    #         postgresql-username = "guacamole";
+    #         postgresql-password = "Changeme";
+    #     };
+    # };
 
     # Copyparty: WebDav Fileserver with great performance
     services.copyparty.enable = true;
