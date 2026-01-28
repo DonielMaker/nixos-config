@@ -41,21 +41,22 @@ in
                 "XDG_SCREENSHOTS_DIR,~/screenshots"
             ];
 
-            windowrulev2 = [
+            windowrule = [
                 # Float Pip in the bottom right
-                "float, pin, noinitialfocus, title:^(Picture in picture)"
+                # "float, pin, noinitialfocus, title:^([Pp]icture[ -]in[ -][Pp]icture)"
+                "match:title ^([Pp]icture[ -]in[ -][Pp]icture)$, float on, pin on"
                 # Width, Height
-                "size 40% 40%, title:^(Picture in picture)"
-                "move 59% 58%, title:^(Picture in picture)"
+                "match:title ^([Pp]icture[ -]in[ -][Pp]icture)$, size monitor_w*0.4 monitor_h*0.4"
+                "match:title ^([Pp]icture[ -]in[ -][Pp]icture)$, move monitor_w*0.59 monitor_h*0.58"
 
                 # Float Brave Extensions in the bottom left
-                "float, pin, class:^(brave-[a-z]+-Default)$"
-                "size 30% 50%, class:^(brave-[a-z]+-Default)$"
-                "move 1% 48%, class:^(brave-[a-z]+-Default)$"
+                "match:class ^(brave-[a-z]+-Default)$, float on, pin on"
+                "match:class ^(brave-[a-z]+-Default)$, size monitor_w*0.3 monitor_h*0.5"
+                "match:class ^(brave-[a-z]+-Default)$, move monitor_w*0.01 monitor_h*0.48"
 
                 # Float gtk portal (File Chooser) in the middle
-                "float, center, class:^(xdg-desktop-portal-gtk)$"
-                "size 40% 40%, class:^(xdg-desktop-portal-gtk)$"
+                "match:class ^(xdg-desktop-portal-gtk)$, float on, center on"
+                "match:class ^(xdg-desktop-portal-gtk)$, size monitor_w*0.4 monitor_h*0.4"
             ];
 
             exec-once = [
