@@ -1,4 +1,4 @@
-{pkgs, ...}: 
+{pkgs, username, ...}: 
 
 {
 
@@ -18,4 +18,6 @@
 
     stylix.targets.hyprland.enable = false;
     stylix.targets.neovim.enable = false;
+
+    stylix.targets.librewolf.profileNames = [ username ];
 }
