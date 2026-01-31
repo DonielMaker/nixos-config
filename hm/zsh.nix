@@ -12,7 +12,7 @@
             "...." = "cd ../../..";
             "....." = "cd ../../../..";
             z = "zellij";
-            rg = "rg --color=auto";
+            grep = "rg";
             s = "ragenix -e";
             lg = "lazygit";
             v = "nvim";
