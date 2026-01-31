@@ -16,6 +16,7 @@
         hyprland
         hyprlock
         hypridle
+        quickshell
         stylix
     ];
 

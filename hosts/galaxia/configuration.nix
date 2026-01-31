@@ -1,11 +1,10 @@
-{inputs, pkgs, pkgs-stable, arch, ...}:
+{inputs, pkgs, pkgs-stable, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
         ./hardware-configuration.nix
         ./disko.nix
         inputs.disko.nixosModules.disko
-        inputs.ragenix.nixosModules.default
         inputs.stylix.nixosModules.stylix
 
         limine
@@ -33,8 +32,6 @@
     programs.localsend.enable = true;
 
     environment.systemPackages = with pkgs; [
-        inputs.quickshell.packages.${arch}.quickshell
-        inputs.ragenix.packages.${arch}.default
 
         just
         typst

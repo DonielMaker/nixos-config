@@ -1,11 +1,10 @@
-{inputs, pkgs, pkgs-stable, arch, ...}:
+{inputs, pkgs, pkgs-stable, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
         ./hardware-configuration.nix
         ./disko.nix
         inputs.disko.nixosModules.disko
-        inputs.ragenix.nixosModules.default
         inputs.stylix.nixosModules.stylix
 
         limine
@@ -47,8 +46,6 @@
     programs.wayvnc.enable = true;
 
     environment.systemPackages = with pkgs; [
-        inputs.ragenix.packages.${arch}.default
-        inputs.quickshell.packages.${arch}.quickshell
 
         scarlett2
         alsa-scarlett-gui
