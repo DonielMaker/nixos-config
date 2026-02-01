@@ -7,6 +7,7 @@
         ./disko.nix
         inputs.disko.nixosModules.disko
         inputs.ragenix.nixosModules.default
+        inputs.authentik-nix.nixosModules.default
 
         systemd-boot
         networking
@@ -20,7 +21,7 @@
     ];
 
     # prometheus, authelia, lldap-web, lldap-ldap, vaultwarden
-    networking.firewall.allowedTCPPorts = [ 9090 9091 17170 3890 5902];
+    networking.firewall.allowedTCPPorts = [ 9090 9091 17170 3890 5902 9000];
     # bind9
     networking.firewall.allowedUDPPorts = [ 53 ];
 
@@ -40,6 +41,9 @@
     in
 
     {
+        authentik-environment.file = ./secrets/authentik/secret.env.age;
+        authentik-proxyEnvironment.file = ./secrets/authentik/proxy.env.age;
+
         autheliaJwtSecret = {
             inherit (authelia) mode owner group;
             file = ./secrets/authelia/jwtSecret.age;
@@ -73,10 +77,25 @@
         cloudflareDnsApiToken.file = ./secrets/cloudflare/dnsApiToken.age;
     };
 
+    services.authentik.enable = true;
+    services.authentik = {
+        environmentFile = config.age.secrets.authentik-environment.path;
+        settings = {
+            disable_startup_analytics = true;
+            avatars = "initials";
+        };
+    };
+
+    # services.authentik-rac.enable = true;
+    # services.authentik-rac.environmentFile = config.age.secrets.authentik-racEnvironment.path;
+
+    # services.authentik-proxy.enable = true;
+    services.authentik-proxy.environmentFile = config.age.secrets.authentik-proxyEnvironment.path;
+
     # Lldap: Ldap Server
     services.lldap.enable = true;
     services.lldap.settings.ldap_base_dn = "dc=thematt,dc=net";
-    # User does no longer exist
+    # # User does no longer exist
     services.lldap.settings.ldap_user_pass = "blablabla";
     services.lldap.silenceForceUserPassResetWarning = true;
 
@@ -185,6 +204,21 @@ IN  NS  localhost.
                 };
             }
         ];
+
+        # bookmarks = [
+        #     {
+        #
+        #         "Social Media" = [
+        #             {
+        #                 "Youtube" = {
+        #                     abbr = "YT";
+        #                     href = "https://youtube.com";
+        #                 };
+        #             }
+        #         ];
+        #     }
+        # ];
+
         services = [
             {
                 "Management/Authentication" = [

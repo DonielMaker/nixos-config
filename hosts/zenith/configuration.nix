@@ -50,15 +50,12 @@
         scarlett2
         alsa-scarlett-gui
 
-        evolution
-        evolution-data-server
         brave 
-        pkgs-stable.geeqie
+        geeqie
         gimp
-        pkgs-stable.rustdesk
         signal-desktop
         vlc
-        kdePackages.kdenlive
+        pkgs-stable.kdePackages.kdenlive
         vesktop
         obs-studio
         orca-slicer

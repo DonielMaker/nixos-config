@@ -63,53 +63,48 @@
             file = ./secrets/copyparty/copyparty-donielmaker-password.age;
         };
 
-        outlineSecretKey = {
-            inherit (outline) mode owner group;
-            file = ./secrets/outline/secretKey.age;
-        };
+        # outlineSecretKey = {
+        #     inherit (outline) mode owner group;
+        #     file = ./secrets/outline/secretKey.age;
+        # };
 
-        outlineUtilsSecret = {
-            inherit (outline) mode owner group;
-            file = ./secrets/outline/utilsSecret.age;
-        };
+        # outlineUtilsSecret = {
+        #     inherit (outline) mode owner group;
+        #     file = ./secrets/outline/utilsSecret.age;
+        # };
 
-        outlineClientSecret = {
-            inherit (outline) mode owner group;
-            file = ./secrets/outline/clientSecret.age;
-        };
-
-        radicalePassword = {
-            inherit (radicale) mode owner group;
-            file = ./secrets/radicale/password.age;
-        };
+        # outlineClientSecret = {
+        #     inherit (outline) mode owner group;
+        #     file = ./secrets/outline/clientSecret.age;
+        # };
     };
 
     # Outline: Note-Taking Server
-    services.outline.enable = true;
-    systemd.services.outline.environment.OIDC_LOGOUT_URI = "https://homepage.${domain}";
-    services.outline = {
-        secretKeyFile = config.age.secrets.outlineSecretKey.path;
-        utilsSecretFile = config.age.secrets.outlineUtilsSecret.path;
-        port = 2920;
-        publicUrl = "https://outline.${domain}";
-        forceHttps = false;
-        concurrency = 4;
-        defaultLanguage = "en_US";
-        storage = {
-            storageType = "local";
-            localRootDir = "/storage/outline";
-        };
-        oidcAuthentication = {
-            clientId = "outline";
-            clientSecretFile = config.age.secrets.outlineClientSecret.path;
-            authUrl = "https://authelia.${domain}/api/oidc/authorization";
-            tokenUrl = "https://authelia.${domain}/api/oidc/token";
-            userinfoUrl = "https://authelia.${domain}/api/oidc/userinfo";
-            usernameClaim = "preferred_username";
-            displayName = "Authelia";
-            scopes = [ "openid" "offline_access" "profile" "email" ];
-        };
-    };
+    # services.outline.enable = true;
+    # systemd.services.outline.environment.OIDC_LOGOUT_URI = "https://homepage.${domain}";
+    # services.outline = {
+    #     secretKeyFile = config.age.secrets.outlineSecretKey.path;
+    #     utilsSecretFile = config.age.secrets.outlineUtilsSecret.path;
+    #     port = 2920;
+    #     publicUrl = "https://outline.${domain}";
+    #     forceHttps = false;
+    #     concurrency = 4;
+    #     defaultLanguage = "en_US";
+    #     storage = {
+    #         storageType = "local";
+    #         localRootDir = "/storage/outline";
+    #     };
+    #     oidcAuthentication = {
+    #         clientId = "outline";
+    #         clientSecretFile = config.age.secrets.outlineClientSecret.path;
+    #         authUrl = "https://authelia.${domain}/api/oidc/authorization";
+    #         tokenUrl = "https://authelia.${domain}/api/oidc/token";
+    #         userinfoUrl = "https://authelia.${domain}/api/oidc/userinfo";
+    #         usernameClaim = "preferred_username";
+    #         displayName = "Authelia";
+    #         scopes = [ "openid" "offline_access" "profile" "email" ];
+    #     };
+    # };
 
     services.apcupsd.enable = true;
     services.apcupsd.configText = ''
@@ -120,25 +115,6 @@
         UPSCLASS standalone
         UPSMODE disable
     '';
-
-    # Replaced by Authentik RAC
-    # services.guacamole-server.enable = true;
-    # services.guacamole-server = {
-    #     host = "0.0.0.0";
-    # };
-
-    # services.tomcat.port = 8081;
-    # services.guacamole-client.enable = true;
-    # services.guacamole-client = {
-    #     enableWebserver = true;
-    #     settings = {
-    #         guacd-port = config.services.guacamole-server.port;
-    #         guacd-hostname = config.services.guacamole-server.host;
-    #         postgresql-database = "guacamole";
-    #         postgresql-username = "guacamole";
-    #         postgresql-password = "Changeme";
-    #     };
-    # };
 
     # Copyparty: WebDav Fileserver with great performance
     services.copyparty.enable = true;
@@ -194,22 +170,6 @@
         settings = {
             Address = "0.0.0.0";
             MusicFolder = "/storage/media/music"; 
-        };
-    };
-
-    # Radicale: CalDav/CardDav server for syncing calenders and contacts
-    services.radicale.enable = true;
-    services.radicale.settings = {
-        server.hosts = [ "0.0.0.0:5232" ];
-        storage.filesystem_folder = "/storage/radicale";
-        auth.type = "ldap";
-        auth = {
-            ldap_uri = "ldap://miasma.${domain}:3890";
-            ldap_base = "dc=thematt,dc=net";
-            ldap_reader_dn = "uid=radicale,ou=people,dc=thematt,dc=net";
-            ldap_user_attribute = "uid";
-            ldap_secret_file = config.age.secrets.radicalePassword.path;
-            ldap_filter = "(&(objectClass=Person)(uid={0})(memberOf=cn=radicale,ou=groups,dc=thematt,dc=net))";
         };
     };
 

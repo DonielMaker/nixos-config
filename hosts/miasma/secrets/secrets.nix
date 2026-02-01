@@ -17,6 +17,9 @@ in
     "authelia/lldapPassword.age".publicKeys = users ++ systems;
     "authelia/jwksKey.age".publicKeys = users ++ systems;
 
+    "authentik/secret.env.age".publicKeys = users ++ systems;
+    "authentik/proxy.env.age".publicKeys = users ++ systems;
+
     "grafana/clientSecret.age".publicKeys = users ++ systems;
 
     "cloudflare/dnsApiToken.age".publicKeys = users ++ systems;
