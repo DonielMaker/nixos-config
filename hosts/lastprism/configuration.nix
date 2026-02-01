@@ -14,16 +14,15 @@
         settings
         user
         openssh
+        qemuGuest
 
-        alloy
+        # alloy
     ];
 
     nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
 
-    # copyparty, radicale, homeassistant, zigbee2mqtt, mosquitto, paperless, outline, apcupsd
-    networking.firewall.allowedTCPPorts = [ 3923 5232 8123 8080 1883 28981 2920 3551 ];
-
-    powerManagement.powertop.enable = true;
+    # copyparty, homeassistant, zigbee2mqtt, mosquitto, paperless, apcupsd
+    networking.firewall.allowedTCPPorts = [ 3923 8123 8080 1883 28981 3551 ];
 
     users.users.${username}.extraGroups = [ "media" ];
     users.groups.media = {};
@@ -48,12 +47,6 @@
             mode = "440";
             owner = config.services.outline.user;
             group = config.services.outline.group;
-        };
-
-        radicale = {
-            mode = "440";
-            owner = "radicale";
-            group = "radicale";
         };
     in
 
@@ -226,65 +219,65 @@
     # };
 
     # Home-Assistant: Home Automation
-    services.home-assistant.enable = true;
-    services.home-assistant = {
-        extraComponents = [
-            "analytics"
-            "met"
-            "isal"
-            "mqtt"
-        ];
-
-        customComponents = with pkgs.home-assistant-custom-components; [
-            auth_oidc
-            prometheus_sensor
-        ];
-
-        config = {
-            # Includes dependencies for a basic setup
-            # https://www.home-assistant.io/integrations/default_config/
-            default_config = {};
-            homeassistant = {
-                name = "Home";
-                latitude = "53.00906288742223";
-                longitude = "9.060134791016266";
-                unit_system = "metric";
-                time_zone = "Europe/Berlin";
-            };
-            http = {
-                use_x_forwarded_for = true;
-                # Why Can't this be dns?
-                trusted_proxies = [ "10.10.12.10" ];
-            };
-        };
-    };
+    # services.home-assistant.enable = true;
+    # services.home-assistant = {
+    #     extraComponents = [
+    #         "analytics"
+    #         "met"
+    #         "isal"
+    #         "mqtt"
+    #     ];
+    #
+    #     customComponents = with pkgs.home-assistant-custom-components; [
+    #         auth_oidc
+    #         prometheus_sensor
+    #     ];
+    #
+    #     config = {
+    #         # Includes dependencies for a basic setup
+    #         # https://www.home-assistant.io/integrations/default_config/
+    #         default_config = {};
+    #         homeassistant = {
+    #             name = "Home";
+    #             latitude = "53.00906288742223";
+    #             longitude = "9.060134791016266";
+    #             unit_system = "metric";
+    #             time_zone = "Europe/Berlin";
+    #         };
+    #         http = {
+    #             use_x_forwarded_for = true;
+    #             # Why Can't this be dns?
+    #             trusted_proxies = [ "10.10.12.10" ];
+    #         };
+    #     };
+    # };
 
     # Mosquitto: Mqtt Server
     # Needs authentication currently not usable for prod. Used anyways
-    services.mosquitto.enable = true;
-    services.mosquitto = {
-        listeners = [
-            {
-                acl = [ "pattern readwrite #" ];
-                omitPasswordAuth = true;
-                settings.allow_anonymous = true;
-            }
-        ];
-    };
+    # services.mosquitto.enable = true;
+    # services.mosquitto = {
+    #     listeners = [
+    #         {
+    #             acl = [ "pattern readwrite #" ];
+    #             omitPasswordAuth = true;
+    #             settings.allow_anonymous = true;
+    #         }
+    #     ];
+    # };
 
     # Zigbee2mqtt: Connection between Zigbee and Mqtt devices
-    services.zigbee2mqtt.enable = true;
-    services.zigbee2mqtt = {
-        settings = {
-            homeassistant.enabled = config.services.home-assistant.enable;
-            frontend.enabled = true;
-            permit_join = true;
-            serial = {
-                port = "/dev/ttyUSB0";
-            };
-        }
-        ;
-    };
+    # services.zigbee2mqtt.enable = true;
+    # services.zigbee2mqtt = {
+    #     settings = {
+    #         homeassistant.enabled = config.services.home-assistant.enable;
+    #         frontend.enabled = true;
+    #         permit_join = true;
+    #         serial = {
+    #             port = "/dev/ttyUSB0";
+    #         };
+    #     }
+    #     ;
+    # };
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${arch}.default

@@ -17,21 +17,14 @@
 
         alloy
         ./modules/caddy.nix
-        ./modules/authelia.nix
     ];
 
-    # prometheus, authelia, lldap-web, lldap-ldap, vaultwarden
-    networking.firewall.allowedTCPPorts = [ 9090 9091 17170 3890 5902 9000];
-    # bind9
+    # prometheus, vaultwarden, authentik
+    networking.firewall.allowedTCPPorts = [ 9090 5902 9000];
+    # bind
     networking.firewall.allowedUDPPorts = [ 53 ];
 
     age.secrets = let
-
-        authelia = {
-            mode = "440";
-            owner = config.services.authelia.instances.main.user;
-            group = config.services.authelia.instances.main.group;
-        };
 
         grafana = {
             mode = "440";
@@ -43,31 +36,6 @@
     {
         authentik-environment.file = ./secrets/authentik/secret.env.age;
         authentik-proxyEnvironment.file = ./secrets/authentik/proxy.env.age;
-
-        autheliaJwtSecret = {
-            inherit (authelia) mode owner group;
-            file = ./secrets/authelia/jwtSecret.age;
-        };
-
-        autheliaStorageEncryptionKey = {
-            inherit (authelia) mode owner group;
-            file = ./secrets/authelia/storageEncryptionKey.age;
-        };
-
-        autheliaSessionSecret = {
-            inherit (authelia) mode owner group;
-            file = ./secrets/authelia/sessionSecret.age;
-        };
-
-        autheliaLldapPassword = {
-            inherit (authelia) mode owner group;
-            file = ./secrets/authelia/lldapPassword.age;
-        };
-
-        autheliaJwksKey = {
-            inherit (authelia) mode owner group;
-            file = ./secrets/authelia/jwksKey.age;
-        };
 
         grafanaClientSecret = {
             inherit (grafana) mode owner group;
@@ -86,18 +54,8 @@
         };
     };
 
-    # services.authentik-rac.enable = true;
-    # services.authentik-rac.environmentFile = config.age.secrets.authentik-racEnvironment.path;
-
     # services.authentik-proxy.enable = true;
-    services.authentik-proxy.environmentFile = config.age.secrets.authentik-proxyEnvironment.path;
-
-    # Lldap: Ldap Server
-    services.lldap.enable = true;
-    services.lldap.settings.ldap_base_dn = "dc=thematt,dc=net";
-    # # User does no longer exist
-    services.lldap.settings.ldap_user_pass = "blablabla";
-    services.lldap.silenceForceUserPassResetWarning = true;
+    # services.authentik-proxy.environmentFile = config.age.secrets.authentik-proxyEnvironment.path;
 
     # Vaultwarden: Passwordmanager
     services.vaultwarden.enable = true;
@@ -159,6 +117,7 @@ ark                 IN      A       10.10.12.13
                 '';
             };
 
+            # Empty so it won't be recursed to somewhere else
             "soluttech.uk" = {
                 master = true;
                 allowQuery = [];
@@ -191,13 +150,6 @@ IN  NS  localhost.
                 };
             }
             {
-                search = {
-                    provider = "duckduckgo";
-                    target = "_blank";
-                    focus = "true";
-                };
-            }
-            {
                 greeting = {
                     text_size = "x1";
                     text = "Hello you motherfucker";
@@ -223,19 +175,11 @@ IN  NS  localhost.
             {
                 "Management/Authentication" = [
                     {
-                        "Lldap" = {
-                            description = "Ldap server written in rust";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/lldap-light.svg";
-                            href = "https://lldap.${domain}";
-                            siteMonitor = "http://miasma.${domain}:17170";
-                        };
-                    }
-                    {
-                        "Authelia" = {
+                        "Authentik" = {
                             description = "IdP Manager";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/authelia.svg";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/authentik.svg";
                             href = "https://authelia.${domain}";
-                            siteMonitor = "http://miasma.${domain}:9091";
+                            siteMonitor = "http://miasma.${domain}:9000";
                         };
                     }
                     {
@@ -284,6 +228,14 @@ IN  NS  localhost.
                         };
                     }
                     {
+                        "Vaultwarden" = {
+                            description = "Passwordmanager";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/vaultwarden.svg";
+                            href = "https://vaultwarden.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:5902";
+                        };
+                    }
+                    {
                         "Paperless" = {
                             description = "Document server";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
@@ -297,14 +249,6 @@ IN  NS  localhost.
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/copyparty.svg";
                             href = "https://copyparty.${domain}";
                             siteMonitor = "http://lastprism.${domain}:3923";
-                        };
-                    }
-                    {
-                        "Radicale" = {
-                            description = "CalDav/CardDav Server";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/radicale.svg";
-                            href = "https://radicale.${domain}";
-                            siteMonitor = "http://lastprism.${domain}:5232";
                         };
                     }
                     {
