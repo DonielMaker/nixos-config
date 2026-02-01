@@ -54,11 +54,11 @@
         alsa-scarlett-gui
 
         brave 
-        pkgs-stable.geeqie
+        geeqie
         gimp
         signal-desktop
         vlc
-        kdePackages.kdenlive
+        pkgs-stable.kdePackages.kdenlive
         vesktop
         obs-studio
         orca-slicer
