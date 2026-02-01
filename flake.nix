@@ -32,6 +32,8 @@
 
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
+        # quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+        # quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
         neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
         neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";

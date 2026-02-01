@@ -13,6 +13,11 @@
                 reverse_proxy miasma.${domain}:9091
             }
 
+            @authentik host authentik.${domain}
+            handle @authentik {
+                reverse_proxy miasma.${domain}:9000
+            }
+
             @lldap host lldap.${domain}
             handle @lldap {
                 reverse_proxy miasma.${domain}:17170
