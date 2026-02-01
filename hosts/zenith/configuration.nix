@@ -53,12 +53,9 @@
         scarlett2
         alsa-scarlett-gui
 
-        evolution
-        evolution-data-server
         brave 
         pkgs-stable.geeqie
         gimp
-        pkgs-stable.rustdesk
         signal-desktop
         vlc
         kdePackages.kdenlive
