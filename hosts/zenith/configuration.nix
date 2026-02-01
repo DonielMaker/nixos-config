@@ -1,4 +1,4 @@
-{inputs, pkgs, pkgs-stable, ...}:
+{inputs, pkgs, pkgs-stable, arch, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -46,6 +46,7 @@
     programs.wayvnc.enable = true;
 
     environment.systemPackages = with pkgs; [
+        inputs.ragenix.packages.${arch}.default
 
         scarlett2
         alsa-scarlett-gui

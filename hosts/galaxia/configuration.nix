@@ -1,4 +1,4 @@
-{inputs, pkgs, pkgs-stable, ...}:
+{inputs, pkgs, pkgs-stable, arch, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -32,6 +32,7 @@
     programs.localsend.enable = true;
 
     environment.systemPackages = with pkgs; [
+        inputs.ragenix.packages.${arch}.default
 
         just
         typst
