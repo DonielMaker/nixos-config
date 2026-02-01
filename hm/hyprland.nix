@@ -32,6 +32,8 @@ in
 
             inherit monitor;
 
+            ecosystem.no_update_news = true;
+
             env = [
                 "XDG_CURRENT_DESKTOP,Hyprland"
                 "XDG_SESSION_TYPE,wayland"
