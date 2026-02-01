@@ -14,6 +14,7 @@
         settings
         user
         openssh
+        qemuGuest
 
         alloy
         ./modules/caddy.nix
@@ -54,8 +55,8 @@
         };
     };
 
-    # services.authentik-proxy.enable = true;
-    # services.authentik-proxy.environmentFile = config.age.secrets.authentik-proxyEnvironment.path;
+    services.authentik-proxy.enable = true;
+    services.authentik-proxy.environmentFile = config.age.secrets.authentik-proxyEnvironment.path;
 
     # Vaultwarden: Passwordmanager
     services.vaultwarden.enable = true;
@@ -63,7 +64,7 @@
         backupDir = "/storage/vaultwarden";
         config = {
             DOMAIN = "https://vaultwarden.${domain}";
-            ADMIN_TOKEN = "$argon2id$v=19$m=65536,t=3,p=4$PuLNkQoWqh2KK6oTiS13zA$jODU+1C0V9/dEMmMbmtyRtEFXgwAkBfTb36s848IUzA";
+            ADMIN_TOKEN = "$argon2id$v=19$m=65536,t=3,p=4$YuYzPNfIrFp69F5oWscuVA$iF6KL1SM1TatHPVUS2TYodnBxCADIj1EJd8oNbShd7M";
             ROCKET_ADDRESS = "0.0.0.0";
             ROCKET_PORT = 5902;
             # HaveIBeenPwned Api Key
@@ -71,7 +72,6 @@
             TRASH_AUTO_DELETE_DAYS = 30;
             SIGNUPS_ALLOWED = false;
             IP_HEADER = "X-Forwarded-For";
-            # Do we need this?
             PASSWORD_HINTS_ALLOWED = false;
         };
     };
@@ -178,7 +178,7 @@ IN  NS  localhost.
                         "Authentik" = {
                             description = "IdP Manager";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/authentik.svg";
-                            href = "https://authelia.${domain}";
+                            href = "https://authentik.${domain}";
                             siteMonitor = "http://miasma.${domain}:9000";
                         };
                     }
@@ -230,9 +230,9 @@ IN  NS  localhost.
                     {
                         "Vaultwarden" = {
                             description = "Passwordmanager";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/vaultwarden.svg";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/vaultwarden-light.svg";
                             href = "https://vaultwarden.${domain}";
-                            siteMonitor = "http://lastprism.${domain}:5902";
+                            siteMonitor = "http://miasma.${domain}:5902";
                         };
                     }
                     {
@@ -282,15 +282,15 @@ IN  NS  localhost.
 
         "auth.generic_oauth" = {
             enabled = true;
-            name = "Authelia";
+            name = "Authentik";
             icon = "signin";
             client_id = "grafana";
             client_secret = ''$__file{${config.age.secrets.grafanaClientSecret.path}}'';
             scopes = "openid profile email groups";
             empty_scopes = false;
-            auth_url = "https://authelia.${domain}/api/oidc/authorization";
-            token_url = "https://authelia.${domain}/api/oidc/token";
-            api_url = "https://authelia.${domain}/api/oidc/userinfo";
+            auth_url = "https://authentik.${domain}/application/o/authorize/";
+            token_url = "https://authentik.${domain}/application/o/token/";
+            api_url = "https://authentik.${domain}/application/o/userinfo/";
             login_attribute_path = "preferred_username";
             groups_attribute_path = "groups";
             name_attribute_path = "display_name";

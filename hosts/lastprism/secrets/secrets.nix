@@ -1,10 +1,10 @@
 let
     donielmaker-zenith = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwosE68FthKwXs1WhPnY3YqbkVPT52V30X489epRsJQ donielmaker@zenith";
-    donielmaker-lastprism = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMWLLqlBUTjozxsybGqwNu0dmqvANB103SZQnlX+tZ7y donielmaker@lastprism";
+    donielmaker-lastprism = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIF6bUoSt3TnuVLcPtdmbEnLl/8uCn/hspLlJqg289Zl donielmaker@lastprism";
     users = [donielmaker-zenith donielmaker-lastprism];
 
     zenith = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE9OsEE+anE42quYmi3ewEsxA/jiopIzdjdAaXa05t/m";
-    lastprism = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILFiN6GBFPWtkNhWeSLRTN8yLIXs6BkNQQf1L7nF4Zv3";
+    lastprism = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEvXk41EZG7NmAeFp8SAV/By7no2a7HpWmyP8ex0D4He";
     systems = [zenith lastprism];
 in
 

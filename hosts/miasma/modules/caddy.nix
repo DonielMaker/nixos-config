@@ -8,19 +8,9 @@
                 protocols tls1.3
             }
 
-            @authelia host authelia.${domain}
-            handle @authelia {
-                reverse_proxy miasma.${domain}:9091
-            }
-
             @authentik host authentik.${domain}
             handle @authentik {
                 reverse_proxy miasma.${domain}:9000
-            }
-
-            @lldap host lldap.${domain}
-            handle @lldap {
-                reverse_proxy miasma.${domain}:17170
             }
 
             @vaultwarden host vaultwarden.${domain}
@@ -28,18 +18,18 @@
                 reverse_proxy miasma.${domain}:5902
             }
 
-            @outline host outline.${domain}
-            handle @outline {
-                reverse_proxy lastprism.${domain}:2920
-            }
-
             @homepage host homepage.${domain}
             handle @homepage {
-                forward_auth miasma.${domain}:9091 {
-                    uri /api/authz/forward-auth
-                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                route {
+                    reverse_proxy /outpost.goauthentik.io/* http://miasma.${domain}:9000
+
+                    forward_auth http://miasma.${domain}:9000 {
+                        uri /outpost.goauthentik.io/auth/caddy
+                        copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+                    }
+
+                    reverse_proxy miasma.${domain}:8082
                 }
-                reverse_proxy miasma.${domain}:8082
             }
 
             @grafana host grafana.${domain} 
@@ -49,10 +39,6 @@
 
             @paperless host paperless.${domain}
             handle @paperless {
-                forward_auth miasma.${domain}:9091 {
-                    uri /api/authz/forward-auth
-                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-                }
                 reverse_proxy lastprism.${domain}:28981
             }
 
@@ -66,11 +52,6 @@
                 reverse_proxy lastprism.${domain}:3923
             }
 
-            @radicale host radicale.${domain} 
-            handle @radicale {
-                reverse_proxy lastprism.${domain}:5232
-            }
-
             @home-assistant host home-assistant.${domain} 
             handle @home-assistant {
                 reverse_proxy lastprism.${domain}:8123
@@ -78,16 +59,30 @@
 
             @zigbee2mqtt host zigbee2mqtt.${domain} 
             handle @zigbee2mqtt {
-                forward_auth miasma.${domain}:9091 {
-                    uri /api/authz/forward-auth
-                    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+                route {
+                    reverse_proxy /outpost.goauthentik.io/* http://miasma.${domain}:9000
+
+                    forward_auth http://miasma.${domain}:9000 {
+                        uri /outpost.goauthentik.io/auth/caddy
+                        copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+                    }
+
+                    reverse_proxy miasma.${domain}:8080
                 }
-                reverse_proxy lastprism.${domain}:8080
             }
 
             @prometheus host prometheus.${domain} 
             handle @prometheus {
-                reverse_proxy miasma.${domain}:9090
+                route {
+                    reverse_proxy /outpost.goauthentik.io/* http://miasma.${domain}:9000
+
+                    forward_auth http://miasma.${domain}:9000 {
+                        uri /outpost.goauthentik.io/auth/caddy
+                        copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+                    }
+
+                    reverse_proxy miasma.${domain}:9090
+                }
             }
 
             @proxmox-lastprism host proxmox.${domain} 
@@ -96,20 +91,6 @@
                     transport http { tls_insecure_skip_verify }
                 }
             }
-
-            # While this does work, it doesn't fit the suitcase of copyparty as it is also reachable outside a 
-            # browser (where headers don't matter/work)
-            # @copyparty host copyparty.${domain} 
-            # handle @copyparty {
-            #     forward_auth nixos.lastprism.${domain}:9091 {
-            #         uri /api/authz/forward-auth
-            #         copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-            #     }
-            #     reverse_proxy nixos.lastprism.${domain}:3923 {
-            #         header_up X-Idp-User {http.request.header.Remote-User}
-            #         header_up X-Idp-Group {http.request.header.Remote-Groups}
-            #     }
-            # }
         }
     '';
 

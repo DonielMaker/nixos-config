@@ -16,7 +16,7 @@
         openssh
         qemuGuest
 
-        # alloy
+        alloy
     ];
 
     nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
@@ -43,11 +43,11 @@
             group = config.services.copyparty.group;
         };
 
-        outline = {
-            mode = "440";
-            owner = config.services.outline.user;
-            group = config.services.outline.group;
-        };
+        # outline = {
+        #     mode = "440";
+        #     owner = config.services.outline.user;
+        #     group = config.services.outline.group;
+        # };
     in
 
     {

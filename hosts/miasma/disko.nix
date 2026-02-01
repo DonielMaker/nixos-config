@@ -1,14 +1,14 @@
 {
     disko.devices.disk = {
         main = {
-            device = "/dev/disk/by-id/ata-CT240BX500SSD1_2451E99C053F";
+            device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
             type = "disk";
             content = {
                 type = "gpt";
                 partitions = {
                     ESP = {
                         type = "EF00";
-                        size = "500M";
+                        size = "1G";
                         content = {
                             type = "filesystem";
                             format = "vfat";
