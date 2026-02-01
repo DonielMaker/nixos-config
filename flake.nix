@@ -28,6 +28,8 @@
         copyparty.url = "github:9001/copyparty";
         copyparty.inputs.nixpkgs.follows = "nixpkgs";
 
+        authentik-nix.url = "github:nix-community/authentik-nix";
+
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
