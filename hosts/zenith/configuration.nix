@@ -47,6 +47,7 @@
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${arch}.default
+        inputs.quickshell.packages.${arch}.default
 
         scarlett2
         alsa-scarlett-gui

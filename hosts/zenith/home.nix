@@ -10,7 +10,7 @@
         zsh
         neovim
         git
-        quickshell
+        # quickshell
 
         mangohud
         librewolf
