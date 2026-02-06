@@ -6,7 +6,7 @@
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
         nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
-        home-manager.url = "github:nix-community/home-manager/release-25.11";
+        home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
         disko.url = "github:nix-community/disko/latest";
@@ -50,16 +50,13 @@
             nur.overlays.default
         ];
 
-        # TODO: Perhaps move these all into one main import file?
-        # TODO: mkHome and mkNixos seem very similar is there a way to maybe combine these into one make function?
-        mkNixos = import ./lib/mkNixos.nix {inherit inputs pkgs pkgs-stable;};
-        mkHome = import ./lib/mkHome.nix {inherit inputs pkgs pkgs-stable;};
-        buildModules = import ./lib/getModules.nix {lib = inputs.nixpkgs.lib;};
+        dLib = import ./lib {inherit inputs pkgs pkgs-stable;};
+        inherit (dLib) mkNixos mkHome mkModules;
     in
 
     {
-        nixosModules = buildModules ./nixos ".nix";
-        homeManagerModules = buildModules ./hm ".nix";
+        nixosModules = mkModules ".nix" ./nixos;
+        homeManagerModules = mkModules ".nix" ./hm;
 
         # Desktop
         nixosConfigurations.zenith = mkNixos ./hosts/zenith;

@@ -30,7 +30,7 @@
 
             rule {
                 target_label = "instance"
-                    replacement  = constants.hostname
+                replacement  = constants.hostname
             }
 
             rule {

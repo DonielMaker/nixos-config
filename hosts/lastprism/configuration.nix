@@ -9,14 +9,16 @@
         inputs.ragenix.nixosModules.default
         inputs.copyparty.nixosModules.default
 
-        systemd-boot
-        networking
-        settings
-        user
-        openssh
-        qemuGuest
+        system.systemd-boot
 
-        alloy
+        system.settings
+        system.user
+
+        system.openssh
+        system.networking
+
+        server.qemuGuest
+        server.alloy
     ];
 
     nixpkgs.overlays = [ inputs.copyparty.overlays.default ];

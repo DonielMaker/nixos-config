@@ -9,15 +9,17 @@
         inputs.ragenix.nixosModules.default
         inputs.authentik-nix.nixosModules.default
 
-        systemd-boot
-        networking
-        settings
-        user
-        openssh
-        qemuGuest
+        system.systemd-boot
 
-        alloy
+        system.settings
+        system.user
+
+        system.openssh
+        system.networking
+
         ./modules/caddy.nix
+        server.qemuGuest
+        server.alloy
     ];
 
     # prometheus, vaultwarden, authentik
@@ -305,7 +307,29 @@ IN  NS  localhost.
     services.prometheus = {
         webExternalUrl = "https://prometheus.${domain}";
         port = 9090;
+        # globalConfig.scrape_interval = "15s";
+        # scrapeConfigs = [
+        #     {
+        #         job_name = "miasma-metrics";
+        #         static_configs = [{
+        #             targets = [ "miasma.thematt.net:9100"];
+        #         }];
+        #     } 
+        #     # {
+        #     #     job_name = "lastprism-metrics";
+        #     #     static_configs = [{
+        #     #         targets = [ "lastprism.thematt.net:9100"];
+        #     #     }];
+        #     # } 
+        # ];
     };
+
+    # services.prometheus.exporters.node = {
+    #     enable = true;
+    #     openFirewall = true;
+    #     enabledCollectors = [ "systemd" "meminfo" ];
+    #     disabledCollectors = [ "ipvs" "btrfs" "infiniband" "xfs" "zfs" ];
+    # };
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${arch}.default

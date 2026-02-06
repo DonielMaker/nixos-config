@@ -7,29 +7,33 @@
         inputs.disko.nixosModules.disko
         inputs.stylix.nixosModules.stylix
 
-        limine
-        settings
-        user
-        openssh
-        networking
+        system.limine
+        system.amd
 
-        graphics
-        hyprland
-        amd
+        system.settings
+        system.user
 
-        regreet
-        stylix
+        system.openssh
+        system.networking
 
-        sound
-        gigabyte
-        coolercontrol
-        bluetooth
-        steam
+        desktop.graphics
+        desktop.hyprland
+        desktop.regreet
 
-        zsh
+        desktop.gigabyte
+        desktop.coolercontrol
+        desktop.steam
+
+        desktop.sound
+        desktop.bluetooth
+
+        desktop.stylix
+        desktop.zsh
     ];
 
     networking.firewall.allowedTCPPorts = [ 5900 ];
+    networking.nameservers = [ "10.10.12.10" "10.10.110.10" "1.1.1.1" ];
+    networking.search = [ "thematt.net, soluttech.uk" ];
 
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
 

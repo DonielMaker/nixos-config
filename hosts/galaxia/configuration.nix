@@ -7,23 +7,24 @@
         inputs.disko.nixosModules.disko
         inputs.stylix.nixosModules.stylix
 
-        limine
-        settings
-        user
-        openssh
-        networking
+        system.limine
+        system.intel
 
-        graphics
-        hyprland
-        intel
+        system.settings
+        system.user
 
-        regreet
-        stylix
+        system.openssh
+        system.networking
 
-        bluetooth
-        sound
+        desktop.graphics
+        desktop.hyprland
+        desktop.regreet
 
-        zsh
+        desktop.bluetooth
+        desktop.sound
+
+        desktop.zsh
+        desktop.stylix
     ];
 
     services.upower.enable = true;
