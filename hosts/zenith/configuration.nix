@@ -1,4 +1,4 @@
-{inputs, pkgs, pkgs-stable, arch, ...}:
+{config, inputs, pkgs, pkgs-stable, arch, username, ...}:
 
 {
     imports = with inputs.self.nixosModules; [
@@ -18,7 +18,7 @@
 
         desktop.graphics
         desktop.hyprland
-        desktop.regreet
+        # desktop.regreet
 
         desktop.gigabyte
         desktop.coolercontrol
@@ -37,6 +37,20 @@
 
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
 
+    programs.dms-shell.enable = true;
+    programs.dms-shell = {
+        systemd.enable = true;
+        systemd.restartIfChanged = true;
+        enableDynamicTheming = false;
+        enableAudioWavelength = false;
+    };
+
+    services.displayManager.dms-greeter.enable = true;
+    services.displayManager.dms-greeter = {
+        compositor.name = "hyprland";
+        configHome = config.users.users.${username}.home;
+    };
+
     services.flatpak.enable = true;
 
     services.gnome.gnome-keyring.enable = true;
@@ -45,13 +59,10 @@
 
     services.lact.enable = true;
 
-    virtualisation.waydroid.enable = true;
-
     programs.wayvnc.enable = true;
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${arch}.default
-        inputs.quickshell.packages.${arch}.default
 
         scarlett2
         alsa-scarlett-gui

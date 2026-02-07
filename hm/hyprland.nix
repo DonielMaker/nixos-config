@@ -4,10 +4,6 @@ let
     terminal = lib.getExe pkgs.alacritty;
     browser = "${lib.getExe pkgs.brave} --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1";
     explorer = lib.getExe pkgs.nautilus;
-    launcher = lib.getExe pkgs.fuzzel;
-    cliphist = lib.getExe pkgs.cliphist;
-    screenshot = lib.getExe pkgs.hyprshot;
-    # hyprpicker = lib.getExe pkgs.hyprpicker;
 in
 
 {
@@ -62,10 +58,7 @@ in
             ];
 
             exec-once = [
-                "swww-daemon"
-                "hypridle"
-                # "hyprctl setcursor Bibata-Modern-Ice 24"
-                "qs"
+               # "hyprctl setcursor Bibata-Modern-Ice 24"
                 "wl-paste --type text --watch cliphist store"
                 "wl-paste --type image --watch cliphist store"
                 "systemctl --user start hyprpolkitagent.service"
@@ -164,38 +157,37 @@ in
                 # Browser
                 "$mainMod, B, exec, ${browser}"
                 # Application Launcher
-                "$mainMod, space, exec, ${launcher}"
+                "$mainMod, space, exec, dms ipc call spotlight toggle"
                 # Clipboard History
-                "$mainMod, V, exec, ${cliphist} list | ${launcher} --dmenu | ${cliphist} decode | wl-copy"
-                "$mainMod CTRL, V, exec, ${cliphist} wipe"
+                "$mainMod, V, exec, dms ipc call clipboard toggle"
                 # Screenshot to Clipboard
-                "$mainMod, S, exec, ${screenshot} -szm region --clipboard-only"
+                "$mainMod, S, exec, dms screenshot --no-file" 
                 # Screenshot to file
-                "$mainMod SHIFT, S, exec, ${screenshot} -szm region -o ${config.home.homeDirectory}/Pictures/Screenshots"
+                "$mainMod SHIFT, S, exec, dms screenshot -d ${config.home.homeDirectory}/Pictures/Screenshots"
 
                 "$mainMod, Q, killactive,"
                 "$mainMod SHIFT, M, exit,"
                 "$mainMod, F, togglefloating,"
                 "$mainMod, P, pin,"
                 "$mainMod, G, fullscreenstate, 2 0"
-                "$mainMod, N, exec, hyprlock"
+                "$mainMod, N, exec, dms ipc call lock lock"
 
                 # Move focus with mainMod + arrow keys
-                "$mainMod, h,  movefocus, l"
-                "$mainMod, j,  movefocus, d"
-                "$mainMod, k,    movefocus, u"
+                "$mainMod, h, movefocus, l"
+                "$mainMod, j, movefocus, d"
+                "$mainMod, k, movefocus, u"
                 "$mainMod, l, movefocus, r"
 
                 # Moving windows
-                "$mainMod SHIFT, h,  swapwindow, l"
-                "$mainMod SHIFT, j,  swapwindow, d"
-                "$mainMod SHIFT, k,    swapwindow, u"
+                "$mainMod SHIFT, h, swapwindow, l"
+                "$mainMod SHIFT, j, swapwindow, d"
+                "$mainMod SHIFT, k, swapwindow, u"
                 "$mainMod SHIFT, l, swapwindow, r"
 
                 # Window resizing                     X  Y
-                "$mainMod CTRL, h,  resizeactive, -60 0"
-                "$mainMod CTRL, j,  resizeactive,  0  60"
-                "$mainMod CTRL, k,    resizeactive,  0 -60"
+                "$mainMod CTRL, h, resizeactive, -60 0"
+                "$mainMod CTRL, j, resizeactive,  0  60"
+                "$mainMod CTRL, k, resizeactive,  0 -60"
                 "$mainMod CTRL, l, resizeactive,  60 0"
 
                 # Switch workspaces with mainMod + [0-9]
@@ -223,7 +215,8 @@ in
                 "$mainMod SHIFT, 0, movetoworkspacesilent, 10"
 
                 # Mute source
-                "$mainMod, Control_R, exec, pamixer --default-source -t"
+                "$mainMod, Control_R, exec, dms ipc call audio micmute"
+                "$mainMod SHIFT, Control_R, exec, dms ipc call audio mute"
 
                 #  INFO: Currently unused
 
@@ -236,11 +229,11 @@ in
                 ", XF86MonBrightnessUp, exec, brightnessctl set +5% "
 
                 # Laptop related
-                ", XF86AudioMute, exec, pamixer -t"
-                ", XF86AudioMicMute, exec, pamixer --default-source -t"
+                ", XF86AudioMute, exec, dms ipc call audio mute"
+                ", XF86AudioMicMute, exec, dms ipc call audio micmute"
 
-                ", XF86AudioRaiseVolume, exec, pamixer -i 5"
-                ", XF86AudioLowerVolume, exec, pamixer -d 5"
+                ", XF86AudioRaiseVolume, exec, dms ipc call audio increment 5"
+                ", XF86AudioLowerVolume, exec, dms ipc call audio decrement 5"
                 "SHIFT, XF86AudioRaiseVolume, exec, pamixer --default-source -i 5"
                 "SHIFT, XF86AudioLowerVolume, exec, pamixer --default-source -d 5"
             ];

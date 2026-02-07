@@ -10,17 +10,10 @@
         zsh
         neovim
         git
-        # quickshell
 
-        mangohud
         librewolf
-        mangohud
-
-        fuzzel
 
         hyprland
-        hyprlock
-        hypridle
         stylix
     ];
 
