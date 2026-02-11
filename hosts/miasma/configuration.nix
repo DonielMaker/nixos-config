@@ -45,6 +45,8 @@
             file = ./secrets/grafana/clientSecret.age;
         };
 
+        vaultwardenEnv.file = ./secrets/vaultwarden-env.age;
+
         cloudflareDnsApiToken.file = ./secrets/cloudflare/dnsApiToken.age;
     };
 
@@ -52,6 +54,14 @@
     services.authentik = {
         environmentFile = config.age.secrets.authentik-environment.path;
         settings = {
+            email = {
+                host = "mail.${domain}";
+                port = 587;
+                username = "admin@${domain}";
+                use_tls = true;
+                use_ssl = false;
+                from = "authentik@${domain}";
+            };
             disable_startup_analytics = true;
             avatars = "initials";
         };
@@ -64,17 +74,22 @@
     services.vaultwarden.enable = true;
     services.vaultwarden = {
         backupDir = "/storage/vaultwarden";
+        environmentFile = config.age.secrets.vaultwardenEnv.path;
         config = {
             DOMAIN = "https://vaultwarden.${domain}";
-            ADMIN_TOKEN = "$argon2id$v=19$m=65536,t=3,p=4$YuYzPNfIrFp69F5oWscuVA$iF6KL1SM1TatHPVUS2TYodnBxCADIj1EJd8oNbShd7M";
+            ADMIN_TOKEN = "$argon2id$v=19$m=65536,t=3,p=4$yw24wHrUcU5jnsLq1wC2zA$EfhTG1MS60r5Gb5D74VUzPo13a//GTFx9wlPSwh1xwQ";
             ROCKET_ADDRESS = "0.0.0.0";
             ROCKET_PORT = 5902;
             # HaveIBeenPwned Api Key
-            HIBP_API_KEY = "";
             TRASH_AUTO_DELETE_DAYS = 30;
             SIGNUPS_ALLOWED = false;
             IP_HEADER = "X-Forwarded-For";
             PASSWORD_HINTS_ALLOWED = false;
+
+            SMTP_HOST = "mail.${domain}";
+            SMTP_FROM = "vaultwarden@${domain}";
+            SMTP_FROM_NAME = "Vaultwarden";
+            SMTP_USERNAME = "admin@${domain}";
         };
     };
 
@@ -114,6 +129,8 @@ miasma              IN      A       10.10.12.10
 vilethorn           IN      A       10.10.90.1              
 
 ark                 IN      A       10.10.12.13
+
+mail                IN      CNAME   eu1.workspace.org.
 
 *                   IN      CNAME   miasma.${domain}.
                 '';

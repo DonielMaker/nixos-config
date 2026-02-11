@@ -23,4 +23,6 @@ in
     "grafana/clientSecret.age".publicKeys = users ++ systems;
 
     "cloudflare/dnsApiToken.age".publicKeys = users ++ systems;
+
+    "vaultwarden-env.age".publicKeys = users ++ systems;
 }
