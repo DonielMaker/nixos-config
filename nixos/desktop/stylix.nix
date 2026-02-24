@@ -16,6 +16,5 @@
     stylix.icons.package = pkgs.papirus-icon-theme;
 
     stylix.targets.plymouth.logoAnimated = false;
-
     stylix.targets.limine.image.enable = false;
 }
