@@ -21,6 +21,7 @@ in
     "authentik/proxy.env.age".publicKeys = users ++ systems;
 
     "grafana/clientSecret.age".publicKeys = users ++ systems;
+    "grafana/secretKey.age".publicKeys = users ++ systems;
 
     "cloudflare/dnsApiToken.age".publicKeys = users ++ systems;
 

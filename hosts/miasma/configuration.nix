@@ -45,6 +45,11 @@
             file = ./secrets/grafana/clientSecret.age;
         };
 
+        grafana-secretKey = {
+            inherit (grafana) mode owner group;
+            file = ./secrets/grafana/secretKey.age;
+        };
+
         vaultwardenEnv.file = ./secrets/vaultwarden-env.age;
 
         cloudflareDnsApiToken.file = ./secrets/cloudflare/dnsApiToken.age;
@@ -301,12 +306,14 @@ IN  NS  localhost.
             root_url = "https://grafana.${domain}";
         };
 
+        security.secret_key = "$__file{${config.age.secrets.grafana-secretKey.path}}";
+
         "auth.generic_oauth" = {
             enabled = true;
             name = "Authentik";
             icon = "signin";
             client_id = "grafana";
-            client_secret = ''$__file{${config.age.secrets.grafanaClientSecret.path}}'';
+            client_secret = "$__file{${config.age.secrets.grafanaClientSecret.path}}";
             scopes = "openid profile email groups";
             empty_scopes = false;
             auth_url = "https://authentik.${domain}/application/o/authorize/";
