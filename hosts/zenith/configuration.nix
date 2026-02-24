@@ -67,6 +67,7 @@
         scarlett2
         alsa-scarlett-gui
 
+        openpgp-ca
         brave 
         geeqie
         gimp
@@ -78,6 +79,7 @@
         orca-slicer
         librewolf
         drawio
+        thunderbird
 
         prismlauncher
         heroic
@@ -87,8 +89,12 @@
         owmods-gui
         owmods-cli
         protonplus
+        olympus
 
         kdePackages.kwallet
+
+        element-desktop
+        teamspeak6-client
 
         home-manager
     ];
