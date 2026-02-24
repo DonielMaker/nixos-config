@@ -132,6 +132,8 @@ ark                 IN      A       10.10.12.13
 
 mail                IN      CNAME   eu1.workspace.org.
 
+ts                  IN      CNAME   lastprism.thematt.net.
+
 *                   IN      CNAME   miasma.${domain}.
                 '';
             };

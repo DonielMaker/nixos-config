@@ -101,6 +101,13 @@
     #     };
     # };
 
+    services.teamspeak3.enable = true;
+    services.teamspeak3 = {
+        openFirewall = true;
+        openFirewallServerQuery = true;
+        dataDir = "/storage/ts";
+    };
+
     services.apcupsd.enable = true;
     services.apcupsd.configText = ''
         UPSCABLE usb
