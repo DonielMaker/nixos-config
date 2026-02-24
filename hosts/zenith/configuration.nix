@@ -53,7 +53,7 @@
 
     services.flatpak.enable = true;
 
-    services.gnome.gnome-keyring.enable = true;
+    security.pam.services.${username}.kwallet.enable = true;
 
     programs.localsend.enable = true;
 
@@ -87,6 +87,8 @@
         owmods-gui
         owmods-cli
         protonplus
+
+        kdePackages.kwallet
 
         home-manager
     ];
