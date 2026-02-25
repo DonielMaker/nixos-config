@@ -1,4 +1,9 @@
-{config, domain, ...}:
+{config, ...}:
+
+let
+    domain = config.modules.server.domain;
+in
+
 {
     networking.firewall.allowedTCPPorts = [ 80 443 ];
     services.caddy.enable = true;

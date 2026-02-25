@@ -40,9 +40,9 @@
     outputs = {...}@inputs:
 
     let 
-        # This only lives in this flake please use arch instead
         system = "x86_64-linux";
 
+        # These might be better stated in an nixos modules (nixpkgs.config || nixpkgs.overlays)?
         pkgs = import inputs.nixpkgs { inherit system overlays; config.allowUnfree = true; };
         pkgs-stable = import inputs.nixpkgs-stable {inherit system overlays; config.allowUnfree = true;};
         overlays = with inputs; [
@@ -50,20 +50,15 @@
             nur.overlays.default
         ];
 
-        dLib = import ./lib {inherit inputs pkgs pkgs-stable;};
-        inherit (dLib) mkNixos mkHome mkModules;
+        sLib = import ./lib {inherit inputs pkgs pkgs-stable;};
+        inherit (sLib) mkNixos;
     in
 
     {
-        nixosModules = mkModules ".nix" ./nixos;
-        homeManagerModules = mkModules ".nix" ./hm;
-
         # Desktop
         nixosConfigurations.zenith = mkNixos ./hosts/zenith;
-        homeConfigurations."donielmaker@zenith" = mkHome ./hosts/zenith;
         # Laptop
         nixosConfigurations.galaxia = mkNixos ./hosts/galaxia;
-        homeConfigurations."donielmaker@galaxia" = mkHome ./hosts/galaxia;
         # Storage Server
         nixosConfigurations.lastprism = mkNixos ./hosts/lastprism;
         # Auth Server

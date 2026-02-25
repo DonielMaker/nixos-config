@@ -25,5 +25,8 @@ in
 
     "cloudflare/dnsApiToken.age".publicKeys = users ++ systems;
 
+    # Teamspeak
+    "newt-secret.env.age".publicKeys = users ++ systems;
+
     "vaultwarden-env.age".publicKeys = users ++ systems;
 }

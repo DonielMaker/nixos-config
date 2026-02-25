@@ -1,26 +1,37 @@
-{config, inputs, pkgs, arch, domain, ...}:
+{config, inputs, pkgs, ...}:
+
+let
+    domain = config.modules.server.domain;
+in
 
 {
 
-    imports = with inputs.self.nixosModules; [
-        ./hardware-configuration.nix
-        ./disko.nix
-        inputs.disko.nixosModules.disko
-        inputs.ragenix.nixosModules.default
+    imports = [ ./hardware-configuration.nix ./disko.nix
+
         inputs.authentik-nix.nixosModules.default
-
-        system.systemd-boot
-
-        system.settings
-        system.user
-
-        system.openssh
-        system.networking
-
         ./modules/caddy.nix
-        server.qemuGuest
-        server.alloy
     ];
+
+    modules = {
+        system = {
+            enable = true;
+            hostname = "miasma";
+            username = "donielmaker";
+
+            user.enable = true;
+
+            systemd-boot.enable = true;
+
+            openssh.enable = true;
+        };
+
+        server = {
+            enable = true;
+            domain = "thematt.net";
+            alloy.enable = true;
+            qemuGuest.enable = true;
+        };
+    };
 
     # prometheus, vaultwarden, authentik
     networking.firewall.allowedTCPPorts = [ 9090 5902 9000];
@@ -50,6 +61,8 @@
             file = ./secrets/grafana/secretKey.age;
         };
 
+        newt-secretEnv.file = ./secrets/newt-secret.env.age;
+
         vaultwardenEnv.file = ./secrets/vaultwarden-env.age;
 
         cloudflareDnsApiToken.file = ./secrets/cloudflare/dnsApiToken.age;
@@ -74,6 +87,12 @@
 
     services.authentik-proxy.enable = true;
     services.authentik-proxy.environmentFile = config.age.secrets.authentik-proxyEnvironment.path;
+
+    services.newt.enable = true;
+    services.newt = {
+        settings.endpoint = "https://pangolin.soluttech.uk";
+        environmentFile = config.age.secrets.newt-secretEnv.path;
+    };
 
     # Vaultwarden: Passwordmanager
     services.vaultwarden.enable = true;
@@ -358,7 +377,7 @@ IN  NS  localhost.
     # };
 
     environment.systemPackages = with pkgs; [
-        inputs.ragenix.packages.${arch}.default
+        inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         vim
         git

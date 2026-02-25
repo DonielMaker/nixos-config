@@ -1,23 +1,20 @@
-{inputs, username, ... }:
+{config, ... }:
 
 {
-    imports = with inputs.self.homeManagerModules; [
-        inputs.stylix.homeModules.stylix
+    modules.hm = {
+        
+        alacritty.enable = true;
+        git.enable = true;
+        neovim.enable = true;
+        starship.enable = true;
+        zellij.enable = true;
+        zsh.enable = true;
 
-        alacritty
-        zellij
-        starship
-        zsh
-        neovim
-        git
-
-        librewolf
-
-        hyprland
-        stylix
-    ];
-
-    nixpkgs.overlays = [ inputs.nur.overlays.default ];
+        stylix.enable = true;
+        librewolf.enable = true;
+        hyprland.enable = true;
+        hyprland.monitor = ["DP-1, 2560x1440@144hz, auto, 1" "DP-2, 1920x1080@180hz, auto-left, 1, transform, 3"];
+    };
 
     wayland.windowManager.hyprland.settings = {
         workspace = [
@@ -30,8 +27,8 @@
     };
 
     home = {
-        inherit username;
-        homeDirectory = /home/${username};
+        inherit (config.modules.hm) username;
+        homeDirectory = "/home/${config.modules.hm.username}";
         stateVersion = "24.11";
         keyboard.layout = "us";
     };
