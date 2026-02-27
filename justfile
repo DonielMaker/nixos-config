@@ -3,49 +3,49 @@ FLAKE := justfile_directory()
 default:
     just --list
 
-# Build System Configuration
-rb CONFIG=(FLAKE):
-    git add .
-    sudo nixos-rebuild switch --flake {{ CONFIG }}
+alias rb := rebuild
+alias nr := nix-remote
+alias ri := remote-install
 
-# Build Home Configuration
-hm CONFIG=(FLAKE):
-    git add .
-    home-manager switch --flake {{ CONFIG }}
+[doc("Build System Configuration Locally")]
+[group("build")]
+rebuild CONFIG=(FLAKE) *ARGS:
+    @git add .
+    sudo nixos-rebuild switch \
+        --flake {{ CONFIG }} \
+        {{ ARGS }}
 
-# Build Remote Target
-nr HOST CONFIG:
-    git add .
-    nixos-rebuild switch --target-host {{ HOST }} --flake {{ CONFIG }} --sudo --ask-sudo-password
+[doc("Build System Configuration Remotely")]
+[group("build")]
+nix-remote HOST CONFIG *ARGS:
+    @git add .
+    nixos-rebuild switch \
+        --target-host {{ HOST }} \
+        --flake {{ CONFIG }} \
+        --sudo {{ ARGS }}
 
-# Generates the plaintext and hashed secrets for OIDC Clients
-gen-auth:
-    nix run nixpkgs\#authelia -- crypto hash generate argon2 --random --random.length 64 --random.charset alphanumeric
+[doc("Install via nixos-anywhere")]
+[group("build")]
+remote-install HOST CONFIG *ARGS: 
+    nix run github:nix-community/nixos-anywhere -- \
+            --generate-hardware-config nixos-generate-config "{{ FLAKE }}/hosts/{{ replace(CONFIG, ".#", "") }}" \
+            --flake {{ CONFIG }} \
+            --target-host {{ HOST }} \
+            {{ ARGS }}
 
-# Execute rb and hm afterwards
+[doc("Update the flake and rebuild")]
+[group("maintenance")]
 update:
-    just rb
-    just hm
-
-# Update nix flake and run just update
-update-full:
     nix flake update
-    just update
+    just rb
 
-# Clean Nix-Store
+[doc("Clean Nix-Store")]
+[group("maintenance")]
 clean:
     sudo nix-collect-garbage -d    
     nix-collect-garbage -d
 
-# Run a nixosConfiguration inside a repl
+[doc("Enter a repl with specified flake")]
+[group("develop")]
 repl CONFIG=(FLAKE):
     nixos-rebuild repl --flake {{ CONFIG }}
-
-[doc("""
-Install via nixos-anywhere
-    HARDWARE_PATH: path to your hardware-configuration.nix
-    HOST: host to install the config on (user@ip_address)
-    CONFIG: path to flake
-""")]
-remote-install HARDWARE_PATH HOST CONFIG: 
-    nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-generate-config {{ HARDWARE_PATH }} --flake {{ CONFIG }} --target-host {{ HOST }}
