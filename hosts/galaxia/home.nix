@@ -3,6 +3,7 @@
 {
     modules.hm = {
         mail = "daniel.schmidt0204@gmail.com";
+        keyboard.layout = "de";
         
         alacritty.enable = true;
         git.enable = true;
@@ -21,6 +22,5 @@
         inherit (config.modules.hm) username;
         homeDirectory = "/home/${config.modules.hm.username}";
         stateVersion = "24.11";
-        keyboard.layout = "de";
     };
 }

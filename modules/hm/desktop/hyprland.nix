@@ -87,7 +87,7 @@ in with lib;
                 };
 
                 input = {
-                    kb_layout = config.home.keyboard.layout;
+                    kb_layout = config.modules.hm.keyboard.layout;
 
                     follow_mouse = 1;
 
