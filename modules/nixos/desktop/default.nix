@@ -26,6 +26,8 @@ in
             signal-desktop
             thunderbird
             gnupg
+
+            home-manager
         ];
     };
 }

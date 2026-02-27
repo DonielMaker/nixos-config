@@ -1,52 +1,57 @@
-{inputs, pkgs, pkgs-stable, arch, ...}:
+{inputs, pkgs, ...}:
 
 {
-    imports = with inputs.self.nixosModules; [
-        ./hardware-configuration.nix
-        ./disko.nix
-        inputs.disko.nixosModules.disko
-        inputs.stylix.nixosModules.stylix
+    imports = [ ./hardware-configuration.nix ./disko.nix ];
 
-        system.limine
-        system.intel
+    modules = {
+        system = {
+            enable = true;
+            hostname = "galaxia";
+            username = "donielmaker";
+            shell = pkgs.zsh;
 
-        system.settings
-        system.user
+            user.enable = true;
+            
+            limine.enable = true;
+            limine.image = pkgs.fetchurl {
+                url = "https://codeberg.org/solut/pub_ressources/raw/branch/main/images/wallpaper/vladislav-klapin-o-SMjjGuP6c-unsplash.jpg";
+                sha256 = "sha256-+ObY8Jft/Ergnufgcp/cXKV/webd+74yl1XdsCYdMp0=";
+            };
 
-        system.openssh
-        system.networking
+            openssh.enable = true;
+        };
 
-        desktop.graphics
-        desktop.hyprland
-        desktop.regreet
+        hm.enable = true;
+        hm.home = ./home.nix;
 
-        desktop.bluetooth
-        desktop.sound
+        desktop = {
+            enable = true;
+            graphics.enable = true;
+            sound.enable = true;
+            networking.enable = true;
+            bluetooth.enable = true;
 
-        desktop.zsh
-        desktop.stylix
-    ];
+            stylix.enable = true;
 
-    services.upower.enable = true;
-    services.tlp.enable = true;
+            hyprland.enable = true;
+            dms.enable = true;
+        };
 
-    programs.localsend.enable = true;
+        programs = {
+            zsh.enable = true;
+        };
+    };
 
     environment.systemPackages = with pkgs; [
-        inputs.ragenix.packages.${arch}.default
+        inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-        just
         typst
 
         zathura
         brave
-        vlc
-        signal-desktop
         gimp
         obs-studio
-        pkgs-stable.geeqie
-
-        home-manager
+        geeqie
     ];
 
     system.stateVersion = "25.05"; # Just don't
