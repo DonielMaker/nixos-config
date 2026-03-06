@@ -1,35 +1,44 @@
-{config, inputs, pkgs, username, domain, arch, ...}:
+{config, inputs, pkgs, ...}:
 
 {
 
-    imports = with inputs.self.nixosModules; [
+    imports = [
         ./hardware-configuration.nix
         ./disko.nix
-        inputs.disko.nixosModules.disko
-        inputs.ragenix.nixosModules.default
         inputs.copyparty.nixosModules.default
-
-        system.systemd-boot
-
-        system.settings
-        system.user
-
-        system.openssh
-        system.networking
-
-        server.qemuGuest
-        server.alloy
     ];
+
+    modules = {
+        system = {
+            enable = true;
+            hostname = "lastprism";
+            username = "donielmaker";
+
+            user.enable = true;
+
+            systemd-boot.enable = true;
+
+            openssh.enable = true;
+        };
+
+        server = {
+            enable = true;
+            domain = "thematt.net";
+            alloy.enable = true;
+            qemuGuest.enable = true;
+        };
+    };
+
+    networking.hostName = config.modules.system.hostname;
 
     nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
 
     # copyparty, homeassistant, zigbee2mqtt, mosquitto, paperless, apcupsd
     networking.firewall.allowedTCPPorts = [ 3923 8123 8080 1883 28981 3551 ];
 
-    users.users.${username}.extraGroups = [ "media" ];
+    users.users.${config.modules.system.username}.extraGroups = [ "media" ];
     users.groups.media = {};
 
-    # Should these be hardcoded or via config.services.copyparty.user, etc.?
     systemd.tmpfiles.rules = [
         "d /storage/media 0770 copyparty media -"
         "d /storage/media/pictures 0770 copyparty media -"
@@ -289,7 +298,7 @@
     # };
 
     environment.systemPackages = with pkgs; [
-        inputs.ragenix.packages.${arch}.default
+        inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         vim
         git
