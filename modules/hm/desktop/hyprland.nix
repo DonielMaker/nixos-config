@@ -49,8 +49,7 @@ in with lib;
                         "XDG_SESSION_TYPE,wayland"
                         "XDG_SESSION_DESKTOP,Hyprland"
                         "QT_QPA_PLATFORM,wayland"
-                        "QT_QPA_PLATFORMTHEME,qt5ct"
-                        "XDG_SCREENSHOTS_DIR,~/screenshots"
+                        "QT_QPA_PLATFORMTHEME,qt6ct"
                 ];
 
                 windowrule = [
