@@ -83,6 +83,8 @@
         # };
 
         mosquitto-iotPassword.file = ./secrets/mosquitto-iotPassword.age;
+
+        paperless-envFile.file = ./secrets/paperless-envFile.age;
     };
 
     # Outline: Note-Taking Server
@@ -187,56 +189,47 @@
     };
 
     # Paperless: A Document server with plenty of features (ocr, file conversion, editing, etc.)
-#     services.paperless.enable = true;
-#     services.paperless = {
-#         address = "0.0.0.0";
-#         port = 28981;
-#         dataDir = "/storage/paperless";
-#
-#         settings = {
-#             PAPERLESS_URL = "https://paperless.${domain}";
-#             PAPERLESS_OCR_LANGUAGE = "eng+deu";
-#             PAPERLESS_TIME_ZONE = "Europe/Berlin";
-#             PAPERLESS_TRUSTED_PROXIES = "10.10.12.0/24";
-#             PAPERLESS_USE_X_FORWARDED_HOST = true;
-#             PAPERLESS_USE_X_FORWARDED_PORT = true;
-#             PAPERLESS_LOGOUT_REDIRECT_URL = "https://homepage.${domain}";
-#
-#             # SSO
-#             PAPERLESS_SOCIAL_AUTO_SIGNUP = true;
-#             PAPERLESS_DISABLE_REGULAR_LOGIN = true;
-#             PAPERLESS_REDIRECT_LOGIN_TO_SSO = true;
-#             PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
-#             # TODO: This secrets needs to be secured
-#             PAPERLESS_SOCIALACCOUNT_PROVIDERS= ''
-# {
-#     "openid_connect": {
-#         "SCOPE":["openid", "profile", "email"],
-#         "OAUTH_PKCE_ENABLED": true,
-#         "APPS": [
-#             {
-#                 "provider_id": "authelia",
-#                 "name": "Authelia",
-#                 "client_id": "paperless",
-#                 "secret": "SE9kT540KNYhaXYxhd7ymQN7OLarVcdWC5BIZKORgbiJSDcj1qDiMnMzFGSPsysh",
-#                 "settings": {
-#                     "server_url":"https://authelia.thematt.net/.well-known/openid-configuration",
-#                     "token_auth_method": "client_secret_basic"
-#                 }
-#             }
-#         ]
-#     }
-# }'';
-#         };
-#     };
+    services.paperless.enable = true;
+    services.paperless = {
+        address = "0.0.0.0";
+        port = 28981;
+        dataDir = "/storage/paperless";
+        configureTika = true;
+        environmentFile = config.age.secrets.paperless-envFile.path;
 
-    # Tika: Ocr?
-    # services.tika.enable = true;
-    # services.tika = {
-    #     listenAddress = "0.0.0.0";
-    #     openFirewall = true;
-    #     enableOcr = true;
-    # };
+        settings = {
+            PAPERLESS_URL = "https://paperless.${config.modules.server.domain}";
+            PAPERLESS_OCR_LANGUAGE = "eng+deu";
+            PAPERLESS_TIME_ZONE = "Europe/Berlin";
+            PAPERLESS_TRUSTED_PROXIES = "10.10.12.0/24";
+            PAPERLESS_USE_X_FORWARDED_HOST = true;
+            PAPERLESS_USE_X_FORWARDED_PORT = true;
+
+            # SSO
+            PAPERLESS_SOCIAL_AUTO_SIGNUP = true;
+            PAPERLESS_LOGOUT_REDIRECT_URL = "https://authentik.${config.modules.server.domain}/application/o/paperless/end-session/";
+            PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
+            # PAPERLESS_SOCIALACCOUNT_PROVIDERS = ''
+            #     {
+            #       "openid_connect": {
+            #         "OAUTH_PKCE_ENABLED": true,
+            #         "APPS": [
+            #           {
+            #             "provider_id": "authentik",
+            #             "name": "authentik",
+            #             "client_id": "paperless",
+            #             "secret": "NnS5IPSsLp3DffKh9sXy5FraH9B16xJl9VK7XaguaPa2U8hHxuryFn1xNPUPFk2qt12wdvKi6NYut9HXD5GD5B2XLHETIvBSXMt62tBswL3dGkZuUQE7bFgptZEaFTaT",
+            #             "settings": {
+            #               "server_url": "https://authentik.${config.modules.server.domain}/application/o/paperless/.well-known/openid-configuration",
+            #               "fetch_userinfo": true
+            #             }
+            #           }
+            #         ],
+            #         "SCOPE": ["openid", "profile", "email"]
+            #       }
+            #     }'';
+        };
+    };
 
     # Home-Assistant: Home Automation
     services.home-assistant.enable = true;

@@ -22,4 +22,7 @@ in
 
     # Mosquitto
     "mosquitto-iotPassword.age".publicKeys = users ++ systems;
+
+    # Paperless
+    "paperless-envFile.age".publicKeys = users ++ systems;
 }
