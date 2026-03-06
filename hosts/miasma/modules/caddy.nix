@@ -64,16 +64,7 @@ in
 
             @zigbee2mqtt host zigbee2mqtt.${domain} 
             handle @zigbee2mqtt {
-                route {
-                    reverse_proxy /outpost.goauthentik.io/* http://miasma.${domain}:9000
-
-                    forward_auth http://miasma.${domain}:9000 {
-                        uri /outpost.goauthentik.io/auth/caddy
-                        copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
-                    }
-
-                    reverse_proxy miasma.${domain}:8080
-                }
+                reverse_proxy lastprism.${domain}:8080
             }
 
             @prometheus host prometheus.${domain} 

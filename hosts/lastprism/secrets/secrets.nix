@@ -19,4 +19,7 @@ in
 
     # Radicale
     "radicale/password.age".publicKeys = users ++ systems;
+
+    # Mosquitto
+    "mosquitto-iotPassword.age".publicKeys = users ++ systems;
 }
