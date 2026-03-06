@@ -47,6 +47,11 @@ in
                 reverse_proxy lastprism.${domain}:28981
             }
 
+            @homebox host homebox.${domain}
+            handle @homebox {
+                reverse_proxy lastprism.${domain}:7745
+            }
+
             @navidrome host navidrome.${domain} 
             handle @navidrome {
                 reverse_proxy lastprism.${domain}:4533

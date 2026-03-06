@@ -25,4 +25,7 @@ in
 
     # Paperless
     "paperless-envFile.age".publicKeys = users ++ systems;
+
+    # Homebox
+    "homebox-envFile.age".publicKeys = users ++ systems;
 }

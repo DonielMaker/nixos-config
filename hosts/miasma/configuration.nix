@@ -276,6 +276,14 @@ IN  NS  localhost.
                         };
                     }
                     {
+                        "Homebox" = {
+                            description = "Inventory Management";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/homebox.svg";
+                            href = "https://homebox.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:7745";
+                        };
+                    }
+                    {
                         "Vaultwarden" = {
                             description = "Passwordmanager";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/vaultwarden-light.svg";

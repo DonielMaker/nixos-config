@@ -33,8 +33,8 @@
 
     nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
 
-    # copyparty, homeassistant, zigbee2mqtt, mosquitto, paperless, apcupsd
-    networking.firewall.allowedTCPPorts = [ 3923 8123 8080 1883 28981 3551 ];
+    # copyparty, homeassistant, zigbee2mqtt, mosquitto, paperless, apcupsd, homebox
+    networking.firewall.allowedTCPPorts = [ 3923 8123 8080 1883 28981 3551 7745 ];
 
     users.users.${config.modules.system.username}.extraGroups = [ "media" ];
     users.groups.media = {};
@@ -81,6 +81,8 @@
         #     inherit (outline) mode owner group;
         #     file = ./secrets/outline/clientSecret.age;
         # };
+
+        homebox-envFile.file = ./secrets/homebox-envFile.age;
 
         mosquitto-iotPassword.file = ./secrets/mosquitto-iotPassword.age;
 
@@ -156,6 +158,7 @@
             "/" = {
                 path = "/storage/media";
                 access.rwmda = "donielmaker";
+                flags.chmod-f = 644;
             };
         };
     };
@@ -185,6 +188,30 @@
         settings = {
             Address = "0.0.0.0";
             MusicFolder = "/storage/media/music"; 
+        };
+    };
+
+    # Homebox: Inventory Management for the Home Owner
+    services.homebox.enable = true;
+    systemd.services.homebox.serviceConfig.EnvironmentFile = config.age.secrets.homebox-envFile.path;
+    services.homebox = {
+        database.createLocally = true;
+        settings = {
+            HBOX_MODE = "production";
+            HBOX_OPTIONS_CHECK_GITHUB_RELEASE = "false";
+
+            # Directories
+            HBOX_STORAGE_CONN_STRING = "file:///storage/homebox";
+            HBOX_STORAGE_PREFIX_PATH = "data";
+            HOME = "/storage/homebox";
+            TMPDIR = "/storage/homebox/tmp";
+
+            # OIDC
+            HBOX_OIDC_ENABLED = "true";
+            HBOX_OIDC_ISSUER_URL = "https://authentik.thematt.net/application/o/homebox/";
+            HBOX_OIDC_CLIENT_ID = "homebox";
+            HBOX_OPTIONS_ALLOW_REGISTRATION = "false";
+            HBOX_OPTIONS_TRUST_PROXY = "true";
         };
     };
 
