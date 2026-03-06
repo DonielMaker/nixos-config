@@ -22,7 +22,8 @@ nix-remote HOST CONFIG *ARGS:
     nixos-rebuild switch \
         --target-host {{ HOST }} \
         --flake {{ CONFIG }} \
-        --sudo {{ ARGS }}
+        --ask-sudo-password \
+        {{ ARGS }}
 
 [doc("Install via nixos-anywhere")]
 [group("build")]
