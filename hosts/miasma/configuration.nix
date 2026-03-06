@@ -6,8 +6,9 @@ in
 
 {
 
-    imports = [ ./hardware-configuration.nix ./disko.nix
-
+    imports = [ 
+        ./hardware-configuration.nix 
+        ./disko.nix
         inputs.authentik-nix.nixosModules.default
         ./modules/caddy.nix
     ];
@@ -32,6 +33,8 @@ in
             qemuGuest.enable = true;
         };
     };
+
+    networking.hostName = config.modules.system.hostname;
 
     # prometheus, vaultwarden, authentik
     networking.firewall.allowedTCPPorts = [ 9090 5902 9000];
