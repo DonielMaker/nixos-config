@@ -1,18 +1,20 @@
 {config, lib, ...}: 
 
 let
-    module = "Stylix";
+    inherit (lib) mkIf mkEnableOption;
     cfg = config.modules.hm.stylix;
-in with lib;
+in
 
 {
-    options.modules.hm.stylix.enable = mkEnableOption "Enable ${module}";
+    options.modules.hm.stylix.enable = mkEnableOption "Enable Stylix";
 
     config = mkIf cfg.enable {
 
            stylix.enable = true;
            stylix = {
-               targets.librewolf.profileNames = lib.mkIf config.programs.librewolf.enable [ config.modules.hm.username ];
+               targets.librewolf.profileNames = lib.mkIf config.programs.librewolf.enable [ 
+                   config.modules.hm.username 
+               ];
                targets.hyprland.enable = false;
                targets.neovim.enable = false;
            };

@@ -48,10 +48,6 @@ in
                     name = "FiraCode Nerd Font";
                     package = pkgs.nerd-fonts.fira-code;
                 };
-                # monospace = {
-                #     name = "CascaydiaCove Nerd Font";
-                #     package = pkgs.nerd-fonts.caskaydia-cove;
-                # };
             };
 
             # Doesn't work with nixos logo
