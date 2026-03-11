@@ -98,13 +98,13 @@ in
     security.acme = {
         acceptTerms = true;
         defaults.email = "daniel.schmidt0204@gmail.com";
-        # defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
         defaults.server = "https://acme-v02.api.letsencrypt.org/directory";
+        # defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
 
-        certs."${domain}" = {
+        certs.${domain} = {
             group = config.services.caddy.group;
 
-            domain = "${domain}";
+            inherit domain;
             extraDomainNames = [ 
                 "*.${domain}"
                 "*.lastprism.${domain}"
