@@ -6,6 +6,7 @@
         ./hardware-configuration.nix
         ./disko.nix
         inputs.copyparty.nixosModules.default
+        ./modules/home-assistant.nix
     ];
 
     modules = {
@@ -38,13 +39,6 @@
 
     users.users.${config.modules.system.username}.extraGroups = [ "media" ];
     users.groups.media = {};
-
-    systemd.tmpfiles.rules = [
-        "d /storage/media 0770 copyparty media -"
-        "d /storage/media/pictures 0770 copyparty media -"
-        "d /storage/media/videos 0770 copyparty media -"
-        "d /storage/media/music 0770 navidrome media -"
-    ];
 
     age.secrets = let
 
@@ -89,32 +83,6 @@
         paperless-envFile.file = ./secrets/paperless-envFile.age;
     };
 
-    # Outline: Note-Taking Server
-    # services.outline.enable = true;
-    # systemd.services.outline.environment.OIDC_LOGOUT_URI = "https://homepage.${domain}";
-    # services.outline = {
-    #     secretKeyFile = config.age.secrets.outlineSecretKey.path;
-    #     utilsSecretFile = config.age.secrets.outlineUtilsSecret.path;
-    #     port = 2920;
-    #     publicUrl = "https://outline.${domain}";
-    #     forceHttps = false;
-    #     concurrency = 4;
-    #     defaultLanguage = "en_US";
-    #     storage = {
-    #         storageType = "local";
-    #         localRootDir = "/storage/outline";
-    #     };
-    #     oidcAuthentication = {
-    #         clientId = "outline";
-    #         clientSecretFile = config.age.secrets.outlineClientSecret.path;
-    #         authUrl = "https://authelia.${domain}/api/oidc/authorization";
-    #         tokenUrl = "https://authelia.${domain}/api/oidc/token";
-    #         userinfoUrl = "https://authelia.${domain}/api/oidc/userinfo";
-    #         usernameClaim = "preferred_username";
-    #         displayName = "Authelia";
-    #         scopes = [ "openid" "offline_access" "profile" "email" ];
-    #     };
-    # };
 
     services.teamspeak3.enable = true;
     services.teamspeak3 = {
@@ -236,104 +204,9 @@
             PAPERLESS_SOCIAL_AUTO_SIGNUP = true;
             PAPERLESS_LOGOUT_REDIRECT_URL = "https://authentik.${config.modules.server.domain}/application/o/paperless/end-session/";
             PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
-            # PAPERLESS_SOCIALACCOUNT_PROVIDERS = ''
-            #     {
-            #       "openid_connect": {
-            #         "OAUTH_PKCE_ENABLED": true,
-            #         "APPS": [
-            #           {
-            #             "provider_id": "authentik",
-            #             "name": "authentik",
-            #             "client_id": "paperless",
-            #             "secret": "NnS5IPSsLp3DffKh9sXy5FraH9B16xJl9VK7XaguaPa2U8hHxuryFn1xNPUPFk2qt12wdvKi6NYut9HXD5GD5B2XLHETIvBSXMt62tBswL3dGkZuUQE7bFgptZEaFTaT",
-            #             "settings": {
-            #               "server_url": "https://authentik.${config.modules.server.domain}/application/o/paperless/.well-known/openid-configuration",
-            #               "fetch_userinfo": true
-            #             }
-            #           }
-            #         ],
-            #         "SCOPE": ["openid", "profile", "email"]
-            #       }
-            #     }'';
         };
     };
 
-    # Home-Assistant: Home Automation
-    services.home-assistant.enable = true;
-    services.home-assistant = {
-        extraComponents = [
-            "analytics"
-            "met"
-            "isal"
-            "mqtt"
-        ];
-
-        customComponents = with pkgs.home-assistant-custom-components; [
-            auth_oidc
-            prometheus_sensor
-        ];
-
-        config = {
-            # Includes dependencies for a basic setup
-            # https://www.home-assistant.io/integrations/default_config/
-            default_config = {};
-            homeassistant = {
-                name = "Home";
-                latitude = "53.00906288742223";
-                longitude = "9.060134791016266";
-                unit_system = "metric";
-                time_zone = "Europe/Berlin";
-            };
-            http = {
-                use_x_forwarded_for = true;
-                # Why Can't this be dns?
-                trusted_proxies = [ "10.10.12.10" ];
-            };
-        };
-    };
-
-    # Mosquitto: Mqtt Server
-    # Needs authentication currently not usable for prod. Used anyways
-    services.mosquitto.enable = true;
-    services.mosquitto = {
-        # listeners = [
-        #     {
-        #         acl = [ "pattern readwrite #" ];
-        #         omitPasswordAuth = true;
-        #         settings.allow_anonymous = true;
-        #     }
-        # ];
-        listeners = [
-        {  
-            users.iot = {
-                acl = [
-                    "read IoT/device/action"
-                    "write IoT/device/observations"
-                    "write IoT/device/LW"
-                ];
-                passwordFile = config.age.secrets.mosquitto-iotPassword.path;
-            };
-        }
-        ];
-    };
-
-    # Zigbee2mqtt: Connection between Zigbee and Mqtt devices
-    services.zigbee2mqtt.enable = true;
-    services.zigbee2mqtt = {
-        settings = {
-            homeassistant.enabled = config.services.home-assistant.enable;
-            frontend.enabled = true;
-            permit_join = true;
-            serial = {
-                port = "/dev/ttyUSB0";
-            };
-            mqtt = {
-                server = "mqtt://lastprism.thematt.net:1883";
-                user = "iot";
-                password = "2nkFzRMG#l4sxXsUrctHQ&%UcD6ZCc&HIG3vMPxmOfX0VIgvY2HeE5m&&eWbXr^T";
-            };
-        };
-    };
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
