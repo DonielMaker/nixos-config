@@ -29,7 +29,7 @@ nix-remote HOST CONFIG *ARGS:
 [group("build")]
 remote-install HOST CONFIG *ARGS: 
     nix run github:nix-community/nixos-anywhere -- \
-            --generate-hardware-config nixos-generate-config "{{ FLAKE }}/hosts/{{ replace(CONFIG, ".#", "") }}" \
+            --generate-hardware-config nixos-generate-config "{{ FLAKE }}/hosts/{{ replace(CONFIG, ".#", "") }}/hardware-configuration.nix" \
             --flake {{ CONFIG }} \
             --target-host {{ HOST }} \
             {{ ARGS }}
