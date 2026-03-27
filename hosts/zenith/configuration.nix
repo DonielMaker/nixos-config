@@ -69,6 +69,7 @@
         obs-studio
         orca-slicer
         drawio
+        typst
 
         prismlauncher
         heroic
@@ -86,6 +87,10 @@
         teamspeak6-client
 
         home-manager
+    ];
+
+    fonts.packages = with pkgs; [
+        aileron
     ];
 
     system.stateVersion = "24.11"; # Just don't
