@@ -122,8 +122,8 @@ in
 
     services.bind.enable = true;
     services.bind = {
-        forwarders = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" "8.8.8.8" ]; 
-        cacheNetworks = [ "127.0.0.1" "10.0.0.0/8" ];
+        forwarders = [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" "9.9.9.9" "2620:fe::fe"]; 
+        cacheNetworks = [ "127.0.0.1" "10.0.0.0/8" "::1/128" "2003:c2:703:dc0::/58"];
         zones = {
             "${domain}" = {
                 master = true;
@@ -143,25 +143,35 @@ $ORIGIN ${domain}.
             2h         ; minimum
 )
 
-                    IN      NS      ns.${domain}.
+                    IN      NS      ns
 
 ns                  IN      A       10.10.12.10
 
-proxmox.lastprism   IN      A       10.10.12.12
+ns                  IN      AAAA    2003:c2:703:dc1:be24:11ff:feb6:21fe
 
+; Auth Server
+miasma              IN      CNAME   ns
+
+*                   IN      CNAME   miasma
+
+; Main Server
 lastprism           IN      A       10.10.12.11
 
-miasma              IN      A       10.10.12.10
+lastprism           IN      AAAA    2003:c2:703:dc1:be24:11ff:fede:2125
 
-vilethorn           IN      A       10.10.90.1              
+ts                  IN      CNAME   lastprism
+
+; Vyos Router
+vilethorn           IN      A       10.10.10.1        
+
+vilethorn           IN      AAAA    2003:c2:703:d00:62be:b4ff:fe14:c2a8
+
+; Proxmox Server
+proxmox.lastprism   IN      A       10.10.12.12
 
 ark                 IN      A       10.10.12.13
 
 mail                IN      CNAME   eu1.workspace.org.
-
-ts                  IN      CNAME   lastprism.thematt.net.
-
-*                   IN      CNAME   miasma.${domain}.
                 '';
             };
 
