@@ -45,8 +45,7 @@
         };
     };
 
-    networking.nameservers = [ "10.10.12.10" "10.10.110.10" "1.1.1.1" ];
-    networking.search = [ "thematt.net, soluttech.uk" ];
+    networking.search = [ "thematt.net" ];
 
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
 
