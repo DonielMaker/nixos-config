@@ -74,12 +74,12 @@
         prismlauncher
         heroic
         steam
-        everest-mons
         xclicker
         owmods-gui
         owmods-cli
         protonplus
         olympus
+        r2modman
 
         kdePackages.kwallet
         kdePackages.kate
