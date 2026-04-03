@@ -90,12 +90,14 @@
 
         paperless-envFile.file = ./secrets/paperless-envFile.age;
 
-    services.teamspeak3.enable = true;
-    services.teamspeak3 = {
-        openFirewall = true;
-        openFirewallServerQuery = true;
-        dataDir = "/storage/ts";
     };
+
+    # services.teamspeak3.enable = true;
+    # services.teamspeak3 = {
+    #     openFirewall = true;
+    #     openFirewallServerQuery = true;
+    #     dataDir = "/storage/ts";
+    # };
 
     services.apcupsd.enable = true;
     services.apcupsd.configText = ''
