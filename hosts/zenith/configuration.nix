@@ -68,8 +68,8 @@
         vesktop
         obs-studio
         orca-slicer
-        drawio
         typst
+        freecad
 
         prismlauncher
         heroic
@@ -82,8 +82,10 @@
         olympus
 
         kdePackages.kwallet
+        kdePackages.kate
 
         element-desktop
+        gajim
         teamspeak6-client
 
         home-manager
