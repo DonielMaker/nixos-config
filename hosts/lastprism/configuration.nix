@@ -89,8 +89,6 @@
         mosquitto-iotPassword.file = ./secrets/mosquitto-iotPassword.age;
 
         paperless-envFile.file = ./secrets/paperless-envFile.age;
-    };
-
 
     services.teamspeak3.enable = true;
     services.teamspeak3 = {
