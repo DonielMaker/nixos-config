@@ -34,8 +34,16 @@
 
     nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
 
-    # copyparty, homeassistant, zigbee2mqtt, mosquitto, paperless, apcupsd, homebox
-    networking.firewall.allowedTCPPorts = [ 3923 8123 8080 1883 28981 3551 7745 ];
+    networking.firewall.allowedTCPPorts = [ 
+        3923 # copyparty
+        8123 # homeassistant
+        8080 # zigbee2mqtt
+        1883 # mosquitto
+        28981 # paperless
+        7745 # homebox
+        80 443 # inventree
+        9987 30033 # tsserver
+    ];
 
     users.users.${config.modules.system.username}.extraGroups = [ "media" ];
     users.groups.media = {};
