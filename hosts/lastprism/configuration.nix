@@ -27,6 +27,8 @@
             domain = "thematt.net";
             alloy.enable = true;
             qemuGuest.enable = true;
+            # TBC
+            # podman.enable = true;
         };
     };
 
@@ -41,7 +43,6 @@
         1883 # mosquitto
         28981 # paperless
         7745 # homebox
-        80 443 # inventree
         9987 30033 # tsserver
     ];
 
@@ -56,11 +57,6 @@
             group = config.services.copyparty.group;
         };
 
-        # outline = {
-        #     mode = "440";
-        #     owner = config.services.outline.user;
-        #     group = config.services.outline.group;
-        # };
     in
 
     {
@@ -69,20 +65,6 @@
             file = ./secrets/copyparty/copyparty-donielmaker-password.age;
         };
 
-        # outlineSecretKey = {
-        #     inherit (outline) mode owner group;
-        #     file = ./secrets/outline/secretKey.age;
-        # };
-
-        # outlineUtilsSecret = {
-        #     inherit (outline) mode owner group;
-        #     file = ./secrets/outline/utilsSecret.age;
-        # };
-
-        # outlineClientSecret = {
-        #     inherit (outline) mode owner group;
-        #     file = ./secrets/outline/clientSecret.age;
-        # };
 
         homebox-envFile.file = ./secrets/homebox-envFile.age;
 
@@ -184,7 +166,7 @@
 
             # OIDC
             HBOX_OIDC_ENABLED = "true";
-            HBOX_OIDC_ISSUER_URL = "https://authentik.thematt.net/application/o/homebox/";
+            HBOX_OIDC_ISSUER_URL = "https://authentik.${config.modules.server.domain}/application/o/homebox/";
             HBOX_OIDC_CLIENT_ID = "homebox";
             HBOX_OPTIONS_ALLOW_REGISTRATION = "false";
             HBOX_OPTIONS_TRUST_PROXY = "true";
@@ -198,6 +180,7 @@
         port = 28981;
         dataDir = "/storage/paperless";
         configureTika = true;
+        ## Also holds SSO
         environmentFile = config.age.secrets.paperless-envFile.path;
 
         settings = {
