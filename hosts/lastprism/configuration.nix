@@ -44,6 +44,7 @@
         28981 # paperless
         7745 # homebox
         9987 30033 # tsserver
+        4856 9837 # sftpgo
     ];
 
     users.users.${config.modules.system.username}.extraGroups = [ "media" ];
@@ -170,6 +171,57 @@
             HBOX_OIDC_CLIENT_ID = "homebox";
             HBOX_OPTIONS_ALLOW_REGISTRATION = "false";
             HBOX_OPTIONS_TRUST_PROXY = "true";
+        };
+    };
+
+    # SFTPGo: Fileserver with Virtual Folders and RBAC
+    users.users.${config.modules.system.username}.extraGroups = [ "media" ];
+    users.groups.media = {};
+    services.sftpgo.enable = true;
+    services.sftpgo = {
+        ## No actual data but holds sftpgo.db
+            # dataDir = "/var/lib/sftpgo";
+        ## Needed when dataDir != <your-wanted-dir>
+        extraReadWriteDirs = [ "/storage/media" ];
+        ## Allow other services to read files
+        group = "media";
+        settings = {
+            ## Sets dirs to 750 and files to 640
+            common.umask = "027";
+
+            httpd.bindings = [
+                {
+                    address = "0.0.0.0";
+                    port = 4856;
+                    # Not needed when a reverse proxy exists
+                    # enable_https = true;
+                    # certificate_file = "/var/lib/acme/${config.modules.server.domain}/cert.pem";
+                    # certificate_key_file = "/var/lib/acme/${config.modules.server.domain}/key.pem";
+
+                    oidc = {
+                        client_id = "sftpgo";
+                        client_secret = "n0CRQK9eoHmdlG8Rl2gGA62hEzvQtU5Hag2MbACA4Aq8dkbu2xo4bsmYhnQhdYOJ3gfd1SRSptlh18eifO5F7hU0iKcEWn9PT5M7B0lLil3XivR8wltCYMIDIgmJAsug";
+                        config_url = "https://authentik.${config.modules.server.domain}/application/o/sftpgo/";
+                        redirect_base_url = "https://sftpgo.thematt.net";
+                        scopes = [ "openid" "profile" "email" ];
+                        username_field = "preferred_username";
+                        implicit_roles = true;
+                        # custom_fields = []
+                    };
+                }
+            ];
+
+            webdavd.bindings = [ 
+                {
+                    address = "0.0.0.0";
+                    port = 9837;
+                    # Not needed when a reverse proxy exists
+                    # enable_https = true;
+                    # certificate_file = "/var/lib/acme/${config.modules.server.domain}/cert.pem";
+                    # certificate_key_file = "/var/lib/acme/${config.modules.server.domain}/key.pem";
+                } 
+            ];
+
         };
     };
 

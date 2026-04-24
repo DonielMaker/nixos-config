@@ -57,6 +57,14 @@ in
                 reverse_proxy lastprism.${domain}:4533
             }
 
+            @sftpgo host sftpgo.${domain} 
+            handle @sftpgo {
+                reverse_proxy lastprism.${domain}:4856
+            }
+
+            @webdav host webdav.${domain} 
+            handle @webdav {
+                reverse_proxy lastprism.${domain}:9837
             @copyparty host copyparty.${domain} 
             handle @copyparty {
                 reverse_proxy lastprism.${domain}:3923
