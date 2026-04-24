@@ -5,7 +5,6 @@
     imports = [
         ./hardware-configuration.nix
         ./disko.nix
-        inputs.copyparty.nixosModules.default
         ./modules/home-assistant.nix
     ];
 
@@ -34,10 +33,7 @@
 
     networking.hostName = config.modules.system.hostname;
 
-    nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
-
     networking.firewall.allowedTCPPorts = [ 
-        3923 # copyparty
         8123 # homeassistant
         8080 # zigbee2mqtt
         1883 # mosquitto
@@ -47,25 +43,7 @@
         4856 9837 # sftpgo
     ];
 
-    users.users.${config.modules.system.username}.extraGroups = [ "media" ];
-    users.groups.media = {};
-
-    age.secrets = let
-
-        copyparty = {
-            mode = "440";
-            owner = config.services.copyparty.user;
-            group = config.services.copyparty.group;
-        };
-
-    in
-
-    {
-        copyparty-donielmaker-password = {
-            inherit (copyparty) mode owner group;
-            file = ./secrets/copyparty/copyparty-donielmaker-password.age;
-        };
-
+    age.secrets = {
 
         homebox-envFile.file = ./secrets/homebox-envFile.age;
 
@@ -91,36 +69,6 @@
         UPSCLASS standalone
         UPSMODE disable
     '';
-
-    # Copyparty: WebDav Fileserver with great performance
-    services.copyparty.enable = true;
-    services.copyparty = {
-        group = "media";
-        settings = {
-            i = "0.0.0.0";
-            z = true;
-            e2dsa = true;
-            e2ts = true;
-
-            # As of now this does not work since trying to use copyparty outside the browser (file explorer on PC/Smartphone) leads to a https unauthorized? error.
-            # idp-h-usr = "x-idp-user";
-            # idp-h-grp = "x-idp-group";
-            # idp-store = 3;
-            xff-src = "10.10.12.0/24";
-        };
-
-        accounts = {
-            donielmaker.passwordFile = config.age.secrets.copyparty-donielmaker-password.path;
-        };
-
-        volumes = {
-            "/" = {
-                path = "/storage/media";
-                access.rwmda = "donielmaker";
-                flags.chmod-f = 644;
-            };
-        };
-    };
 
     # Currently problems regarding inter-subnet access
     # services.printing.enable = true;

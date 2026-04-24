@@ -314,11 +314,11 @@ IN  NS  localhost.
                         };
                     }
                     {
-                        "Copyparty" = {
+                        "SFTPGo" = {
                             description = "Fileserver";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/copyparty.svg";
-                            href = "https://copyparty.${domain}";
-                            siteMonitor = "http://lastprism.${domain}:3923";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/sftpgo.svg";
+                            href = "https://sftpgo.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:4856";
                         };
                     }
                     {

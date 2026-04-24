@@ -9,9 +9,6 @@ let
 in
 
 {
-    # Copyparty
-    "copyparty/copyparty-donielmaker-password.age".publicKeys = users ++ systems;
-
     # Mosquitto
     "mosquitto-iotPassword.age".publicKeys = users ++ systems;
 

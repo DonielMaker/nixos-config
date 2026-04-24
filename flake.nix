@@ -25,9 +25,6 @@
         nur.inputs.nixpkgs.follows = "nixpkgs";
 
         # These are program flakes
-        copyparty.url = "github:9001/copyparty";
-        copyparty.inputs.nixpkgs.follows = "nixpkgs";
-
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
 

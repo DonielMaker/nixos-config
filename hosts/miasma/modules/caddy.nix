@@ -3,7 +3,6 @@
 let
     domain = config.modules.server.domain;
 in
-
 {
     networking.firewall.allowedTCPPorts = [ 80 443 ];
     services.caddy.enable = true;
@@ -65,9 +64,6 @@ in
             @webdav host webdav.${domain} 
             handle @webdav {
                 reverse_proxy lastprism.${domain}:9837
-            @copyparty host copyparty.${domain} 
-            handle @copyparty {
-                reverse_proxy lastprism.${domain}:3923
             }
 
             @home-assistant host home-assistant.${domain} 
