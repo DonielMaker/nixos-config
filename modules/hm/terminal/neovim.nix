@@ -10,33 +10,14 @@ in with lib;
 
     config = mkIf cfg.enable {
 
-        programs.neovim = {
-            enable = true;
-            defaultEditor = true;
-            plugins = with pkgs.vimPlugins.nvim-treesitter-parsers; [
-                # latex
-                json
-                javascript
-                tsx
-                yaml
-                yuck
-                html
-                css
-                markdown
-                markdown_inline
-                bash
-                lua
-                gitignore
-                query
-                c
-                rust
-                regex
-                slint
-                typst
-            ];
-        };
+        # Broken because HM tries to set init.lua
+        # programs.neovim.enable = true;
+        # programs.neovim.defaultEditor = true;
 
         home.packages = with pkgs; [
+            # See above
+            neovim
+
             tree-sitter
             zig
             rustc
