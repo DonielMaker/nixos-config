@@ -43,7 +43,17 @@
         4856 9837 # sftpgo
     ];
 
-    age.secrets = {
+    age.secrets = let
+
+    sftpgo = {
+        owner = config.services.sftpgo.user;
+        group = config.services.sftpgo.group;
+        mode = "440";
+    };
+
+    in 
+
+    {
 
         homebox-envFile.file = ./secrets/homebox-envFile.age;
 
@@ -51,6 +61,10 @@
 
         paperless-envFile.file = ./secrets/paperless-envFile.age;
 
+        sftpgo-clientSecret = {
+            inherit (sftpgo) owner group mode;
+            file = ./secrets/sftpgo-clientSecret.age;
+        };
     };
 
     # services.teamspeak3.enable = true;
@@ -129,9 +143,9 @@
     services.sftpgo = {
         ## No actual data but holds sftpgo.db
             # dataDir = "/var/lib/sftpgo";
-        ## Needed when dataDir != <your-wanted-dir>
+        # Needed when dataDir != <your-wanted-dir>
         extraReadWriteDirs = [ "/storage/media" ];
-        ## Allow other services to read files
+        # Allow other services to read files
         group = "media";
         settings = {
             ## Sets dirs to 750 and files to 640
@@ -141,35 +155,31 @@
                 {
                     address = "0.0.0.0";
                     port = 4856;
-                    # Not needed when a reverse proxy exists
-                    # enable_https = true;
-                    # certificate_file = "/var/lib/acme/${config.modules.server.domain}/cert.pem";
-                    # certificate_key_file = "/var/lib/acme/${config.modules.server.domain}/key.pem";
 
                     oidc = {
                         client_id = "sftpgo";
-                        client_secret = "n0CRQK9eoHmdlG8Rl2gGA62hEzvQtU5Hag2MbACA4Aq8dkbu2xo4bsmYhnQhdYOJ3gfd1SRSptlh18eifO5F7hU0iKcEWn9PT5M7B0lLil3XivR8wltCYMIDIgmJAsug";
+                        client_secret_file = "${config.age.secrets.sftpgo-clientSecret.path}";
                         config_url = "https://authentik.${config.modules.server.domain}/application/o/sftpgo/";
+                        # Url to redirect to. != Redirect Url for OIDC which is https://sftpgo.example.com/web/oidc/redirect
                         redirect_base_url = "https://sftpgo.thematt.net";
                         scopes = [ "openid" "profile" "email" ];
                         username_field = "preferred_username";
                         implicit_roles = true;
-                        # custom_fields = []
+                    };
+
+                    security = {
+                        enabled = true;
+                        allowed_hosts = [ "sftpgo.${config.modules.server.domain}" ];
+                    };
+
+                    cors = {
+                        enabled = true;
+                        allowed_origins = [ "sftpgo.${config.modules.server.domain}" ];
                     };
                 }
             ];
 
-            webdavd.bindings = [ 
-                {
-                    address = "0.0.0.0";
-                    port = 9837;
-                    # Not needed when a reverse proxy exists
-                    # enable_https = true;
-                    # certificate_file = "/var/lib/acme/${config.modules.server.domain}/cert.pem";
-                    # certificate_key_file = "/var/lib/acme/${config.modules.server.domain}/key.pem";
-                } 
-            ];
-
+            webdavd.bindings = [ { address = "0.0.0.0"; port = 9837; } ];
         };
     };
 
