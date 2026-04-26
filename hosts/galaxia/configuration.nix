@@ -1,4 +1,4 @@
-{config, inputs, pkgs, ...}:
+{inputs, pkgs, ...}:
 
 {
     imports = [ ./hardware-configuration.nix ./disko.nix ];
@@ -42,42 +42,6 @@
         };
     };
     
-    age.secrets = {
-        webdav = {
-            file = ./secrets/webdav-secret.age;
-            path = "/home/donielmaker/.config/davfs2/secrets";
-        };
-    };
-
-    services.davfs2.enable = true;
-
-    systemd.mounts = [
-        {
-            description = "Webdav Mount";
-            after = ["network-online.target"];
-            wants = ["network-online.target"];
-
-            what = "https://webdav.thematt.net";
-            where = "/home/donielmaker/webdav";
-
-            options = "uid=1000,gid=100";
-            type = "davfs";
-        }
-    ];
-
-    systemd.automounts = [
-        {
-            description = "Webdav Automount";
-
-            where = "/home/donielmaker/webdav";
-
-            wantedBy = [ "multi-user.target" ];
-
-            automountConfig.TimeoutIdleSec = "600"; # unmount after 10 min idle (optional)
-        }
-    ];
-
-
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 
