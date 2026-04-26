@@ -42,6 +42,7 @@
             steam.enable = true;
             coolercontrol.enable = true;
             zsh.enable = true;
+            webdav.enable = true;
         };
     };
 
