@@ -18,5 +18,7 @@ in
                targets.hyprland.enable = false;
                targets.neovim.enable = false;
            };
+
+           gtk.gtk4.theme = config.gtk.theme;
     };
 }

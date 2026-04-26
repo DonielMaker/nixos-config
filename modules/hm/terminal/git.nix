@@ -14,6 +14,7 @@ in with lib;
         programs.git.settings = {
             user.name = config.modules.hm.username;
             user.email = config.modules.hm.mail;
+            signing.format = "openpgp";
         };
     };
 }
