@@ -102,7 +102,7 @@ in
     services.bind.enable = true;
     services.bind = {
         forwarders = [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" "9.9.9.9" "2620:fe::fe"]; 
-        cacheNetworks = [ "127.0.0.1" "10.0.0.0/8" "::1/128" "2003:c2:703:dc0::/58" "fd::/8"];
+        cacheNetworks = [ "127.0.0.1" "10.0.0.0/8" "::1/128" "2003:c2:703:dc0::/58" ];
         zones = {
             "${domain}" = {
                 master = true;
@@ -111,7 +111,7 @@ $TTL 2d    ; default TTL for zone
 
 $ORIGIN ${domain}.
 
-; Start of Authority RR defining the key characteristics of the zone (domain)
+; Start of Authority RR defining the key characteristics of the zone (${domain})
 
 @                   IN      SOA   ns.${domain}. daniel.schmidt0204.gmail.com (
 
@@ -155,22 +155,6 @@ proxmox.lastprism   IN      A       10.10.12.12
 ark                 IN      A       10.10.12.13
 
 mail                IN      CNAME   eu1.workspace.org.
-                '';
-            };
-
-            # Empty so it won't be recursed to somewhere else
-            "soluttech.uk" = {
-                master = true;
-                allowQuery = [];
-                file = pkgs.writeText "soluttech.uk.zone" ''
-$TTL 3600
-@   IN  SOA localhost. root.localhost. (
-        1
-        3600
-        600
-        604800
-        3600 )
-IN  NS  localhost.
                 '';
             };
         };
