@@ -26,6 +26,7 @@ in
             signal-desktop
             thunderbird
             gnupg
+            kdePackages.gwenview
 
             home-manager
         ];

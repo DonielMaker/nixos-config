@@ -63,7 +63,6 @@
         alsa-scarlett-gui
 
         brave 
-        geeqie
         gimp
         pkgs-stable.kdePackages.kdenlive
         vesktop
