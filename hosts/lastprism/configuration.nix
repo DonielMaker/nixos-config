@@ -24,7 +24,7 @@
         server = {
             enable = true;
             domain = "thematt.net";
-            alloy.enable = true;
+            # alloy.enable = true;
             qemuGuest.enable = true;
             # TBC
             # podman.enable = true;
@@ -61,6 +61,8 @@
 
         paperless-envFile.file = ./secrets/paperless-envFile.age;
 
+        cloudflare-dnsApiToken.file = ./secrets/cloudflare-dnsApiToken.age;
+
         sftpgo-clientSecret = {
             inherit (sftpgo) owner group mode;
             file = ./secrets/sftpgo-clientSecret.age;
@@ -74,15 +76,15 @@
     #     dataDir = "/storage/ts";
     # };
 
-    services.apcupsd.enable = true;
-    services.apcupsd.configText = ''
-        UPSCABLE usb
-        UPSTYPE usb
-        DEVICE
-        LOCKFILE /var/lock
-        UPSCLASS standalone
-        UPSMODE disable
-    '';
+    # services.apcupsd.enable = true;
+    # services.apcupsd.configText = ''
+    #     UPSCABLE usb
+    #     UPSTYPE usb
+    #     DEVICE
+    #     LOCKFILE /var/lock
+    #     UPSCLASS standalone
+    #     UPSMODE disable
+    # '';
 
     # Currently problems regarding inter-subnet access
     # services.printing.enable = true;
@@ -120,6 +122,7 @@
         settings = {
             HBOX_MODE = "production";
             HBOX_OPTIONS_CHECK_GITHUB_RELEASE = "false";
+            HBOX_OPTIONS_TRUST_PROXY = "true";
 
             # Directories
             HBOX_STORAGE_CONN_STRING = "file:///storage/homebox";
@@ -129,10 +132,10 @@
 
             # OIDC
             HBOX_OIDC_ENABLED = "true";
-            HBOX_OIDC_ISSUER_URL = "https://authentik.${config.modules.server.domain}/application/o/homebox/";
+            HBOX_OIDC_ISSUER_URL = "https://authelia.${config.modules.server.domain}";
             HBOX_OIDC_CLIENT_ID = "homebox";
-            HBOX_OPTIONS_ALLOW_REGISTRATION = "false";
-            HBOX_OPTIONS_TRUST_PROXY = "true";
+            HBOX_OIDC_SCOPE = "openid profile email groups";
+            # HBOX_OPTIONS_ALLOW_REGISTRATION = "true";
         };
     };
 
@@ -159,7 +162,7 @@
                     oidc = {
                         client_id = "sftpgo";
                         client_secret_file = "${config.age.secrets.sftpgo-clientSecret.path}";
-                        config_url = "https://authentik.${config.modules.server.domain}/application/o/sftpgo/";
+                        config_url = "https://authelia.${config.modules.server.domain}";
                         # Url to redirect to. != Redirect Url for OIDC which is https://sftpgo.example.com/web/oidc/redirect
                         redirect_base_url = "https://sftpgo.thematt.net";
                         scopes = [ "openid" "profile" "email" ];
@@ -202,8 +205,7 @@
             PAPERLESS_USE_X_FORWARDED_PORT = true;
 
             # SSO
-            PAPERLESS_SOCIAL_AUTO_SIGNUP = true;
-            PAPERLESS_LOGOUT_REDIRECT_URL = "https://authentik.${config.modules.server.domain}/application/o/paperless/end-session/";
+            PAPERLESS_LOGOUT_REDIRECT_URL = "https://homepage.${config.modules.server.domain}";
             PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
         };
     };

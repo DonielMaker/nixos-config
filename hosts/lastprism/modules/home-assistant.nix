@@ -30,13 +30,12 @@
             http = {
                 use_x_forwarded_for = true;
                 # Why Can't this be dns?
-                trusted_proxies = [ "10.10.12.10" ];
+                trusted_proxies = [ "10.10.12.10" "fd70:239a:df9e:0::/64" ]; 
             };
         };
     };
 
     # Mosquitto: Mqtt Server
-    # Needs authentication currently not usable for prod. Used anyways
     services.mosquitto.enable = true;
     services.mosquitto = {
         # listeners = [
@@ -47,16 +46,22 @@
         #     }
         # ];
         listeners = [
-        {  
-            users.iot = {
-                acl = [
-                    "read IoT/device/action"
-                    "write IoT/device/observations"
-                    "write IoT/device/LW"
-                ];
-                passwordFile = config.age.secrets.mosquitto-iotPassword.path;
-            };
-        }
+            {  
+                users.iot = {
+                    acl = [
+
+                        "readwrite zigbee2mqtt/#"
+                            "readwrite homeassistant/#"
+                            "readwrite IoT/#"
+                    ];
+                    # acl = [
+                    #     "read IoT/device/action"
+                    #     "write IoT/device/observations"
+                    #     "write IoT/device/LW"
+                    # ];
+                    passwordFile = config.age.secrets.mosquitto-iotPassword.path;
+                };
+            }
         ];
     };
 
