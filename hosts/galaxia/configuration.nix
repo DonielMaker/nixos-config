@@ -34,13 +34,16 @@
             stylix.enable = true;
 
             hyprland.enable = true;
-            dms.enable = true;
+            # dms.enable = true;
         };
 
         programs = {
             zsh.enable = true;
         };
     };
+    services.power-profiles-daemon.enable = true;
+
+    services.upower.enable = true;
     
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default

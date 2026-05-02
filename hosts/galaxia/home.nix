@@ -14,6 +14,7 @@
 
         stylix.enable = true;
         librewolf.enable = true;
+        noctalia.enable = true;
         hyprland.enable = true;
         hyprland.monitor = ", 1920x1080@60hz, auto, 1";
     };
