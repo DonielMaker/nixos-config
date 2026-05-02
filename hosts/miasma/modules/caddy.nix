@@ -12,9 +12,9 @@ in
                 protocols tls1.3
             }
 
-            @authentik host authentik.${domain}
-            handle @authentik {
-                reverse_proxy miasma.${domain}:9000
+            @authelia host authelia.${domain}
+            handle @authelia {
+                reverse_proxy miasma.${domain}:9091
             }
 
             @vaultwarden host vaultwarden.${domain}
@@ -24,21 +24,18 @@ in
 
             @homepage host homepage.${domain}
             handle @homepage {
-                route {
-                    reverse_proxy /outpost.goauthentik.io/* http://miasma.${domain}:9000
-
-                    forward_auth http://miasma.${domain}:9000 {
-                        uri /outpost.goauthentik.io/auth/caddy
-                        copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
-                    }
-
-                    reverse_proxy miasma.${domain}:8082
+                forward_auth miasma.${domain}:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
                 }
+
+                reverse_proxy miasma.${domain}:8082
             }
 
-            @grafana host grafana.${domain} 
-            handle @grafana {
-                reverse_proxy miasma.${domain}:6778
+            @grocy host grocy.${domain} 
+            handle @grocy {
+                # reverse_proxy lastprism.${domain}:9283
+                reverse_proxy 10.10.12.102:9283
             }
 
             @paperless host paperless.${domain}
@@ -76,20 +73,6 @@ in
                 reverse_proxy lastprism.${domain}:8080
             }
 
-            @prometheus host prometheus.${domain} 
-            handle @prometheus {
-                route {
-                    reverse_proxy /outpost.goauthentik.io/* http://miasma.${domain}:9000
-
-                    forward_auth http://miasma.${domain}:9000 {
-                        uri /outpost.goauthentik.io/auth/caddy
-                        copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
-                    }
-
-                    reverse_proxy miasma.${domain}:9090
-                }
-            }
-
             @proxmox-lastprism host proxmox.${domain} 
             handle @proxmox-lastprism {
                 reverse_proxy proxmox.lastprism.${domain}:8006 {
@@ -103,6 +86,7 @@ in
         acceptTerms = true;
         defaults.email = "daniel.schmidt0204@gmail.com";
         defaults.server = "https://acme-v02.api.letsencrypt.org/directory";
+        # Staging
         # defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
 
         certs.${domain} = {
@@ -116,7 +100,7 @@ in
             dnsProvider = "cloudflare";
             dnsResolver = "1.1.1.1:53";
             dnsPropagationCheck = true;
-            environmentFile = config.age.secrets.cloudflareDnsApiToken.path;
+            environmentFile = config.age.secrets.cloudflare-dnsApiToken.path;
         };
     };
 }

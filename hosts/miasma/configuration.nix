@@ -9,8 +9,8 @@ in
     imports = [ 
         ./hardware-configuration.nix 
         ./disko.nix
-        inputs.authentik-nix.nixosModules.default
         ./modules/caddy.nix
+        ./modules/authelia.nix
     ];
 
     modules = {
@@ -29,72 +29,51 @@ in
         server = {
             enable = true;
             domain = "thematt.net";
-            alloy.enable = true;
+            # alloy.enable = true;
             qemuGuest.enable = true;
         };
     };
 
     networking.hostName = config.modules.system.hostname;
 
-    # prometheus, vaultwarden, authentik
-    networking.firewall.allowedTCPPorts = [ 9090 5902 9000];
+    # authelia, vaultwarden
+    networking.firewall.allowedTCPPorts = [ 9091 5902 ];
     # bind
     networking.firewall.allowedUDPPorts = [ 53 ];
 
     age.secrets = let
 
-        grafana = {
+        authelia-main = {
             mode = "440";
-            owner = "grafana";
-            group = "grafana";
+            owner = config.services.authelia.instances.main.user;
+            group = config.services.authelia.instances.main.group;
         };
     in
 
     {
-        authentik-environment.file = ./secrets/authentik/secret.env.age;
-        authentik-proxyEnvironment.file = ./secrets/authentik/proxy.env.age;
-
-        grafanaClientSecret = {
-            inherit (grafana) mode owner group;
-            file = ./secrets/grafana/clientSecret.age;
+        authelia-jwtSecret = {
+            inherit (authelia-main) mode owner group;
+            file = ./secrets/authelia/jwtSecret.age;
         };
 
-        grafana-secretKey = {
-            inherit (grafana) mode owner group;
-            file = ./secrets/grafana/secretKey.age;
+        authelia-storageEncryptionKey = {
+            inherit (authelia-main) mode owner group;
+            file = ./secrets/authelia/storageEncryptionKey.age;
         };
 
-        newt-secretEnv.file = ./secrets/newt-secret.env.age;
+        authelia-sessionSecret = {
+            inherit (authelia-main) mode owner group;
+            file = ./secrets/authelia/sessionSecret.age;
+        };
+
+        authelia-oidcIssuerPrivateKey = {
+            inherit (authelia-main) mode owner group;
+            file = ./secrets/authelia/oidcIssuerPrivateKey.age;
+        };
 
         vaultwardenEnv.file = ./secrets/vaultwarden-env.age;
 
-        cloudflareDnsApiToken.file = ./secrets/cloudflare/dnsApiToken.age;
-    };
-
-    services.authentik.enable = true;
-    services.authentik = {
-        environmentFile = config.age.secrets.authentik-environment.path;
-        settings = {
-            email = {
-                host = "mail.${domain}";
-                port = 587;
-                username = "admin@${domain}";
-                use_tls = true;
-                use_ssl = false;
-                from = "authentik@${domain}";
-            };
-            disable_startup_analytics = true;
-            avatars = "initials";
-        };
-    };
-
-    services.authentik-proxy.enable = true;
-    services.authentik-proxy.environmentFile = config.age.secrets.authentik-proxyEnvironment.path;
-
-    services.newt.enable = true;
-    services.newt = {
-        settings.endpoint = "https://pangolin.soluttech.uk";
-        environmentFile = config.age.secrets.newt-secretEnv.path;
+        cloudflare-dnsApiToken.file = ./secrets/cloudflare-dnsApiToken.age;
     };
 
     # Vaultwarden: Passwordmanager
@@ -237,11 +216,11 @@ IN  NS  localhost.
             {
                 "Management/Authentication" = [
                     {
-                        "Authentik" = {
+                        "Authelia" = {
                             description = "IdP Manager";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/authentik.svg";
-                            href = "https://authentik.${domain}";
-                            siteMonitor = "http://miasma.${domain}:9000";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/authelia.svg";
+                            href = "https://authelia.${domain}";
+                            siteMonitor = "http://miasma.${domain}:9091";
                         };
                     }
                     {
@@ -253,28 +232,10 @@ IN  NS  localhost.
                         };
                     }
                     {
-                        "Grafana" = {
-                            description = "Metrics and Logs visualization";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grafana.svg";
-                            href = "https://grafana.${domain}";
-                            siteMonitor = "http://miasma.${domain}:6778";
-                        };
-                    }
-                    {
                         "Fritz!Box" = {
                             description = "Fritz Box Router";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/fritz.svg";
                             href = "http://192.168.0.1";
-                        };
-                    }
-                    {
-                        "APCUPSD" = {
-                            description = "UPS Stats";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/apc.svg";
-                            widget = {
-                                type = "apcups";
-                                url = "tcp://lastprism.${domain}:3551";
-                            };
                         };
                     }
                 ];
@@ -282,19 +243,19 @@ IN  NS  localhost.
             {
                 "Services" = [
                     {
+                        "SFTPGo" = {
+                            description = "Fileserver";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/sftpgo.svg";
+                            href = "https://sftpgo.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:4856";
+                        };
+                    }
+                    {
                         "Navidrome" = {
                             description = "Music server";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/navidrome.svg";
                             href = "https://navidrome.${domain}";
                             siteMonitor = "http://lastprism.${domain}:4533";
-                        };
-                    }
-                    {
-                        "Homebox" = {
-                            description = "Inventory Management";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/homebox.svg";
-                            href = "https://homebox.${domain}";
-                            siteMonitor = "http://lastprism.${domain}:7745";
                         };
                     }
                     {
@@ -306,6 +267,14 @@ IN  NS  localhost.
                         };
                     }
                     {
+                        "Homebox" = {
+                            description = "Inventory Management";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/homebox.svg";
+                            href = "https://homebox.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:7745";
+                        };
+                    }
+                    {
                         "Paperless" = {
                             description = "Document server";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
@@ -314,11 +283,11 @@ IN  NS  localhost.
                         };
                     }
                     {
-                        "SFTPGo" = {
-                            description = "Fileserver";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/sftpgo.svg";
-                            href = "https://sftpgo.${domain}";
-                            siteMonitor = "http://lastprism.${domain}:4856";
+                        "Grocy" = {
+                            description = "ERP for your Kitchen";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grocy.svg";
+                            href = "";
+                            siteMonitor = "";
                         };
                     }
                     {
@@ -342,57 +311,57 @@ IN  NS  localhost.
         ];
     };
 
-    services.grafana.enable = true;
-    services.grafana.settings = {
-        server = {
-            http_addr = "0.0.0.0";
-            http_port = 6778;
-            root_url = "https://grafana.${domain}";
-        };
+    # services.grafana.enable = true;
+    # services.grafana.settings = {
+    #     server = {
+    #         http_addr = "0.0.0.0";
+    #         http_port = 6778;
+    #         root_url = "https://grafana.${domain}";
+    #     };
+    #
+    #     security.secret_key = "$__file{${config.age.secrets.grafana-secretKey.path}}";
+    #
+    #     "auth.generic_oauth" = {
+    #         enabled = true;
+    #         name = "Authentik";
+    #         icon = "signin";
+    #         client_id = "grafana";
+    #         client_secret = "$__file{${config.age.secrets.grafanaClientSecret.path}}";
+    #         scopes = "openid profile email groups";
+    #         empty_scopes = false;
+    #         auth_url = "https://authentik.${domain}/application/o/authorize/";
+    #         token_url = "https://authentik.${domain}/application/o/token/";
+    #         api_url = "https://authentik.${domain}/application/o/userinfo/";
+    #         login_attribute_path = "preferred_username";
+    #         groups_attribute_path = "groups";
+    #         name_attribute_path = "display_name";
+    #         use_pkce = true;
+    #         signout_redirect_url = "https://homepage.${domain}";
+    #         skip_org_role_sync = true;
+    #     };
+    # };
 
-        security.secret_key = "$__file{${config.age.secrets.grafana-secretKey.path}}";
-
-        "auth.generic_oauth" = {
-            enabled = true;
-            name = "Authentik";
-            icon = "signin";
-            client_id = "grafana";
-            client_secret = "$__file{${config.age.secrets.grafanaClientSecret.path}}";
-            scopes = "openid profile email groups";
-            empty_scopes = false;
-            auth_url = "https://authentik.${domain}/application/o/authorize/";
-            token_url = "https://authentik.${domain}/application/o/token/";
-            api_url = "https://authentik.${domain}/application/o/userinfo/";
-            login_attribute_path = "preferred_username";
-            groups_attribute_path = "groups";
-            name_attribute_path = "display_name";
-            use_pkce = true;
-            signout_redirect_url = "https://homepage.${domain}";
-            skip_org_role_sync = true;
-        };
-    };
-
-    services.prometheus.enable = true;
-    services.prometheus.extraFlags = [ "--web.enable-remote-write-receiver" ];
-    services.prometheus = {
-        webExternalUrl = "https://prometheus.${domain}";
-        port = 9090;
-        # globalConfig.scrape_interval = "15s";
-        # scrapeConfigs = [
-        #     {
-        #         job_name = "miasma-metrics";
-        #         static_configs = [{
-        #             targets = [ "miasma.thematt.net:9100"];
-        #         }];
-        #     } 
-        #     # {
-        #     #     job_name = "lastprism-metrics";
-        #     #     static_configs = [{
-        #     #         targets = [ "lastprism.thematt.net:9100"];
-        #     #     }];
-        #     # } 
-        # ];
-    };
+    # services.prometheus.enable = true;
+    # services.prometheus.extraFlags = [ "--web.enable-remote-write-receiver" ];
+    # services.prometheus = {
+    #     webExternalUrl = "https://prometheus.${domain}";
+    #     port = 9090;
+    #     # globalConfig.scrape_interval = "15s";
+    #     # scrapeConfigs = [
+    #     #     {
+    #     #         job_name = "miasma-metrics";
+    #     #         static_configs = [{
+    #     #             targets = [ "miasma.thematt.net:9100"];
+    #     #         }];
+    #     #     } 
+    #     #     # {
+    #     #     #     job_name = "lastprism-metrics";
+    #     #     #     static_configs = [{
+    #     #     #         targets = [ "lastprism.thematt.net:9100"];
+    #     #     #     }];
+    #     #     # } 
+    #     # ];
+    # };
 
     # services.prometheus.exporters.node = {
     #     enable = true;

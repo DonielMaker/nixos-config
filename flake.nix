@@ -28,8 +28,6 @@
         quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
         quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
-        authentik-nix.url = "github:nix-community/authentik-nix";
-
         dms.url = "github:AvengeMedia/DankMaterialShell/stable";
         dms.inputs.nixpkgs.follows = "nixpkgs";
 

@@ -14,19 +14,12 @@ in
     "authelia/jwtSecret.age".publicKeys = users ++ systems;
     "authelia/storageEncryptionKey.age".publicKeys = users ++ systems;
     "authelia/sessionSecret.age".publicKeys = users ++ systems;
-    "authelia/lldapPassword.age".publicKeys = users ++ systems;
-    "authelia/jwksKey.age".publicKeys = users ++ systems;
+    "authelia/oidcIssuerPrivateKey.age".publicKeys = users ++ systems;
 
     "authentik/secret.env.age".publicKeys = users ++ systems;
     "authentik/proxy.env.age".publicKeys = users ++ systems;
 
-    "grafana/clientSecret.age".publicKeys = users ++ systems;
-    "grafana/secretKey.age".publicKeys = users ++ systems;
-
-    "cloudflare/dnsApiToken.age".publicKeys = users ++ systems;
-
-    # Teamspeak
-    "newt-secret.env.age".publicKeys = users ++ systems;
+    "cloudflare-dnsApiToken.age".publicKeys = users ++ systems;
 
     "vaultwarden-env.age".publicKeys = users ++ systems;
 }
