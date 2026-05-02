@@ -18,6 +18,9 @@ in
     # Homebox
     "homebox-envFile.age".publicKeys = users ++ systems;
 
+    # Acme
+    "cloudflare-dnsApiToken.age".publicKeys = users ++ systems;
+
     # SFTPGo OIDC Client Secret
     "sftpgo-clientSecret.age".publicKeys = users ++ systems;
 }

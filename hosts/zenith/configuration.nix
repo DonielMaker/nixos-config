@@ -48,7 +48,10 @@
 
     networking.search = [ "thematt.net" ];
 
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
+    programs.neovim.enable = true;
+    programs.neovim.defaultEditor = true;
+
+    boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_0;
 
     services.flatpak.enable = true;
 
@@ -63,7 +66,6 @@
         alsa-scarlett-gui
 
         brave 
-        geeqie
         gimp
         pkgs-stable.kdePackages.kdenlive
         vesktop

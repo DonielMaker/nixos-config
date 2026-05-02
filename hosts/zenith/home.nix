@@ -12,14 +12,17 @@
         zellij.enable = true;
         zsh.enable = true;
 
-        stylix.enable = true;
         librewolf.enable = true;
+
+        stylix.enable = true;
         hyprland.enable = true;
         hyprland.monitor = [
             "DP-1, 2560x1440@144hz, auto, 1"
             "DP-2, 1920x1080@180hz, auto-left, 1, transform, 3"
         ];
     };
+
+    programs.obsidian.enable = true;
 
     wayland.windowManager.hyprland.settings = {
         # Fix this
