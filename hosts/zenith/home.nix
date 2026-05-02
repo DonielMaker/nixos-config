@@ -12,8 +12,9 @@
         zellij.enable = true;
         zsh.enable = true;
 
-        stylix.enable = true;
         librewolf.enable = true;
+
+        stylix.enable = true;
         hyprland.enable = true;
         hyprland.monitor = [
             "DP-1, 2560x1440@144hz, auto, 1"
