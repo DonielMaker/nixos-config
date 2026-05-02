@@ -12,9 +12,8 @@ let
         "_netdev" # Makes this a network dependant device
         "vfs-cache-mode=writes" # Allows Rclone to use VFS (Virtual Filesystem) for local files before sending to server
         "cache-dir=/var/rclone" # Required by vfs-cache-mode
-        # Sets the rclone.conf.
-        # Make sure your rclone remote is stored there. Otherwise this won't work
-        "config=/home/${config.modules.system.username}/.config/rclone/rclone.conf" 
+        # Make sure your rclone remote is exists there. Otherwise this won't work
+        "config=/home/${config.modules.system.username}/.config/rclone/rclone.conf" # Sets the rclone.conf
         "uid=1000"
         "gid=100"
     ];
@@ -34,7 +33,7 @@ in
                 after = ["network-online.target"];
                 wants = ["network-online.target"];
 
-                # Make sure this exists in ~/.config/rclone/rclone.conf
+                # Make sure this exists in rclone.conf
                 what = "webdav:";
                 where = mountpoint;
 
