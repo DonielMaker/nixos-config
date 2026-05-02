@@ -13,6 +13,7 @@
         zsh.enable = true;
 
         librewolf.enable = true;
+        obsidian.enable = true;
 
         stylix.enable = true;
         hyprland.enable = true;
