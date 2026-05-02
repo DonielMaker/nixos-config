@@ -50,3 +50,6 @@ clean:
 [group("develop")]
 repl CONFIG=(FLAKE):
     nixos-rebuild repl --flake {{ CONFIG }}
+
+gen-auth:
+    nix run nixpkgs#authelia -- crypto hash generate argon2 --random
