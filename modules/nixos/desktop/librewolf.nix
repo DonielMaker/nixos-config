@@ -1,19 +1,19 @@
 { config, lib, pkgs, ...}:
 
 let
-    module = "Librewolf";
-    cfg = config.modules.hm.librewolf;
-in with lib;
+    inherit (lib) mkEnableOption mkIf;
+    cfg = config.modules.programs.librewolf;
+in
 
 {
-    options.modules.hm.librewolf.enable = mkEnableOption "Enable ${module}";
+    options.modules.programs.librewolf.enable = mkEnableOption "Enable Librewolf";
 
-    config = mkIf cfg.enable {
+    config.home-manager.users.${config.modules.system.username} = mkIf cfg.enable ({ modules, ...}: {
 
         programs.librewolf.enable = true;
         programs.librewolf = {
 
-            profiles.${config.modules.hm.username} = {
+            profiles.${"donielmaker"} = {
                 extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
                     ublock-origin
                     bitwarden
@@ -56,5 +56,5 @@ in with lib;
                 };
             };
         };
-    };
+    });
 }

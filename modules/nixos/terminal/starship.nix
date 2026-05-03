@@ -1,21 +1,21 @@
 { config, lib, ...}:
 
 let
-    module = "Starship";
-    cfg = config.modules.hm.starship;
-in with lib;
+    inherit (lib) mkEnableOption mkIf;
+    cfg = config.modules.terminal.starship;
+in
 
 {
-    options.modules.hm.starship.enable = mkEnableOption "Enable ${module}";
+    options.modules.terminal.starship.enable = mkEnableOption "Enable Starship";
 
-    config = mkIf cfg.enable {
+    config.home-manager.users.${config.modules.system.username} = mkIf cfg.enable {
 
         programs.starship.enable = true;
         programs.starship.settings = {
             format = ''
                 $hostname$directory$git_branch$git_status$character
                 ❯
-                '';
+            '';
 
             directory = {
                 truncate_to_repo = false; 

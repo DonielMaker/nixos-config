@@ -1,8 +1,7 @@
-{ config, lib, sLib, inputs, pkgs, ... }: 
+{ config, lib, inputs, pkgs, ... }: 
 
 let
     inherit (lib) mkIf mkEnableOption mkOption types;
-    inherit (sLib) assertEnabled;
     cfg = config.modules.system;
 in
 
@@ -20,6 +19,18 @@ in
             default = "user";
             type = types.str;
             description = "Sets the username of the machine";
+        };
+
+        mail = mkOption {
+            default = "example@mail.com";
+            type = types.str;
+            description = "Sets the mail account";
+        };
+
+        keyboard.layout = mkOption {
+            default = "us";
+            type = types.str;
+            description = "Sets the Keyboard Layout";
         };
 
         timezone = mkOption {
@@ -41,9 +52,6 @@ in
     ];
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertEnabled cfg config.modules.system.enable)
-        ];
 
         time.timeZone = cfg.timezone;
 

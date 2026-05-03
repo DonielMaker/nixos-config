@@ -1,8 +1,9 @@
 { config, inputs, lib, ... }: 
 
 let
+    inherit (lib) mkEnableOption mkOption types mkIf;
     cfg = config.modules.hm;
-in with lib;
+in
 
 {
     options.modules.hm = {
@@ -14,19 +15,29 @@ in with lib;
         };
     };
 
-    imports = [ inputs.home-manager.nixosModules.home-manager];
+    imports = [ inputs.home-manager.nixosModules.home-manager ];
 
     config = mkIf cfg.enable {
         
         home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = {inherit inputs;};
-            users.${config.modules.system.username} = {
-                imports = [ cfg.home ] ++ lib.filesystem.listFilesRecursive "${inputs.self}/modules/hm";
+            extraSpecialArgs = {
+                inherit inputs; 
+                modules = {
+                    system = {
+                        username = config.modules.system.username;
+                        mail = config.modules.system.username;
+                        keyboard.layout = config.modules.system.keyboard.layout;
+                    };
 
-                config.modules.hm.username = config.modules.system.username;
+                    programs.librewolf = config.modules.programs.librewolf;
+
+                    hypr = config.modules.desktop.hyprland;
+                };
             };
+
+            users.${config.modules.system.username}.imports = [ cfg.home ];
         };
     };
 }

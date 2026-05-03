@@ -8,6 +8,7 @@
             enable = true;
             hostname = "zenith";
             username = "donielmaker";
+            mail = "daniel.schmidt0204@gmail.com";
             shell = pkgs.zsh;
 
             user.enable = true;
@@ -19,6 +20,7 @@
             };
 
             openssh.enable = true;
+            networking.enable = true;
         };
 
         hm.enable = true;
@@ -29,26 +31,37 @@
             graphics.enable = true;
             gigabyte.enable = true;
             sound.enable = true;
-            networking.enable = true;
             bluetooth.enable = true;
 
             stylix.enable = true;
 
+            noctalia.enable = true;
             hyprland.enable = true;
-            dms.enable = true;
+            hyprland.monitor = [
+                "DP-1, 2560x1440@144hz, auto, 1"
+                "DP-2, 1920x1080@180hz, auto-left, 1, transform, 3"
+            ];
         };
 
         programs = {
             steam.enable = true;
             coolercontrol.enable = true;
-            zsh.enable = true;
             webdav.enable = true;
+            librewolf.enable = true;
+            obsidian.enable = true;
+        };
+
+        terminal = {
+            alacritty.enable = true;
+            git.enable = true;
+            neovim.enable = true;
+            starship.enable = true;
+            zellij.enable = true;
+            zsh.enable = true;
         };
     };
 
-    networking.search = [ "thematt.net" ];
-
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
+    boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_0;
 
     services.flatpak.enable = true;
 

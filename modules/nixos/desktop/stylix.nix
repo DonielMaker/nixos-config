@@ -1,8 +1,7 @@
-{ config, lib, sLib, inputs, pkgs, ... }: 
+{ config, lib, inputs, pkgs, ... }: 
 
 let
     inherit (lib) mkIf mkEnableOption;
-    inherit (sLib) assertEnabled;
     cfg = config.modules.desktop.stylix;
 in
 
@@ -12,9 +11,6 @@ in
     imports = [ inputs.stylix.nixosModules.default ];
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertEnabled cfg config.modules.desktop.enable)
-        ];
 
         stylix.enable = true;
         stylix = {
@@ -55,5 +51,21 @@ in
 
             targets.limine.image.enable = false;
         };
+
+
+        home-manager.users.${config.modules.system.username} = ({ config, modules,  ...}: {
+
+            stylix.enable = true;
+            stylix = {
+                targets.librewolf.profileNames = lib.mkIf modules.programs.librewolf.enable [ 
+                    "donielmaker"
+                    # modules.system.username 
+                ];
+                targets.hyprland.enable = false;
+                targets.neovim.enable = false;
+            };
+
+            gtk.gtk4.theme = config.gtk.theme;
+        });
     };
 }
