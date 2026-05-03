@@ -210,6 +210,26 @@
         };
     };
 
+    # This can probably be modularised
+    # users.groups.certs.members = [];
+    # security.acme = {
+    #     acceptTerms = true;
+    #     defaults.email = "acme@${config.modules.server.domain}";
+    #     defaults.server = "https://acme-v02.api.letsencrypt.org/directory";
+    #     ## Staging Servers
+    #     # defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+    #
+    #     certs."${config.modules.server.domain}" = {
+    #         group = config.users.groups.certs.name;
+    #
+    #         domain = "${config.modules.server.domain}";
+    #         extraDomainNames = [ "*.${config.modules.server.domain}" ];
+    #         dnsProvider = "cloudflare";
+    #         dnsResolver = "1.1.1.1:53";
+    #         dnsPropagationCheck = true;
+    #         environmentFile = config.age.secrets.cloudflare-dnsApiToken.path;
+    #     };
+    # };
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
