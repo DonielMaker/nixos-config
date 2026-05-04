@@ -1,4 +1,4 @@
-{inputs, pkgs, ...}:
+{config, inputs, pkgs, ...}:
 
 {
     imports = [ ./hardware-configuration.nix ./disko.nix ];
@@ -8,6 +8,8 @@
             enable = true;
             hostname = "galaxia";
             username = "donielmaker";
+            mail = "daniel.schmidt0204@gmail.com";
+            keyboard.layout = "de";
             shell = pkgs.zsh;
 
             user.enable = true;
@@ -19,6 +21,7 @@
             };
 
             openssh.enable = true;
+            networking.enable = true;
         };
 
         hm.enable = true;
@@ -28,19 +31,31 @@
             enable = true;
             graphics.enable = true;
             sound.enable = true;
-            networking.enable = true;
             bluetooth.enable = true;
 
             stylix.enable = true;
 
+            noctalia.enable = true;
             hyprland.enable = true;
-            # dms.enable = true;
+            hyprland.monitor = ", 1920x1080@60hz, auto, 1";
         };
 
         programs = {
+            obsidian.enable = true;
+            webdav.enable = true;
+        };
+
+        terminal = {
+            alacritty.enable = true;
+            git.enable = true;
+            neovim.enable = true;
+            starship.enable = true;
+            zellij.enable = true;
             zsh.enable = true;
         };
     };
+
+    security.pam.services.${config.modules.system.username}.kwallet.enable = true;
     
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
