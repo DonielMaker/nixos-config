@@ -125,6 +125,7 @@ in
                                     ];
                                 }
                                 { id = "Battery"; }
+                                { id = "plugin:privacy-indicator"; }
                                 { 
                                     id = "NotificationHistory"; 
                                     iconColor = "secondary";
