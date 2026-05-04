@@ -31,7 +31,7 @@ in
             maxGenerations = 10;
             style = {
                 wallpapers = [ "${config.modules.system.limine.image}" ];
-                interface.branding = "Company Device";
+                interface.branding = "I use NixOS btw.";
                 # Sets the backgrounds Opacity to zero
                 graphicalTerminal.background = lib.mkForce "FFFFFFFF";
             };
