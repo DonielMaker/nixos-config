@@ -28,8 +28,6 @@ in
             kitty # For crashes
 
             nautilus # File explorer
-
-            hyprpolkitagent # Polkit Agent
         ];
 
         home-manager.users.${config.modules.system.username} = mkIf cfg.enable ({ modules, ... }:
@@ -43,7 +41,8 @@ in
             launcher = "${ipc} launcher toggle";
             # clipboard = "${ipc} launcher clipboard";
             clipboard = "${ipc} plugin:clipper toggle";
-            screenshot = "${ipc} plugin:screen-toolkit toggle";
+            screenshot-menu = "${ipc} plugin:screen-toolkit toggle";
+            screenshot = "${ipc} plugin:screen-toolkit annotate";
 
             lock = "${ipc} lockScreen lock";
             micMute = "${ipc} volume muteInput";
@@ -70,9 +69,11 @@ in
                 settings = {
                     "$mainMod" = "SUPER";
 
-                    inherit (modules.hypr) monitor;
-
-                    ecosystem.no_update_news = true;
+                    exec-once = [
+                        "wl-paste --type text --watch cliphist store"
+                        "wl-paste --type image --watch cliphist store"
+                        "noctalia-shell"
+                    ];
 
                     env = [
                         "XDG_CURRENT_DESKTOP,Hyprland"
@@ -100,12 +101,9 @@ in
                         "match:class ^(xdg-desktop-portal-gtk)$, size monitor_w*0.4 monitor_h*0.4"
                     ];
 
-                    exec-once = [
-                        "wl-paste --type text --watch cliphist store"
-                        "wl-paste --type image --watch cliphist store"
-                        "systemctl --user start hyprpolkitagent.service"
-                        "noctalia-shell"
-                    ];
+                    inherit (modules.hypr) monitor;
+
+                    ecosystem.no_update_news = true;
 
                     cursor.no_hardware_cursors = true;
 
@@ -186,7 +184,8 @@ in
                         "$mainMod, V, exec, ${clipboard}"
 
                         # Screenshot
-                        "$mainMod, S, exec, ${screenshot}" 
+                        "$mainMod, S, exec, ${screenshot-menu}" 
+                        "$mainMod SHIFT, S, exec, ${screenshot}" 
 
                         # Close current application
                         "$mainMod, Q, killactive,"
