@@ -1,4 +1,4 @@
-{config, inputs, pkgs, pkgs-stable, ...}:
+{inputs, pkgs, pkgs-stable, ...}:
 
 {
     imports = [ ./hardware-configuration.nix ./disko.nix ];
@@ -66,48 +66,45 @@
 
     services.flatpak.enable = true;
 
-    security.pam.services.${config.modules.system.username}.kwallet.enable = true;
+    # Display Manager
+    services.displayManager.ly.enable = true;
 
+    # Gpu Overclocking
     services.lact.enable = true;
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-        scarlett2
-        alsa-scarlett-gui
+        # == Programs ==
+        gimp # Image editing
+        pkgs-stable.kdePackages.kdenlive # Video editing
+        obs-studio # Video Recording
+        orca-slicer # 3D-Printer Slicer
+        freecad # CAD Software
 
-        brave 
-        gimp
-        pkgs-stable.kdePackages.kdenlive
-        vesktop
-        obs-studio
-        orca-slicer
-        typst
-        freecad
+        element-desktop # Matrix client
+        teamspeak6-client # Teamspeak client
 
-        prismlauncher
-        heroic
-        steam
-        xclicker
-        owmods-gui
-        owmods-cli
-        protonplus
-        olympus
-        r2modman
+        # == Utils ==
+        typst # Professional Documents
+        cryptsetup # Encrypted Drives
 
-        kdePackages.kwallet
-        kdePackages.kate
+        # == Gaming ==
+        prismlauncher # Minecraft Launcher
+        heroic # Epic Games Launcher
+        steam # Steam
+        owmods-gui # Outer Wilds Mod Manager
+        olympus # Celeste Mod Manager
+        r2modman # General Mod Manager
+        protonplus # Manage Valve's Proton
+        xclicker # Autoclicker (Don't know how good it works with wayland)
 
-        element-desktop
-        gajim
-        teamspeak6-client
-
-        home-manager
+        scarlett2 # Manage Scarlett Firmware
+        alsa-scarlett-gui # Manage Scarlett Routing
     ];
 
-    fonts.packages = with pkgs; [
-        aileron
-    ];
+    # This might have to be moved to stylix or similar
+    fonts.packages = with pkgs; [ aileron ];
 
     system.stateVersion = "24.11"; # Just don't
 }
