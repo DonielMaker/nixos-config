@@ -18,15 +18,17 @@ in
 
         environment.systemPackages = with pkgs; [
 
-            vim
+            vim # vim
 
-            vlc
-            libreoffice
-            librewolf
-            signal-desktop
-            thunderbird
-            gnupg
-            kdePackages.gwenview
+            vlc # Video Viewer
+            libreoffice # Office Suite
+            librewolf # Firefox-based Browser
+            brave # Chromium-based Browser
+            signal-desktop # Messaging
+            thunderbird # Email Application
+            gnupg # Encrypted signing
+            kdePackages.gwenview # Image viewer
+            kdePackages.kate # Text editor
 
             home-manager
         ];
