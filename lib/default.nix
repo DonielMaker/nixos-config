@@ -17,7 +17,7 @@ in
 
     inputs.nixpkgs.lib.nixosSystem {
         inherit specialArgs;
-        modules = [ conf { nixpkgs.pkgs = pkgs; } ] ++ lib.filesystem.listFilesRecursive "${inputs.self}/modules/nixos";
+        modules = [ conf { nixpkgs.pkgs = pkgs; } ] ++ lib.filesystem.listFilesRecursive "${inputs.self}/modules";
     };
 
     assertEnabled = cfg: config: {
