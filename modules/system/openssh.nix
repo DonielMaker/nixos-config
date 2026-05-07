@@ -1,8 +1,7 @@
-{ config, lib, sLib, ... }: 
+{ config, lib, ... }: 
 
 let
-    inherit (lib) mkIf mkEnableOption;
-    inherit (sLib) assertEnabled;
+    inherit (lib) mkEnableOption mkIf;
     cfg = config.modules.system.openssh;
 in
 
@@ -10,9 +9,6 @@ in
     options.modules.system.openssh.enable = mkEnableOption "Enable Openssh";
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertEnabled cfg config.modules.system.enable)
-        ];
 
         security.sudo.execWheelOnly  =  true;
         services.openssh.enable = true;

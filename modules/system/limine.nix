@@ -1,8 +1,7 @@
-{ config, lib, sLib, ... }: 
+{ config, lib, ... }: 
 
 let
-    inherit (lib) mkIf mkEnableOption mkOption types;
-    inherit (sLib) assertEnabled assertCollision;
+    inherit (lib) mkEnableOption mkOption mkIf types;
     cfg = config.modules.system.limine;
 in
 
@@ -18,11 +17,6 @@ in
     };
 
     config = mkIf cfg.enable {
-
-        assertions = [
-            (assertEnabled cfg config.modules.system.enable)
-            (assertCollision cfg config.modules.system.systemd-boot.enable)
-        ];
 
         boot.loader.limine.enable = true;
         boot.loader.efi.canTouchEfiVariables = true;

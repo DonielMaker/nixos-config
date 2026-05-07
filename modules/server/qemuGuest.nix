@@ -1,8 +1,7 @@
-{ config, lib, sLib, pkgs, ... }: 
+{ config, lib, ... }: 
 
 let
-    inherit (lib) mkIf mkEnableOption;
-    inherit (sLib) assertEnabled;
+    inherit (lib) mkEnableOption mkIf;
     cfg = config.modules.server.qemuGuest;
 in
 
@@ -10,9 +9,6 @@ in
     options.modules.server.qemuGuest.enable = mkEnableOption "Enable Qemu Guest Agent";
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertEnabled cfg config.modules.server.enable)
-        ];
 
         services.qemuGuest.enable = true;
     };

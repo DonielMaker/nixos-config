@@ -11,7 +11,7 @@ in
     options.modules.desktop.hyprland.monitor = mkOption {
             default = ", prefferred, auto, 1";
             type = types.either types.str (types.listOf types.str);
-            description = "Monitor used in Hyprland";
+            description = "Monitor(s) used in Hyprland";
     };
 
     config = mkIf cfg.enable {

@@ -1,8 +1,9 @@
-{ config, lib, sLib, ... }: 
+{ config, lib, ... }: 
+
+# This is somewhat untested
 
 let
     inherit (lib) mkIf mkEnableOption;
-    inherit (sLib) assertEnabled;
     cfg = config.modules.server.alloy;
 in
 
@@ -10,9 +11,7 @@ in
     options.modules.server.alloy.enable = mkEnableOption "Enable Grafana Alloy";
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertEnabled cfg config.modules.server.enable)
-        ];
+
         networking.firewall.allowedTCPPorts = [ 12345 ];
 
         services.alloy.enable = true;

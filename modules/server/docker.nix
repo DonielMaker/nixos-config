@@ -1,8 +1,7 @@
-{ config, lib, sLib, pkgs, ... }: 
+{ config, lib, pkgs, ... }: 
 
 let
-    inherit (lib) mkIf mkEnableOption;
-    inherit (sLib) assertEnabled;
+    inherit (lib) mkEnableOption mkIf;
     cfg = config.modules.server.docker;
 in
 
@@ -10,9 +9,6 @@ in
     options.modules.server.docker.enable = mkEnableOption "Enable Docker";
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertEnabled cfg config.modules.server.enable)
-        ];
 
         virtualisation.containers.enable = true;
         virtualisation.docker.enable = true;

@@ -1,8 +1,7 @@
-{ config, lib, pkgs, sLib, ... }: 
+{ config, lib, pkgs, ... }: 
 
 let
     inherit (lib) mkIf mkEnableOption;
-    inherit (sLib) assertCollision;
     cfg = config.modules.desktop;
 in
 
@@ -10,10 +9,8 @@ in
     options.modules.desktop.enable = mkEnableOption "Enable Desktop";
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertCollision cfg config.modules.server.enable)
-        ];
 
+        # File sharing
         programs.localsend.enable = true;
 
         environment.systemPackages = with pkgs; [
@@ -30,7 +27,7 @@ in
             kdePackages.gwenview # Image viewer
             kdePackages.kate # Text editor
 
-            home-manager
+            home-manager # Used by nixos for dotfiles
         ];
     };
 }

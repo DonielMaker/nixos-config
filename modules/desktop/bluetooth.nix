@@ -1,18 +1,14 @@
-{ config, lib, sLib, ... }: 
+{ config, lib, ... }: 
 
 let
-    inherit (lib) mkIf mkEnableOption;
-    inherit (sLib) assertEnabled ;
+    inherit (lib) mkEnableOption mkIf;
     cfg = config.modules.desktop.bluetooth;
 in
 
 {
-    options.modules.desktop.bluetooth.enable = mkEnableOption "Enable Bluetooth";
+    options.modules.desktop.bluetooth.enable = mkEnableOption "Enable bluetooth";
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertEnabled cfg config.modules.desktop.enable)
-        ];
 
         hardware.bluetooth.enable = true;
         hardware.bluetooth = {
@@ -24,7 +20,5 @@ in
                 };
             };
         };
-
-        services.blueman.enable = true;
     };
 }

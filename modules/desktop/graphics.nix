@@ -1,8 +1,7 @@
-{ config, lib, sLib, pkgs, ... }: 
+{ config, lib, pkgs, ... }: 
 
 let
     inherit (lib) mkIf mkEnableOption;
-    inherit (sLib) assertEnabled;
     cfg = config.modules.desktop.graphics;
 in
 
@@ -10,9 +9,6 @@ in
     options.modules.desktop.graphics.enable = mkEnableOption "Enable Graphics";
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertEnabled cfg config.modules.desktop.enable)
-        ];
 
         hardware.graphics.enable = true;
         hardware.graphics.enable32Bit = true;

@@ -1,8 +1,7 @@
-{ config, lib, sLib, ... }: 
+{ config, lib, ... }: 
 
 let
     inherit (lib) mkIf mkEnableOption;
-    inherit (sLib) assertEnabled;
     cfg = config.modules.system.user;
 in
 
@@ -10,9 +9,6 @@ in
     options.modules.system.user.enable = mkEnableOption "Enable User";
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertEnabled cfg config.modules.system.enable)
-        ];
 
         nix.settings.trusted-users = [ config.modules.system.username ];
 

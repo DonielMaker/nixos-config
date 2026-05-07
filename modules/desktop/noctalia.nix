@@ -8,7 +8,6 @@ in
 {
     options.modules.desktop.noctalia.enable = mkEnableOption "Enable Noctalia Shell";
 
-
     config = mkIf cfg.enable {
 
         services.power-profiles-daemon.enable = true;

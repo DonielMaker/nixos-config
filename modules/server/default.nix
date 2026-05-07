@@ -1,8 +1,7 @@
-{ config, lib, sLib, pkgs, ... }: 
+{ config, lib, pkgs, ... }: 
 
 let
-    inherit (lib) mkIf mkEnableOption mkOption types;
-    inherit (sLib) assertCollision;
+    inherit (lib) mkEnableOption mkOption mkIf types;
     cfg = config.modules.server;
 in
 
@@ -18,14 +17,13 @@ in
     };
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertCollision cfg config.modules.desktop.enable)
-        ];
 
         environment.systemPackages = with pkgs; [
-            restic
+
             vim
             git
+
+            restic # Backups
         ];
     };
 }

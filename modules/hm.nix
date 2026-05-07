@@ -1,7 +1,7 @@
 { config, inputs, lib, ... }: 
 
 let
-    inherit (lib) mkEnableOption mkOption types mkIf;
+    inherit (lib) mkEnableOption mkOption mkIf types;
     cfg = config.modules.hm;
 in
 
@@ -25,6 +25,7 @@ in
             extraSpecialArgs = {
                 inherit inputs; 
                 modules = {
+                    # For some reason evaluation changes when these are placed in their specific module (Maybe due to them no longer being in scope).
                     system = {
                         username = config.modules.system.username;
                         mail = config.modules.system.username;

@@ -1,7 +1,7 @@
 { config, lib, ... }: 
 
 let
-    inherit (lib) mkIf mkEnableOption;
+    inherit (lib) mkEnableOption mkIf;
     cfg = config.modules.system.networking;
 in
 

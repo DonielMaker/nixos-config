@@ -1,8 +1,7 @@
-{ config, lib, sLib, pkgs-stable, ... }: 
+{ config, lib, pkgs-stable, ... }: 
 
 let
     inherit (lib) mkIf mkEnableOption;
-    inherit (sLib) assertEnabled;
     cfg = config.modules.desktop.sound;
 in
 
@@ -10,9 +9,6 @@ in
     options.modules.desktop.sound.enable = mkEnableOption "Enable Sound";
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertEnabled cfg config.modules.desktop.enable)
-        ];
 
         security.rtkit.enable = true;
         services.pipewire.enable = true;

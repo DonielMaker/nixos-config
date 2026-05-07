@@ -1,7 +1,7 @@
 { config, lib, inputs, pkgs, ... }: 
 
 let
-    inherit (lib) mkIf mkEnableOption mkOption types;
+    inherit (lib) mkEnableOption mkOption mkIf types;
     cfg = config.modules.system;
 in
 

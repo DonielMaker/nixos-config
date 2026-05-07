@@ -13,11 +13,12 @@ in
         programs.librewolf.enable = true;
         programs.librewolf = {
 
-            profiles.${"donielmaker"} = {
+            profiles.${modules.system.username} = {
                 extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
                     ublock-origin
                     bitwarden
                     darkreader
+                    # ?
                     foxyproxy-standard
                     multi-account-containers
                 ];
