@@ -49,6 +49,7 @@
             webdav.enable = true;
             librewolf.enable = true;
             obsidian.enable = true;
+            vesktop.enable = true;
         };
 
         terminal = {

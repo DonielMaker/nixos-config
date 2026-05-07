@@ -61,8 +61,12 @@ in
                     "donielmaker"
                     # modules.system.username 
                 ];
+
                 targets.hyprland.enable = false;
+
                 targets.neovim.enable = false;
+
+                targets.vesktop.enable = false;
             };
 
             gtk.gtk4.theme = config.gtk.theme;
