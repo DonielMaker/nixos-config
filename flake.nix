@@ -36,6 +36,9 @@
 
         neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
         neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
+        mango.url = "github:mangowm/mango";
+        mango.inputs.nixpkgs.follows = "nixpkgs";
     };
 
     outputs = {...}@inputs:
