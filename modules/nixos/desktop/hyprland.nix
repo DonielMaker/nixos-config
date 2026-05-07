@@ -103,18 +103,24 @@ in
 
                     inherit (modules.hypr) monitor;
 
+                    ecosystem.no_donation_nag = true;
                     ecosystem.no_update_news = true;
 
                     cursor.no_hardware_cursors = true;
 
-                    debug = {
-                        disable_logs = false;
-                        enable_stdout_logs = true;
-                    };
+                    # debug = {
+                    #     disable_logs = false;
+                    #     enable_stdout_logs = true;
+                    # };
 
                     input = {
                         kb_layout = modules.system.keyboard.layout;
 
+                        # Keyboard repeats faster and quicker;
+                        repeat_rate = 40;
+                        repeat_delay = 300;
+
+                        # Window focus follows Mouse
                         follow_mouse = 1;
 
                         touchpad = {
@@ -254,7 +260,7 @@ in
                         #", XF86AudioLowerVolume, exec, dms ipc call audio decrement 5"
                         #"SHIFT, XF86AudioRaiseVolume, exec, pamixer --default-source -i 5"
                         #"SHIFT, XF86AudioLowerVolume, exec, pamixer --default-source -d 5"
-                            ];
+                    ];
 
                     bindm = [
                         # Super + M1
