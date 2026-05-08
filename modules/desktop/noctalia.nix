@@ -123,8 +123,11 @@ in
                                         "Signal Desktop"
                                     ];
                                 }
-                                { id = "Battery"; }
                                 { id = "plugin:privacy-indicator"; }
+                                {
+                                    id = "Battery"; 
+                                    displayMode = "graphic";
+                                }
                                 { 
                                     id = "NotificationHistory"; 
                                     iconColor = "secondary";

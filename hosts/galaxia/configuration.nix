@@ -55,7 +55,8 @@
         };
     };
 
-    security.pam.services.${config.modules.system.username}.kwallet.enable = true;
+    # Display Manager
+    services.displayManager.ly.enable = true;
     
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
