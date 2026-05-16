@@ -1,4 +1,4 @@
-{config, inputs, pkgs, ...}:
+{inputs, pkgs, ...}:
 
 {
     imports = [ ./hardware-configuration.nix ./disko.nix ];
@@ -29,28 +29,20 @@
 
         desktop = {
             enable = true;
-            graphics.enable = true;
             sound.enable = true;
             bluetooth.enable = true;
 
             stylix.enable = true;
-
-            noctalia.enable = true;
             hyprland.enable = true;
             hyprland.monitor = ", 1920x1080@60hz, auto, 1";
         };
 
         programs = {
-            obsidian.enable = true;
             webdav.enable = true;
         };
 
         terminal = {
-            alacritty.enable = true;
-            git.enable = true;
             neovim.enable = true;
-            starship.enable = true;
-            zellij.enable = true;
             zsh.enable = true;
         };
     };
@@ -64,10 +56,8 @@
         typst
 
         zathura
-        brave
         gimp
         obs-studio
-        geeqie
     ];
 
     system.stateVersion = "25.05"; # Just don't

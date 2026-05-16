@@ -8,7 +8,7 @@ in
 {
     options.modules.programs.obsidian.enable = mkEnableOption "Enable Obsidian";
 
-    config.home-manager.users.${config.modules.system.username} = mkIf cfg.enable {
+    config = mkIf cfg.enable {
         programs.obsidian.enable = true;
     };
 }

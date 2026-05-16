@@ -1,8 +1,7 @@
-{ config, lib, sLib, pkgs, ... }: 
+{ config, lib, pkgs, ... }: 
 
 let
     inherit (lib) mkIf mkEnableOption;
-    inherit (sLib) assertEnabled assertCollision;
     cfg = config.modules.desktop.plasma;
 in
 
@@ -10,10 +9,6 @@ in
     options.modules.desktop.plasma.enable = mkEnableOption "Enable Plasma";
 
     config = mkIf cfg.enable {
-        assertions = [
-            (assertEnabled cfg config.modules.desktop.enable)
-            (assertCollision cfg config.modules.desktop.hyprland.enable)
-        ];
 
         services.desktopManager.plasma6.enable = true;
 

@@ -8,7 +8,7 @@ in
 {
     options.modules.terminal.starship.enable = mkEnableOption "Enable Starship";
 
-    config.home-manager.users.${config.modules.system.username} = mkIf cfg.enable {
+    config = mkIf cfg.enable {
 
         programs.starship.enable = true;
         programs.starship.settings = {

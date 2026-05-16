@@ -49,27 +49,8 @@ in
             # Doesn't work with nixos logo
             targets.plymouth.logoAnimated = false;
 
+            # Set a custom image in limine.nix instead
             targets.limine.image.enable = false;
         };
-
-
-        home-manager.users.${config.modules.system.username} = ({ config, modules,  ...}: {
-
-            stylix.enable = true;
-            stylix = {
-                targets.librewolf.profileNames = lib.mkIf modules.programs.librewolf.enable [ 
-                    "donielmaker"
-                    # modules.system.username 
-                ];
-
-                targets.hyprland.enable = false;
-
-                targets.neovim.enable = false;
-
-                targets.vesktop.enable = false;
-            };
-
-            gtk.gtk4.theme = config.gtk.theme;
-        });
     };
 }

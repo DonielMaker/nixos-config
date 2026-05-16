@@ -8,8 +8,9 @@ in
 {
     options.modules.terminal.zellij.enable = mkEnableOption "Enable Zellij";
 
-    config.home-manager.users.${config.modules.system.username} = mkIf cfg.enable {
+    config = mkIf cfg.enable {
 
+        # Config tbi
         programs.zellij.enable = true;
     };
 }

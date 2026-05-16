@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, modules, ...}:
 
 let
     inherit (lib) mkEnableOption mkIf;
@@ -8,7 +8,7 @@ in
 {
     options.modules.programs.librewolf.enable = mkEnableOption "Enable Librewolf";
 
-    config.home-manager.users.${config.modules.system.username} = mkIf cfg.enable ({ modules, ...}: {
+    config = mkIf cfg.enable {
 
         programs.librewolf.enable = true;
         programs.librewolf = {
@@ -18,9 +18,6 @@ in
                     ublock-origin
                     bitwarden
                     darkreader
-                    # ?
-                    foxyproxy-standard
-                    multi-account-containers
                 ];
 
                 search = {
@@ -57,5 +54,5 @@ in
                 };
             };
         };
-    });
+    };
 }

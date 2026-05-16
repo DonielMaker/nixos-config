@@ -32,13 +32,11 @@ in
                         keyboard.layout = config.modules.system.keyboard.layout;
                     };
 
-                    programs.librewolf = config.modules.programs.librewolf;
-
                     hypr = config.modules.desktop.hyprland;
                 };
             };
 
-            users.${config.modules.system.username}.imports = [ cfg.home ];
+            users.${config.modules.system.username}.imports = [ cfg.home ] ++ lib.filesystem.listFilesRecursive "${inputs.self}/modules/hm";
         };
     };
 }

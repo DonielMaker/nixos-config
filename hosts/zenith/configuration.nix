@@ -28,14 +28,11 @@
 
         desktop = {
             enable = true;
-            graphics.enable = true;
             gigabyte.enable = true;
             sound.enable = true;
             bluetooth.enable = true;
 
             stylix.enable = true;
-
-            noctalia.enable = true;
             hyprland.enable = true;
             hyprland.monitor = [
                 "DP-1, 2560x1440@144hz, auto, 1"
@@ -47,17 +44,10 @@
             steam.enable = true;
             coolercontrol.enable = true;
             webdav.enable = true;
-            librewolf.enable = true;
-            obsidian.enable = true;
-            vesktop.enable = true;
         };
 
         terminal = {
-            alacritty.enable = true;
-            git.enable = true;
             neovim.enable = true;
-            starship.enable = true;
-            zellij.enable = true;
             zsh.enable = true;
         };
     };

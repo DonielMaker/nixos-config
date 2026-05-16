@@ -1,8 +1,31 @@
 { modules, ... }:
 
 {
+    modules = {
+        desktop = {
+            hyprland.enable = true;
+            noctalia.enable = true;
+            stylix.enable = true;
+        };
+
+        programs = {
+            librewolf.enable = true;
+            obsidian.enable = true;
+            vesktop.enable = true;
+        };
+
+        terminal = {
+            alacritty.enable = true;
+            git.enable = true;
+            neovim.enable = true;
+            starship.enable = true;
+            zellij.enable = true;
+            zsh.enable = true;
+        };
+    };
+
     wayland.windowManager.hyprland.settings = {
-        # Fix this
+        # Fix this?
         workspace = [
             "1, monitor:DP-1"
             "2, monitor:DP-1"
@@ -12,8 +35,6 @@
             "5, monitor:DP-2"
             "6, monitor:DP-2"
             "7, monitor:DP-2"
-            # Do we want this as default?
-            # "r[4-10], monitor:DP-2, layout:scrolling, layoutopt:direction:down"
         ];
     };
 

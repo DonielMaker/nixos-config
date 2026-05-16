@@ -8,7 +8,7 @@ in
 {
     options.modules.terminal.alacritty.enable = mkEnableOption "Enable Alacritty";
 
-    config.home-manager.users.${config.modules.system.username} = mkIf cfg.enable {
+    config = mkIf cfg.enable {
         programs.alacritty.enable = true;
         programs.alacritty.settings = {
             window = {
