@@ -5,6 +5,8 @@ let
 in
 
 {
+    networking.firewall.allowedTCPPorts = [ 9091 ];
+
     services.redis.servers.authelia-main = {
         enable = true;
         user = config.services.authelia.instances.main.user;   

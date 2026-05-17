@@ -34,10 +34,10 @@ in
         };
     };
 
+    # vaultwarden
+    networking.firewall.allowedTCPPorts = [ 5902 ];
     networking.hostName = config.modules.system.hostname;
 
-    # authelia, vaultwarden
-    networking.firewall.allowedTCPPorts = [ 9091 5902 ];
     # bind
     networking.firewall.allowedUDPPorts = [ 53 ];
 
