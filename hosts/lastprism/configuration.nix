@@ -19,6 +19,7 @@
             systemd-boot.enable = true;
 
             openssh.enable = true;
+            networking.enable = true;
         };
 
         server = {

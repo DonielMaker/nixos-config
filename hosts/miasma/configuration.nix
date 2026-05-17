@@ -24,6 +24,7 @@ in
             systemd-boot.enable = true;
 
             openssh.enable = true;
+            networking.enable = true;
         };
 
         server = {
@@ -36,8 +37,6 @@ in
 
     # vaultwarden
     networking.firewall.allowedTCPPorts = [ 5902 ];
-    networking.hostName = config.modules.system.hostname;
-
     # bind
     networking.firewall.allowedUDPPorts = [ 53 ];
 
