@@ -25,10 +25,7 @@
         server = {
             enable = true;
             domain = "thematt.net";
-            # alloy.enable = true;
             qemuGuest.enable = true;
-            # TBC
-            # podman.enable = true;
         };
     };
 
@@ -46,11 +43,11 @@
 
     age.secrets = let
 
-    sftpgo = {
-        owner = config.services.sftpgo.user;
-        group = config.services.sftpgo.group;
-        mode = "440";
-    };
+        sftpgo = {
+            owner = config.services.sftpgo.user;
+            group = config.services.sftpgo.group;
+            mode = "440";
+        };
 
     in 
 
@@ -61,8 +58,6 @@
         mosquitto-iotPassword.file = ./secrets/mosquitto-iotPassword.age;
 
         paperless-envFile.file = ./secrets/paperless-envFile.age;
-
-        cloudflare-dnsApiToken.file = ./secrets/cloudflare-dnsApiToken.age;
 
         sftpgo-clientSecret = {
             inherit (sftpgo) owner group mode;
@@ -145,8 +140,8 @@
     users.groups.media = {};
     services.sftpgo.enable = true;
     services.sftpgo = {
-        ## No actual data but holds sftpgo.db
-            # dataDir = "/var/lib/sftpgo";
+        # No actual data but holds sftpgo.db
+        # dataDir = "/var/lib/sftpgo";
         # Needed when dataDir != <your-wanted-dir>
         extraReadWriteDirs = [ "/storage/media" ];
         # Allow other services to read files
@@ -165,7 +160,7 @@
                         client_secret_file = "${config.age.secrets.sftpgo-clientSecret.path}";
                         config_url = "https://authelia.${config.modules.server.domain}";
                         # Url to redirect to. != Redirect Url for OIDC which is https://sftpgo.example.com/web/oidc/redirect
-                        redirect_base_url = "https://sftpgo.thematt.net";
+                        redirect_base_url = "https://sftpgo.${config.modules.server.domain}]";
                         scopes = [ "openid" "profile" "email" ];
                         username_field = "preferred_username";
                         implicit_roles = true;

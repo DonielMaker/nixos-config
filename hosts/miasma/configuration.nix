@@ -30,7 +30,7 @@ in
         server = {
             enable = true;
             domain = "thematt.net";
-            # alloy.enable = true;
+            podman.enable = true;
             qemuGuest.enable = true;
         };
     };
