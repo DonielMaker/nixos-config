@@ -41,6 +41,7 @@ in
                 options = builtins.concatStringsSep "," rcloneOptions;
                 # fuse.rclone seems to be better suited but doesn't work as rclone is not found as a command
                 type = "rclone";
+                mountConfig.TimeoutSec = "5";
             } 
         ];
 
