@@ -125,8 +125,6 @@ $ORIGIN ${domain}.
 
 ns                  IN      A       10.10.12.10
 
-ns                  IN      AAAA    fd70:239a:df9e:0:be24:11ff:feb6:21fe
-
 ; === Auth Server ===
 miasma              IN      CNAME   ns
 
@@ -135,23 +133,14 @@ miasma              IN      CNAME   ns
 ; === Main Server ===
 lastprism           IN      A       10.10.12.11
 
-lastprism           IN      AAAA    fd70:239a:df9e:0:be24:11ff:fede:2125
-
-ts                  IN      CNAME   lastprism
-
-meet                IN      CNAME   lastprism
-*.meet              IN      CNAME   lastprism
-
 ; === Vyos Router ===
 vilethorn           IN      A       10.10.10.1        
-
-vilethorn           IN      AAAA    fd70:239a:df9e:0::1 ; This is the INFRA Gateway IPv6
 
 ; === Proxmox Server ===
 proxmox.lastprism   IN      A       10.10.12.12
 
 ; === Misc ===
-ark                 IN      A       10.10.12.13
+gameserver          IN      A       10.10.12.102
 
 mail                IN      CNAME   eu1.workspace.org.
                 '';
