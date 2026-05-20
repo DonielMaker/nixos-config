@@ -50,11 +50,17 @@
             neovim.enable = true;
             zsh.enable = true;
         };
+
+        server.podman.enable = true;
     };
 
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_0;
 
     services.flatpak.enable = true;
+
+    services.netbird.enable = true;
+
+    programs.dconf.enable = true;
 
     # Display Manager
     services.displayManager.ly.enable = true;
@@ -78,6 +84,8 @@
         # == Utils ==
         typst # Professional Documents
         cryptsetup # Encrypted Drives
+        furmark # Gpu Stress Testing
+        stress-ng # General Stress Testing
 
         # == Gaming ==
         prismlauncher # Minecraft Launcher

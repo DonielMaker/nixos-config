@@ -24,6 +24,8 @@
         };
     };
 
+    services.easyeffects.enable = true;
+
     wayland.windowManager.hyprland.settings = {
         # Fix this?
         workspace = [
