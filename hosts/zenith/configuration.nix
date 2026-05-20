@@ -93,8 +93,5 @@
         alsa-scarlett-gui # Manage Scarlett Routing
     ];
 
-    # This might have to be moved to stylix or similar
-    fonts.packages = with pkgs; [ aileron ];
-
     system.stateVersion = "24.11"; # Just don't
 }

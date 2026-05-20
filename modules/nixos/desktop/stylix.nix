@@ -44,6 +44,7 @@ in
                     name = "FiraCode Nerd Font";
                     package = pkgs.nerd-fonts.fira-code;
                 };
+
             };
 
             # Doesn't work with nixos logo
@@ -52,5 +53,9 @@ in
             # Set a custom image in limine.nix instead
             targets.limine.image.enable = false;
         };
+
+        fonts.packages = with pkgs; [
+            aileron 
+        ];
     };
 }
