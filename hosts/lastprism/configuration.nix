@@ -106,7 +106,7 @@
         group = "media";
         settings = {
             Address = "0.0.0.0";
-            MusicFolder = "/storage/media/music"; 
+            MusicFolder = "/storage/media/Music"; 
         };
     };
 
