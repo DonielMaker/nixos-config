@@ -31,11 +31,11 @@ in
                 radiusRatio = 0.5;
                 iRadiusRatio = 0.7;
                 # This might be problematic
-                avatarImage = "/home/donielmaker/webdav/pictures/Matt.jpg";
+                avatarImage = "/home/${config.home.username}/webdav/pictures/Matt.jpg";
             };
 
             # This might be problematic
-            wallpaper.directory = "/home/donielmaker/.config/wallpapers";
+            wallpaper.directory = "/home/${config.home.username}/.config/wallpapers";
 
             location = {
                 name = "Bremen";
