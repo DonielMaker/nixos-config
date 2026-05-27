@@ -19,14 +19,4 @@ in
         inherit specialArgs;
         modules = [ conf { nixpkgs.pkgs = pkgs; } ] ++ lib.filesystem.listFilesRecursive "${inputs.self}/modules/nixos";
     };
-
-    assertEnabled = cfg: config: {
-        assertion = config;
-        message = "${config} has to be enabled for ${cfg}";
-    };
-
-    assertCollision = cfg: collision: {
-        assertion = !collision;
-        message = "${cfg} cannot be enabled while ${collision} is enabled";
-    };
 }
