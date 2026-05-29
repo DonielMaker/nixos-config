@@ -72,33 +72,35 @@
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         # == Programs ==
+        freecad # CAD Software
         gimp # Image editing
-        pkgs-stable.kdePackages.kdenlive # Video editing
         obs-studio # Video Recording
         orca-slicer # 3D-Printer Slicer
-        freecad # CAD Software
+        pkgs-stable.kdePackages.kdenlive # Video editing
+        zathura # PDF Viewer
 
         element-desktop # Matrix client
-        teamspeak6-client # Teamspeak client
+        # teamspeak6-client # Teamspeak client
 
         # == Utils ==
-        typst # Professional Documents
         cryptsetup # Encrypted Drives
         furmark # Gpu Stress Testing
         stress-ng # General Stress Testing
+        typst # Professional Documents
 
         # == Gaming ==
-        prismlauncher # Minecraft Launcher
         heroic # Epic Games Launcher
-        steam # Steam
-        owmods-gui # Outer Wilds Mod Manager
         olympus # Celeste Mod Manager
-        r2modman # General Mod Manager
+        owmods-gui # Outer Wilds Mod Manager
+        prismlauncher # Minecraft Launcher
         protonplus # Manage Valve's Proton
-        xclicker # Autoclicker (Don't know how good it works with wayland)
+        r2modman # General Mod Manager
+        steam # Steam
+        xclicker # Autoclicker
 
-        scarlett2 # Manage Scarlett Firmware
+        # == Audio ==
         alsa-scarlett-gui # Manage Scarlett Routing
+        scarlett2 # Manage Scarlett Firmware
     ];
 
     system.stateVersion = "24.11"; # Just don't
