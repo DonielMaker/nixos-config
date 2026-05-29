@@ -44,6 +44,7 @@
             steam.enable = true;
             coolercontrol.enable = true;
             webdav.enable = true;
+            virt-manager.enable = true;
         };
 
         terminal = {
@@ -59,8 +60,6 @@
     services.flatpak.enable = true;
 
     services.netbird.enable = true;
-
-    programs.dconf.enable = true;
 
     # Display Manager
     services.displayManager.ly.enable = true;
