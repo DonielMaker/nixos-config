@@ -23,7 +23,8 @@ in
             useGlobalPkgs = true;
             useUserPackages = true;
             extraSpecialArgs = {
-                inherit inputs; 
+                inherit inputs;
+
                 modules = {
                     # For some reason evaluation changes when these are placed in their specific module (Maybe due to them no longer being in scope).
                     system = {
