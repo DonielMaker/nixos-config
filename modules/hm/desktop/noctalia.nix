@@ -148,7 +148,7 @@ in
                         { id = "Bluetooth"; }
                         { 
                             id = "Network"; 
-                            displayMode = "never";
+                            displayMode = "alwaysHide";
                         }
                     ];
                 };
