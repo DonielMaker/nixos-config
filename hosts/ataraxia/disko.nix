@@ -1,6 +1,6 @@
 {
     disko.devices.disk.main = {
-        device = "/dev/disk/by-id/";
+        device = "/dev/disk/by-id/nvme-SAMSUNG_MZVLQ256HBJD-00B_S6F2NX0T526871";
         type = "disk";
         content = {
             type = "gpt";
