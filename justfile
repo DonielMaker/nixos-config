@@ -26,7 +26,7 @@ nix-remote HOST CONFIG *ARGS:
         {{ ARGS }}
 
 [doc("Install via nixos-anywhere")]
-[group("build")]
+[group("install")]
 remote-install HOST CONFIG *ARGS: 
     nix run github:nix-community/nixos-anywhere -- \
             --generate-hardware-config nixos-generate-config "{{ FLAKE }}/hosts/{{ replace(CONFIG, ".#", "") }}/hardware-configuration.nix" \
@@ -34,11 +34,13 @@ remote-install HOST CONFIG *ARGS:
             --target-host {{ HOST }} \
             {{ ARGS }}
 
-[doc("Update the flake and rebuild")]
-[group("maintenance")]
-update:
-    nix flake update
-    just rb
+[doc("Install Nixos locally (Might be Broken rn)")]
+[group("install")]
+install CONFIG: 
+    @git add .
+    nix --experimental-features "nix-command flakes" \
+        run github:nix-community/disko/latest -- \
+        --mode destroy,format,mount "{{ FLAKE }}/hosts/{{ replace(CONFIG, ".#", "")}}/disko.nix"
 
 [doc("Clean Nix-Store")]
 [group("maintenance")]
