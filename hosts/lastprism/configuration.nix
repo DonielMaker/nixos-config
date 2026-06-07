@@ -160,7 +160,7 @@
                         client_secret_file = "${config.age.secrets.sftpgo-clientSecret.path}";
                         config_url = "https://authelia.${config.modules.server.domain}";
                         # Url to redirect to. != Redirect Url for OIDC which is https://sftpgo.example.com/web/oidc/redirect
-                        redirect_base_url = "https://sftpgo.${config.modules.server.domain}]";
+                        redirect_base_url = "https://sftpgo.${config.modules.server.domain}";
                         scopes = [ "openid" "profile" "email" ];
                         username_field = "preferred_username";
                         implicit_roles = true;
