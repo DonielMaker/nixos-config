@@ -38,27 +38,15 @@
     # Mosquitto: Mqtt Server
     services.mosquitto.enable = true;
     services.mosquitto = {
-        # listeners = [
-        #     {
-        #         acl = [ "pattern readwrite #" ];
-        #         omitPasswordAuth = true;
-        #         settings.allow_anonymous = true;
-        #     }
-        # ];
         listeners = [
             {  
                 users.iot = {
                     acl = [
 
                         "readwrite zigbee2mqtt/#"
-                            "readwrite homeassistant/#"
-                            "readwrite IoT/#"
+                        "readwrite homeassistant/#"
+                        "readwrite IoT/#"
                     ];
-                    # acl = [
-                    #     "read IoT/device/action"
-                    #     "write IoT/device/observations"
-                    #     "write IoT/device/LW"
-                    # ];
                     passwordFile = config.age.secrets.mosquitto-iotPassword.path;
                 };
             }
@@ -77,6 +65,7 @@
             };
             mqtt = {
                 server = "mqtt://lastprism.thematt.net:1883";
+                # Problem
                 user = "iot";
                 password = "2nkFzRMG#l4sxXsUrctHQ&%UcD6ZCc&HIG3vMPxmOfX0VIgvY2HeE5m&&eWbXr^T";
             };
