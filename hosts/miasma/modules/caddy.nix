@@ -32,12 +32,6 @@ in
                 reverse_proxy miasma.${domain}:8082
             }
 
-            @grocy host grocy.${domain} 
-            handle @grocy {
-                # reverse_proxy lastprism.${domain}:9283
-                reverse_proxy 10.10.12.102:9283
-            }
-
             @paperless host paperless.${domain}
             handle @paperless {
                 reverse_proxy lastprism.${domain}:28981

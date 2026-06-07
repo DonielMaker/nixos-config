@@ -30,7 +30,7 @@
             http = {
                 use_x_forwarded_for = true;
                 # Why Can't this be dns?
-                trusted_proxies = [ "10.10.12.10" "fd70:239a:df9e:0::/64" ]; 
+                trusted_proxies = [ "10.10.12.10" ]; 
             };
         };
     };

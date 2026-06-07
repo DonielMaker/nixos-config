@@ -65,13 +65,6 @@
         };
     };
 
-    # services.teamspeak3.enable = true;
-    # services.teamspeak3 = {
-    #     openFirewall = true;
-    #     openFirewallServerQuery = true;
-    #     dataDir = "/storage/ts";
-    # };
-
     # services.apcupsd.enable = true;
     # services.apcupsd.configText = ''
     #     UPSCABLE usb
@@ -81,23 +74,6 @@
     #     UPSCLASS standalone
     #     UPSMODE disable
     # '';
-
-    # Currently problems regarding inter-subnet access
-    # services.printing.enable = true;
-    # services.printing = {
-    #     listenAddresses = [ "*:631" ];
-    #     # allowFrom = [ "10.10.0.0/16" ];
-    #     allowFrom = [ "all" ];
-    #     browsing = true;
-    #     defaultShared = true;
-    #     openFirewall = true;
-    # };
-
-    # services.avahi.enable = true;
-    # services.avahi = {
-    #     nssmdns4 = true;
-    #     openFirewall = true;
-    # };
 
     # Navidrome: A Music server which uses the subsonic protocol to send content to clients
     services.navidrome.enable = true;
@@ -206,25 +182,12 @@
         };
     };
 
-    # This can probably be modularised
-    # users.groups.certs.members = [];
-    # security.acme = {
-    #     acceptTerms = true;
-    #     defaults.email = "acme@${config.modules.server.domain}";
-    #     defaults.server = "https://acme-v02.api.letsencrypt.org/directory";
-    #     ## Staging Servers
-    #     # defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
-    #
-    #     certs."${config.modules.server.domain}" = {
-    #         group = config.users.groups.certs.name;
-    #
-    #         domain = "${config.modules.server.domain}";
-    #         extraDomainNames = [ "*.${config.modules.server.domain}" ];
-    #         dnsProvider = "cloudflare";
-    #         dnsResolver = "1.1.1.1:53";
-    #         dnsPropagationCheck = true;
-    #         environmentFile = config.age.secrets.cloudflare-dnsApiToken.path;
-    #     };
+    # services.grocy.enable = true;
+    # services.grocy = {
+    #     hostName = "grocy.${config.modules.server.domain}"; 
+    #     nginx.enableSSL = false;
+    #     settings.calendar.firstDayOfWeek = 1;
+    #     settings.currency = "EUR";
     # };
 
     environment.systemPackages = with pkgs; [
