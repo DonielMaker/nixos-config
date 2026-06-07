@@ -75,7 +75,7 @@ in
 
             @proxmox-lastprism host proxmox.${domain} 
             handle @proxmox-lastprism {
-                reverse_proxy proxmox.lastprism.${domain}:8006 {
+                reverse_proxy apathanull.${domain}:8006 {
                     transport http { tls_insecure_skip_verify }
                 }
             }

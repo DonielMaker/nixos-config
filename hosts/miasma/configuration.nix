@@ -137,7 +137,7 @@ lastprism           IN      A       10.10.12.11
 vilethorn           IN      A       10.10.10.1        
 
 ; === Proxmox Server ===
-proxmox.lastprism   IN      A       10.10.12.12
+apathanull IN      A       10.10.12.12
 
 ; === Misc ===
 gameserver          IN      A       10.10.12.102
