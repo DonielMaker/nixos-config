@@ -7,32 +7,29 @@ alias rb := rebuild
 alias nr := nix-remote
 alias ri := remote-install
 
-[doc("Build System Configuration Locally")]
+[doc("Build System Configuration locally")]
 [group("build")]
-rebuild CONFIG=(FLAKE) *ARGS:
+rebuild CONFIG=(FLAKE) MODE="switch":
     @git add .
-    sudo nixos-rebuild switch \
-        --flake {{ CONFIG }} \
-        {{ ARGS }}
+    sudo nixos-rebuild {{ MODE }} --flake {{ CONFIG }}
 
 [doc("Build System Configuration Remotely")]
 [group("build")]
-nix-remote HOST CONFIG *ARGS:
+nix-remote HOST CONFIG MODE="switch":
     @git add .
-    nixos-rebuild switch \
-        --target-host {{ HOST }} \
+    nixos-rebuild {{ MODE }} \
         --flake {{ CONFIG }} \
+        --target-host {{ HOST }} \
         --ask-sudo-password \
-        {{ ARGS }}
 
 [doc("Install via nixos-anywhere")]
 [group("install")]
-remote-install HOST CONFIG *ARGS: 
+remote-install HOST CONFIG: 
+    @git add .
     nix run github:nix-community/nixos-anywhere -- \
             --generate-hardware-config nixos-generate-config "{{ FLAKE }}/hosts/{{ replace(CONFIG, ".#", "") }}/hardware-configuration.nix" \
             --flake {{ CONFIG }} \
-            --target-host {{ HOST }} \
-            {{ ARGS }}
+            --target-host {{ HOST }}
 
 [doc("Install Nixos locally (Might be Broken rn)")]
 [group("install")]
@@ -52,6 +49,3 @@ clean:
 [group("develop")]
 repl CONFIG=(FLAKE):
     nixos-rebuild repl --flake {{ CONFIG }}
-
-gen-auth:
-    nix run nixpkgs#authelia -- crypto hash generate argon2 --random
