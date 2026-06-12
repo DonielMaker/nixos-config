@@ -23,8 +23,8 @@ in
             gifski
         ];
 
-        programs.noctalia.enable = true;
-        programs.noctalia.settings = {
+        programs.noctalia-shell.enable = true;
+        programs.noctalia-shell.settings = {
             settingsVersion = 59;
 
             general = {

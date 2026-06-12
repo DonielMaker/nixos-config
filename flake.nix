@@ -25,10 +25,7 @@
         nur.inputs.nixpkgs.follows = "nixpkgs";
 
         # These are program flakes
-        quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-        quickshell.inputs.nixpkgs.follows = "nixpkgs";
-
-        noctalia.url = "github:noctalia-dev/noctalia-shell";
+        noctalia.url = "github:noctalia-dev/noctalia/legacy-v4";
         noctalia.inputs.nixpkgs.follows = "nixpkgs";
 
         neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
