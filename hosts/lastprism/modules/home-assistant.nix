@@ -66,10 +66,8 @@
             };
             mqtt = {
                 server = "mqtt://lastprism.thematt.net:1883";
-                # Problem
                 user = "iot";
                 password = "!${config.age.secrets."z2mqtt-iotPassword.yaml".path} password";
-                # password = "2nkFzRMG#l4sxXsUrctHQ&%UcD6ZCc&HIG3vMPxmOfX0VIgvY2HeE5m&&eWbXr^T";
             };
         };
     };
