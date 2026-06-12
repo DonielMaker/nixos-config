@@ -10,8 +10,9 @@ in
 
 {
 
-    # Mosquitto
+    # Home-assistant
     "mosquitto-iotPassword.age".publicKeys = users ++ systems;
+    "z2mqtt-iotPassword.yaml.age".publicKeys = users ++ systems;
 
     # Paperless
     "paperless-envFile.age".publicKeys = users ++ systems;

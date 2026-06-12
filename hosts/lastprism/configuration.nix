@@ -49,6 +49,12 @@
             mode = "440";
         };
 
+        z2mqtt = {
+            owner = "zigbee2mqtt";
+            group = "zigbee2mqtt";
+            mode = "440";
+        };
+
     in 
 
     {
@@ -56,6 +62,11 @@
         homebox-envFile.file = ./secrets/homebox-envFile.age;
 
         mosquitto-iotPassword.file = ./secrets/mosquitto-iotPassword.age;
+
+        "z2mqtt-iotPassword.yaml" = {
+            inherit (z2mqtt) owner group mode;
+            file = ./secrets/z2mqtt-iotPassword.yaml.age;
+        };
 
         paperless-envFile.file = ./secrets/paperless-envFile.age;
 

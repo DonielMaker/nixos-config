@@ -61,13 +61,15 @@
             frontend.enabled = true;
             permit_join = true;
             serial = {
+                # port = "/dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_c22b5d26aadbed11aedeeb2d62c613ac-if00-port0";
                 port = "/dev/ttyUSB0";
             };
             mqtt = {
                 server = "mqtt://lastprism.thematt.net:1883";
                 # Problem
                 user = "iot";
-                password = "2nkFzRMG#l4sxXsUrctHQ&%UcD6ZCc&HIG3vMPxmOfX0VIgvY2HeE5m&&eWbXr^T";
+                password = "!${config.age.secrets."z2mqtt-iotPassword.yaml".path} password";
+                # password = "2nkFzRMG#l4sxXsUrctHQ&%UcD6ZCc&HIG3vMPxmOfX0VIgvY2HeE5m&&eWbXr^T";
             };
         };
     };
