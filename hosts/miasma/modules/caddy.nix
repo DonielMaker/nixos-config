@@ -59,12 +59,12 @@ in
 
             @home-assistant host home-assistant.${domain} 
             handle @home-assistant {
-                reverse_proxy lastprism.${domain}:8123
-            }
-
-            @zigbee2mqtt host zigbee2mqtt.${domain} 
-            handle @zigbee2mqtt {
-                reverse_proxy lastprism.${domain}:8080
+                reverse_proxy http://10.10.12.101:8123 {
+                    header_up Host {host}
+                    header_up X-Real-IP {remote_host}
+                    header_up X-Forwarded-For {remote_host}
+                    header_up X-Forwarded-Proto {scheme}
+                }
             }
 
             @proxmox-lastprism host proxmox.${domain} 

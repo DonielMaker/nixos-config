@@ -5,7 +5,6 @@
     imports = [
         ./hardware-configuration.nix
         ./disko.nix
-        ./modules/home-assistant.nix
     ];
 
     modules = {
@@ -32,12 +31,8 @@
     networking.hostName = config.modules.system.hostname;
 
     networking.firewall.allowedTCPPorts = [ 
-        8123 # homeassistant
-        8080 # zigbee2mqtt
-        1883 # mosquitto
         28981 # paperless
         7745 # homebox
-        9987 30033 # tsserver
         4856 9837 # sftpgo
     ];
 
@@ -49,24 +44,11 @@
             mode = "440";
         };
 
-        z2mqtt = {
-            owner = "zigbee2mqtt";
-            group = "zigbee2mqtt";
-            mode = "440";
-        };
-
     in 
 
     {
 
         homebox-envFile.file = ./secrets/homebox-envFile.age;
-
-        mosquitto-iotPassword.file = ./secrets/mosquitto-iotPassword.age;
-
-        "z2mqtt-iotPassword.yaml" = {
-            inherit (z2mqtt) owner group mode;
-            file = ./secrets/z2mqtt-iotPassword.yaml.age;
-        };
 
         paperless-envFile.file = ./secrets/paperless-envFile.age;
 
@@ -75,16 +57,6 @@
             file = ./secrets/sftpgo-clientSecret.age;
         };
     };
-
-    # services.apcupsd.enable = true;
-    # services.apcupsd.configText = ''
-    #     UPSCABLE usb
-    #     UPSTYPE usb
-    #     DEVICE
-    #     LOCKFILE /var/lock
-    #     UPSCLASS standalone
-    #     UPSMODE disable
-    # '';
 
     # Navidrome: A Music server which uses the subsonic protocol to send content to clients
     services.navidrome.enable = true;
@@ -193,6 +165,7 @@
         };
     };
 
+    # This is VERY Broken. Might have to use a podman container
     # services.grocy.enable = true;
     # services.grocy = {
     #     hostName = "grocy.${config.modules.server.domain}"; 
@@ -200,6 +173,16 @@
     #     settings.calendar.firstDayOfWeek = 1;
     #     settings.currency = "EUR";
     # };
+
+    # services.apcupsd.enable = true;
+    # services.apcupsd.configText = ''
+    #     UPSCABLE usb
+    #     UPSTYPE usb
+    #     DEVICE
+    #     LOCKFILE /var/lock
+    #     UPSCLASS standalone
+    #     UPSMODE disable
+    # '';
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default

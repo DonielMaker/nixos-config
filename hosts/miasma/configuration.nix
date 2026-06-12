@@ -200,7 +200,7 @@ mail                IN      CNAME   eu1.workspace.org.
                             description = "The Proxmox Lastprism Server";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/proxmox.svg";
                             href = "https://proxmox.${domain}";
-                            siteMonitor = "https://proxmox.lastprism.${domain}:8006";
+                            siteMonitor = "https://apathanull.${domain}:8006";
                         };
                     }
                     {
