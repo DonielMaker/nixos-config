@@ -22,7 +22,5 @@ in
 
             targets.vesktop.enable = false;
         };
-
-        gtk.gtk4.theme = config.gtk.theme;
     };
 }
