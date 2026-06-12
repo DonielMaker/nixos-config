@@ -86,6 +86,7 @@
         furmark # Gpu Stress Testing
         stress-ng # General Stress Testing
         typst # Professional Documents
+        wireguard-tools # Wireguard related commands
 
         # == Gaming ==
         heroic # Epic Games Launcher
