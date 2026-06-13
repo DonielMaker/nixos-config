@@ -25,15 +25,15 @@
         nur.inputs.nixpkgs.follows = "nixpkgs";
 
         # These are program flakes
-        noctalia.url = "github:noctalia-dev/noctalia/legacy-v4";
-        noctalia.inputs.nixpkgs.follows = "nixpkgs";
-
-        neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-        neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
-
         # Right now unused
-        mango.url = "github:mangowm/mango";
         mango.inputs.nixpkgs.follows = "nixpkgs";
+        mango.url = "github:mangowm/mango";
+
+        neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+        neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
+        noctalia.inputs.nixpkgs.follows = "nixpkgs";
+        noctalia.url = "github:noctalia-dev/noctalia/legacy-v4";
     };
 
     outputs = {...}@inputs:
