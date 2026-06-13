@@ -14,6 +14,7 @@
             user.enable = true;
             
             limine.enable = true;
+            limine.resolution = "2560x1440";
             limine.image = pkgs.fetchurl {
                 url = "https://codeberg.org/solut/pub_ressources/raw/branch/main/images/wallpaper/vladislav-klapin-o-SMjjGuP6c-unsplash.jpg";
                 sha256 = "sha256-+ObY8Jft/Ergnufgcp/cXKV/webd+74yl1XdsCYdMp0=";

@@ -9,6 +9,12 @@ in
     options.modules.system.limine = {
         enable = mkEnableOption "Enable Limine";
 
+        resolution = mkOption {
+            default = "1920x1080";
+            type = types.string;
+            description = "Sets the Resolution of the TTY";
+        };
+
         image = mkOption {
             default = null;
             type = types.nullOr types.package;
@@ -30,6 +36,8 @@ in
                 graphicalTerminal.background = lib.mkForce "FFFFFFFF";
             };
         };
+
+        boot.kernelParams = [ "video=${config.modules.system.limine.resolution}" ];
     };
 }
 
