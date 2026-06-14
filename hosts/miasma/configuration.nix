@@ -137,7 +137,7 @@ lastprism           IN      A       10.10.12.11
 vilethorn           IN      A       10.10.10.1        
 
 ; === Proxmox Server ===
-apathanull IN      A       10.10.12.12
+apathanull          IN      A       10.10.12.12
 
 ; === Misc ===
 gameserver          IN      A       10.10.12.102
@@ -215,22 +215,6 @@ mail                IN      CNAME   eu1.workspace.org.
             {
                 "Services" = [
                     {
-                        "SFTPGo" = {
-                            description = "Fileserver";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/sftpgo.svg";
-                            href = "https://sftpgo.${domain}";
-                            siteMonitor = "http://lastprism.${domain}:4856";
-                        };
-                    }
-                    {
-                        "Navidrome" = {
-                            description = "Music server";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/navidrome.svg";
-                            href = "https://navidrome.${domain}";
-                            siteMonitor = "http://lastprism.${domain}:4533";
-                        };
-                    }
-                    {
                         "Vaultwarden" = {
                             description = "Passwordmanager";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/vaultwarden-light.svg";
@@ -255,11 +239,19 @@ mail                IN      CNAME   eu1.workspace.org.
                         };
                     }
                     {
-                        "Grocy" = {
-                            description = "ERP for your Kitchen";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grocy.svg";
-                            href = "";
-                            siteMonitor = "";
+                        "Navidrome" = {
+                            description = "Music server";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/navidrome.svg";
+                            href = "https://navidrome.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:4533";
+                        };
+                    }
+                    {
+                        "SFTPGo" = {
+                            description = "Fileserver";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/sftpgo.svg";
+                            href = "https://sftpgo.${domain}";
+                            siteMonitor = "http://lastprism.${domain}:4856";
                         };
                     }
                     {
@@ -267,15 +259,15 @@ mail                IN      CNAME   eu1.workspace.org.
                             description = "Home Automation Server";
                             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/home-assistant-light.svg";
                             href = "https://home-assistant.${domain}";
-                            siteMonitor = "http://lastprism.${domain}:8123";
+                            siteMonitor = "http://10.10.12.101:8123";
                         };
                     }
                     {
-                        "Zigbee2mqtt" = {
-                            description = "Connection Between Zigbee and Mqtt";
-                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/zigbee2mqtt.svg";
-                            href = "https://zigbee2mqtt.${domain}";
-                            siteMonitor = "http://lastprism.${domain}:8080";
+                        "Grocy" = {
+                            description = "ERP for your Kitchen";
+                            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grocy.svg";
+                            href = "";
+                            siteMonitor = "";
                         };
                     }
                 ];

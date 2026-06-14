@@ -11,7 +11,7 @@ in
 
         resolution = mkOption {
             default = "1920x1080";
-            type = types.string;
+            type = types.str;
             description = "Sets the Resolution of the TTY";
         };
 
