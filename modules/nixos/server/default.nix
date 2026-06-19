@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: 
+{ config, inputs, lib, pkgs, ... }: 
 
 let
     inherit (lib) mkEnableOption mkOption mkIf types;
@@ -19,11 +19,11 @@ in
     config = mkIf cfg.enable {
 
         environment.systemPackages = with pkgs; [
+            inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-            vim
             git
-
-            restic # Backups
+            restic 
+            vim
         ];
     };
 }

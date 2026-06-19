@@ -1,4 +1,4 @@
-{config, lib, inputs, pkgs, ...}:
+{config, lib, ...}:
 
 {
 
@@ -65,14 +65,6 @@
 
         cloudflare-dnsApiToken.file = ./secrets/cloudflare-dnsApiToken.age;
     };
-
-    environment.systemPackages = with pkgs; [
-        inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
-
-        git
-        restic
-        vim
-    ];
 
     system.stateVersion = "25.05"; # Just don't
 }
