@@ -75,7 +75,7 @@
         freecad # CAD Software
         gimp # Image editing
         obs-studio # Video Recording
-        orca-slicer # 3D-Printer Slicer
+        pkgs-stable.orca-slicer # 3D-Printer Slicer
         pkgs-stable.kdePackages.kdenlive # Video editing
         zathura # PDF Viewer
 
@@ -88,6 +88,7 @@
         stress-ng # General Stress Testing
         typst # Professional Documents
         wireguard-tools # Wireguard related commands
+        restic # Backup tool
 
         # == Gaming ==
         heroic # Epic Games Launcher
