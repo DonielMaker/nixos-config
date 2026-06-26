@@ -14,16 +14,28 @@ in
         browser = "${lib.getExe pkgs.brave} --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1";
         explorer = lib.getExe pkgs.nautilus;
 
+        # Noctalia related
         ipc = "noctalia-shell ipc call";
         launcher = "${ipc} launcher toggle";
-        # clipboard = "${ipc} launcher clipboard";
         clipboard = "${ipc} plugin:clipper toggle";
         screenshot-menu = "${ipc} plugin:screen-toolkit toggle";
         screenshot = "${ipc} plugin:screen-toolkit annotate";
 
         lock = "${ipc} lockScreen lock";
+
         micMute = "${ipc} volume muteInput";
         audioMute = "${ipc} volume muteOutput";
+
+        micIncrease = "${ipc} volume increaseInput";
+        micDecrease = "${ipc} volume decreaseInput";
+
+        audioIncrease = "${ipc} volume increase";
+        audioDecrease = "${ipc} volume decrease";
+
+        mediaPlayPause = "${ipc} media playPause";
+        # Untested
+        mediaPrev = "${ipc} media previous";
+        mediaNext = "${ipc} media next";
 
     in mkIf cfg.enable 
 
@@ -42,6 +54,7 @@ in
 
         wayland.windowManager.hyprland.enable = true;
         wayland.windowManager.hyprland = {
+            configType = "hyprlang";
             xwayland.enable = true;
 
             settings = {
@@ -219,18 +232,23 @@ in
                     "$mainMod, Control_R, exec, ${micMute}"
                     "$mainMod SHIFT, Control_R, exec, ${audioMute}"
 
-                    # Laptop related (Broken as of now)
                     ", XF86AudioMicMute, exec, ${micMute}"
                     ", XF86AudioMute, exec, ${audioMute}"
+                    "SHIFT, XF86AudioMute, exec, ${micMute}"
+
+                    ", XF86AudioRaiseVolume, exec, ${audioIncrease}"
+                    ", XF86AudioLowerVolume, exec, ${audioDecrease}"
+
+                    "SHIFT, XF86AudioRaiseVolume, exec, ${micIncrease}"
+                    "SHIFT, XF86AudioLowerVolume, exec, ${micDecrease}"
+
+                    ", XF86AudioPlay, exec, ${mediaPlayPause}"
+                    ", XF86AudioNext, exec, ${mediaNext}"
+                    ", XF86AudioPrev, exec, ${mediaPrev}"
 
                     # Brightness control
-                    #", XF86MonBrightnessDown, exec, "
-                    #", XF86MonBrightnessUp, exec, "
-
-                    # ", XF86AudioRaiseVolume, exec, dms ipc call audio increment 5"
-                    # ", XF86AudioLowerVolume, exec, dms ipc call audio decrement 5"
-                    #"SHIFT, XF86AudioRaiseVolume, exec, pamixer --default-source -i 5"
-                    #"SHIFT, XF86AudioLowerVolume, exec, pamixer --default-source -d 5"
+                    ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
+                    ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
                 ];
 
                 bindm = [
