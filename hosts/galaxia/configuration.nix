@@ -49,15 +49,20 @@
 
     # Display Manager
     services.displayManager.ly.enable = true;
+
+    services.netbird.enable = true;
     
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-        typst
+        # == Programs ==
+        gimp # Image editing
+        obs-studio # Video Recording
+        zathura # PDF Viewer
 
-        zathura
-        gimp
-        obs-studio
+        # == Utils ==
+        cryptsetup # Encrypted Drives
+        typst # Professional Documents
     ];
 
     system.stateVersion = "25.05"; # Just don't
