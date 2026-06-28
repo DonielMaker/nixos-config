@@ -39,6 +39,7 @@
 
         programs = {
             webdav.enable = true;
+            printing.enable = true;
         };
 
         terminal = {
@@ -59,6 +60,7 @@
         gimp # Image editing
         obs-studio # Video Recording
         zathura # PDF Viewer
+        simple-scan
 
         # == Utils ==
         cryptsetup # Encrypted Drives
