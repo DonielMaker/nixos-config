@@ -231,20 +231,26 @@ in
                     # Mute Audio/Mic
                     "$mainMod, Control_R, exec, ${micMute}"
                     "$mainMod SHIFT, Control_R, exec, ${audioMute}"
-
                     ", XF86AudioMicMute, exec, ${micMute}"
                     ", XF86AudioMute, exec, ${audioMute}"
                     "SHIFT, XF86AudioMute, exec, ${micMute}"
 
-                    ", XF86AudioRaiseVolume, exec, ${audioIncrease}"
-                    ", XF86AudioLowerVolume, exec, ${audioDecrease}"
-
-                    "SHIFT, XF86AudioRaiseVolume, exec, ${micIncrease}"
-                    "SHIFT, XF86AudioLowerVolume, exec, ${micDecrease}"
-
+                    # Don't know if these work
                     ", XF86AudioPlay, exec, ${mediaPlayPause}"
                     ", XF86AudioNext, exec, ${mediaNext}"
                     ", XF86AudioPrev, exec, ${mediaPrev}"
+                ];
+
+                # Repeated while pressed
+                binde = [
+
+                    # Raise/Lower audio
+                    ", XF86AudioRaiseVolume, exec, ${audioIncrease}"
+                    ", XF86AudioLowerVolume, exec, ${audioDecrease}"
+
+                    # Raise/Lower mic audio
+                    "SHIFT, XF86AudioRaiseVolume, exec, ${micIncrease}"
+                    "SHIFT, XF86AudioLowerVolume, exec, ${micDecrease}"
 
                     # Brightness control
                     ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
