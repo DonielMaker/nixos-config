@@ -27,6 +27,8 @@ in
 
             kitty # For crashes
 
+            brightnessctl
+
             nautilus # File explorer
         ];
     };
