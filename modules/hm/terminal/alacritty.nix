@@ -1,14 +1,13 @@
-{ config, lib, ...}:
+{ osConfig, lib, ...}:
 
 let
-    inherit (lib) mkEnableOption mkIf;
-    cfg = config.modules.terminal.alacritty;
+    inherit (lib) mkIf;
 in
 
 {
-    options.modules.terminal.alacritty.enable = mkEnableOption "Enable Alacritty";
 
-    config = mkIf cfg.enable {
+    config = mkIf osConfig.modules.terminal.alacritty.enable {
+
         programs.alacritty.enable = true;
         programs.alacritty.settings = {
             window = {

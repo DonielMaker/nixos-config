@@ -1,45 +1,12 @@
-{ config, lib, pkgs, modules, ... }: 
+{ osConfig, lib, pkgs, ... }: 
 
 let
-    inherit (lib) mkEnableOption mkIf;
-    cfg = config.modules.desktop.hyprland;
+    inherit (lib) mkIf;
 in
 
 {
-    options.modules.desktop.hyprland.enable = mkEnableOption "Enable Hyprland";
+    config =  mkIf osConfig.modules.desktop.hyprland.enable {
 
-    config = let
-
-        terminal = lib.getExe pkgs.alacritty;
-        browser = "${lib.getExe pkgs.brave} --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1";
-        explorer = lib.getExe pkgs.nautilus;
-
-        # Noctalia related
-        ipc = "noctalia-shell ipc call";
-        launcher = "${ipc} launcher toggle";
-        clipboard = "${ipc} plugin:clipper toggle";
-        screenshot-menu = "${ipc} plugin:screen-toolkit toggle";
-        screenshot = "${ipc} plugin:screen-toolkit annotate";
-
-        lock = "${ipc} lockScreen lock";
-
-        micMute = "${ipc} volume muteInput";
-        audioMute = "${ipc} volume muteOutput";
-
-        micIncrease = "${ipc} volume increaseInput";
-        micDecrease = "${ipc} volume decreaseInput";
-
-        audioIncrease = "${ipc} volume increase";
-        audioDecrease = "${ipc} volume decrease";
-
-        mediaPlayPause = "${ipc} media playPause";
-        # Untested
-        mediaPrev = "${ipc} media previous";
-        mediaNext = "${ipc} media next";
-
-    in mkIf cfg.enable 
-
-    {
         # Allows interoperabilty between Applications
         xdg.portal.enable = true;
         xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
@@ -54,10 +21,41 @@ in
 
         wayland.windowManager.hyprland.enable = true;
         wayland.windowManager.hyprland = {
+            # This is temporary and we need to change to lua sometime soon.
             configType = "hyprlang";
             xwayland.enable = true;
 
-            settings = {
+            settings = let
+
+                terminal = lib.getExe pkgs.alacritty;
+                browser = "${lib.getExe pkgs.brave} --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1";
+                explorer = lib.getExe pkgs.nautilus;
+
+                # Noctalia related
+                ipc = "noctalia-shell ipc call";
+                launcher = "${ipc} launcher toggle";
+                clipboard = "${ipc} plugin:clipper toggle";
+                screenshot-menu = "${ipc} plugin:screen-toolkit toggle";
+                screenshot = "${ipc} plugin:screen-toolkit annotate";
+
+                lock = "${ipc} lockScreen lock";
+
+                micMute = "${ipc} volume muteInput";
+                audioMute = "${ipc} volume muteOutput";
+
+                micIncrease = "${ipc} volume increaseInput";
+                micDecrease = "${ipc} volume decreaseInput";
+
+                audioIncrease = "${ipc} volume increase";
+                audioDecrease = "${ipc} volume decrease";
+
+                mediaPlayPause = "${ipc} media playPause";
+                # Untested
+                mediaPrev = "${ipc} media previous";
+                mediaNext = "${ipc} media next";
+
+            in {
+
                 "$mainMod" = "SUPER";
 
                 exec-once = [
@@ -90,7 +88,7 @@ in
                     "match:class ^(xdg-desktop-portal-gtk)$, size monitor_w*0.4 monitor_h*0.4"
                 ];
 
-                inherit (modules.hypr) monitor;
+                inherit (osConfig.modules.desktop.hyprland) monitor;
 
                 ecosystem.no_donation_nag = true;
                 ecosystem.no_update_news = true;
@@ -98,7 +96,7 @@ in
                 cursor.no_hardware_cursors = true;
 
                 input = {
-                    kb_layout = modules.system.keyboard.layout;
+                    kb_layout = osConfig.modules.system.keyboard.layout;
 
                     # Keyboard repeats faster and quicker;
                     repeat_rate = 40;

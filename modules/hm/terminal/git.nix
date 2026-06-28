@@ -1,19 +1,17 @@
-{ config, lib, modules, ...}: 
+{ osConfig, lib, ...}: 
 
 let
-    inherit (lib) mkEnableOption mkIf;
-    cfg = config.modules.terminal.git;
+    inherit (lib) mkIf;
 in
 
 {
-    options.modules.terminal.git.enable = mkEnableOption "Enable git";
 
-    config = mkIf cfg.enable {
+    config = mkIf osConfig.modules.terminal.git.enable {
 
         programs.git.enable = true;
         programs.git.settings = {
-            user.name = modules.system.username;
-            user.email = modules.system.mail;
+            user.name = osConfig.modules.system.username;
+            user.email = osConfig.modules.system.mail;
         };
     };
 }

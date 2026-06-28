@@ -22,20 +22,7 @@ in
         home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = {
-                inherit inputs;
-
-                modules = {
-                    # For some reason evaluation changes when these are placed in their specific module (Maybe due to them no longer being in scope).
-                    system = {
-                        username = config.modules.system.username;
-                        mail = config.modules.system.username;
-                        keyboard.layout = config.modules.system.keyboard.layout;
-                    };
-
-                    hypr = config.modules.desktop.hyprland;
-                };
-            };
+            extraSpecialArgs = { inherit inputs; };
 
             users.${config.modules.system.username}.imports = [ cfg.home ] ++ lib.filesystem.listFilesRecursive "${inputs.self}/modules/hm";
         };

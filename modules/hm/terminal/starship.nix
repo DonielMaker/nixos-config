@@ -1,14 +1,12 @@
-{ config, lib, ...}:
+{ osConfig, lib, ...}:
 
 let
-    inherit (lib) mkEnableOption mkIf;
-    cfg = config.modules.terminal.starship;
+    inherit (lib) mkIf;
 in
 
 {
-    options.modules.terminal.starship.enable = mkEnableOption "Enable Starship";
 
-    config = mkIf cfg.enable {
+    config = mkIf osConfig.modules.terminal.starship.enable {
 
         programs.starship.enable = true;
         programs.starship.settings = {

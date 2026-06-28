@@ -1,14 +1,12 @@
-{ config, lib, ...}:
+{ osConfig, lib, ...}:
 
 let
-    inherit (lib) mkEnableOption mkIf;
-    cfg = config.modules.terminal.zellij;
+    inherit (lib) mkIf;
 in
 
 {
-    options.modules.terminal.zellij.enable = mkEnableOption "Enable Zellij";
 
-    config = mkIf cfg.enable {
+    config = mkIf osConfig.modules.terminal.zellij.enable {
 
         # Config tbi
         programs.zellij.enable = true;

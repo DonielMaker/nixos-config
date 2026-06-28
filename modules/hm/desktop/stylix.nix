@@ -1,19 +1,17 @@
-{ config, lib, modules, ... }: 
+{ config, osConfig, lib, ... }: 
 
 let
-    inherit (lib) mkIf mkEnableOption;
-    cfg = config.modules.desktop.stylix;
+    inherit (lib) mkIf;
 in
 
 {
-    options.modules.desktop.stylix.enable = mkEnableOption "Enable Stylix";
 
-    config = mkIf cfg.enable {
+    config = mkIf osConfig.modules.desktop.stylix.enable {
 
         stylix.enable = true;
         stylix = {
             targets.librewolf.profileNames = lib.mkIf config.programs.librewolf.enable [ 
-                modules.system.username
+                osConfig.modules.system.username
             ];
 
             targets.hyprland.enable = false;

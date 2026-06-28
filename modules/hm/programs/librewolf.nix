@@ -1,19 +1,17 @@
-{ config, lib, pkgs, modules, ...}:
+{ osConfig, lib, pkgs, ...}:
 
 let
-    inherit (lib) mkEnableOption mkIf;
-    cfg = config.modules.programs.librewolf;
+    inherit (lib) mkIf;
 in
 
 {
-    options.modules.programs.librewolf.enable = mkEnableOption "Enable Librewolf";
 
-    config = mkIf cfg.enable {
+    config = mkIf osConfig.modules.programs.librewolf.enable {
 
         programs.librewolf.enable = true;
         programs.librewolf = {
 
-            profiles.${modules.system.username} = {
+            profiles.${osConfig.modules.system.username} = {
                 extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
                     ublock-origin
                     bitwarden

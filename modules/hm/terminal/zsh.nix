@@ -1,14 +1,12 @@
-{ config, lib, ...}: 
+{ config, osConfig, lib, ...}: 
 
 let
-    inherit (lib) mkEnableOption mkIf;
-    cfg = config.modules.terminal.zsh;
+    inherit (lib) mkIf;
 in
 
 {
-    options.modules.terminal.zsh.enable = mkEnableOption "Enable Zsh";
 
-    config = mkIf cfg.enable {
+    config = mkIf osConfig.modules.terminal.zsh.enable {
 
         programs.zsh = {
             enable = true;

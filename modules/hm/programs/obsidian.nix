@@ -1,14 +1,12 @@
-{ config, lib, ... }:
+{ osConfig, lib, ... }:
 
 let
-    inherit (lib) mkIf mkEnableOption;
-    cfg = config.modules.programs.obsidian;
+    inherit (lib) mkIf;
 in
 
 {
-    options.modules.programs.obsidian.enable = mkEnableOption "Enable Obsidian";
 
-    config = mkIf cfg.enable {
+    config = mkIf osConfig.modules.programs.obsidian.enable {
         programs.obsidian.enable = true;
     };
 }
