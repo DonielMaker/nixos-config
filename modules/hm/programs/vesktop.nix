@@ -1,14 +1,12 @@
-{ config, lib, ... }:
+{ osConfig, lib, ... }:
 
 let
-    inherit (lib) mkIf mkEnableOption;
-    cfg = config.modules.programs.vesktop;
+    inherit (lib) mkIf;
 in
 
 {
-    options.modules.programs.vesktop.enable = mkEnableOption "Enable Vesktop";
 
-    config = mkIf cfg.enable {
+    config = mkIf osConfig.modules.programs.vesktop.enable {
 
         programs.vesktop.enable = true;
         programs.vesktop.vencord.useSystem = true;

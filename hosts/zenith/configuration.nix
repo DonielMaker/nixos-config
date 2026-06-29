@@ -20,8 +20,8 @@
                 sha256 = "sha256-+ObY8Jft/Ergnufgcp/cXKV/webd+74yl1XdsCYdMp0=";
             };
 
-            openssh.enable = true;
             networking.enable = true;
+            openssh.enable = true;
         };
 
         hm.enable = true;
@@ -29,37 +29,44 @@
 
         desktop = {
             enable = true;
+            bluetooth.enable = true;
             gigabyte.enable = true;
             sound.enable = true;
-            bluetooth.enable = true;
 
-            stylix.enable = true;
             hyprland.enable = true;
             hyprland.monitor = [
                 "DP-1, 2560x1440@144hz, auto, 1"
                 "DP-2, 1920x1080@180hz, auto-left, 1, transform, 3"
             ];
+            noctalia.enable = true;
+            stylix.enable = true;
         };
 
         programs = {
-            steam.enable = true;
             coolercontrol.enable = true;
-            webdav.enable = true;
+            librewolf.enable = true;
+            obsidian.enable = true;
+            steam.enable = true;
+            vesktop.enable = true;
             virt-manager.enable = true;
+            webdav.enable = true;
         };
 
         terminal = {
+            alacritty.enable = true;
+            git.enable = true;
             neovim.enable = true;
+            starship.enable = true;
+            zellij.enable = true;
             zsh.enable = true;
         };
-
-        server.podman.enable = true;
     };
 
     boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_0;
 
     services.flatpak.enable = true;
 
+    # Overlay VPN
     services.netbird.enable = true;
 
     # Display Manager
@@ -75,7 +82,7 @@
         freecad # CAD Software
         gimp # Image editing
         obs-studio # Video Recording
-        pkgs-stable.orca-slicer # 3D-Printer Slicer
+        pkgs-stable.orca-slicer
         pkgs-stable.kdePackages.kdenlive # Video editing
         zathura # PDF Viewer
 
@@ -89,6 +96,7 @@
         typst # Professional Documents
         wireguard-tools # Wireguard related commands
         restic # Backup tool
+        # bitwarden-desktop
 
         # == Gaming ==
         heroic # Epic Games Launcher
