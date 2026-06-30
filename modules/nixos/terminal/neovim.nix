@@ -14,35 +14,34 @@ in
         programs.neovim.defaultEditor = true;
 
         users.users.${config.modules.system.username}.packages = with pkgs; [
-            # Needed by Treesitter
-            zig
+            zig # Needed by Treesitter
+
             # These are most likely not needed and should be in devenv/devshells
-            rustc
-            cargo
-            nodejs
+            # cargo
             # gnumake
+            # nodejs
             # openssl
             # pkg-config
+            # rustc
 
-            # Needed by certain plugins
-            fzf
+            # == Dependencies == 
             fd
-            ripgrep
+            fzf
             git
+            ripgrep
 
-            # LSPs
-            marksman
-            yaml-language-server
-            lua-language-server
-            rust-analyzer
-            yaml-language-server
-            nixd
-            bash-language-server
-            vscode-langservers-extracted
-            vtsls
-            kdePackages.qtdeclarative
-            just-lsp
-            tinymist
+            # == LSPs ==
+            bash-language-server # Bash, sh
+            just-lsp # Just
+            lua-language-server # Lua
+            marksman # Markdown
+            nixd # Nix
+            rust-analyzer # Rust
+            tinymist # Typst
+            websocat # Required by Typst (Not an LSP)
+            vscode-langservers-extracted # Html, Css, Json
+            vtsls # Js, Ts
+            yaml-language-server # Yaml
         ];
     };
 }
