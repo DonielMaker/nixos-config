@@ -33,6 +33,7 @@
             bluetooth.enable = true;
 
             stylix.enable = true;
+            noctalia.enable = true;
             hyprland.enable = true;
             hyprland.monitor = ", 1920x1080@60hz, auto, 1";
         };
@@ -64,7 +65,7 @@
         gimp # Image editing
         obs-studio # Video Recording
         zathura # PDF Viewer
-        simple-scan
+        simple-scan # Scanning Utility
 
         # == Utils ==
         cryptsetup # Encrypted Drives
