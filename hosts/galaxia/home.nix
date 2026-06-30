@@ -5,6 +5,6 @@
     home = {
         inherit (osConfig.modules.system) username;
         homeDirectory = "/home/${osConfig.modules.system.username}";
-        stateVersion = "24.11";
+        stateVersion = osConfig.system.stateVersion;
     };
 }
