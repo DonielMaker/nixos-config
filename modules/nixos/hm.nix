@@ -2,6 +2,7 @@
 
 let
     inherit (lib) mkEnableOption mkOption mkIf types;
+    inherit (lib.filesystem) listFilesRecursive;
     cfg = config.modules.hm;
 in
 
@@ -24,7 +25,7 @@ in
             useUserPackages = true;
             extraSpecialArgs = { inherit inputs; };
 
-            users.${config.modules.system.username}.imports = [ cfg.home ] ++ lib.filesystem.listFilesRecursive "${inputs.self}/modules/hm";
+            users.${config.modules.system.username}.imports = [ cfg.home ] ++ listFilesRecursive "${inputs.self}/modules/hm";
         };
     };
 }
