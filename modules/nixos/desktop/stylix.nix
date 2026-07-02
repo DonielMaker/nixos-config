@@ -14,7 +14,7 @@ in
 
         stylix.enable = true;
         stylix = {
-            base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
+            base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-storm.yaml";
 
             polarity = "dark";
 
