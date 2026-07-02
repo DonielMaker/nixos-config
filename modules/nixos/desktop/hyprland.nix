@@ -19,7 +19,7 @@ in
         programs.hyprland.enable = true;
 
         programs.nautilus-open-any-terminal.enable = true;
-        programs.nautilus-open-any-terminal.terminal = "alacritty";
+        programs.nautilus-open-any-terminal.terminal = "ghostty";
 
         services.gvfs.enable = true;
 
