@@ -12,12 +12,9 @@ in
 
         programs.zsh.enable = true;
         # Start fastfetch when Terminal opens (Kinda like a dashboard)
-        programs.zsh.promptInit = "fastfetch";
-        environment.pathsToLink = [ "/share/zsh" ];
+        # programs.zsh.promptInit = "fastfetch";
         # Enable zsh-vi-mode
-        programs.zsh.interactiveShellInit = ''
-            source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-        '';
+        programs.zsh.interactiveShellInit = '' source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh '';
 
         environment.systemPackages = with pkgs; [
             eza # Better ls
