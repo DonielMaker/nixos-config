@@ -27,7 +27,7 @@ in
 
             settings = let
 
-                terminal = lib.getExe pkgs.ghostty;
+                terminal = lib.getExe pkgs.alacritty;
                 browser = "${lib.getExe pkgs.brave} --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1";
                 explorer = lib.getExe pkgs.nautilus;
 
