@@ -44,7 +44,7 @@
         };
 
         terminal = {
-            alacritty.enable = true;
+            ghostty.enable = true;
             git.enable = true;
             neovim.enable = true;
             starship.enable = true;
