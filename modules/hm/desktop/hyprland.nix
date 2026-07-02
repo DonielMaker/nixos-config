@@ -27,7 +27,7 @@ in
 
             settings = let
 
-                terminal = lib.getExe pkgs.alacritty;
+                terminal = lib.getExe pkgs.ghostty;
                 browser = "${lib.getExe pkgs.brave} --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1";
                 explorer = lib.getExe pkgs.nautilus;
 
@@ -117,7 +117,8 @@ in
 
                 general = {
                     # Gaps between windows
-                    gaps_in = 5;
+                    # gaps_in = 5;
+                    gaps_in = 0;
                     # Gaps on top, right, bottom, left
                     gaps_out = "10, 10, 10, 10";
                     # No border
@@ -127,7 +128,7 @@ in
                 };
 
                 decoration = {
-                    rounding = 10;
+                    # rounding = 10;
 
                     shadow = {
                         enabled = true;

@@ -26,13 +26,12 @@ in
             settingsVersion = 59;
 
             general = {
-                radiusRatio = 0.5;
+                radiusRatio = 0.0;
+                # radiusRatio = 0.5;
                 iRadiusRatio = 0.7;
-                # This might be problematic
-                avatarImage = "/home/${config.home.username}/webdav/pictures/Matt.jpg";
+                avatarImage = "/home/${config.home.username}/.config/wallpapers/Matt.jpg";
             };
 
-            # This might be problematic
             wallpaper.directory = "/home/${config.home.username}/.config/wallpapers";
 
             location = {
@@ -76,7 +75,8 @@ in
             # };
 
             bar = {
-                barType = "floating";
+                barType = "simple";
+                # barType = "floating";
                 showCapsule = false;
 
                 widgets = {
