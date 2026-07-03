@@ -128,7 +128,7 @@ in
                 };
 
                 decoration = {
-                    # rounding = 10;
+                    rounding = 2;
 
                     shadow = {
                         enabled = true;

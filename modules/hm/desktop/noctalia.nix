@@ -26,8 +26,7 @@ in
             settingsVersion = 59;
 
             general = {
-                radiusRatio = 0.0;
-                # radiusRatio = 0.5;
+                radiusRatio = 0.2;
                 iRadiusRatio = 0.7;
                 avatarImage = "/home/${config.home.username}/.config/wallpapers/Matt.jpg";
             };
