@@ -115,6 +115,8 @@ in
 
                 dwindle.preserve_split = true; # you probably want this
 
+                scrolling.column_width = 1;
+
                 general = {
                     # Gaps between windows
                     # gaps_in = 5;
