@@ -11,14 +11,18 @@ in
     config = mkIf osConfig.modules.desktop.noctalia.enable {
 
         home.packages = with pkgs; [
-            grim
-            slurp
-            zbar
-            satty
-            tesseract
-            jq
-            wl-screenrec
+            curl
+            ffmpeg
             gifski
+            grim
+            imagemagick
+            jq
+            satty
+            slurp
+            tesseract
+            wl-clipboard
+            wl-screenrec
+            zbar
         ];
 
         programs.noctalia-shell.enable = true;
