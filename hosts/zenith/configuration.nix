@@ -100,7 +100,6 @@
         typst # Professional Documents
         wireguard-tools # Wireguard related commands
         restic # Backup tool
-        # bitwarden-desktop
 
         # == Gaming ==
         heroic # Epic Games Launcher
