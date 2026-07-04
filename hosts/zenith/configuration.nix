@@ -74,6 +74,11 @@
     # Gpu Overclocking
     services.lact.enable = true;
 
+    services.ollama.enable = true;
+    services.ollama = {
+        package = pkgs.ollama-rocm;
+    };
+
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 
