@@ -42,7 +42,11 @@
         system = "x86_64-linux";
 
         # These might be better stated in an nixos modules (nixpkgs.config || nixpkgs.overlays)?
-        pkgs = import inputs.nixpkgs { inherit system overlays; config.allowUnfree = true; };
+        pkgs = import inputs.nixpkgs { 
+            inherit system overlays;
+            config.allowUnfree = true;
+            config.permittedInsecurePackages = [ "pnpm-10.29.2" ];
+        };
         pkgs-stable = import inputs.nixpkgs-stable {inherit system overlays; config.allowUnfree = true;};
         overlays = with inputs; [
             neovim-nightly-overlay.overlays.default
