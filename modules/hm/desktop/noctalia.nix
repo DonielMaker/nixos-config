@@ -37,11 +37,6 @@ in
 
             wallpaper.directory = "/home/${config.home.username}/.config/wallpapers";
 
-            location = {
-                name = "Bremen";
-                autoLocate = false;
-            };
-
             idle = {
                 enabled = true;
                 lockTimeout = 180;
@@ -58,24 +53,12 @@ in
                 showCategories = false;
             };
 
-            # Does this even work?
-            # plugins = {
-            #     version = 2;
-            #     sources = [
-            #         {
-            #             enabled = true;
-            #             name = "Official Noctalia Plugins";
-            #             url = "https://github.com/noctalia-dev/noctalia-plugins";
-            #         }
-            #     ];
-            #
-            #     states = {
-            #         screen-toolkit = {
-            #             enabled = true;
-            #             sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-            #         };
-            #     };
-            # };
+            # Make sure to download this (Can this be created declaratively?)
+            colorSchemes.predefinedScheme = "Tokyo Night Storm";
+            templates.activeTemplates = [
+                # Create kcolorscheme (Since stylix doesn't?)
+                { enabled = true; id = "kcolorscheme"; }
+            ];
 
             bar = {
                 barType = "simple";
