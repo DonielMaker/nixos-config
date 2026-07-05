@@ -27,6 +27,7 @@
             navidrome.enable = true;
             paperless.enable = true;
             sftpgo.enable = true;
+            grocy.enable = true;
         };
     };
 

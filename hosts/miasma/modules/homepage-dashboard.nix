@@ -114,8 +114,8 @@ in
                             "Grocy" = {
                                 description = "ERP for your Kitchen";
                                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grocy.svg";
-                                href = "";
-                                siteMonitor = "";
+                                href = "https://grocy.thematt.net";
+                                siteMonitor = "http://lastprism.thematt.net:9283";
                             };
                         }
                     ];
