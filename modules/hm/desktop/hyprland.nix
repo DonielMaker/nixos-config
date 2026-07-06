@@ -34,7 +34,7 @@ in
                 # Noctalia related
                 ipc = "noctalia-shell ipc call";
                 launcher = "${ipc} launcher toggle";
-                clipboard = "${ipc} plugin:clipper toggle";
+                clipboard = "${ipc} launcher clipboard";
                 screenshot-menu = "${ipc} plugin:screen-toolkit toggle";
                 screenshot = "${ipc} plugin:screen-toolkit annotate";
 
