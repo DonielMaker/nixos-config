@@ -87,7 +87,7 @@
         gimp # Image editing
         obs-studio # Video Recording
         pkgs-stable.orca-slicer
-        pkgs-stable.kdePackages.kdenlive # Video editing
+        kdePackages.kdenlive # Video editing
         zathura # PDF Viewer
 
         element-desktop # Matrix client
