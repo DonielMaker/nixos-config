@@ -13,9 +13,13 @@ in
 
         # Bind9: DNS Server
         services.bind.enable = true;
-        services.bind.zones.${config.modules.server.domain} = {
-            master = true;
-            file = pkgs.writeText "${config.modules.server.domain}.zone" ''
+        services.bind = {
+            cacheNetworks = [ "127.0.0.0/24" "::1/128" "10.0.0.0/8" ];
+            zones.${config.modules.server.domain} = {
+                allowQuery = [ "127.0.0.0/24" "::1/128" "10.0.0.0/8" ];
+                master = true;
+                file = pkgs.writeText "${config.modules.server.domain}.zone" 
+''
 $TTL 2d    ; default TTL for zone
 
 $ORIGIN ${config.modules.server.domain}.
@@ -54,6 +58,7 @@ gameserver          IN      A       10.10.12.102
 
 mail                IN      CNAME   eu1.workspace.org.
 '';
+            };
         };
     };
 }
