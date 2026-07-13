@@ -35,6 +35,7 @@ in
                 ipc = "noctalia-shell ipc call";
                 launcher = "${ipc} launcher toggle";
                 clipboard = "${ipc} launcher clipboard";
+                clipboard-wipe = "cliphist wipe";
                 screenshot-menu = "${ipc} plugin:screen-toolkit toggle";
                 screenshot = "${ipc} plugin:screen-toolkit annotate";
 
@@ -173,6 +174,7 @@ in
 
                     # Clipboard
                     "$mainMod, V, exec, ${clipboard}"
+                    "$mainMod SHIFT, V, exec, ${clipboard-wipe}"
 
                     # Screenshot
                     "$mainMod, S, exec, ${screenshot-menu}" 
@@ -200,10 +202,10 @@ in
                     "$mainMod SHIFT, l, swapwindow, r"
 
                     # Window resizing                     X  Y
-                    "$mainMod CTRL, h, resizeactive, -60 0"
-                    "$mainMod CTRL, j, resizeactive,  0  60"
-                    "$mainMod CTRL, k, resizeactive,  0 -60"
-                    "$mainMod CTRL, l, resizeactive,  60 0"
+                    # "$mainMod CTRL, h, resizeactive, -60 0"
+                    # "$mainMod CTRL, j, resizeactive,  0  60"
+                    # "$mainMod CTRL, k, resizeactive,  0 -60"
+                    # "$mainMod CTRL, l, resizeactive,  60 0"
 
                     # Switch workspaces with mainMod + [0-9]
                     "$mainMod, 1, workspace, 1"
