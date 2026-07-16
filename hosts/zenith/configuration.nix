@@ -83,7 +83,6 @@
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         # == Programs ==
-        freecad # CAD Software
         gimp # Image editing
         obs-studio # Video Recording
         pkgs-stable.orca-slicer
