@@ -11,8 +11,6 @@ in
     config = mkIf cfg.enable {
 
         programs.zsh.enable = true;
-        # Start fastfetch when Terminal opens (Kinda like a dashboard)
-        # programs.zsh.promptInit = "fastfetch";
         # Enable zsh-vi-mode
         programs.zsh.interactiveShellInit = '' source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh '';
 
