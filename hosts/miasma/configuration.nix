@@ -16,6 +16,8 @@
 
             openssh.enable = true;
             networking.enable = true;
+
+            gc.enable = true;
         };
 
         server = {
