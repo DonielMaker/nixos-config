@@ -85,7 +85,7 @@
         # == Programs ==
         gimp # Image editing
         obs-studio # Video Recording
-        pkgs-stable.orca-slicer
+        orca-slicer
         kdePackages.kdenlive # Video editing
         zathura # PDF Viewer
 

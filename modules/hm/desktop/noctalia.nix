@@ -32,7 +32,7 @@ in
             general = {
                 radiusRatio = 0.2;
                 iRadiusRatio = 0.7;
-                avatarImage = "/home/${config.home.username}/.config/wallpapers/Matt.jpg";
+                avatarImage = "/home/${config.home.username}/.config/wallpapers/Matt.png";
             };
 
             wallpaper.directory = "/home/${config.home.username}/.config/wallpapers";

@@ -19,17 +19,16 @@ in
         programs.hyprland.enable = true;
 
         programs.nautilus-open-any-terminal.enable = true;
-        programs.nautilus-open-any-terminal.terminal = "ghostty";
+        programs.nautilus-open-any-terminal.terminal = "alacritty";
 
         services.gvfs.enable = true;
 
         environment.systemPackages = with pkgs; [
 
             kitty # For crashes
+            nautilus # File explorer
 
             brightnessctl
-
-            nautilus # File explorer
         ];
     };
 }

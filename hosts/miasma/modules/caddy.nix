@@ -15,7 +15,7 @@ in
         # Caddy: Simple but featureful Reverse Proxy
         services.caddy.enable = true;
         services.caddy.extraConfig = ''
-            *.${domain}, *.lastprism.${domain} {
+            *.${domain} {
                 tls /var/lib/acme/${domain}/cert.pem /var/lib/acme/${domain}/key.pem {
                     protocols tls1.3
                 }

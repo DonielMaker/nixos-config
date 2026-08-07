@@ -44,7 +44,7 @@ in
                             };
                         }
                         {
-                            "Lastprism" = {
+                            "Apathanull" = {
                                 description = "The Proxmox Lastprism Server";
                                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/proxmox.svg";
                                 href = "https://proxmox.${config.modules.server.domain}";
