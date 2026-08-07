@@ -26,6 +26,7 @@
             qemuGuest.enable = true;
 
             homebox.enable = true;
+            beszel-hub.enable = true;
             navidrome.enable = true;
             paperless.enable = true;
             sftpgo.enable = true;
