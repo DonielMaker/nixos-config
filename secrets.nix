@@ -30,6 +30,10 @@ in
     # SFTPGo
     "${lastprism.path}/sftpgo-clientSecret.age".publicKeys = donielmaker ++ lastprism.key;
 
+    # Beszel Secrets
+    "${lastprism.path}/beszel/key.age".publicKeys = donielmaker ++ lastprism.key;
+    "${lastprism.path}/beszel/token.age".publicKeys = donielmaker ++ lastprism.key;
+
     # === Miasma ===
 
     # Authelia
@@ -44,4 +48,7 @@ in
     # Vaultwarden
     "${miasma.path}/vaultwarden-env.age".publicKeys = donielmaker ++ miasma.key;
 
+    # Beszel Secrets
+    "${miasma.path}/beszel/key.age".publicKeys = donielmaker ++ miasma.key;
+    "${miasma.path}/beszel/token.age".publicKeys = donielmaker ++ miasma.key;
 }

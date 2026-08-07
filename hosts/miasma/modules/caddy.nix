@@ -70,6 +70,11 @@ in
                     reverse_proxy lastprism.${domain}:9837
                 }
 
+                @beszel host beszel.${domain} 
+                handle @beszel {
+                    reverse_proxy lastprism.${domain}:8090
+                }
+
                 @home-assistant host home-assistant.${domain} 
                 handle @home-assistant {
                     reverse_proxy http://10.10.12.101:8123 {

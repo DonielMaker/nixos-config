@@ -40,6 +40,10 @@
             mode = "440";
         };
 
+        beszel = {
+            mode = "440";
+            owner = "beszel-agent";
+        };
     in 
 
     {
@@ -51,6 +55,29 @@
         sftpgo-clientSecret = {
             inherit (sftpgo) owner group mode;
             file = ./secrets/sftpgo-clientSecret.age;
+        };
+
+        beszel-key = {
+            inherit (beszel) mode owner;
+            file = ./secrets/beszel/key.age;
+        };
+
+        beszel-token = {
+            inherit (beszel) mode owner;
+            file = ./secrets/beszel/token.age;
+        };
+    };
+
+    services.beszel.agent.enable = true;
+    services.beszel.agent = {
+        openFirewall = true;
+        smartmon.enable = true;
+        environment = {
+            FILESYSTEM = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
+            EXTRA_FILESYSTEMS = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1";
+            HUB_URL = "https://beszel.thematt.net";
+            KEY_FILE = config.age.secrets.beszel-key.path;
+            TOKEN_FILE = config.age.secrets.beszel-token.path;
         };
     };
 
