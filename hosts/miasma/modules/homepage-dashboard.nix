@@ -110,14 +110,6 @@ in
                                 siteMonitor = "http://10.10.12.101:8123";
                             };
                         }
-                        {
-                            "Grocy" = {
-                                description = "ERP for your Kitchen";
-                                icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grocy.svg";
-                                href = "https://grocy.thematt.net";
-                                siteMonitor = "http://lastprism.thematt.net:9283";
-                            };
-                        }
                     ];
                 }
             ];

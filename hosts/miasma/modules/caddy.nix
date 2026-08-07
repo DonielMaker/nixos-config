@@ -50,11 +50,6 @@ in
                     reverse_proxy lastprism.${domain}:7745
                 }
 
-                @grocy host grocy.${domain}
-                handle @grocy {
-                    reverse_proxy lastprism.${domain}:9283
-                }
-
                 @navidrome host navidrome.${domain} 
                 handle @navidrome {
                     reverse_proxy lastprism.${domain}:4533
