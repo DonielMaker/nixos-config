@@ -30,6 +30,11 @@ in
                     reverse_proxy miasma.${domain}:5902
                 }
 
+                @technitium host technitium.${domain}
+                handle @technitium {
+                    reverse_proxy miasma.${domain}:5380
+                }
+
                 @homepage host homepage.${domain}
                 handle @homepage {
                     forward_auth miasma.${domain}:9091 {

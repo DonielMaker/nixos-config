@@ -52,6 +52,14 @@ in
                             };
                         }
                         {
+                            "Technitium" = {
+                                description = "DNS/DHCP Server";
+                                icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/technitium.svg";
+                                href = "https://technitium.${config.modules.server.domain}";
+                                siteMonitor = "http://miasma.${config.modules.server.domain}:5380";
+                            };
+                        }
+                        {
                             "Fritz!Box" = {
                                 description = "Fritz Box Router";
                                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/fritz.svg";

@@ -24,7 +24,6 @@
             qemuGuest.enable = true;
 
             authelia.enable = true;
-            bind.enable = true;
             caddy.enable = true;
             homepage-dashboard.enable = true;
             vaultwarden.enable = true;
@@ -64,6 +63,8 @@
         vaultwardenEnv.file = ./secrets/vaultwarden-env.age;
 
         cloudflare-dnsApiToken.file = ./secrets/cloudflare-dnsApiToken.age;
+    services.technitium-dns-server.enable = true;
+    services.technitium-dns-server.openFirewall = true;
     };
 
     system.stateVersion = "25.05"; # Just don't
