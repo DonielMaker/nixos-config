@@ -42,3 +42,5 @@ install CONFIG:
         run github:nix-community/disko/latest -- \
         --mode destroy,format,mount "./hosts/{{ replace(CONFIG, ".#", "")}}/disko.nix"
 
+gen-auth:
+    nix run nixpkgs#authelia -- crypto hash generate argon2 --random --random.length 64 --random.charset alphanumeric
