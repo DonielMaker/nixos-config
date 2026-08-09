@@ -23,7 +23,6 @@ in
             imagemagick # Image Toolkit
             jq # Json Processor
             mpv # Media Player
-            satty # Annotation Util
             slurp # Selection Util
             tesseract # OCR Engine
             translate-shell # CLI Translator
@@ -31,6 +30,8 @@ in
             wl-screenrec # Wayland Screen Recording
             zbar # Barcode Reader
         ];
+
+        programs.satty.enable = true;
 
         programs.noctalia.enable = true;
         programs.noctalia.settings = {
@@ -56,7 +57,6 @@ in
                 widget_spacing = 10; # Spacing between Widgets
                 margin_ends = 0; # Spacing between Bar and Monitor Edge
                 radius = 0; # Radius of Bar
-                layer = "overlay"; # Above Fullscreen
 
                 font_family = "CommitMono Nerd Font";
             };
