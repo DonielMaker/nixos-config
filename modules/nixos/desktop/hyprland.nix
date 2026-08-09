@@ -1,18 +1,12 @@
 { config, lib, pkgs, ... }: 
 
 let
-    inherit (lib) mkEnableOption mkOption mkIf types;
+    inherit (lib) mkEnableOption mkIf;
     cfg = config.modules.desktop.hyprland;
 in
 
 {
     options.modules.desktop.hyprland.enable = mkEnableOption "Enable Hyprland";
-
-    options.modules.desktop.hyprland.monitor = mkOption {
-            default = ", prefferred, auto, 1";
-            type = types.either types.str (types.listOf types.str);
-            description = "Monitor(s) used in Hyprland";
-    };
 
     config = mkIf cfg.enable {
 
@@ -27,8 +21,17 @@ in
 
             kitty # For crashes
             nautilus # File explorer
-
-            brightnessctl
         ];
+
+        # Allows interoperabilty between Applications
+        xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+        # This is only for the FileChooser from gtk which hyprland-portal does not have
+        xdg.portal.config = {
+            common = {
+                default = [ "hyprland" ];
+                "org.freedesktop.impl.FileChooser" = "gtk";
+            };
+        };
     };
 }

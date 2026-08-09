@@ -7,266 +7,260 @@ in
 {
     config =  mkIf osConfig.modules.desktop.hyprland.enable {
 
-        # Allows interoperabilty between Applications
-        xdg.portal.enable = true;
-        xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
-        # This is only for the FileChooser from gtk which hyprland-portal does not have
-        xdg.portal.config = {
-            common = {
-                default = [ "hyprland" ];
-                "org.freedesktop.impl.FileChooser" = "gtk";
-            };
-        };
-
         wayland.windowManager.hyprland.enable = true;
-        wayland.windowManager.hyprland = {
-            # This is temporary and we need to change to lua sometime soon.
-            configType = "hyprlang";
-            xwayland.enable = true;
+        wayland.windowManager.hyprland.configType = "lua";
+        wayland.windowManager.hyprland.extraConfig = let
 
-            settings = let
+            terminal = lib.getExe pkgs.alacritty;
+            browser = "${lib.getExe pkgs.brave} --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1";
+            explorer = lib.getExe pkgs.nautilus;
 
-                terminal = lib.getExe pkgs.alacritty;
-                browser = "${lib.getExe pkgs.brave} --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1";
-                explorer = lib.getExe pkgs.nautilus;
+            # Noctalia related
+            ipc = "noctalia msg";
+            launcher = "${ipc} panel-open launcher";
+            clipboard = "${ipc} panel-open clipboard";
+            clipboard-wipe = "cliphist wipe";
+            screenshot-menu = "${ipc} plugin alexander/screen-toolkit:service all toggle";
+            screenshot = "${ipc} plugin alexander/screen-toolkit:service all annotate";
 
-                # Noctalia related
-                ipc = "noctalia-shell ipc call";
-                launcher = "${ipc} launcher toggle";
-                clipboard = "${ipc} launcher clipboard";
-                clipboard-wipe = "cliphist wipe";
-                screenshot-menu = "${ipc} plugin:screen-toolkit toggle";
-                screenshot = "${ipc} plugin:screen-toolkit annotate";
+            lock = "${ipc} session lock";
 
-                lock = "${ipc} lockScreen lock";
+            micMute = "${ipc} mic-mute";
+            audioMute = "${ipc} volume-mute";
 
-                micMute = "${ipc} volume muteInput";
-                audioMute = "${ipc} volume muteOutput";
+            micIncrease = "${ipc} mic-volume-up 5";
+            micDecrease = "${ipc} mic-volume-down 5";
 
-                micIncrease = "${ipc} volume increaseInput";
-                micDecrease = "${ipc} volume decreaseInput";
+            audioIncrease = "${ipc} volume-up 5";
+            audioDecrease = "${ipc} volume-down 5";
 
-                audioIncrease = "${ipc} volume increase";
-                audioDecrease = "${ipc} volume decrease";
+            mediaPlayPause = "${ipc} media toggle";
+            mediaPrev = "${ipc} media previous";
+            mediaNext = "${ipc} media next";
 
-                mediaPlayPause = "${ipc} media playPause";
-                # Untested
-                mediaPrev = "${ipc} media previous";
-                mediaNext = "${ipc} media next";
+        in 
 
-            in {
+        ''
+            -- === Startups ===
+            hl.on("hyprland.start", function ()
+                hl.exec_cmd("wl-paste --type text --watch cliphist store")
+                hl.exec_cmd("wl-paste --type image --watch cliphist store")
+                hl.exec_cmd("noctalia")
+            end)
 
-                "$mainMod" = "SUPER";
+            -- === Window Rules ===
+            hl.window_rule({
+                name = "Float Picture in Picture in the bottom right",
+                match = { title = "^([Pp]icture[ -]in[ -][Pp]icture)$"},
+                float = true,
+                pin = true,
+                size = {"monitor_w * 0.4", "monitor_h * 0.4"},
+                move = {"monitor_w * 0.59", "monitor_h * 0.58"},
+            })
 
-                exec-once = [
-                    "wl-paste --type text --watch cliphist store"
-                    "wl-paste --type image --watch cliphist store"
-                    "noctalia-shell"
-                ];
+            hl.window_rule({
+                name = "Float Brave Extensions in the bottom left",
+                match = { class = "^(brave-[a-z]+-Default)$"},
+                float = true,
+                pin = true,
+                size = {"monitor_w * 0.3", "monitor_h * 0.5"},
+                move = {"monitor_w * 0.01", "monitor_h * 0.48"},
+            })
 
-                env = [
-                    "XDG_CURRENT_DESKTOP,Hyprland"
-                    "XDG_SESSION_TYPE,wayland"
-                    "XDG_SESSION_DESKTOP,Hyprland"
-                    "QT_QPA_PLATFORM,wayland"
-                    "QT_QPA_PLATFORMTHEME,qt6ct"
-                ];
+            hl.window_rule({
+                name = "Float gtk portal (File Chooser) in the middle",
+                match = { class = "^(xdg-desktop-portal-gtk)$"},
+                float = true,
+                center = true,
+                size = {"monitor_w * 0.4", "monitor_h * 0.4"},
+            })
 
-                windowrule = [
-                    # Float Pip (Picture in Picture) in the bottom right
-                    "match:title ^([Pp]icture[ -]in[ -][Pp]icture)$, float on, pin on"
-                    "match:title ^([Pp]icture[ -]in[ -][Pp]icture)$, size monitor_w*0.4 monitor_h*0.4"
-                    "match:title ^([Pp]icture[ -]in[ -][Pp]icture)$, move monitor_w*0.59 monitor_h*0.58"
+            hl.window_rule({
+                name = "Float Satty in the middle",
+                match = { class = "^(com.gabm.satty)$"},
+                float = true,
+                center = true,
+                size = {"monitor_w * 0.4", "monitor_h * 0.4"},
+            })
 
-                    # Float Brave Extensions in the bottom left
-                    "match:class ^(brave-[a-z]+-Default)$, float on, pin on"
-                    "match:class ^(brave-[a-z]+-Default)$, size monitor_w*0.3 monitor_h*0.5"
-                    "match:class ^(brave-[a-z]+-Default)$, move monitor_w*0.01 monitor_h*0.48"
+            hl.window_rule({
+                name = "Float XDG-Desktop-Portal in the middle",
+                match = { title = "^(Select what to share)$"},
+                float = true,
+                center = true,
+                size = {"monitor_w * 0.4", "monitor_h * 0.4"},
+            })
 
-                    # Float gtk portal (File Chooser) in the middle
-                    "match:class ^(xdg-desktop-portal-gtk)$, float on, center on"
-                    "match:class ^(xdg-desktop-portal-gtk)$, size monitor_w*0.4 monitor_h*0.4"
-                ];
+            -- === General ===
+            hl.config({
 
-                inherit (osConfig.modules.desktop.hyprland) monitor;
+                ecosystem = {
+                    no_donation_nag = true,
+                    no_update_news = true,
+                },
 
-                ecosystem.no_donation_nag = true;
-                ecosystem.no_update_news = true;
-
-                cursor.no_hardware_cursors = true;
+                cursor = {
+                    no_hardware_cursors = 1,
+                },
 
                 input = {
-                    kb_layout = osConfig.modules.system.keyboard.layout;
+                    kb_layout = "${osConfig.modules.system.keyboard.layout}",
 
-                    # Keyboard repeats faster and quicker;
-                    repeat_rate = 40;
-                    repeat_delay = 300;
+                    -- Keyboard repeats faster and quicker
+                    repeat_rate = 40,
+                    repeat_delay = 300,
 
-                    # Window focus follows Mouse
-                    follow_mouse = 1;
+                    -- Window focus follows Mouse
+                    follow_mouse = 1,
 
                     touchpad = {
-                        natural_scroll = true;
-                        scroll_factor = 0.25;
-                    };
+                        natural_scroll = true,
+                        scroll_factor = 0.25,
+                    },
+                },
 
-                    sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
-                };
+                scrolling = {
+                    column_width = 1,
+                },
 
-                dwindle.preserve_split = true; # you probably want this
-
-                scrolling.column_width = 1;
+                dwindle = {
+                    preserve_split = true, -- you probably want this
+                },
 
                 general = {
-                    # Gaps between windows
-                    # gaps_in = 5;
-                    gaps_in = 0;
-                    # Gaps on top, right, bottom, left
-                    gaps_out = "10, 10, 10, 10";
-                    # No border
-                    border_size = 0;
+                    -- Gaps between windows
+                    gaps_in = 0,
 
-                    layout = "dwindle";
-                };
+                    -- Gaps on top, right, bottom, left
+                    gaps_out = 10,
+
+                    -- No border
+                    border_size = 0,
+
+                    layout = "dwindle",
+                },
 
                 decoration = {
-                    rounding = 2;
+                    rounding = 2,
 
                     shadow = {
-                        enabled = true;
-                        range = 4;
-                        render_power = 3;
-                        color = "rgba(1a1a1aee)";
-                    };
-                };
-
-
-                animations = {
-                    enabled = true;
-
-                    bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-
-                    animation = [
-                        "windows,     1, 7,  myBezier"
-                        "windowsOut,  1, 7,  default, popin 80%"
-                        "border,      1, 10, default"
-                        "borderangle, 1, 8,  default"
-                        "fade,        1, 7,  default"
-                        "workspaces,  1, 6,  default"
-                    ];
-                };
+                        enabled = true,
+                        range = 4,
+                        render_power = 3,
+                        color = "rgba(1a1a1aee)",
+                    },
+                },
 
                 misc = {
-                    animate_manual_resizes = true;
-                    animate_mouse_windowdragging = true;
-                    enable_swallow = true;
-                    # render_ahead_of_time = false;
-                    disable_hyprland_logo = true;
-                };
+                    animate_manual_resizes = true,
+                    animate_mouse_windowdragging = true,
+                    enable_swallow = true,
+                    disable_hyprland_logo = true,
+                },
+            })
 
-                bind = [
-                    "$mainMod, Return, exec, ${terminal}"
-                    "$mainMod, E, exec, ${explorer}"
-                    "$mainMod, B, exec, ${browser}"
-                    "$mainMod, space, exec, ${launcher}"
-                    "$mainMod, N, exec, ${lock}"
+            -- === Animations ===
+            hl.curve("myBezier", { type = "bezier", points = { {0.05, 0.9}, {0.1, 1.05} } })
 
-                    # Clipboard
-                    "$mainMod, V, exec, ${clipboard}"
-                    "$mainMod SHIFT, V, exec, ${clipboard-wipe}"
+            hl.animation({ leaf = "windows", enabled = true, speed = 7, bezier = "myBezier" })
+            hl.animation({ leaf = "windowsOut", enabled = true, speed = 7, bezier = "default", style = "popin 80%" })
+            hl.animation({ leaf = "border", enabled = true, speed = 10, bezier = "default" })
+            hl.animation({ leaf = "borderangle", enabled = true, speed = 8, bezier = "default" })
+            hl.animation({ leaf = "fade", enabled = true, speed = 7, bezier = "default" })
+            hl.animation({ leaf = "workspaces", enabled = true, speed = 6, bezier = "default" })
 
-                    # Screenshot
-                    "$mainMod, S, exec, ${screenshot-menu}" 
-                    "$mainMod SHIFT, S, exec, ${screenshot}" 
+            -- === Binds ===
+            -- General
+            hl.bind("SUPER + Return", hl.dsp.exec_cmd("${terminal}"))
+            hl.bind("SUPER + E", hl.dsp.exec_cmd("${explorer}"))
+            hl.bind("SUPER + B", hl.dsp.exec_cmd("${browser}"))
+            hl.bind("SUPER + space", hl.dsp.exec_cmd("${launcher}"))
+            hl.bind("SUPER + N", hl.dsp.exec_cmd("${lock}"))
 
-                    # Close current application
-                    "$mainMod, Q, killactive,"
-                    # Exit Hyprland
-                    "$mainMod SHIFT, M, exit,"
+            -- Clipboard
+            hl.bind("SUPER + V", hl.dsp.exec_cmd("${clipboard}"))
+            hl.bind("SUPER + SHIFT + V", hl.dsp.exec_cmd("${clipboard-wipe}"))
 
-                    "$mainMod, F, togglefloating,"
-                    "$mainMod, P, pin,"
-                    "$mainMod, G, fullscreenstate, 2 0"
+            -- Screenshot
+            hl.bind("SUPER + S", hl.dsp.exec_cmd("${screenshot-menu}"))
+            hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("${screenshot}"))
 
-                    # Move focus with mainMod + arrow keys
-                    "$mainMod, h, movefocus, l"
-                    "$mainMod, j, movefocus, d"
-                    "$mainMod, k, movefocus, u"
-                    "$mainMod, l, movefocus, r"
+            -- Close current application
+            hl.bind("SUPER + Q", hl.dsp.window.close())
 
-                    # Moving windows
-                    "$mainMod SHIFT, h, swapwindow, l"
-                    "$mainMod SHIFT, j, swapwindow, d"
-                    "$mainMod SHIFT, k, swapwindow, u"
-                    "$mainMod SHIFT, l, swapwindow, r"
+            -- Exit Hyprland
+            hl.bind("SUPER + SHIFT + M", hl.dsp.exit())
 
-                    # Window resizing                     X  Y
-                    # "$mainMod CTRL, h, resizeactive, -60 0"
-                    # "$mainMod CTRL, j, resizeactive,  0  60"
-                    # "$mainMod CTRL, k, resizeactive,  0 -60"
-                    # "$mainMod CTRL, l, resizeactive,  60 0"
+            hl.bind("SUPER + F", hl.dsp.window.float({ action = "toggle" })) -- Float window
+            hl.bind("SUPER + P", hl.dsp.window.pin({ action = "toggle" })) -- Pin window
+            hl.bind("SUPER + G", hl.dsp.window.fullscreen_state({ internal = 2, client = 0, action = "toggle" })) -- Fullscreen window without telling the application
 
-                    # Switch workspaces with mainMod + [0-9]
-                    "$mainMod, 1, workspace, 1"
-                    "$mainMod, 2, workspace, 2"
-                    "$mainMod, 3, workspace, 3"
-                    "$mainMod, 4, workspace, 4"
-                    "$mainMod, 5, workspace, 5"
-                    "$mainMod, 6, workspace, 6"
-                    "$mainMod, 7, workspace, 7"
-                    "$mainMod, 8, workspace, 8"
-                    "$mainMod, 9, workspace, 9"
-                    "$mainMod, 0, workspace, 10"
+            -- Move focus with SUPER + hjkl
+            hl.bind("SUPER + h", hl.dsp.focus({ direction = "l"}))
+            hl.bind("SUPER + j", hl.dsp.focus({ direction = "d"}))
+            hl.bind("SUPER + k", hl.dsp.focus({ direction = "u"}))
+            hl.bind("SUPER + l", hl.dsp.focus({ direction = "r"}))
 
-                    # Move active window to a workspace with mainMod + SHIFT + [0-9]
-                    "$mainMod SHIFT, 1, movetoworkspacesilent, 1"
-                    "$mainMod SHIFT, 2, movetoworkspacesilent, 2"
-                    "$mainMod SHIFT, 3, movetoworkspacesilent, 3"
-                    "$mainMod SHIFT, 4, movetoworkspacesilent, 4"
-                    "$mainMod SHIFT, 5, movetoworkspacesilent, 5"
-                    "$mainMod SHIFT, 6, movetoworkspacesilent, 6"
-                    "$mainMod SHIFT, 7, movetoworkspacesilent, 7"
-                    "$mainMod SHIFT, 8, movetoworkspacesilent, 8"
-                    "$mainMod SHIFT, 9, movetoworkspacesilent, 9"
-                    "$mainMod SHIFT, 0, movetoworkspacesilent, 10"
+            -- Move windows with SUPER + hjkl
+            hl.bind("SUPER + SHIFT + h", hl.dsp.window.swap({ direction = "l"}))
+            hl.bind("SUPER + SHIFT + j", hl.dsp.window.swap({ direction = "d"}))
+            hl.bind("SUPER + SHIFT + k", hl.dsp.window.swap({ direction = "u"}))
+            hl.bind("SUPER + SHIFT + l", hl.dsp.window.swap({ direction = "r"}))
 
-                    # Mute Audio/Mic
-                    "$mainMod, Control_R, exec, ${micMute}"
-                    "$mainMod SHIFT, Control_R, exec, ${audioMute}"
-                    ", XF86AudioMicMute, exec, ${micMute}"
-                    ", XF86AudioMute, exec, ${audioMute}"
-                    "SHIFT, XF86AudioMute, exec, ${micMute}"
+            -- Switch workspaces with SUPER + [0-9]
+            hl.bind("SUPER + 1", hl.dsp.focus({ workspace = 1 }))
+            hl.bind("SUPER + 2", hl.dsp.focus({ workspace = 2 }))
+            hl.bind("SUPER + 3", hl.dsp.focus({ workspace = 3 }))
+            hl.bind("SUPER + 4", hl.dsp.focus({ workspace = 4 }))
+            hl.bind("SUPER + 5", hl.dsp.focus({ workspace = 5 }))
+            hl.bind("SUPER + 6", hl.dsp.focus({ workspace = 6 }))
+            hl.bind("SUPER + 7", hl.dsp.focus({ workspace = 7 }))
+            hl.bind("SUPER + 8", hl.dsp.focus({ workspace = 8 }))
+            hl.bind("SUPER + 9", hl.dsp.focus({ workspace = 9 }))
+            hl.bind("SUPER + 0", hl.dsp.focus({ workspace = 10 }))
 
-                    # Don't know if these work
-                    ", XF86AudioPlay, exec, ${mediaPlayPause}"
-                    ", XF86AudioNext, exec, ${mediaNext}"
-                    ", XF86AudioPrev, exec, ${mediaPrev}"
-                ];
+            -- Move active window to a workspace with SUPER + SHIFT + [0-9]
+            hl.bind("SUPER + SHIFT + 1", hl.dsp.window.move({ workspace = 1 }))
+            hl.bind("SUPER + SHIFT + 2", hl.dsp.window.move({ workspace = 2 }))
+            hl.bind("SUPER + SHIFT + 3", hl.dsp.window.move({ workspace = 3 }))
+            hl.bind("SUPER + SHIFT + 4", hl.dsp.window.move({ workspace = 4 }))
+            hl.bind("SUPER + SHIFT + 5", hl.dsp.window.move({ workspace = 5 }))
+            hl.bind("SUPER + SHIFT + 6", hl.dsp.window.move({ workspace = 6 }))
+            hl.bind("SUPER + SHIFT + 7", hl.dsp.window.move({ workspace = 7 }))
+            hl.bind("SUPER + SHIFT + 8", hl.dsp.window.move({ workspace = 8 }))
+            hl.bind("SUPER + SHIFT + 9", hl.dsp.window.move({ workspace = 9 }))
+            hl.bind("SUPER + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
 
-                # Repeated while pressed
-                binde = [
+            -- Mute audio/mic
+            hl.bind("SUPER + Control_R", hl.dsp.exec_cmd("${micMute}"))
+            hl.bind("SUPER + SHIFT + Control_R", hl.dsp.exec_cmd("${audioMute}"))
 
-                    # Raise/Lower audio
-                    ", XF86AudioRaiseVolume, exec, ${audioIncrease}"
-                    ", XF86AudioLowerVolume, exec, ${audioDecrease}"
+            hl.bind("XF86AudioMute", hl.dsp.exec_cmd("${audioMute}"))
+            hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("${micMute}"))
+            hl.bind("SHIFT + XF86AudioMute", hl.dsp.exec_cmd("${micMute}"))
 
-                    # Raise/Lower mic audio
-                    "SHIFT, XF86AudioRaiseVolume, exec, ${micIncrease}"
-                    "SHIFT, XF86AudioLowerVolume, exec, ${micDecrease}"
+            -- Media control
+            hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("${mediaPlayPause}"))
+            hl.bind("XF86AudioNext", hl.dsp.exec_cmd("${mediaNext}"))
+            hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("${mediaPrev}"))
 
-                    # Brightness control
-                    ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
-                    ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-                ];
+            -- Raise/Lower audio
+            hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("${audioIncrease}", { repeating = true }))
+            hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("${audioDecrease}", { repeating = true }))
 
-                bindm = [
-                    # Super + M1
-                    "$mainMod, mouse:272, movewindow"
-                    # Super + M2
-                    "$mainMod, mouse:273, resizewindow"
-                ];
-            };
-        };
+            -- Raise/Lower mic audio
+            hl.bind("SHIFT + XF86AudioRaiseVolume", hl.dsp.exec_cmd("${micIncrease}", { repeating = true }))
+            hl.bind("SHIFT + XF86AudioLowerVolume", hl.dsp.exec_cmd("${micDecrease}", { repeating = true }))
+
+            -- Brightness control
+            hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5%", { repeating = true }))
+            hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-", { repeating = true }))
+
+            -- Move windows with Super + M1
+            hl.bind("SUPER + mouse:272", hl.dsp.window.drag())
+
+            -- Resize windows with Super + M2
+            hl.bind("SUPER + mouse:273", hl.dsp.window.resize())
+        '';
     };
 }
