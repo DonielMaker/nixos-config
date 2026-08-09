@@ -79,9 +79,9 @@ in
                 handle @home-assistant {
                     reverse_proxy http://10.10.12.101:8123 {
                         header_up Host {host}
-                    header_up X-Real-IP {remote_host}
-                    header_up X-Forwarded-For {remote_host}
-                    header_up X-Forwarded-Proto {scheme}
+                        header_up X-Real-IP {remote_host}
+                        header_up X-Forwarded-For {remote_host}
+                        header_up X-Forwarded-Proto {scheme}
                     }
                 }
 

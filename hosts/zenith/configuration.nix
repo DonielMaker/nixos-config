@@ -1,4 +1,4 @@
-{inputs, pkgs, pkgs-stable, ...}:
+{ inputs, pkgs, ... }:
 
 {
     imports = [ ./hardware-configuration.nix ./disko.nix ];

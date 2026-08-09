@@ -29,12 +29,12 @@
 
         desktop = {
             enable = true;
-            sound.enable = true;
             bluetooth.enable = true;
+            sound.enable = true;
 
-            stylix.enable = true;
-            noctalia.enable = true;
             hyprland.enable = true;
+            noctalia.enable = true;
+            stylix.enable = true;
         };
 
         programs = {
@@ -47,7 +47,6 @@
             git.enable = true;
             neovim.enable = true;
             starship.enable = true;
-            zellij.enable = true;
             zsh.enable = true;
         };
     };
