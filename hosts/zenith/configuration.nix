@@ -61,12 +61,6 @@
 
     services.flatpak.enable = true;
 
-    # Overlay VPN
-    services.netbird.enable = true;
-
-    # Display Manager
-    services.displayManager.ly.enable = true;
-
     # Gpu Overclocking
     services.lact.enable = true;
 
@@ -81,7 +75,7 @@
         # == Programs ==
         gimp # Image editing
         obs-studio # Video Recording
-        orca-slicer
+        orca-slicer # 3D Printer Slicer
         kdePackages.kdenlive # Video editing
         zathura # PDF Viewer
 
@@ -89,12 +83,10 @@
         # teamspeak6-client # Teamspeak client
 
         # == Utils ==
-        cryptsetup # Encrypted Drives
         furmark # Gpu Stress Testing
         stress-ng # General Stress Testing
         typst # Professional Documents
         wireguard-tools # Wireguard related commands
-        restic # Backup tool
 
         # == Gaming ==
         heroic # Epic Games Launcher

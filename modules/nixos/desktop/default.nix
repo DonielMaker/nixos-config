@@ -16,14 +16,14 @@ in
         hardware.graphics.enable = true;
         hardware.graphics.enable32Bit = true;
 
-        # Sets a image while booting (Might move into seperate config)
+        # Sets an image while booting
         boot.plymouth.enable = true;
 
         # Enabled the power-profiles-daemon which allows setting Cpu performance
         # modes (Battery Saver, Balanced, Performance)
         services.power-profiles-daemon.enable = true;
 
-        # Enables info about Batteries
+        # Enables info about Battery
         services.upower.enable = true;
 
         # Privilege control
@@ -32,28 +32,35 @@ in
         # File sharing
         programs.localsend.enable = true;
 
+        # Overlay VPN
+        services.netbird.enable = true;
+
+        # Display Manager
+        services.displayManager.ly.enable = true;
+
         # Required for Wayland
         environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
         environment.systemPackages = with pkgs; [
 
-            vim # vim
-
-            vlc # Video Viewer
-            libreoffice # Office Suite
-            librewolf # Firefox based Browser
             brave # Chromium based Browser
-            signal-desktop # Messaging Client
-            thunderbird # Email Client
             gnupg # Encrypted signing
             kdePackages.gwenview # Image viewer
             kdePackages.kate # Text editor
+            libreoffice # Office Suite
+            librewolf # Firefox based Browser
+            signal-desktop # Messaging Client
+            thunderbird # Email Client
+            vlc # Video Viewer
 
-            xwayland # X11 Interface
-            wl-clipboard # Command line copy/paste tool
             cliphist # Clipboard manager
+            cryptsetup # Drive Encryption
+            restic # Backup tool
+            vim # vim
+            wl-clipboard # Command line copy/paste tool
+            xwayland # X11 Interface
 
-            home-manager # Used by nixos for dotfiles
+            home-manager # Dotfile management
         ];
     };
 }
