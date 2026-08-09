@@ -33,7 +33,7 @@
         neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
         noctalia.inputs.nixpkgs.follows = "nixpkgs";
-        noctalia.url = "github:noctalia-dev/noctalia/legacy-v4";
+        noctalia.url = "github:noctalia-dev/noctalia";
     };
 
     outputs = {...}@inputs:

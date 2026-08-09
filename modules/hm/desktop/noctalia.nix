@@ -1,4 +1,4 @@
-{config, osConfig, inputs, lib, pkgs, ...}: 
+{osConfig, inputs, lib, pkgs, ...}: 
 
 let
     inherit (lib) mkIf;
@@ -11,132 +11,104 @@ in
     config = mkIf osConfig.modules.desktop.noctalia.enable {
 
         home.packages = with pkgs; [
+            bc # Calculator
+            brightnessctl
             curl
+            ddcutil # Monitor Control
             ffmpeg
-            gifski
-            grim
-            imagemagick
-            jq
-            satty
-            slurp
-            tesseract
-            wl-clipboard
-            wl-screenrec
-            zbar
+            gifski # GIF Encoder
+            gpu-screen-recorder # Screen Recording via GPU
+            grim # Screenshot Util
+            hyprpicker # Color Picker
+            imagemagick # Image Toolkit
+            jq # Json Processor
+            mpv # Media Player
+            satty # Annotation Util
+            slurp # Selection Util
+            tesseract # OCR Engine
+            translate-shell # CLI Translator
+            wl-clipboard # Wayland Clipboard
+            wl-screenrec # Wayland Screen Recording
+            zbar # Barcode Reader
         ];
 
-        programs.noctalia-shell.enable = true;
-        programs.noctalia-shell.settings = {
-            settingsVersion = 59;
+        programs.noctalia.enable = true;
+        programs.noctalia.settings = {
 
-            general = {
-                radiusRatio = 0.2;
-                iRadiusRatio = 0.7;
-                avatarImage = "/home/${config.home.username}/.config/wallpapers/Matt.png";
+            shell = {
+                avatar_path = "/home/donielmaker/.config/wallpaper/Matt.png";
+                corner_radius_scale = 0.4;
+                polkit_agent = true;
+
+                launcher.categories = false;
+                launcher.compact = true;
+
+                panel.control_center_placement = "floating";
+                panel.session_placement = "floating";
             };
 
-            wallpaper.directory = "/home/${config.home.username}/.config/wallpapers";
+            bar.widgets = {
+
+                start = [ "control-center" "workspaces" "media" ];
+                center = [ "clock" ];
+                end = [ "tray" "battery" "notifications" "caffeine" "input_volume" "output_volume" "bluetooth" "network" ];
+
+                widget_spacing = 10; # Spacing between Widgets
+                margin_ends = 0; # Spacing between Bar and Monitor Edge
+                radius = 0; # Radius of Bar
+                layer = "overlay"; # Above Fullscreen
+
+                font_family = "CommitMono Nerd Font";
+            };
+
+            widget = {
+                caffeine.color = "#f7768e"; # Red
+                input_volume.color = "#7aa2f7"; # Blue
+                output_volume.color = "#73daca"; # Teal
+                notifications.color = "#bb9af7"; # Purple
+
+                network.show_label = false; # Don't show the interface name
+
+                clock.format = "{:%a %d, %H:%M:%S}"; # I.E Sun 09, 23:25:03
+            };
 
             idle = {
-                enabled = true;
-                lockTimeout = 180;
-                screenOffTimeout = 300;
-                suspendTimeout = 0;
-            };
+                behaviour_order = [ "lock" "screen-off" ];
 
-            dock.enabled = false;
+                behaviour.lock = {
+                    action = "lock";
+                    enabled = true;
+                    timeout = 300.0;
+                };
 
-            osd.location = "bottom";
-
-            appLauncher = {
-                enableClipboardHistory = true;
-                showCategories = false;
-            };
-
-            # Make sure to download this (Can this be created declaratively?)
-            colorSchemes.predefinedScheme = "Tokyo Night Storm";
-            templates.activeTemplates = [
-                # Create kcolorscheme (Since stylix doesn't?)
-                { enabled = true; id = "kcolorscheme"; }
-            ];
-
-            bar = {
-                barType = "simple";
-                # barType = "floating";
-                showCapsule = false;
-
-                widgets = {
-                    left = [
-                        {
-                            id = "ControlCenter";
-                            useDistroLogo = true;
-                            enableColorization = true;
-                            colorizeSystemIcon = "primary";
-                        }
-                        {
-                            id = "Workspace";
-                            emptyColor = "none";
-                            occupiedColor = "none";
-                        }
-                        {
-                            id = "MediaMini";
-                            maxWidth = 200;
-                        }
-                    ];
-
-                    center = [
-                        {
-                            id = "Clock";
-                            formatHorizontal = "MMM dd, HH:mm:ss";
-                        }
-                    ];
-
-                    right = [
-                        { 
-                            id = "Tray"; 
-                            colorizeIcons = false;
-                            pinned = [
-                                "Vesktop"
-                                "Signal Desktop"
-                            ];
-                        }
-                        { id = "plugin:privacy-indicator"; }
-                        {
-                            id = "Battery"; 
-                            displayMode = "graphic";
-                        }
-                        { 
-                            id = "NotificationHistory"; 
-                            iconColor = "secondary";
-                            textColor = "secondary";
-                        }
-                        {
-                            id = "KeepAwake";
-                            iconColor = "error";
-                            textColor = "error";
-                        }
-                        {
-                            id = "Microphone";
-                            iconColor = "primary";
-                            textColor = "primary";
-                            displayMode = "alwaysShow";
-                            middleClickCommand = "pavucontrol";
-                        }
-                        {
-                            id = "Volume";
-                            iconColor = "tertiary";
-                            textColor = "tertiary";
-                            displayMode = "alwaysShow";
-                            middleClickCommand = "pavucontrol";
-                        }
-                        { id = "Bluetooth"; }
-                        { 
-                            id = "Network"; 
-                            displayMode = "alwaysHide";
-                        }
-                    ];
+                behaviour.screen-off = {
+                    action = "screen-off";
+                    enabled = true;
+                    timeout = 600.0;
                 };
             };
+
+            osd = {
+                position = "bottom_center";
+                kinds.media = false; # No OSD on Media Play
+            };
+
+            control_center.shortcuts = []; # No Shortcuts
+
+            plugins.enabled = [ "alexander/screen-toolkit" ];
+
+            plugin_settings."alexander/screen-toolkit".panel-full_position = "top_center";
+
+            brightness.enable_ddcutil = true; # Experimental
+
+            audio.enable_overdrive = true; # Max Volume is 150%
+
+            location.auto_locate = true;
+
+            # Disable shitty features
+            desktop_widgets.enabled = false;
+            dock.enabled = false;
+            lockscreen.fingerprint = false;
         };
     };
 }
