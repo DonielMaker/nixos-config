@@ -182,6 +182,17 @@ in
                                 redirect_uris = [ "https://paperless.${domain}/accounts/oidc/authelia/login/callback/" ];
                                 scopes = [ "openid" "profile" "email" "groups" ];
                             }
+                            {
+                                client_id = "beszel";
+                                client_name = "Beszel";
+                                client_secret = "$argon2id$v=19$m=65536,t=3,p=4$K5EgPQWH5xUVH6E/VK5IGA$NdVLiyrEUEsktc0ETbQQD3OmOwoLbYqp97qOs1hy5uA";
+                                public = false;
+                                require_pkce = true;
+                                pkce_challenge_method = "S256";
+                                authorization_policy = "two_factor";
+                                redirect_uris = [ "https://beszel.${domain}/api/oauth2-redirect" ];
+                                scopes = [ "openid" "profile" "email" "groups" ];
+                            }
                             # {
                             #     client_id = "technitium";
                             #     client_name = "Technitium";
