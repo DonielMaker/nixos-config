@@ -38,6 +38,9 @@ in
         # Display Manager
         services.displayManager.ly.enable = true;
 
+        # Secret Service Provider
+        services.gnome.gnome-keyring.enable = true;
+
         # Required for Wayland
         environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -49,6 +52,7 @@ in
             kdePackages.kate # Text editor
             libreoffice # Office Suite
             librewolf # Firefox based Browser
+            seahorse # Manage Gnome-Keyring
             signal-desktop # Messaging Client
             thunderbird # Email Client
             vlc # Video Viewer
