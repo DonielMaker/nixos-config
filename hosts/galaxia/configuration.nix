@@ -50,11 +50,6 @@
             zsh.enable = true;
         };
     };
-
-    # Display Manager
-    services.displayManager.ly.enable = true;
-
-    services.netbird.enable = true;
     
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
