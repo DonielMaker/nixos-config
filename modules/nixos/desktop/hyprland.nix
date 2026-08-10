@@ -15,12 +15,16 @@ in
         programs.nautilus-open-any-terminal.enable = true;
         programs.nautilus-open-any-terminal.terminal = "alacritty";
 
+        # Secret Service Provider
+        services.gnome.gnome-keyring.enable = true;
+
         services.gvfs.enable = true;
 
         environment.systemPackages = with pkgs; [
 
             kitty # For crashes
             nautilus # File explorer
+            seahorse # Manage Gnome-Keyring
         ];
 
         # Allows interoperabilty between Applications
