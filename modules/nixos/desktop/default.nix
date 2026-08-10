@@ -16,29 +16,19 @@ in
         hardware.graphics.enable = true;
         hardware.graphics.enable32Bit = true;
 
-        # Sets an image while booting
-        boot.plymouth.enable = true;
+        boot.plymouth.enable = true; # Sets an image while booting
 
-        # Enabled the power-profiles-daemon which allows setting Cpu performance
-        # modes (Battery Saver, Balanced, Performance)
-        services.power-profiles-daemon.enable = true;
+        services.power-profiles-daemon.enable = true; # Allows setting Cpu performance modes (Battery Saver, Balanced, Performance)
 
-        # Enables info about Battery
-        services.upower.enable = true;
+        services.upower.enable = true; # Enables info about Battery
 
-        # Privilege control
-        security.polkit.enable = true;
+        security.polkit.enable = true; # Privilege control
 
-        # File sharing
-        programs.localsend.enable = true;
+        programs.localsend.enable = true; # File sharing
 
-        # Overlay VPN
-        services.netbird.enable = true;
+        services.netbird.enable = true; # Overlay VPN
 
-        # Display Manager
-        services.displayManager.ly.enable = true;
-
-        # environment.sessionVariables.NIXOS_OZONE_WL = "1";
+        services.displayManager.ly.enable = true; # Display Manager
 
         environment.systemPackages = with pkgs; [
 
