@@ -15,81 +15,74 @@ in
         # Caddy: Simple but featureful Reverse Proxy
         services.caddy.enable = true;
         services.caddy.extraConfig = ''
+
+            # === TLS ===
             *.${domain} {
                 tls /var/lib/acme/${domain}/cert.pem /var/lib/acme/${domain}/key.pem {
                     protocols tls1.3
                 }
+            }
 
-                @authelia host authelia.${domain}
-                handle @authelia {
-                    reverse_proxy miasma.${domain}:9091
+            # === Miasma ===
+            authelia.${domain} {
+                reverse_proxy miasma.${domain}:9091 
+            }
+
+            vaultwarden.${domain} {
+                reverse_proxy miasma.${domain}:5902 
+            }
+
+            technitium.${domain} {
+                reverse_proxy miasma.${domain}:5380 
+            }
+
+            homepage.${domain} {
+                forward_auth miasma.${domain}:9091 {
+                    uri /api/authz/forward-auth
+                    copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
                 }
 
-                @vaultwarden host vaultwarden.${domain}
-                handle @vaultwarden {
-                    reverse_proxy miasma.${domain}:5902
+                reverse_proxy miasma.${domain}:8082
+            }
+            
+            # === Lastprism ===
+            paperless.${domain} {
+                reverse_proxy lastprism.${domain}:28981 
+            }
+            
+            homebox.${domain} {
+                reverse_proxy lastprism.${domain}:7745 
+            }
+            
+            navidrome.${domain} {
+                reverse_proxy lastprism.${domain}:4533 
+            }
+
+            sftpgo.${domain} {
+                reverse_proxy lastprism.${domain}:4856 
+            }
+
+            webdav.${domain} {
+                reverse_proxy lastprism.${domain}:9837 
+            }
+
+            beszel.${domain} {
+                reverse_proxy lastprism.${domain}:8090 
+            }
+
+            # === Misc ===
+            home-assistant.${domain} {
+                reverse_proxy http://10.10.12.101:8123 {
+                    header_up Host {host}
+                    header_up X-Real-IP {remote_host}
+                    header_up X-Forwarded-For {remote_host}
+                    header_up X-Forwarded-Proto {scheme}
                 }
-
-                @technitium host technitium.${domain}
-                handle @technitium {
-                    reverse_proxy miasma.${domain}:5380
-                }
-
-                @homepage host homepage.${domain}
-                handle @homepage {
-                    forward_auth miasma.${domain}:9091 {
-                        uri /api/authz/forward-auth
-                            copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
-                    }
-
-                    reverse_proxy miasma.${domain}:8082
-                }
-
-                @paperless host paperless.${domain}
-                handle @paperless {
-                    reverse_proxy lastprism.${domain}:28981
-                }
-
-                @homebox host homebox.${domain}
-                handle @homebox {
-                    reverse_proxy lastprism.${domain}:7745
-                }
-
-                @navidrome host navidrome.${domain} 
-                handle @navidrome {
-                    reverse_proxy lastprism.${domain}:4533
-                }
-
-                @sftpgo host sftpgo.${domain} 
-                handle @sftpgo {
-                    reverse_proxy lastprism.${domain}:4856
-                }
-
-                @webdav host webdav.${domain} 
-                handle @webdav {
-                    reverse_proxy lastprism.${domain}:9837
-                }
-
-                @beszel host beszel.${domain} 
-                handle @beszel {
-                    reverse_proxy lastprism.${domain}:8090
-                }
-
-                @home-assistant host home-assistant.${domain} 
-                handle @home-assistant {
-                    reverse_proxy http://10.10.12.101:8123 {
-                        header_up Host {host}
-                        header_up X-Real-IP {remote_host}
-                        header_up X-Forwarded-For {remote_host}
-                        header_up X-Forwarded-Proto {scheme}
-                    }
-                }
-
-                @proxmox-lastprism host proxmox.${domain} 
-                handle @proxmox-lastprism {
-                    reverse_proxy apathanull.${domain}:8006 {
-                        transport http { tls_insecure_skip_verify }
-                    }
+            }
+            
+            proxmox.${domain} {
+                reverse_proxy apathanull.${domain}:8006 {
+                    transport http { tls_insecure_skip_verify }
                 }
             }
         '';
