@@ -49,8 +49,7 @@ in
             };
 
             bar.widgets = {
-
-                start = [ "control-center" "workspaces" "media" ];
+                start = [ "session" "workspaces" "media" ];
                 center = [ "clock" ];
                 end = [ "tray" "battery" "notifications" "caffeine" "input_volume" "output_volume" "bluetooth" "network" ];
 
@@ -66,22 +65,27 @@ in
                 input_volume.color = "#7aa2f7"; # Blue
                 output_volume.color = "#73daca"; # Teal
                 notifications.color = "#bb9af7"; # Purple
+                session.color = "#f7768e"; # Red
+
+                session.scale = 1.2;
 
                 network.show_label = false; # Don't show the interface name
 
                 clock.format = "{:%a %d, %H:%M:%S}"; # I.E Sun 09, 23:25:03
+
+                control-center.custom_image = "${pkgs.nixos-icons}/share/icons/hicolor/16x16/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png";
             };
 
             idle = {
-                behaviour_order = [ "lock" "screen-off" ];
+                behavior_order = [ "lock" "screen-off" ];
 
-                behaviour.lock = {
+                behavior.lock = {
                     action = "lock";
                     enabled = true;
                     timeout = 300.0;
                 };
 
-                behaviour.screen-off = {
+                behavior.screen-off = {
                     action = "screen-off";
                     enabled = true;
                     timeout = 600.0;
