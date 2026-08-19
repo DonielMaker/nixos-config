@@ -14,7 +14,7 @@ in
             bc # Calculator
             brightnessctl
             curl
-            ddcutil # Monitor Control
+            # ddcutil # Monitor Control
             ffmpeg
             gifski # GIF Encoder
             gpu-screen-recorder # Screen Recording via GPU
@@ -46,6 +46,8 @@ in
 
                 panel.control_center_placement = "floating";
                 panel.session_placement = "floating";
+
+                clipboard_auto_paste = "off";
             };
 
             bar.widgets = {
@@ -74,6 +76,8 @@ in
                 clock.format = "{:%a %d, %H:%M:%S}"; # I.E Sun 09, 23:25:03
 
                 control-center.custom_image = "${pkgs.nixos-icons}/share/icons/hicolor/16x16/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png";
+
+                workspaces.style = "minimal";
             };
 
             idle = {
@@ -97,13 +101,13 @@ in
                 kinds.media = false; # No OSD on Media Play
             };
 
+            notification.history_retention_hours = 24;
+
             control_center.shortcuts = []; # No Shortcuts
 
             plugins.enabled = [ "alexander/screen-toolkit" ];
 
             plugin_settings."alexander/screen-toolkit".panel-full_position = "top_center";
-
-            brightness.enable_ddcutil = true; # Experimental
 
             audio.enable_overdrive = true; # Max Volume is 150%
 
