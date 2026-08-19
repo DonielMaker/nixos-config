@@ -193,18 +193,18 @@ in
                                 redirect_uris = [ "https://beszel.${domain}/api/oauth2-redirect" ];
                                 scopes = [ "openid" "profile" "email" "groups" ];
                             }
-                            # {
-                            #     client_id = "technitium";
-                            #     client_name = "Technitium";
-                            #     client_secret = "$argon2id$v=19$m=65536,t=3,p=4$VyU3lPS5zK0bzUgZnTeaEA$BacesqF/HRu+JIPaTGIHWYi8oLPWv4aOXtUWCkOKPhc";
-                            #     public = false;
-                            #     require_pkce = true;
-                            #     pkce_challenge_method = "S256";
-                            #     authorization_policy = "two_factor";
-                            #     token_endpoint_auth_method = "client_secret_post";
-                            #     redirect_uris = [ "https://technitium.${domain}/sso/callback" ];
-                            #     scopes = [ "openid" "profile" "email" ];
-                            # }
+                            {
+                                client_id = "technitium";
+                                client_name = "Technitium";
+                                client_secret = "$argon2id$v=19$m=65536,t=3,p=4$VyU3lPS5zK0bzUgZnTeaEA$BacesqF/HRu+JIPaTGIHWYi8oLPWv4aOXtUWCkOKPhc";
+                                public = false;
+                                require_pkce = true;
+                                pkce_challenge_method = "S256";
+                                authorization_policy = "two_factor";
+                                token_endpoint_auth_method = "client_secret_post";
+                                redirect_uris = [ "https://technitium.${domain}/sso/callback" ];
+                                scopes = [ "openid" "profile" ];
+                            }
                         ];
                     };
                 };
