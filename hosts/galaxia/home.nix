@@ -2,12 +2,6 @@
 
 {
 
-    home = {
-        inherit (osConfig.modules.system) username;
-        homeDirectory = "/home/${osConfig.modules.system.username}";
-        stateVersion = osConfig.system.stateVersion;
-    };
-
     wayland.windowManager.hyprland.extraConfig = ''
 
         hl.monitor({
@@ -17,4 +11,10 @@
             scale = 1,
         })
     '';
+
+    home = {
+        inherit (osConfig.settings) username;
+        homeDirectory = "/home/${osConfig.settings.username}";
+        stateVersion = osConfig.system.stateVersion;
+    };
 }

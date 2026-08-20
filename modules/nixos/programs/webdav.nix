@@ -4,7 +4,7 @@ let
     inherit (lib) mkIf mkEnableOption;
     cfg = config.modules.programs.webdav;
 
-    mountpoint = "/home/${config.modules.system.username}/webdav";
+    mountpoint = "/home/${config.settings.username}/webdav";
     rcloneOptions = [
         "rw"
         "allow_other" # Allows other users than root to rw
@@ -13,7 +13,7 @@ let
         "vfs-cache-mode=writes" # Allows Rclone to use VFS (Virtual Filesystem) for local files before sending to server
         "cache-dir=/var/rclone" # Required by vfs-cache-mode
         # Make sure your remote is set in rclone.conf. Otherwise this won't work
-        "config=/home/${config.modules.system.username}/.config/rclone/rclone.conf" # Sets the rclone.conf
+        "config=/home/${config.settings.username}/.config/rclone/rclone.conf" # Sets the rclone.conf
         "uid=1000"
         "gid=100"
     ];

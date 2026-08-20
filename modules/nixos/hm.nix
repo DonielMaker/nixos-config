@@ -25,7 +25,7 @@ in
             useUserPackages = true;
             extraSpecialArgs = { inherit inputs; };
 
-            users.${config.modules.system.username}.imports = [ cfg.home ] ++ listFilesRecursive "${inputs.self}/modules/hm";
+            users.${config.settings.username}.imports = [ cfg.home ] ++ listFilesRecursive "${inputs.self}/modules/hm";
         };
     };
 }

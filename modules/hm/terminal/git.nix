@@ -10,8 +10,8 @@ in
 
         programs.git.enable = true;
         programs.git.settings = {
-            user.name = osConfig.modules.system.username;
-            user.email = osConfig.modules.system.mail;
+            user.name = osConfig.settings.username;
+            user.email = osConfig.settings.mail;
         };
     };
 }

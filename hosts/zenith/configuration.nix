@@ -3,13 +3,18 @@
 {
     imports = [ ./hardware-configuration.nix ./disko.nix ];
 
+    networking.hostName = "zenith";
+
+    services.xserver.xkb.layout = "us";
+
+    settings = {
+        username = "donielmaker";
+        mail = "daniel.schmidt0204@gmail.com";
+    };
+
     modules = {
         system = {
             enable = true;
-            hostname = "zenith";
-            username = "donielmaker";
-            mail = "daniel.schmidt0204@gmail.com";
-            shell = pkgs.zsh;
 
             user.enable = true;
             
@@ -20,7 +25,6 @@
                 sha256 = "sha256-+ObY8Jft/Ergnufgcp/cXKV/webd+74yl1XdsCYdMp0=";
             };
 
-            networking.enable = true;
             openssh.enable = true;
         };
 

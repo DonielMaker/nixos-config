@@ -4,25 +4,25 @@
 
     imports = [ ./hardware-configuration.nix ./disko.nix ] ++ lib.filesystem.listFilesRecursive ./modules;
 
+    networking.hostName = "miasma";
+    
+    settings.username = "donielmaker";
+
     modules = {
         system = {
             enable = true;
-            hostname = "miasma";
-            username = "donielmaker";
 
             user.enable = true;
 
             systemd-boot.enable = true;
 
             openssh.enable = true;
-            networking.enable = true;
 
             gc.enable = true;
         };
 
         server = {
             enable = true;
-            domain = "thematt.net";
             qemuGuest.enable = true;
 
             authelia.enable = true;

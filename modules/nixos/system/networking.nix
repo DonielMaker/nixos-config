@@ -10,8 +10,5 @@ in
 
     config = mkIf cfg.enable {
 
-        networking.networkmanager.enable = true;
-        networking.hostName = config.modules.system.hostname;
-        networking.search = [ "thematt.net" ];
     };
 }

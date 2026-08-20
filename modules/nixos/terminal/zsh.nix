@@ -11,8 +11,7 @@ in
     config = mkIf cfg.enable {
 
         programs.zsh.enable = true;
-        # Enable zsh-vi-mode
-        programs.zsh.interactiveShellInit = '' source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh '';
+        users.users.${config.settings.username}.shell = pkgs.zsh;
 
         environment.systemPackages = with pkgs; [
             eza # Better ls

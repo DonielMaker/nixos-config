@@ -3,14 +3,18 @@
 {
     imports = [ ./hardware-configuration.nix ./disko.nix ];
 
+    networking.hostName = "galaxia";
+
+    services.xserver.xkb.layout = "de";
+
+    settings = {
+        username = "donielmaker";
+        mail = "daniel.schmidt0204@gmail.com";
+    };
+
     modules = {
         system = {
             enable = true;
-            hostname = "galaxia";
-            username = "donielmaker";
-            mail = "daniel.schmidt0204@gmail.com";
-            shell = pkgs.zsh;
-            keyboard.layout = "de";
 
             user.enable = true;
             
@@ -21,7 +25,6 @@
             };
 
             openssh.enable = true;
-            networking.enable = true;
         };
 
         hm.enable = true;
@@ -29,6 +32,7 @@
 
         desktop = {
             enable = true;
+
             bluetooth.enable = true;
             sound.enable = true;
 
@@ -57,7 +61,6 @@
         # == Programs ==
         gimp # Image editing
         obs-studio # Video Recording
-        zathura # PDF Viewer
         simple-scan # Scanning Utility
 
         # == Utils ==

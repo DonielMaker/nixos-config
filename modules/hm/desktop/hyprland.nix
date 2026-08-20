@@ -104,7 +104,7 @@ in
                 },
 
                 input = {
-                    kb_layout = "${osConfig.modules.system.keyboard.layout}",
+                    kb_layout = "${osConfig.services.xserver.xkb.layout}",
 
                     -- Keyboard repeats faster and quicker
                     repeat_rate = 40,

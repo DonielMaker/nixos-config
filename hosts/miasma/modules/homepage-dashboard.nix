@@ -3,6 +3,7 @@
 let
     inherit (lib) mkEnableOption mkIf;
     cfg = config.modules.server.homepage-dashboard;
+    domain = config.networking.domain;
 in
 
 {
@@ -14,7 +15,7 @@ in
         services.homepage-dashboard.enable = true;
         services.homepage-dashboard = {
             openFirewall = true;
-            allowedHosts = "homepage.${config.modules.server.domain}";
+            allowedHosts = "homepage.${domain}";
             widgets = [
                 {
                     resources = {
@@ -39,24 +40,24 @@ in
                             "Authelia" = {
                                 description = "IdP Manager";
                                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/authelia.svg";
-                                href = "https://authelia.${config.modules.server.domain}";
-                                siteMonitor = "http://miasma.${config.modules.server.domain}:9091";
+                                href = "https://authelia.${domain}";
+                                siteMonitor = "http://miasma.${domain}:9091";
                             };
                         }
                         {
                             "Apathanull" = {
                                 description = "The Proxmox Lastprism Server";
                                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/proxmox.svg";
-                                href = "https://proxmox.${config.modules.server.domain}";
-                                siteMonitor = "https://apathanull.${config.modules.server.domain}:8006";
+                                href = "https://proxmox.${domain}";
+                                siteMonitor = "https://apathanull.${domain}:8006";
                             };
                         }
                         {
                             "Technitium" = {
                                 description = "DNS/DHCP Server";
                                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/technitium.svg";
-                                href = "https://technitium.${config.modules.server.domain}";
-                                siteMonitor = "http://miasma.${config.modules.server.domain}:5380";
+                                href = "https://technitium.${domain}";
+                                siteMonitor = "http://miasma.${domain}:5380";
                             };
                         }
                         {
@@ -74,47 +75,47 @@ in
                             "Vaultwarden" = {
                                 description = "Passwordmanager";
                                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/vaultwarden-light.svg";
-                                href = "https://vaultwarden.${config.modules.server.domain}";
-                                siteMonitor = "http://miasma.${config.modules.server.domain}:5902";
+                                href = "https://vaultwarden.${domain}";
+                                siteMonitor = "http://miasma.${domain}:5902";
                             };
                         }
                         {
                             "Homebox" = {
                                 description = "Inventory Management";
                                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/homebox.svg";
-                                href = "https://homebox.${config.modules.server.domain}";
-                                siteMonitor = "http://lastprism.${config.modules.server.domain}:7745";
+                                href = "https://homebox.${domain}";
+                                siteMonitor = "http://lastprism.${domain}:7745";
                             };
                         }
                         {
                             "Paperless" = {
                                 description = "Document server";
                                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/paperless-ngx.svg";
-                                href = "https://paperless.${config.modules.server.domain}";
-                                siteMonitor = "http://lastprism.${config.modules.server.domain}:28981";
+                                href = "https://paperless.${domain}";
+                                siteMonitor = "http://lastprism.${domain}:28981";
                             };
                         }
                         {
                             "Navidrome" = {
                                 description = "Music server";
                                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/navidrome.svg";
-                                href = "https://navidrome.${config.modules.server.domain}";
-                                siteMonitor = "http://lastprism.${config.modules.server.domain}:4533";
+                                href = "https://navidrome.${domain}";
+                                siteMonitor = "http://lastprism.${domain}:4533";
                             };
                         }
                         {
                             "SFTPGo" = {
                                 description = "Fileserver";
                                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/sftpgo.svg";
-                                href = "https://sftpgo.${config.modules.server.domain}";
-                                siteMonitor = "http://lastprism.${config.modules.server.domain}:4856";
+                                href = "https://sftpgo.${domain}";
+                                siteMonitor = "http://lastprism.${domain}:4856";
                             };
                         }
                         {
                             "Homeassistant" = {
                                 description = "Home Automation Server";
                                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/home-assistant-light.svg";
-                                href = "https://home-assistant.${config.modules.server.domain}";
+                                href = "https://home-assistant.${domain}";
                                 siteMonitor = "http://10.10.12.101:8123";
                             };
                         }

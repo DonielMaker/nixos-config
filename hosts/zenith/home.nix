@@ -32,8 +32,8 @@
     '';
 
     home = {
-        inherit (osConfig.modules.system) username;
-        homeDirectory = "/home/${osConfig.modules.system.username}";
+        inherit (osConfig.settings) username;
+        homeDirectory = "/home/${osConfig.settings.username}";
         stateVersion = osConfig.system.stateVersion;
     };
 }

@@ -1,4 +1,4 @@
-{ config, lib, inputs, pkgs, ... }: 
+{ config, lib, inputs, ... }: 
 
 let
     inherit (lib) mkEnableOption mkOption mkIf types;
@@ -6,43 +6,21 @@ let
 in
 
 {
-    options.modules.system = {
-        enable = mkEnableOption "Enable System";
+    options = {
 
-        hostname = mkOption {
-            default = "machine";
-            type = types.str;
-            description = "Sets the hostname of the machine";
-        };
+        modules.system.enable = mkEnableOption "Enable System";
 
-        username = mkOption {
-            default = "user";
-            type = types.str;
-            description = "Sets the username of the machine";
-        };
+        settings = {
 
-        mail = mkOption {
-            default = "example@mail.com";
-            type = types.str;
-            description = "Sets the mail account";
-        };
+            username = mkOption {
+                type = types.str;
+                description = "Sets the username of the machine";
+            };
 
-        keyboard.layout = mkOption {
-            default = "us";
-            type = types.str;
-            description = "Sets the Keyboard Layout";
-        };
-
-        timezone = mkOption {
-            default = "Europe/Berlin";
-            type = types.str;
-            description = "Sets the timezone";
-        };
-
-        shell = mkOption {
-            default = pkgs.bash;
-            type = types.package;
-            description = "Sets the user shell";
+            mail = mkOption {
+                type = types.str;
+                description = "Sets the mail account";
+            };
         };
     };
 
@@ -53,7 +31,10 @@ in
 
     config = mkIf cfg.enable {
 
-        time.timeZone = cfg.timezone;
+        networking.networkmanager.enable = true;
+        networking.domain = "thematt.net";
+
+        time.timeZone = "Europe/Berlin";
 
         nix.settings.experimental-features = [ "nix-command" "flakes" ];
     };

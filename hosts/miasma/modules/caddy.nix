@@ -3,7 +3,7 @@
 let
     inherit (lib) mkEnableOption mkIf;
     cfg = config.modules.server.caddy;
-    domain = config.modules.server.domain;
+    domain = config.networking.domain;
 in
 
 {

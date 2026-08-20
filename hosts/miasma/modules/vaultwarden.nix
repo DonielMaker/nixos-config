@@ -3,6 +3,7 @@
 let
     inherit (lib) mkEnableOption mkIf;
     cfg = config.modules.server.vaultwarden;
+    domain = config.networking.domain;
 in
 
 {
@@ -17,7 +18,7 @@ in
             backupDir = "/storage/vaultwarden";
             environmentFile = config.age.secrets.vaultwardenEnv.path;
             config = {
-                DOMAIN = "https://vaultwarden.${config.modules.server.domain}";
+                DOMAIN = "https://vaultwarden.${domain}";
                 ROCKET_ADDRESS = "0.0.0.0";
                 ROCKET_PORT = 5902;
                 IP_HEADER = "X-Forwarded-For";
@@ -28,10 +29,10 @@ in
                 SIGNUPS_ALLOWED = false;
                 PASSWORD_HINTS_ALLOWED = false;
 
-                SMTP_HOST = "mail.${config.modules.server.domain}";
-                SMTP_FROM = "vaultwarden@${config.modules.server.domain}";
+                SMTP_HOST = "mail.${domain}";
+                SMTP_FROM = "vaultwarden@${domain}";
                 SMTP_FROM_NAME = "Vaultwarden";
-                SMTP_USERNAME = "admin@${config.modules.server.domain}";
+                SMTP_USERNAME = "admin@${domain}";
             };
         };
     };
