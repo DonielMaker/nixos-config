@@ -11,7 +11,7 @@ in
         programs.librewolf.enable = true;
         programs.librewolf = {
 
-            profiles.${osConfig.modules.system.username} = {
+            profiles.${osConfig.settings.username} = {
                 extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
                     ublock-origin
                     bitwarden

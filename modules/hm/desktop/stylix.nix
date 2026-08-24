@@ -11,7 +11,7 @@ in
         stylix.enable = true;
         stylix = {
             targets.librewolf.profileNames = lib.mkIf config.programs.librewolf.enable [ 
-                osConfig.modules.system.username
+                osConfig.settings.username
             ];
 
             targets.hyprland.enable = false;

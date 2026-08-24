@@ -14,7 +14,7 @@ in
 
         virtualisation.libvirtd.enable = true;
         programs.virt-manager.enable = true;
-        users.users.${config.modules.system.username}.extraGroups = [ "libvirtd" ];
+        users.users.${config.settings.username}.extraGroups = [ "libvirtd" ];
 
     };
 }
