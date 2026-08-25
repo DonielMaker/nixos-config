@@ -30,9 +30,9 @@ in
                 PASSWORD_HINTS_ALLOWED = false;
 
                 SMTP_HOST = "mail.${domain}";
+                SMTP_USERNAME = "vaultwarden@${domain}";
                 SMTP_FROM = "vaultwarden@${domain}";
                 SMTP_FROM_NAME = "Vaultwarden";
-                SMTP_USERNAME = "admin@${domain}";
             };
         };
     };

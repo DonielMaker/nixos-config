@@ -124,11 +124,12 @@ in
                             id_token = "1h";
                             refresh_token = "90m";
                         };
+
                         enable_client_debug_messages = true;
                         require_pushed_authorization_requests = false;
-                        claims_policies = {
-                          sftpgo.id_token = [ "preferred_username" ];
-                        };
+
+                        claims_policies.sftpgo.id_token = [ "preferred_username" ];
+
                         cors = {
                             endpoints= [
                                 "authorization"

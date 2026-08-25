@@ -86,6 +86,5 @@
     services.technitium-dns-server.enable = true;
     services.technitium-dns-server.openFirewall = true;
 
-
-    system.stateVersion = "25.05"; # Just don't
+    system.stateVersion = "26.05"; # Just don't
 }
