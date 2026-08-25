@@ -183,20 +183,20 @@ in
                                 scopes = [ "openid" "profile" "email" "groups" ];
                             }
                             {
-                                client_id = "beszel";
-                                client_name = "Beszel";
-                                client_secret = "$argon2id$v=19$m=65536,t=3,p=4$K5EgPQWH5xUVH6E/VK5IGA$NdVLiyrEUEsktc0ETbQQD3OmOwoLbYqp97qOs1hy5uA";
+                                client_id = "grafana";
+                                client_name = "Grafana";
+                                client_secret = "$argon2id$v=19$m=65536,t=3,p=4$r8mQMrcLgT1+tJfukPSJRw$yjGtLHVnB+6/EQT88CVXOtIiEuC+akqhXw8/LGSy/nA";
                                 public = false;
                                 require_pkce = true;
                                 pkce_challenge_method = "S256";
                                 authorization_policy = "two_factor";
-                                redirect_uris = [ "https://beszel.${domain}/api/oauth2-redirect" ];
+                                redirect_uris = [ "https://grafana.${domain}/login/generic_oauth" ];
                                 scopes = [ "openid" "profile" "email" "groups" ];
                             }
                             {
                                 client_id = "technitium";
                                 client_name = "Technitium";
-                                client_secret = "$argon2id$v=19$m=65536,t=3,p=4$VyU3lPS5zK0bzUgZnTeaEA$BacesqF/HRu+JIPaTGIHWYi8oLPWv4aOXtUWCkOKPhc";
+                                client_secret = "$argon2id$v=19$m=65536,t=3,p=4$mbbBrN33r8ASCIejDz7GCg$e4K23Nlfxfl9mqQ2Wyb4tpNBB7r633qb5TsOIrIJ8mc";
                                 public = false;
                                 require_pkce = true;
                                 pkce_challenge_method = "S256";

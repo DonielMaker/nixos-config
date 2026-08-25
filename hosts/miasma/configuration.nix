@@ -40,7 +40,10 @@
             group = config.services.authelia.instances.main.group;
         };
 
+        grafana = {
             mode = "440";
+            owner = "grafana";
+            group = "grafana";
         };
     in
 
@@ -65,13 +68,19 @@
             file = ./secrets/authelia/oidcIssuerPrivateKey.age;
         };
 
+        grafana-secretKey = {
+            inherit (grafana) mode owner group;
+            file = ./secrets/grafana/secretKey.age;
+        };
+
+        grafana-clientSecret = {
+            inherit (grafana) mode owner group;
+            file = ./secrets/grafana/clientSecret.age;
+        };
+
         vaultwardenEnv.file = ./secrets/vaultwarden-env.age;
 
         cloudflare-dnsApiToken.file = ./secrets/cloudflare-dnsApiToken.age;
-
-        };
-
-        };
     };
 
     services.technitium-dns-server.enable = true;

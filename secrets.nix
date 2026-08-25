@@ -44,4 +44,7 @@ in
     # Vaultwarden
     "${miasma.path}/vaultwarden-env.age".publicKeys = donielmaker ++ miasma.key;
 
+    # Grafana
+    "${miasma.path}/grafana/secretKey.age".publicKeys = donielmaker ++ miasma.key;
+    "${miasma.path}/grafana/clientSecret.age".publicKeys = donielmaker ++ miasma.key;
 }

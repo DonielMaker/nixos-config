@@ -36,6 +36,14 @@ in
                 reverse_proxy miasma.${domain}:5380 
             }
 
+            grafana.${domain} {
+                reverse_proxy miasma.${domain}:6778
+            }
+
+            prometheus.${domain} {
+                reverse_proxy miasma.${domain}:9090
+            }
+
             homepage.${domain} {
                 forward_auth miasma.${domain}:9091 {
                     uri /api/authz/forward-auth
@@ -64,10 +72,6 @@ in
 
             webdav.${domain} {
                 reverse_proxy lastprism.${domain}:9837 
-            }
-
-            beszel.${domain} {
-                reverse_proxy lastprism.${domain}:8090 
             }
 
             # === Misc ===
