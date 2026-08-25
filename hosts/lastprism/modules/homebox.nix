@@ -30,7 +30,7 @@ in
 
                 # OIDC
                 HBOX_OIDC_ENABLED = "true";
-                HBOX_OIDC_ISSUER_URL = "https://authelia.${config.modules.server.domain}";
+                HBOX_OIDC_ISSUER_URL = "https://authelia.${config.networking.domain}";
                 HBOX_OIDC_CLIENT_ID = "homebox";
                 HBOX_OIDC_SCOPE = "openid profile email groups";
                 # HBOX_OPTIONS_ALLOW_REGISTRATION = "true";

@@ -13,7 +13,7 @@ in
         networking.firewall.allowedTCPPorts = [ 4856 9837 ];
 
         # SFTPGo: Fileserver with Virtual Folders and RBAC
-        users.users.${config.modules.system.username}.extraGroups = [ "media" ];
+        users.users.${config.settings.username}.extraGroups = [ "media" ];
         users.groups.media = {};
 
         services.sftpgo.enable = true;
@@ -36,9 +36,9 @@ in
                         oidc = {
                             client_id = "sftpgo";
                             client_secret_file = "${config.age.secrets.sftpgo-clientSecret.path}";
-                            config_url = "https://authelia.${config.modules.server.domain}";
+                            config_url = "https://authelia.${config.networking.domain}";
                             # Url to redirect to. != Redirect Url for OIDC which is https://sftpgo.example.com/web/oidc/redirect
-                            redirect_base_url = "https://sftpgo.${config.modules.server.domain}";
+                            redirect_base_url = "https://sftpgo.${config.networking.domain}";
                             scopes = [ "openid" "profile" "email" ];
                             username_field = "preferred_username";
                             implicit_roles = true;
@@ -46,12 +46,12 @@ in
 
                         security = {
                             enabled = true;
-                            allowed_hosts = [ "sftpgo.${config.modules.server.domain}" ];
+                            allowed_hosts = [ "sftpgo.${config.networking.domain}" ];
                         };
 
                         cors = {
                             enabled = true;
-                            allowed_origins = [ "sftpgo.${config.modules.server.domain}" ];
+                            allowed_origins = [ "sftpgo.${config.networking.domain}" ];
                         };
                     }
                 ];

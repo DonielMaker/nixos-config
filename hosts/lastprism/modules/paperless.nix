@@ -23,7 +23,7 @@ in
             environmentFile = config.age.secrets.paperless-envFile.path;
 
             settings = {
-                PAPERLESS_URL = "https://paperless.${config.modules.server.domain}";
+                PAPERLESS_URL = "https://paperless.${config.networking.domain}";
                 PAPERLESS_OCR_LANGUAGE = "eng+deu";
                 PAPERLESS_TIME_ZONE = "Europe/Berlin";
                 PAPERLESS_TRUSTED_PROXIES = "10.10.12.0/24";
@@ -31,7 +31,7 @@ in
                 PAPERLESS_USE_X_FORWARDED_PORT = true;
 
                 # SSO
-                PAPERLESS_LOGOUT_REDIRECT_URL = "https://homepage.${config.modules.server.domain}";
+                PAPERLESS_LOGOUT_REDIRECT_URL = "https://homepage.${config.networking.domain}";
                 PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
             };
         };
