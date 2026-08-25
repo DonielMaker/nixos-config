@@ -13,7 +13,7 @@ let
 
     miasma = {
         path = "${server_path}/miasma/secrets";
-        key = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKZZSSXJMhkykxUFP6A+zSnvBIsSGkBdRLHdcKshzIH6"];
+        key = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAx1/vMiNQllyfZUGtGCv9A60aWciFZW9kvgFMF2GFNH"];
     };
 
 in
