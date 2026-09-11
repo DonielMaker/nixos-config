@@ -47,4 +47,6 @@ in
     # Grafana
     "${miasma.path}/grafana/secretKey.age".publicKeys = donielmaker ++ miasma.key;
     "${miasma.path}/grafana/clientSecret.age".publicKeys = donielmaker ++ miasma.key;
+
+    "${miasma.path}/alertmanager-smtpPassword.age".publicKeys = donielmaker ++ miasma.key;
 }

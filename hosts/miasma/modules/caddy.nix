@@ -40,6 +40,10 @@ in
                 reverse_proxy miasma.${domain}:6778
             }
 
+            alertmanager.${domain} {
+                reverse_proxy miasma.${domain}:9093
+            }
+
             prometheus.${domain} {
                 reverse_proxy miasma.${domain}:9090
             }

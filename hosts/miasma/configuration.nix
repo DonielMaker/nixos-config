@@ -25,9 +25,11 @@
             enable = true;
             qemuGuest.enable = true;
 
+            alloy.enable = true;
             authelia.enable = true;
             caddy.enable = true;
             homepage-dashboard.enable = true;
+            monitoring.enable = true;
             vaultwarden.enable = true;
         };
     };
@@ -38,6 +40,12 @@
             mode = "440";
             owner = config.services.authelia.instances.main.user;
             group = config.services.authelia.instances.main.group;
+        };
+
+        alertmanager = {
+            mode = "440";
+            owner = "alertmanager";
+            group = "alertmanager";
         };
 
         grafana = {
@@ -66,6 +74,11 @@
         authelia-oidcIssuerPrivateKey = {
             inherit (authelia-main) mode owner group;
             file = ./secrets/authelia/oidcIssuerPrivateKey.age;
+        };
+
+        alertmanager-smtpPassword = {
+            inherit (alertmanager) mode owner group;
+            file = ./secrets/alertmanager-smtpPassword.age;
         };
 
         grafana-secretKey = {

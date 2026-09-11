@@ -25,6 +25,7 @@
             enable = true;
             qemuGuest.enable = true;
 
+            alloy.enable = true;
             homebox.enable = true;
             navidrome.enable = true;
             paperless.enable = true;
