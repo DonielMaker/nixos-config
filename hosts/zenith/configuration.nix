@@ -50,6 +50,7 @@
             vesktop.enable = true;
             virt-manager.enable = true;
             webdav.enable = true;
+            woeusb.enable = true;
         };
 
         terminal = {
@@ -87,10 +88,13 @@
         # teamspeak6-client # Teamspeak client
 
         # == Utils ==
+        ansible # IaC
         furmark # Gpu Stress Testing
         stress-ng # General Stress Testing
         typst # Professional Documents
         wireguard-tools # Wireguard related commands
+        openssl
+        rustdesk
 
         # == Gaming ==
         heroic # Epic Games Launcher

@@ -28,6 +28,7 @@ in
             ripgrep # Better grep
             unzip # Working with .zip files
             vim # vim
+            wget # http client
             yt-dlp # Download Youtube videos
         ];
     };
