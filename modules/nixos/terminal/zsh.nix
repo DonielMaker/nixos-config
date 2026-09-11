@@ -15,10 +15,10 @@ in
 
         environment.systemPackages = with pkgs; [
             eza # Better ls
-            fd # Better find
-            fzf # Fuzzy finder
-            ffmpeg # Record, convert and stream audio and video files
             fastfetch # System information tool
+            fd # Better find
+            ffmpeg # Record, convert and stream audio and video files
+            fzf # Fuzzy finder
             ghostscript # PostScript/PDF interpreter
             git # git
             htop # Process and System manager

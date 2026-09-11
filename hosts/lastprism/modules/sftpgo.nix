@@ -6,7 +6,7 @@ let
 in
 
 {
-    options.modules.server.sftpgo.enable = mkEnableOption "Enable SFTPGo}";
+    options.modules.server.sftpgo.enable = mkEnableOption "Enable SFTPGo";
 
     config = mkIf cfg.enable {
 
