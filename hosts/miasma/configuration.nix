@@ -76,6 +76,11 @@
             file = ./secrets/authelia/oidcIssuerPrivateKey.age;
         };
 
+        authelia-smtpPassword = {
+            inherit (authelia-main) mode owner group;
+            file = ./secrets/authelia/smtpPassword.age;
+        };
+
         alertmanager-smtpPassword = {
             inherit (alertmanager) mode owner group;
             file = ./secrets/alertmanager-smtpPassword.age;
@@ -91,7 +96,7 @@
             file = ./secrets/grafana/clientSecret.age;
         };
 
-        vaultwardenEnv.file = ./secrets/vaultwarden-env.age;
+        vaultwarden-env.file = ./secrets/vaultwarden-env.age;
 
         cloudflare-dnsApiToken.file = ./secrets/cloudflare-dnsApiToken.age;
     };

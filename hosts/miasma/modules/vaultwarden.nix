@@ -16,7 +16,7 @@ in
         services.vaultwarden.enable = true;
         services.vaultwarden = {
             backupDir = "/storage/vaultwarden";
-            environmentFile = config.age.secrets.vaultwardenEnv.path;
+            environmentFile = config.age.secrets.vaultwarden-env.path;
             config = {
                 DOMAIN = "https://vaultwarden.${domain}";
                 ROCKET_ADDRESS = "0.0.0.0";

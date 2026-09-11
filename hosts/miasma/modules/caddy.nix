@@ -95,6 +95,7 @@ in
             }
         '';
 
+        users.groups.certs.members = [ config.services.caddy.user ];
         security.acme = {
             acceptTerms = true;
             defaults.email = "daniel.schmidt0204@gmail.com";
@@ -102,7 +103,7 @@ in
             # defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory"; # Staging
 
             certs.${domain} = {
-                group = config.services.caddy.group;
+                group = config.users.groups.certs.name;
 
                 inherit domain;
                 extraDomainNames = [ "*.${domain}" ];
