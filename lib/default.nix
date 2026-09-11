@@ -19,4 +19,7 @@ in
         inherit specialArgs;
         modules = [ conf { nixpkgs.pkgs = pkgs; } ] ++ lib.filesystem.listFilesRecursive "${inputs.self}/modules/nixos";
     };
+
+    # List of all .nix files under <path>
+    nixFiles = path: lib.filter (file: lib.hasSuffix ".nix" file) (lib.filesystem.listFilesRecursive path);
 }

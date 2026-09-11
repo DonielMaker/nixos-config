@@ -1,8 +1,8 @@
-{config, lib, ...}:
+{config, sLib, ...}:
 
 {
 
-    imports = [ ./hardware-configuration.nix ./disko.nix ] ++ lib.filesystem.listFilesRecursive ./modules;
+    imports = [ ./hardware-configuration.nix ./disko.nix ] ++ sLib.nixFiles ./modules;
 
     networking.hostName = "lastprism";
 
