@@ -245,16 +245,16 @@ in
             hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("${mediaPrev}"))
 
             -- Raise/Lower audio
-            hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("${audioIncrease}", { repeating = true }))
-            hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("${audioDecrease}", { repeating = true }))
+            hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("${audioIncrease}"), { repeating = true })
+            hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("${audioDecrease}"), { repeating = true })
 
             -- Raise/Lower mic audio
-            hl.bind("SHIFT + XF86AudioRaiseVolume", hl.dsp.exec_cmd("${micIncrease}", { repeating = true }))
-            hl.bind("SHIFT + XF86AudioLowerVolume", hl.dsp.exec_cmd("${micDecrease}", { repeating = true }))
+            hl.bind("SHIFT + XF86AudioRaiseVolume", hl.dsp.exec_cmd("${micIncrease}"), { repeating = true })
+            hl.bind("SHIFT + XF86AudioLowerVolume", hl.dsp.exec_cmd("${micDecrease}"), { repeating = true })
 
             -- Brightness control
-            hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5%", { repeating = true }))
-            hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-", { repeating = true }))
+            hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5%"), { repeating = true })
+            hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { repeating = true })
 
             -- Move windows with Super + M1
             hl.bind("SUPER + mouse:272", hl.dsp.window.drag())
