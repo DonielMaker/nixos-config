@@ -11,12 +11,14 @@ in
     config = mkIf cfg.enable {
 
         programs.hyprland.enable = true;
+        services.displayManager.gdm.enable = true;
 
         programs.nautilus-open-any-terminal.enable = true;
         programs.nautilus-open-any-terminal.terminal = "alacritty";
 
         # Secret Service Provider
         services.gnome.gnome-keyring.enable = true;
+        programs.seahorse.enable = true;
 
         services.gvfs.enable = true;
 
@@ -24,7 +26,6 @@ in
 
             kitty # For crashes
             nautilus # File explorer
-            seahorse # Manage Gnome-Keyring
         ];
 
         # Allows interoperabilty between Applications

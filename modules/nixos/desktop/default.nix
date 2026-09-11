@@ -28,10 +28,6 @@ in
 
         services.netbird.enable = true; # Overlay VPN
 
-        # services.displayManager.ly.enable = true; # Display Manager
-        services.displayManager.gdm.enable = true;
-        services.displayManager.defaultSession = "hyprland";
-
         environment.systemPackages = with pkgs; [
 
             brave # Chromium based Browser
