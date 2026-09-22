@@ -27,7 +27,7 @@ in
             lazygit # Git tui
             openssl # Cryptography
             ripgrep # Better grep
-            unzip # Working with .zip files
+            zip unzip # Working with .zip files
             vim # vim
             wget # http client
             yt-dlp # Download Youtube videos
