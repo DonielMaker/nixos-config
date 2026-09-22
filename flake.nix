@@ -3,7 +3,7 @@
 
     inputs = {
         # Main Dependencies
-        nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
         nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
         home-manager.url = "github:nix-community/home-manager";
@@ -17,8 +17,8 @@
         ragenix.inputs.nixpkgs.follows = "nixpkgs";
 
         # Styling
-        stylix.url = "github:nix-community/stylix";
-        stylix.inputs.nixpkgs.follows = "nixpkgs";
+        stylix.url = "github:nix-community/stylix/release-25.11";
+        stylix.inputs.nixpkgs.follows = "nixpkgs-stable";
 
         # For now only firefox-addons
         nur.url = "github:nix-community/NUR";
