@@ -25,6 +25,7 @@ in
             imagemagick # Convert, edit, compose image files
             just # Command runner 
             lazygit # Git tui
+            openssl # Cryptography
             ripgrep # Better grep
             unzip # Working with .zip files
             vim # vim

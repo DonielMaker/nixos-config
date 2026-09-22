@@ -98,8 +98,6 @@
         stress-ng # General Stress Testing
         typst # Professional Documents
         wireguard-tools # Wireguard related commands
-        openssl
-        rustdesk
 
         # == Gaming ==
         heroic # Epic Games Launcher
