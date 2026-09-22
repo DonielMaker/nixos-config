@@ -62,7 +62,7 @@
         };
     };
 
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_1;
+    boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_2;
 
     services.flatpak.enable = true;
 
