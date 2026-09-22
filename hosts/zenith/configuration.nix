@@ -69,10 +69,15 @@
     # Gpu Overclocking
     services.lact.enable = true;
 
-    services.ollama.enable = true;
-    services.ollama = {
-        package = pkgs.ollama-rocm;
-    };
+    # services.ollama.enable = true;
+    # services.ollama = {
+    #     package = pkgs.ollama-rocm;
+    # };
+
+    # INFO: Note that you have to set nixpkgs.config.rocmSupport = true; for AMD
+    # users.users.comfyui.extraGroups = [ "video" "render" ];
+    # services.comfyui.enable = true;
+    # services.comfyui.extraArgs = [ "--lowvram" ];
 
     environment.systemPackages = with pkgs; [
         inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
