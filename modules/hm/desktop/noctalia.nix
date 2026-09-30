@@ -106,10 +106,6 @@ in
 
             control_center.shortcuts = []; # No Shortcuts
 
-            plugins.enabled = [ "alexander/screen-toolkit" ];
-
-            plugin_settings."alexander/screen-toolkit".panel-full_position = "top_center";
-
             audio.enable_overdrive = true; # Max Volume is 150%
 
             location.auto_locate = true;
