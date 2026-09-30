@@ -20,10 +20,15 @@ in
             launcher = "${ipc} panel-open launcher";
             clipboard = "${ipc} panel-open clipboard";
             clipboard-wipe = "cliphist wipe";
-            screenshot-menu = "${ipc} plugin alexander/screen-toolkit:service all toggle";
-            screenshot = "${ipc} plugin alexander/screen-toolkit:service all annotate";
+            screenshot = "${ipc} screenshot-fullscreen";
+
+            dnd = "${ipc} notification-dnd-toggle";
+            idleInhibitor = "${ipc} caffeine-toggle";
 
             lock = "${ipc} session lock";
+
+            brightnessIncrease = "${ipc} brightness-up 5";
+            brightnessDecrease = "${ipc} brightness-down 5";
 
             micMute = "${ipc} mic-mute";
             audioMute = "${ipc} volume-mute";
@@ -47,6 +52,9 @@ in
                 hl.exec_cmd("wl-paste --type image --watch cliphist store")
                 hl.exec_cmd("noctalia")
             end)
+
+            -- === Monitors ===
+            ${osConfig.modules.desktop.hyprland.monitors}
 
             -- === Window Rules ===
             hl.window_rule({
@@ -76,14 +84,6 @@ in
             })
 
             hl.window_rule({
-                name = "Float Satty in the middle",
-                match = { class = "^(com.gabm.satty)$"},
-                float = true,
-                center = true,
-                size = {"monitor_w * 0.4", "monitor_h * 0.4"},
-            })
-
-            hl.window_rule({
                 name = "Float XDG-Desktop-Portal in the middle",
                 match = { title = "^(Select what to share)$"},
                 float = true,
@@ -104,7 +104,7 @@ in
                 },
 
                 input = {
-                    kb_layout = "${osConfig.services.xserver.xkb.layout}",
+                    kb_layout = "${osConfig.modules.desktop.hyprland.keyboard.layout}",
 
                     -- Keyboard repeats faster and quicker
                     repeat_rate = 40,
@@ -182,8 +182,13 @@ in
             hl.bind("SUPER + SHIFT + V", hl.dsp.exec_cmd("${clipboard-wipe}"))
 
             -- Screenshot
-            hl.bind("SUPER + S", hl.dsp.exec_cmd("${screenshot-menu}"))
-            hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("${screenshot}"))
+            hl.bind("SUPER + S", hl.dsp.exec_cmd("${screenshot}"))
+
+            -- Idle Inhibitor
+            hl.bind("SUPER + I", hl.dsp.exec_cmd("${idleInhibitor}"))
+
+            -- Do not disturb
+            hl.bind("SUPER + D", hl.dsp.exec_cmd("${dnd}"))
 
             -- Close current application
             hl.bind("SUPER + Q", hl.dsp.window.close())
@@ -253,8 +258,8 @@ in
             hl.bind("SHIFT + XF86AudioLowerVolume", hl.dsp.exec_cmd("${micDecrease}"), { repeating = true })
 
             -- Brightness control
-            hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5%"), { repeating = true })
-            hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { repeating = true })
+            hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("${brightnessIncrease}"), { repeating = true })
+            hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("${brightnessDecrease}"), { repeating = true })
 
             -- Move windows with Super + M1
             hl.bind("SUPER + mouse:272", hl.dsp.window.drag())

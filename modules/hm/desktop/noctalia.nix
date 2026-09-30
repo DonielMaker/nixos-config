@@ -14,40 +14,43 @@ in
             bc # Calculator
             brightnessctl
             curl
-            # ddcutil # Monitor Control
-            ffmpeg
-            gifski # GIF Encoder
-            gpu-screen-recorder # Screen Recording via GPU
-            grim # Screenshot Util
-            hyprpicker # Color Picker
-            imagemagick # Image Toolkit
-            jq # Json Processor
-            mpv # Media Player
-            slurp # Selection Util
-            tesseract # OCR Engine
-            translate-shell # CLI Translator
-            wl-clipboard # Wayland Clipboard
-            wl-screenrec # Wayland Screen Recording
-            zbar # Barcode Reader
+            ddcutil # External Monitor Control
         ];
-
-        programs.satty.enable = true;
 
         programs.noctalia.enable = true;
         programs.noctalia.settings = {
 
+            theme = {
+                custom_palette = "stylix";
+                mode = "dark";
+                source = "custom";
+                
+                templates.builtin_ids = [ "kcolorscheme" ];
+            };
+
+            # General Settings
             shell = {
-                avatar_path = "/home/donielmaker/.config/wallpaper/Matt.png";
+                # avatar_path = "/home/donielmaker/.config/wallpaper/Matt.png";
                 corner_radius_scale = 0.4;
                 polkit_agent = true;
 
-                launcher.categories = false;
-                launcher.compact = true;
+                launcher = {
+                    categories = false;
+                    compact = true;
+                };
 
-                panel.control_center_placement = "floating";
-                panel.session_placement = "floating";
+                panel = {
+                    control_center_placement = "floating";
+                    session_placement = "floating";
+                };
 
                 clipboard_auto_paste = "off";
+
+                screenshot = {
+                    annotate = true;
+                    confirm_region = true;
+                    skip_annotate_on_copy_save = true;
+                };
             };
 
             bar.widgets = {
@@ -75,22 +78,20 @@ in
 
                 clock.format = "{:%a %d, %H:%M:%S}"; # I.E Sun 09, 23:25:03
 
-                control-center.custom_image = "${pkgs.nixos-icons}/share/icons/hicolor/16x16/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png6/apps/nix-snowflake-white.png";
-
                 workspaces.style = "minimal";
             };
 
             idle = {
-                behavior_order = [ "lock" "screen-off" ];
+                behavior_order = [ "screen-off" "lock" ];
 
-                behavior.lock = {
-                    action = "lock";
+                behavior.screen-off = {
+                    action = "screen-off";
                     enabled = true;
                     timeout = 300.0;
                 };
 
-                behavior.screen-off = {
-                    action = "screen-off";
+                behavior.lock = {
+                    action = "lock";
                     enabled = true;
                     timeout = 600.0;
                 };
