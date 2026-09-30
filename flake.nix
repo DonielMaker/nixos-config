@@ -6,7 +6,7 @@
         nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
         nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
-        home-manager.url = "github:nix-community/home-manager";
+        home-manager.url = "github:nix-community/home-manager/release-26.05";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
         disko.url = "github:nix-community/disko/latest";
@@ -17,21 +17,13 @@
         agenix.inputs.nixpkgs.follows = "nixpkgs";
 
         # Styling
-        stylix.url = "github:nix-community/stylix/release-25.11";
+        stylix.url = "github:nix-community/stylix/release-26.05";
         stylix.inputs.nixpkgs.follows = "nixpkgs-stable";
 
-        # For now only firefox-addons
-        nur.url = "github:nix-community/NUR";
-        nur.inputs.nixpkgs.follows = "nixpkgs";
+        nixos-hardware.url = "github:NixOS/nixos-hardware";
+        nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
         # These are program flakes
-        # Right now unused
-        mango.inputs.nixpkgs.follows = "nixpkgs";
-        mango.url = "github:mangowm/mango";
-
-        neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
-        neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
         noctalia.inputs.nixpkgs.follows = "nixpkgs";
         noctalia.url = "github:noctalia-dev/noctalia";
     };
@@ -42,13 +34,9 @@
         system = "x86_64-linux";
 
         # These might be better stated in an nixos modules (nixpkgs.config || nixpkgs.overlays)?
-        pkgs = import inputs.nixpkgs { inherit system overlays; config.allowUnfree = true; };
-        pkgs-stable = import inputs.nixpkgs-stable { inherit system overlays; config.allowUnfree = true; };
-
-        overlays = with inputs; [
-            neovim-nightly-overlay.overlays.default
-            nur.overlays.default
-        ];
+        pkgs = import inputs.nixpkgs { inherit system; config.allowUnfree = true; };
+        # pkgs = import inputs.nixpkgs { inherit system overlays; config.allowUnfree = true; config.rocmSupport = true; }; # Only for Comfyui
+        pkgs-stable = import inputs.nixpkgs-stable { inherit system; config.allowUnfree = true; };
 
         sLib = import ./lib {inherit inputs pkgs pkgs-stable;};
         inherit (sLib) mkNixos;
@@ -63,5 +51,7 @@
         nixosConfigurations.lastprism = mkNixos ./hosts/lastprism;
         # Auth Server
         nixosConfigurations.miasma = mkNixos ./hosts/miasma;
+        # Spectre
+        nixosConfigurations.spectre = mkNixos ./hosts/spectre;
     };
 }

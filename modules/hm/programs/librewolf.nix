@@ -12,11 +12,6 @@ in
         programs.librewolf = {
 
             profiles.${osConfig.settings.username} = {
-                extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
-                    ublock-origin
-                    bitwarden
-                    darkreader
-                ];
 
                 search = {
                     force = true;
