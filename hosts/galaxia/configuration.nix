@@ -37,6 +37,8 @@
             sound.enable = true;
 
             hyprland.enable = true;
+            hyprland.keyboard.layout = "de";
+            gnome.enable = true;
             noctalia.enable = true;
             stylix.enable = true;
         };
