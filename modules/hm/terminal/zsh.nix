@@ -20,7 +20,7 @@ in
                 "....." = "cd ../../../..";
                 z = "zellij";
                 grep = "rg";
-                s = "ragenix -e";
+                s = "agenix -e";
                 lg = "lazygit";
                 v = "nvim";
                 vim = "nvim";

@@ -13,8 +13,8 @@
         disko.inputs.nixpkgs.follows = "nixpkgs";
 
         # Secret Management
-        ragenix.url = "github:yaxitech/ragenix";
-        ragenix.inputs.nixpkgs.follows = "nixpkgs";
+        agenix.url = "github:ryantm/agenix";
+        agenix.inputs.nixpkgs.follows = "nixpkgs";
 
         # Styling
         stylix.url = "github:nix-community/stylix/release-25.11";

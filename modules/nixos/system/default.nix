@@ -26,7 +26,7 @@ in
 
     imports = with inputs; [
         disko.nixosModules.disko
-        ragenix.nixosModules.default
+        agenix.nixosModules.default
     ];
 
     config = mkIf cfg.enable {

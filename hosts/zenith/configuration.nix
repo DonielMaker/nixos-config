@@ -80,7 +80,7 @@
     # services.comfyui.extraArgs = [ "--lowvram" ];
 
     environment.systemPackages = with pkgs; [
-        inputs.ragenix.packages.${pkgs.stdenv.hostPlatform.system}.default
+        inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         # == Programs ==
         gimp # Image editing

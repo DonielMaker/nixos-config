@@ -37,6 +37,7 @@ in
     "${miasma.path}/authelia/storageEncryptionKey.age".publicKeys = donielmaker ++ miasma.key;
     "${miasma.path}/authelia/sessionSecret.age".publicKeys = donielmaker ++ miasma.key;
     "${miasma.path}/authelia/oidcIssuerPrivateKey.age".publicKeys = donielmaker ++ miasma.key;
+    "${miasma.path}/authelia/smtpPassword.age".publicKeys = donielmaker ++ miasma.key;
 
     # Cloudflare
     "${miasma.path}/cloudflare-dnsApiToken.age".publicKeys = donielmaker ++ miasma.key;
