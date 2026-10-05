@@ -85,7 +85,7 @@ in
                 behavior_order = [ "screen-off" "lock" ];
 
                 behavior.screen-off = {
-                    action = "screen-off";
+                    action = "screen_off";
                     enabled = true;
                     timeout = 300.0;
                 };
