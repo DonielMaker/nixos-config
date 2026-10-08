@@ -24,7 +24,7 @@
         nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = {...}@inputs:
+    outputs = inputs:
 
     let 
         system = "x86_64-linux";
