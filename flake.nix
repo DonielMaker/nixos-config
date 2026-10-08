@@ -22,10 +22,6 @@
 
         nixos-hardware.url = "github:NixOS/nixos-hardware";
         nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
-
-        # These are program flakes
-        noctalia.inputs.nixpkgs.follows = "nixpkgs";
-        noctalia.url = "github:noctalia-dev/noctalia";
     };
 
     outputs = {...}@inputs:

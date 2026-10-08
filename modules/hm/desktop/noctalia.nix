@@ -6,8 +6,6 @@ in
 
 {
 
-    imports = [ inputs.noctalia.homeModules.default ];
-
     config = mkIf osConfig.modules.desktop.noctalia.enable {
 
         home.packages = with pkgs; [
