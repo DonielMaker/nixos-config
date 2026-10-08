@@ -3,10 +3,10 @@
 
     inputs = {
         # Main Dependencies
-        nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
-        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
-        home-manager.url = "github:nix-community/home-manager/release-26.05";
+        home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
         disko.url = "github:nix-community/disko/latest";
@@ -17,7 +17,7 @@
         agenix.inputs.nixpkgs.follows = "nixpkgs";
 
         # Styling
-        stylix.url = "github:nix-community/stylix/release-26.05";
+        stylix.url = "github:nix-community/stylix";
         stylix.inputs.nixpkgs.follows = "nixpkgs-stable";
 
         nixos-hardware.url = "github:NixOS/nixos-hardware";
